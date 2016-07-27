@@ -1,19 +1,40 @@
 {
-	"name": "muscles",
-	"version": "1.0.0",
-	"description": "",
-	"main": "app.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/m0sk1t/muscles.git"
-	},
-	"author": "m0sk1t",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/m0sk1t/muscles/issues"
-	},
-	"homepage": "https://github.com/m0sk1t/muscles#readme"
+  "name": "muscles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m0sk1t/muscles.git"
+  },
+  "author": "m0sk1t",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/m0sk1t/muscles/issues"
+  },
+  "homepage": "https://github.com/m0sk1t/muscles#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-csso": "^2.0.0",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.4"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cloudinary": "^1.4.1",
+    "compression": "^1.6.2",
+    "connect-multiparty": "^2.0.0",
+    "cookie-parser": "^1.4.3",
+    "crypto": "0.0.3",
+    "express": "^4.14.0",
+    "mongoose": "^4.5.7",
+    "morgan": "^1.7.0",
+    "serve-favicon": "^2.3.0",
+    "serve-static": "^1.11.1"
+  }
 }
