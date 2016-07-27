@@ -1,0 +1,20 @@
+{
+	"name": "muscles",
+	"description": "",
+	"main": "app.js",
+	"authors": [
+		"m0sk1t"
+	],
+	"license": "MIT",
+	"homepage": "https://github.com/m0sk1t/muscles",
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"static/libs/",
+		"test",
+		"tests"
+	],
+	"dependencies": {
+		"angular": "^1.5.8"
+	}
+}
