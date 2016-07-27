@@ -1,0 +1,54 @@
+@import mixins
+
+body,
+article
+	left: 0
+	margin: 0
+	padding: 0
+	width: 100%
+	height: 100%
+	position: absolute
+
+nav
+	ul
+		text-align: center
+		list-style-type: none
+		li
+			margin: 0 1%
+			display: inline-block
+
+
+.main-page
+	top: 0
+	+flexbox()
+	+align-items(center)
+	+justify-content(center)
+	background-size: cover
+	background-image: url("http://dxlfb468n8ekd.cloudfront.net/gsc/1XY90Q/a3/8d/42/a38d42f7dbc443159922ee012176a5d8/images/new_gl/u8.jpg?token=09f1601618eafa6611aec6737fee6f83")
+
+	a.auth,
+	a.logo
+		color: #169BD5
+		text-align: center
+		position: absolute
+
+	a.auth
+		top: 0
+		right: 0
+
+	a.logo
+		top: 0
+		left: 0
+		height: 3rem
+
+	.main-page__buttons
+		+flexbox()
+		+justify-content(space-between)
+		width: 25rem
+		a
+			color: #eee
+			width: 10rem
+			height: 3rem
+			border-radius: 5%
+			text-align: center
+			background-color: rgba(33,33,33,.7)

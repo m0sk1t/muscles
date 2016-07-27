@@ -45,7 +45,6 @@ gulp.task('build_js', function() {
 
 gulp.task('build_css', function() {
 	gulp.src([
-		'static/libs/angular-material/angular-material.min.css',
 		'static/libs/sweetalert/dist/sweetalert.css',
 		'static/styles/*.css'
 	])

@@ -6,6 +6,7 @@ artillery*
 
 #salt
 routes/salt.js
+routes/cloudinary_config.js
 
 # Runtime data
 pids
