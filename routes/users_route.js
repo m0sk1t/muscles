@@ -1,5 +1,5 @@
 module.exports = (app) => {
-	var salt = require('./salt').salt,
+	var salt = require('./salt.js').salt,
 		crypto = require('crypto'),
 		mongoose = require('mongoose'),
 		Schema = mongoose.Schema,
@@ -39,7 +39,7 @@ module.exports = (app) => {
 					res.status(403).send('Wrong credentials!');
 				}
 			} else {
-				Users.create(Users.create({
+				Users.create({
 					mail: mail,
 					userid: userid,
 				}, (err, user) => {
@@ -48,7 +48,7 @@ module.exports = (app) => {
 						httpOnly: true,
 						path: '/'
 					}).json(user);
-				});)
+				});
 			};
 		});
 	});

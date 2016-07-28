@@ -1,4 +1,4 @@
-<article>
+<article class="user-page">
 	<section>
 		<span>
 			<div class="avatar">
@@ -51,24 +51,24 @@
 		</ul>
 	</section>
 	<section>
-		<img src="" alt="">
-		<img src="" alt="">
-		<img src="" alt="">
-		<img src="" alt="">
-		<img src="" alt="">
-		<img src="" alt="">
-		<img src="" alt="">
+		<img src="" alt="img">
+		<img src="" alt="img">
+		<img src="" alt="img">
+		<img src="" alt="img">
+		<img src="" alt="img">
+		<img src="" alt="img">
+		<img src="" alt="img">
 	</section>
 	<section>
 		<div class="record">
 			<div class="record-area">
-				<img src="" alt="">
-				<span class="record-text"></span>
+				<img src="" alt="ava">
+				<span class="record-text">text</span>
 			</div>
 			<div class="comments">
-				<img src="" alt="">
-				<span class="comment-author"></span>
-				<span class="comment-text"></span>
+				<img src="" alt="guest">
+				<span class="comment-author">asd</span>
+				<span class="comment-text">text</span>
 			</div>
 		</div>
 	</section>

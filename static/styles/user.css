@@ -1,0 +1,22 @@
+.user-page {
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  -webkit-box-justify-content: center;
+  -webkit-justify-content: center;
+  -ms-flex-justify-content: center;
+  justify-content: center;
+  -webkit-flex-wrap: wrap;
+  -webkit-box-wrap: wrap;
+  -ms-flexbox-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
+  .user-page section {
+    display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    width: 1280px; }
+
+/*# sourceMappingURL=user.css.map */
