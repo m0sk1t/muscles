@@ -3,20 +3,69 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
-  -webkit-box-justify-content: center;
-  -webkit-justify-content: center;
-  -ms-flex-justify-content: center;
-  justify-content: center;
   -webkit-flex-wrap: wrap;
   -webkit-box-wrap: wrap;
   -ms-flexbox-wrap: wrap;
   -ms-flex-wrap: wrap;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  -webkit-box-justify-content: center;
+  -webkit-justify-content: center;
+  -ms-flex-justify-content: center;
+  justify-content: center;
+  overflow-y: auto; }
   .user-page section {
     display: flex;
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
-    width: 1280px; }
+    -webkit-flex-wrap: wrap;
+    -webkit-box-wrap: wrap;
+    -ms-flexbox-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-justify-content: center;
+    -webkit-justify-content: center;
+    -ms-flex-justify-content: center;
+    justify-content: center;
+    width: 100%; }
+  .user-page .avatar {
+    width: 200px; }
+    .user-page .avatar img {
+      width: 100%; }
+  .user-page .status-area {
+    width: 400px; }
+  .user-page .mark,
+  .user-page .work,
+  .user-page .status-text {
+    border: 1px solid #ccc; }
+  .user-page .task label,
+  .user-page .status label {
+    display: block; }
+  .user-page .chat {
+    color: #ace; }
+  .user-page .social {
+    width: 200px;
+    background-color: #ace; }
+    .user-page .social .gp {
+      color: #dd4b39; }
+    .user-page .social .fb {
+      color: #3b5998; }
+    .user-page .social .tw {
+      color: #00aced; }
+    .user-page .social .vk {
+      color: #45668e; }
+  .user-page .media {
+    text-align: center;
+    width: 200px; }
+    .user-page .media .photo {
+      color: #cad34a; }
+    .user-page .media .video {
+      color: #add34a; }
+    .user-page .media .favs {
+      color: #93d34a; }
+  .user-page .photos img {
+    width: 200px; }
+  .user-page .record {
+    width: 50%; }
 
 /*# sourceMappingURL=user.css.map */

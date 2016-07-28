@@ -1,10 +1,62 @@
 @import mixins
+@import colors
 
 .user-page
 	+flexbox()
-	+justify-content(center)
 	+flex-wrap(wrap)
+	+justify-content(center)
+	overflow-y: auto
 
 	section
 		+flexbox()
-		width: 1280px
+		+flex-wrap(wrap)
+		+justify-content(center)
+		width: 100%
+
+	.avatar
+		width: 200px
+		img
+			width: 100%
+
+	.status-area
+		width: 400px
+
+	.mark,
+	.work,
+	.status-text
+		border: 1px solid #ccc
+
+	.task,
+	.status
+		label
+			display: block
+
+	.chat
+		color: $ace
+
+	.social
+		width: 200px
+		background-color: $ace
+		.gp
+			color: $googleplus
+		.fb
+			color: $facebook
+		.tw
+			color: $twitter
+		.vk
+			color: $vk
+
+	.media
+		text-align: center
+		width: 200px
+		.photo
+			color: $photo
+		.video
+			color: $video
+		.favs
+			color: $favs
+	.photos
+		img
+			width: 200px
+	.record
+		width: 50%

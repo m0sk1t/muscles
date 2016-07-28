@@ -1,24 +1,51 @@
 <article class="user-page">
 	<section>
-		<span>
-			<div class="avatar">
+		<span class="avatar">
+			<div>
 				<img src="" alt="avatar">
 			</div>
 			<div class="name">Валерий Калашов</div>
 			<div class="city">Иваново</div>
-			<div class="mark">*****</div>
+			<span class="mark">* * * * *</span>
 			<div class="task">
-				<input type="checkbox" ng-if="classic_bb" ng-model="classic_bb">
-				<input type="checkbox" ng-if="crossfit" ng-model="crossfit">
-				<input type="checkbox" ng-if="fitness" ng-model="fitness">
+				<label>
+					<input type="checkbox" ng-if="classic_bb" ng-checked="classic_bb">
+					Классический бодибилдинг
+				</label>
+				<label>
+					<input type="checkbox" ng-if="crossfit" ng-checked="crossfit">
+					Кроссфит
+				</label>
+				<label>
+					<input type="checkbox" ng-if="fitness" ng-checked="fitness">
+					Фитнесс
+				</label>
 			</div>
 		</span>
-		<span>
+		<span class="status-area">
 			<div class="status-text">всё будет хорошо</div>
 			<div class="status">
-				<input type="checkbox" ng-if="classic_bb" ng-model="classic_bb">
-				<input type="checkbox" ng-if="crossfit" ng-model="crossfit">
-				<input type="checkbox" ng-if="fitness" ng-model="fitness">
+				<label>
+					<input type="checkbox" ng-if="classic_bb" ng-checked="classic_bb">
+					Классический бодибилдинг
+					<select name="" id="">
+						<option value=""></option>
+					</select>
+				</label>
+				<label>
+					<input type="checkbox" ng-if="crossfit" ng-checked="crossfit">
+					Кроссфит
+					<select name="" id="">
+						<option value=""></option>
+					</select>
+				</label>
+				<label>
+					<input type="checkbox" ng-if="fitness" ng-checked="fitness">
+					Фитнесс
+					<select name="" id="">
+						<option value=""></option>
+					</select>
+				</label>
 			</div>
 			<div class="vacancies">
 				<select name="" id="">
@@ -30,19 +57,46 @@
 			</div>
 			<div class="params"></div>
 		</span>
-		<span class="social">
-			<div class="vk">VK</div>
-			<div class="fb">FB</div>
-			<div class="tw">TW</div>
-			<div class="ok">OK</div>
+		<span>
+			<div class="chat">
+				<i class="fa fa-4x fa-comments-o"></i>
+			</div>
+			<div class="social">
+				Подписчики
+				<div class="fb">
+					<i class="fa fa-3x fa-facebook-official"></i>
+					<span class="fa fa-2x">14</span>
+				</div>
+				<div class="vk">
+					<i class="fa fa-3x fa-vk"></i>
+					<span class="fa fa-2x">13</span>
+				</div>
+				<div class="gp">
+					<i class="fa fa-3x fa-google-plus-official"></i>
+					<span class="fa fa-2x">12</span>
+				</div>
+				<div class="tw">
+					<i class="fa fa-3x fa-twitter-square"></i>
+					<span class="fa fa-2x">11</span>
+				</div>
+			</div>
 		</span>
 		<span class="media">
-			<div class="photo"></div>
-			<div class="video"></div>
-			<div class="favs"></div>
-			<div class="work"></div>
+			<div class="photo">
+				<i class="fa fa-5x fa-camera"></i>
+			</div>
+			<div class="video">
+				<i class="fa fa-5x fa-video-camera"></i>
+			</div>
+			<div class="favs">
+				<i class="fa fa-5x fa-star-o"></i>
+			</div>
+			<div class="work">
+				Работа и образование
+			</div>
 		</span>
 	</section>
+	<h3>Достижения</h3>
 	<section>
 		<ul>
 			<li>1 Место Мистер Иваново 2016</li>
@@ -50,7 +104,8 @@
 			<li>3 Место Мистер Иваново 2014</li>
 		</ul>
 	</section>
-	<section>
+	<h3>Мои фото</h3>
+	<section class="photos">
 		<img src="" alt="img">
 		<img src="" alt="img">
 		<img src="" alt="img">
@@ -59,7 +114,42 @@
 		<img src="" alt="img">
 		<img src="" alt="img">
 	</section>
+	<h3>Мои записи</h3>
 	<section>
+		<div class="record">
+			<div class="record-area">
+				<img src="" alt="ava">
+				<span class="record-text">text</span>
+			</div>
+			<div class="comments">
+				<div class="comment">
+					<img src="" alt="guest">
+					<span class="comment-author">asd</span>
+					<span class="comment-text">text</span>
+				</div>
+				<div class="comment">
+					<img src="" alt="guest">
+					<span class="comment-author">asd</span>
+					<span class="comment-text">text</span>
+				</div>
+				<div class="comment">
+					<img src="" alt="guest">
+					<span class="comment-author">asd</span>
+					<span class="comment-text">text</span>
+				</div>
+			</div>
+		</div>
+		<div class="record">
+			<div class="record-area">
+				<img src="" alt="ava">
+				<span class="record-text">text</span>
+			</div>
+			<div class="comments">
+				<img src="" alt="guest">
+				<span class="comment-author">asd</span>
+				<span class="comment-text">text</span>
+			</div>
+		</div>
 		<div class="record">
 			<div class="record-area">
 				<img src="" alt="ava">
