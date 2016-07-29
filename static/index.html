@@ -7,7 +7,7 @@
 		<link rel="stylesheet" href="app.min.css">
 	</head>
 	<body>
-		<nav>
+		<nav ng-hide="getloc()">
 			<ul>
 				<li><a href="#/" class="logo">ЛОГОТИП</a></li>
 				<li><a href="#/user">СОЦ СЕТЬ</a></li>
@@ -17,7 +17,7 @@
 				<li><a href="#/search">ПОИСК</a></li>
 			</ul>
 		</nav>
-		<div class="main-view" ng-view></div>
+		<div class="main-view" ng-class="{'full': getloc()}" ng-view></div>
 	</body>
 	<script src="app.min.js"></script>
 </html>

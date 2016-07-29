@@ -58,9 +58,9 @@
 			<div class="params"></div>
 		</span>
 		<span>
-			<div class="chat">
+			<a href="#/dialogs" class="chat">
 				<i class="fa fa-4x fa-comments-o"></i>
-			</div>
+			</a>
 			<div class="social">
 				Подписчики
 				<div class="fb">

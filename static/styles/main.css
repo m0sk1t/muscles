@@ -16,6 +16,10 @@ article {
   position: absolute;
   height: 90%; }
 
+.main-view.full {
+  top: 0;
+  height: 100%; }
+
 nav {
   margin: 0;
   padding: 0;

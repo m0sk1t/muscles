@@ -1,0 +1,11 @@
+@import mixins
+@import colors
+
+.articles-page
+	+flexbox()
+	+flex-wrap(wrap)
+	+justify-content(center)
+	overflow-y: auto
+
+	.article-item
+		width: 70%

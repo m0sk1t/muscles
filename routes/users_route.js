@@ -9,8 +9,24 @@ module.exports = (app) => {
 			phone: String,
 			userid: String,
 			avatar: String,
+
+			age: Date,
+			sex: Boolean,
+			weight: Number,
+			height: Number,
+			hairs: String,
+			type: String,
+
+			chest: Number,
+			waist: Number,
+			huckle: Number,
+
 			location_city: String,
-			location_country: String
+			location_country: String,
+
+			auto_play_gifs: Boolean,
+			use_large_fonts: Boolean,
+			post_comments_enabled: Boolean,
 		});
 
 	app.get('/test', (req, res) => {
