@@ -6,6 +6,9 @@ module.exports = (app) => {
 		Users = mongoose.model('Users', {
 			mail: String,
 			name: String,
+			creDate: Date,
+			online: Boolean,
+			lastOnline: Date,
 			phone: String,
 			userid: String,
 			avatar: String,
@@ -17,14 +20,15 @@ module.exports = (app) => {
 			hairs: String,
 			type: String,
 
-			chest: Number,
-			waist: Number,
-			huckle: Number,
+			chest: Number, // грудь
+			waist: Number, // талия
+			huckle: Number, // бёдра
 
 			location_city: String,
 			location_country: String,
 
-			auto_play_gifs: Boolean,
+			/*			auto_play_gifs: Boolean,
+			 */
 			use_large_fonts: Boolean,
 			post_comments_enabled: Boolean,
 		});
@@ -34,7 +38,7 @@ module.exports = (app) => {
 	});
 
 	app.post('/auth', (req, res) => {
-		if (!req.body.mail || !req.body.pass) {
+		if (!!req.body.mail || !!req.body.pass) {
 			res.status(500).send('Empty credentials!');
 			return console.error('Empty credentials!');
 		}
