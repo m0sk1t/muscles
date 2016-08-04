@@ -57,11 +57,11 @@
   .user-page .media {
     text-align: center;
     width: 200px; }
-    .user-page .media .photo {
+    .user-page .media .photo > a {
       color: #cad34a; }
-    .user-page .media .video {
+    .user-page .media .video > a {
       color: #add34a; }
-    .user-page .media .favs {
+    .user-page .media .favs > a {
       color: #93d34a; }
   .user-page .photos img {
     width: 200px; }

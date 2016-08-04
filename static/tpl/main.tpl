@@ -1,6 +1,6 @@
 <article class="main-page">
 	<a href="#/" class="logo">ЛОГОТИП</a>
-	<a href="#/auth" class="auth">ВОЙТИ или Зарегистрироваться</a>
+	<a href="#/auth" class="auth"><i class="fa fa-2x fa-sign-out"></i>ВОЙТИ или Зарегистрироваться</a>
 	<section>
 		<div class="main-page__buttons">
 			<a href="#/user">СОЦ СЕТЬ</a>

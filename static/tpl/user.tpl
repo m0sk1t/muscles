@@ -83,13 +83,19 @@
 		</span>
 		<span class="media">
 			<div class="photo">
-				<i class="fa fa-5x fa-camera"></i>
+				<a href="#/photos">
+					<i class="fa fa-5x fa-camera"></i>
+				</a>
 			</div>
 			<div class="video">
-				<i class="fa fa-5x fa-video-camera"></i>
+				<a href="#/videos">
+					<i class="fa fa-5x fa-video-camera"></i>
+				</a>
 			</div>
 			<div class="favs">
-				<i class="fa fa-5x fa-star-o"></i>
+				<a href="#/favs">
+					<i class="fa fa-5x fa-star-o"></i>
+				</a>
 			</div>
 			<div class="work">
 				Работа и образование
