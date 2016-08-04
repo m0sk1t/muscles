@@ -113,4 +113,49 @@ module.exports = (app) => {
 				res.status(404).send('Need to register first!');
 			}
 		});
+
+	app.post('/find_users', (req, res) => {
+		var search = {},
+			info = {
+				mail: 1,
+				name: 1,
+				creDate: 1,
+				phone: 1,
+				age: 1,
+				sex: 1,
+				weight: 1,
+				height: 1,
+				hairs: 1,
+				type: 1,
+				chest: 1,
+				waist: 1,
+				huckle: 1,
+				online: 1,
+				lastOnline: 1,
+				location_city: 1,
+				location_country: 1
+			};
+		req.body.mail && search.mail = req.body.mail;
+		req.body.name && search.name = req.body.name;
+		req.body.creDate && search.creDate = req.body.creDate;
+		req.body.phone && search.phone = req.body.phone;
+		req.body.age && search.age = req.body.age;
+		req.body.sex && search.sex = req.body.sex;
+		req.body.weight && search.weight = req.body.weight;
+		req.body.height && search.height = req.body.height;
+		req.body.hairs && search.hairs = req.body.hairs;
+		req.body.type && search.type = req.body.type;
+		req.body.chest && search.chest = req.body.chest;
+		req.body.waist && search.waist = req.body.waist;
+		req.body.huckle && search.huckle = req.body.huckle;
+		req.body.location_city && search.location_city = req.body.location_city;
+		req.body.location_country && search.location_country = req.body.location_country;
+		Users.find(search, info, (err, users) => {
+			if (!err) {
+				res.json(users);
+			} else {
+				res.status(500).json(err);
+			}
+		});
+	})
 }

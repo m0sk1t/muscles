@@ -1,3 +1,7 @@
+body {
+  background-size: cover;
+  background-image: url("https://newevolutiondesigns.com/images/freebies/city-wallpaper-11.jpg"); }
+
 body,
 article {
   left: 0;
@@ -47,9 +51,7 @@ nav {
   -webkit-box-justify-content: center;
   -webkit-justify-content: center;
   -ms-flex-justify-content: center;
-  justify-content: center;
-  background-size: cover;
-  background-image: url("http://dxlfb468n8ekd.cloudfront.net/gsc/1XY90Q/a3/8d/42/a38d42f7dbc443159922ee012176a5d8/images/new_gl/u8.jpg?token=09f1601618eafa6611aec6737fee6f83"); }
+  justify-content: center; }
   .main-page a.auth,
   .main-page a.logo {
     color: #169BD5;
