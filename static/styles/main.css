@@ -24,18 +24,21 @@ article {
   top: 0;
   height: 100%; }
 
-nav {
+nav.main {
   margin: 0;
   padding: 0;
   height: 10%;
   width: 100%;
   position: absolute; }
-  nav ul {
-    text-align: center;
-    list-style-type: none; }
-    nav ul li {
-      margin: 0 1%;
-      display: inline-block; }
+
+nav.main ul,
+nav.options ul {
+  text-align: center;
+  list-style-type: none; }
+  nav.main ul li,
+  nav.options ul li {
+    margin: 0 1%;
+    display: inline-block; }
 
 .main-page {
   top: 0;

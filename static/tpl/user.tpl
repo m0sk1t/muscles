@@ -1,9 +1,11 @@
 <article class="user-page">
 	<section>
 		<span class="avatar">
-			<div>
-				<img src="" alt="avatar">
-			</div>
+			<a href="#/options">
+				<div>
+					<img src="" alt="avatar">
+				</div>
+			</a>
 			<div class="name">Валерий Калашов</div>
 			<div class="city">Иваново</div>
 			<span class="mark">* * * * *</span>

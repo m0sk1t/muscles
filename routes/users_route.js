@@ -6,6 +6,8 @@ module.exports = (app) => {
 		Users = mongoose.model('Users', {
 			mail: String,
 			name: String,
+			surname: String,
+			status: String,
 			creDate: Date,
 			online: Boolean,
 			lastOnline: Date,
@@ -13,7 +15,7 @@ module.exports = (app) => {
 			userid: String,
 			avatar: String,
 
-			age: Date,
+			birthDate: Date,
 			sex: Boolean,
 			weight: Number,
 			height: Number,
@@ -27,8 +29,7 @@ module.exports = (app) => {
 			location_city: String,
 			location_country: String,
 
-			/*			auto_play_gifs: Boolean,
-			 */
+			enable_comments: Boolean,
 			use_large_fonts: Boolean,
 			post_comments_enabled: Boolean,
 		});
@@ -62,6 +63,7 @@ module.exports = (app) => {
 				Users.create({
 					mail: mail,
 					userid: userid,
+					creDate: Date.now(),
 				}, (err, user) => {
 					res.cookie('userid', userid, {
 						expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365 * 10),
