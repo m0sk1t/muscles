@@ -1,11 +1,11 @@
 <article>
 	<nav class="options">
 		<ul>
-			<li ng-click="active_page = 'profile'">Профиль</li>
-			<li ng-click="active_page = 'common'">Общие</li>
-			<li ng-click="active_page = 'security'">Безопасность</li>
-			<li ng-click="active_page = 'privacy'">Приватность</li>
-			<li ng-click="active_page = 'notifications'">Оповещения</li>
+			<li class="option-page" ng-class="{'active-page': active_page === 'profile'}" ng-click="active_page = 'profile'">Профиль</li>
+			<li class="option-page" ng-class="{'active-page': active_page === 'common'}" ng-click="active_page = 'common'">Общие</li>
+			<li class="option-page" ng-class="{'active-page': active_page === 'security'}" ng-click="active_page = 'security'">Безопасность</li>
+			<li class="option-page" ng-class="{'active-page': active_page === 'privacy'}" ng-click="active_page = 'privacy'">Приватность</li>
+			<li class="option-page" ng-class="{'active-page': active_page === 'notifications'}" ng-click="active_page = 'notifications'">Оповещения</li>
 		</ul>
 	</nav>
 	<section ng-show="active_page === 'profile'">
@@ -40,10 +40,15 @@
 				<option>Дрищ</option>
 			</select>
 		</label><br>
-		<label>
+		<div>
 			Дата рождения
-			<input type="date" ng-model="options.user.birthDate">
-		</label><br>
+			<datepicker
+				style="width: 11rem; float: none;"
+				date-format="dd/MM/yyyy"
+			>
+				<input ng-model="options.user.birthDate" type="text"/>
+			</datepicker>
+		</div><br>
 		<label>
 			Рост
 			<input type="number" ng-model="options.user.height">
@@ -64,6 +69,7 @@
 			Бёдра
 			<input type="number" ng-model="options.user.huckle">
 		</label><br>
+		<button ng-click="user_save();">save</button>
 	</section>
 	<section ng-show="active_page === 'common'">
 		<label>

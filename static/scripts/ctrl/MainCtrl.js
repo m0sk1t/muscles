@@ -12,5 +12,13 @@ angular.module('MuscleMan').controller('MainCtrl', ['$scope', 'User', 'LS',
 		}, function(res) {
 			location.hash = '#/auth'
 		});
+		$scope.$on('user_save', function() {
+			User.set($scope.options.user, function(res) {
+				LS.set('user', $scope.options.user);
+				console.log('User saved!');
+			}, function(res) {
+				console.error(res.data);
+			});
+		})
 	}
 ]);

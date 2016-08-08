@@ -97,6 +97,8 @@ module.exports = (app) => {
 					userid: userid
 				}, {
 					$set: req.body
+				}, {
+					upsert: false
 				}, (err, user) => {
 					res.json(user);
 				})
@@ -109,7 +111,7 @@ module.exports = (app) => {
 				Users.findOneAndRemove({
 					userid: userid
 				}, (err, user) => {
-					res.json(user);
+					res.clearCookie('userid').redirect('/');
 				})
 			} else {
 				res.status(404).send('Need to register first!');
@@ -137,21 +139,21 @@ module.exports = (app) => {
 				location_city: 1,
 				location_country: 1
 			};
-		req.body.mail && search.mail = req.body.mail;
-		req.body.name && search.name = req.body.name;
-		req.body.creDate && search.creDate = req.body.creDate;
-		req.body.phone && search.phone = req.body.phone;
-		req.body.age && search.age = req.body.age;
-		req.body.sex && search.sex = req.body.sex;
-		req.body.weight && search.weight = req.body.weight;
-		req.body.height && search.height = req.body.height;
-		req.body.hairs && search.hairs = req.body.hairs;
-		req.body.type && search.type = req.body.type;
-		req.body.chest && search.chest = req.body.chest;
-		req.body.waist && search.waist = req.body.waist;
-		req.body.huckle && search.huckle = req.body.huckle;
-		req.body.location_city && search.location_city = req.body.location_city;
-		req.body.location_country && search.location_country = req.body.location_country;
+		req.body.mail && (search.mail = req.body.mail);
+		req.body.name && (search.name = req.body.name);
+		req.body.creDate && (search.creDate = req.body.creDate);
+		req.body.phone && (search.phone = req.body.phone);
+		req.body.age && (search.age = req.body.age);
+		req.body.sex && (search.sex = req.body.sex);
+		req.body.weight && (search.weight = req.body.weight);
+		req.body.height && (search.height = req.body.height);
+		req.body.hairs && (search.hairs = req.body.hairs);
+		req.body.type && (search.type = req.body.type);
+		req.body.chest && (search.chest = req.body.chest);
+		req.body.waist && (search.waist = req.body.waist);
+		req.body.huckle && (search.huckle = req.body.huckle);
+		req.body.location_city && (search.location_city = req.body.location_city);
+		req.body.location_country && (search.location_country = req.body.location_country);
 		Users.find(search, info, (err, users) => {
 			if (!err) {
 				res.json(users);

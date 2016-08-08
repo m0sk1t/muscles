@@ -5,5 +5,8 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope',
 			new_password: ''
 		};
 		$scope.active_page = 'profile';
+		$scope.user_save = function() {
+			$scope.$emit('user_save');
+		}
 	}
 ]);

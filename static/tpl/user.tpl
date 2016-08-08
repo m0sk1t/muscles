@@ -6,8 +6,8 @@
 					<img src="" alt="avatar">
 				</div>
 			</a>
-			<div class="name">Валерий Калашов</div>
-			<div class="city">Иваново</div>
+			<div class="name">{{options.user.name}} {{options.user.surname}}</div>
+			<div class="city">{{options.user.city}}</div>
 			<span class="mark">* * * * *</span>
 			<div class="task">
 				<label>
@@ -25,7 +25,7 @@
 			</div>
 		</span>
 		<span class="status-area">
-			<div class="status-text">всё будет хорошо</div>
+			<div class="status-text">{{options.user.status}}</div>
 			<div class="status">
 				<label>
 					<input type="checkbox" ng-if="classic_bb" ng-checked="classic_bb">
@@ -57,7 +57,42 @@
 					<option value=""></option>
 				</select>
 			</div>
-			<div class="params"></div>
+			<div class="params">
+				<span>
+					<div>
+						Возраст: {{getAge(options.user.birthDate)}}
+					</div>
+					<div>
+						Рост: {{options.user.height}}
+					</div>
+					<div>
+						Вес: {{options.user.weight}}
+					</div>
+				</span>
+				<span>
+					<div>
+						Волосы: {{options.user.hairs}}
+					</div>
+					<div>
+						Типаж: {{options.user.type}}
+					</div>
+				</span>
+				<span>
+					<div>
+						Грудь: {{options.user.chest}}
+					</div>
+					<div>
+						Талия: {{options.user.waist}}
+					</div>
+					<div>
+						Бедра: {{options.user.huckle}}
+					</div>
+				</span>
+				<label>
+					Дата рождения
+					<input type="date" ng-model="options.user.birthDate">
+				</label><br>
+			</div>
 		</span>
 		<span>
 			<a href="#/dialogs" class="chat">

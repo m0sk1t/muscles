@@ -14,6 +14,7 @@ gulp.task('build_libs', function() {
 		'static/libs/angular-route/angular-route.min.js',
 		'static/libs/angular-touch/angular-touch.min.js',
 		'static/libs/ng-file-upload/ng-file-upload-all.min.js',
+		'static/libs/angularjs-datepicker/dist/angular-datepicker.min.js',
 	])
 		.pipe(concat('libs.js'))
 		.pipe(ngAnnotate())
@@ -45,6 +46,7 @@ gulp.task('build_js', function() {
 
 gulp.task('build_css', function() {
 	gulp.src([
+		'static/libs/angularjs-datepicker/dist/angular-datepicker.min.css',
 		'static/libs/sweetalert/dist/sweetalert.css',
 		'static/styles/*.css'
 	])
