@@ -3,12 +3,19 @@
 		<ul>
 			<li class="option-page" ng-class="{'active-page': active_page === 'profile'}" ng-click="active_page = 'profile'">Профиль</li>
 			<li class="option-page" ng-class="{'active-page': active_page === 'common'}" ng-click="active_page = 'common'">Общие</li>
-			<li class="option-page" ng-class="{'active-page': active_page === 'security'}" ng-click="active_page = 'security'">Безопасность</li>
 			<li class="option-page" ng-class="{'active-page': active_page === 'privacy'}" ng-click="active_page = 'privacy'">Приватность</li>
 			<li class="option-page" ng-class="{'active-page': active_page === 'notifications'}" ng-click="active_page = 'notifications'">Оповещения</li>
 		</ul>
 	</nav>
 	<section ng-show="active_page === 'profile'">
+		<span class="avatar">
+			<div>
+				<img ng-src="options.user.avatar" alt="avatar">
+				<div class="overlay">
+					<input type="file">
+				</div>
+			</div>
+		</span>
 		<label>
 			Имя
 			<input type="text" ng-model="options.user.name">
@@ -18,8 +25,26 @@
 			<input type="text" ng-model="options.user.surname">
 		</label><br>
 		<label>
+			Страна
+			<select>
+				<option></option>
+			</select>
+		</label><br>
+		<label>
+			Город
+			<select>
+				<option></option>
+			</select>
+		</label><br>
+		<label>
 			Статус
 			<input type="text" ng-model="options.user.status">
+		</label><br>
+		<label>
+			<select ng-model="options.user.sex">
+				<option value="1">Мужчина</option>
+				<option value="0">Женщина</option>
+			</select>
 		</label><br>
 		<label>
 			Волосы
@@ -94,13 +119,6 @@
 			Использовать увеличенные шрифты
 		</label><br>
 	</section>
-	<section ng-show="active_page === 'security'">
-		Активность
-		<div>Chrome (12.11.2012)</div>
-		<div>Chrome (12.11.2012)</div>
-		<div>Chrome (12.11.2012)</div>
-		<div>Chrome (12.11.2012)</div>
-	</section>
 	<section ng-show="active_page === 'privacy'">
 		<h3>Моя страница</h3>
 		<label>
@@ -128,12 +146,19 @@
 		<h3>Моментальные оповещения на сайте</h3>
 
 		<label>
-			<input type="checkbox" ng-model="options.user">
-			Показывать текст сообщений
+			<input
+				type="checkbox"
+				ng-model="options.user.settings.show_notifications"
+				ng-click="options.user.settings.show_notifications && requestPermissions();"
+			>
+			Включить уведомления
 		</label><br>
 		<label>
-			<input type="checkbox" ng-model="options.user">
-			Включить звуковые оповещения
+		<input
+			type="checkbox"
+			ng-model="options.user.settings.show_notifications_text"
+		>
+			Показывать текст сообщений
 		</label><br>
 
 		<button>Сохранить</button>

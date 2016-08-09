@@ -1,6 +1,8 @@
 var e = require('express')(),
 	morgan = require('morgan'),
 	mongoose = require('mongoose'),
+	http = require('http').Server(e),
+	io = require('socket.io')(http),
 	bodyParser = require('body-parser'),
 	compression = require('compression'),
 	serveStatic = require('serve-static'),
@@ -26,8 +28,8 @@ e.use(serveStatic(__dirname + '/static'));
 
 //e.use(serveFavicon(__dirname + "/pub/img/favicon.ico"));
 
-e.listen(4321, () => {
-	require(__dirname + '/routes/router.js')(e);
+http.listen(4321, () => {
+	require(__dirname + '/routes/router.js')(e, io);
 	mongoose.connect('mongodb://localhost:27017/muscles');
 	console.log('Server started at: ', new Date(), 'http://localhost:4321/');
 });

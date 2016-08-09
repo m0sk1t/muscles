@@ -5,6 +5,7 @@ module.exports = (app) => {
 		Schema = mongoose.Schema,
 		Users = mongoose.model('Users', {
 			mail: String,
+			ioid: String,
 			name: String,
 			surname: String,
 			status: String,
@@ -29,9 +30,28 @@ module.exports = (app) => {
 			location_city: String,
 			location_country: String,
 
-			enable_comments: Boolean,
-			use_large_fonts: Boolean,
-			post_comments_enabled: Boolean,
+			settings: {
+				enable_comments: {
+					type: Boolean,
+					default: false
+				},
+				use_large_fonts: {
+					type: Boolean,
+					default: false
+				},
+				post_comments_enabled: {
+					type: Boolean,
+					default: false
+				},
+				show_notifications: {
+					type: Boolean,
+					default: false
+				},
+				show_notifications_text: {
+					type: Boolean,
+					default: false
+				},
+			}
 		});
 
 	app.get('/test', (req, res) => {

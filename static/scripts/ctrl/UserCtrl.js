@@ -7,6 +7,6 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope',
 		};
 		$scope.user_save = function() {
 			$scope.$emit('user_save');
-		}
+		};
 	}
 ]);

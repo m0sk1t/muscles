@@ -7,6 +7,6 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope',
 		$scope.active_page = 'profile';
 		$scope.user_save = function() {
 			$scope.$emit('user_save');
-		}
+		};
 	}
 ]);
