@@ -2,9 +2,19 @@ angular.module('MuscleMan').controller('MainCtrl', ['$scope', 'User', 'LS',
 	function($scope, User, LS) {
 		var socket = io();
 
-		socket.on('user:online', function(ev, data) {
+		socket.on('user:online', function(data) {
 			console.log('user:online');
+			console.log(data);
 		});
+
+		socket.on('message:send', function(data) {
+			console.log('message:send');
+			console.log(data);
+		});
+
+		$scope.message_send = function(text) {
+			socket.emit('message:send', text);
+		};
 
 		$scope.options = {
 			user: LS.get('user') || 0

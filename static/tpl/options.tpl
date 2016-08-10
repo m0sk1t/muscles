@@ -10,7 +10,7 @@
 	<section ng-show="active_page === 'profile'">
 		<span class="avatar">
 			<div>
-				<img ng-src="options.user.avatar" alt="avatar">
+				<img ng-src="{{options.user.avatar}}" alt="avatar">
 				<div class="overlay">
 					<input type="file">
 				</div>
@@ -41,6 +41,7 @@
 			<input type="text" ng-model="options.user.status">
 		</label><br>
 		<label>
+			Пол
 			<select ng-model="options.user.sex">
 				<option value="1">Мужчина</option>
 				<option value="0">Женщина</option>
@@ -130,17 +131,21 @@
 			</select>
 		</label><br>
 		<h3>Записи на странице</h3>
+		<label>
 			<select>
 				<option>Все</option>
 				<option>Друзья и друзья друзей</option>
 				<option>Только друзья</option>
 			</select>
+		</label><br>
 		<h3>Связь со мной</h3>
+		<label>
 			<select>
 				<option>Все</option>
 				<option>Друзья и друзья друзей</option>
 				<option>Только друзья</option>
 			</select>
+		</label><br>
 	</section>
 	<section ng-show="active_page === 'notifications'">
 		<h3>Моментальные оповещения на сайте</h3>
@@ -166,42 +171,37 @@
 		<h3>Оповещение по электронной почте</h3>
 
 		<label>
-			<input type="checkbox" ng-model="options.user">
+			<input type="checkbox" ng-model="options.user.settings.notify_private">
 			Личные сообщения
 		</label><br>
 
 		<label>
-			<input type="checkbox" ng-model="options.user">
+			<input type="checkbox" ng-model="options.user.settings.notify_comments">
 			Комментарии на стене
 		</label><br>
 
 		<label>
-			<input type="checkbox" ng-model="options.user">
+			<input type="checkbox" ng-model="options.user.settings.notify_photo_comments">
 			Комментарии к фотографиям
 		</label><br>
 
 		<label>
-			<input type="checkbox" ng-model="options.user">
+			<input type="checkbox" ng-model="options.user.settings.notify_video_comments">
 			Комментарии к видео
 		</label><br>
 
 		<label>
-			<input type="checkbox" ng-model="options.user">
-			Грядущие мероприятия и конкурсы
+			<input type="checkbox" ng-model="options.user.settings.notify_competitions">
+			Оповещения о мероприятиях
 		</label><br>
 
 		<label>
-			<input type="checkbox" ng-model="options.user">
-			Сообщения и ответы с форума
+			<input type="checkbox" ng-model="options.user.settings.notify_contests">
+			Оповещения о конкурсах
 		</label><br>
 
 		<label>
-			<input type="checkbox" ng-model="options.user">
-			Оповещения по конкурсам
-		</label><br>
-
-		<label>
-			<input type="checkbox" ng-model="options.user">
+			<input type="checkbox" ng-model="options.user.settings.notify_birthdays">
 			Дни рождения
 		</label><br>
 		<button>save</button>
