@@ -8,7 +8,8 @@
 			</a>
 			<div class="name">{{options.user.name}} {{options.user.surname}}</div>
 			<div class="city">{{options.user.city}}</div>
-			<span class="mark">* * * * *</span>
+			<span class="mark">&#9733; &#9733; &#9733; &#9733; &#9733;</span>
+			<span ng-class="{fav: inFav()}">&#9825;</span>
 			<div class="task">
 				<label>
 					<input type="checkbox" ng-if="classic_bb" ng-checked="classic_bb">

@@ -2,7 +2,7 @@ module.exports = (app) => {
 	var salt = require('./salt.js').salt,
 		crypto = require('crypto'),
 		mongoose = require('mongoose'),
-		Schema = mongoose.Schema,
+		mailer = require('./mailer.js'),
 		Users = mongoose.model('Users', {
 			mail: String,
 			ioid: String,
@@ -51,6 +51,34 @@ module.exports = (app) => {
 					type: Boolean,
 					default: false
 				},
+				notify_private: {
+					type: Boolean,
+					default: false
+				},
+				notify_comments: {
+					type: Boolean,
+					default: false
+				},
+				notify_photo_comments: {
+					type: Boolean,
+					default: false
+				},
+				notify_video_comments: {
+					type: Boolean,
+					default: false
+				},
+				notify_competitions: {
+					type: Boolean,
+					default: false
+				},
+				notify_contests: {
+					type: Boolean,
+					default: false
+				},
+				notify_birthdays: {
+					type: Boolean,
+					default: false
+				},
 			}
 		});
 
@@ -58,8 +86,16 @@ module.exports = (app) => {
 		res.send('OK!');
 	});
 
+	app.get('/mail/:text', (req, res) => {
+		mailer.send_mail({
+			mail: ['m0sk1t@bk.ru'],
+			subj: 'Testing email',
+			text: req.params.text
+		}, res);
+	});
+
 	app.post('/auth', (req, res) => {
-		if (!!req.body.mail || !!req.body.pass) {
+		if (!req.body.mail || !req.body.pass) {
 			res.status(500).send('Empty credentials!');
 			return console.error('Empty credentials!');
 		}

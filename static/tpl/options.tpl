@@ -119,6 +119,7 @@
 			<input type="checkbox" ng-model="options.user.use_large_fonts">
 			Использовать увеличенные шрифты
 		</label><br>
+		<button ng-click="user_save();">save</button>
 	</section>
 	<section ng-show="active_page === 'privacy'">
 		<h3>Моя страница</h3>
@@ -146,6 +147,7 @@
 				<option>Только друзья</option>
 			</select>
 		</label><br>
+		<button ng-click="user_save();">save</button>
 	</section>
 	<section ng-show="active_page === 'notifications'">
 		<h3>Моментальные оповещения на сайте</h3>
@@ -204,6 +206,6 @@
 			<input type="checkbox" ng-model="options.user.settings.notify_birthdays">
 			Дни рождения
 		</label><br>
-		<button>save</button>
+		<button ng-click="user_save();">save</button>
 	</section>
 </article>

@@ -1,4 +1,4 @@
-angular.module('MuscleMan', ['ngFileUpload', 'ngRoute', '720kb.datepicker', 'Services']).config(['$routeProvider',
+angular.module('MuscleMan', ['ngLocale', 'ngFileUpload', 'ngRoute', '720kb.datepicker', 'Services']).config(['$routeProvider',
 	function($routeProvider) {
 		// Маршрутизация на стороне клиента
 		$routeProvider.when('/', {

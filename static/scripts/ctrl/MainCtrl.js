@@ -1,7 +1,5 @@
-angular.module('MuscleMan').controller('MainCtrl', ['$scope', 'User', 'LS',
-	function($scope, User, LS) {
-		var socket = io();
-
+angular.module('MuscleMan').controller('MainCtrl', ['$scope', 'socket', 'User', 'LS',
+	function($scope, socket, User, LS) {
 		socket.on('user:online', function(data) {
 			console.log('user:online');
 			console.log(data);

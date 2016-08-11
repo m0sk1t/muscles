@@ -16,7 +16,7 @@ module.exports = (app, io) => {
 			}
 		}, (err, user) => {
 			if (err) return console.error(err);
-			socket.emit('user:online', user.id);
+			user && socket.emit('user:online', user.id);
 		});
 
 		socket.on('message:send', (data) => {

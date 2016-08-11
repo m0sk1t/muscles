@@ -7,9 +7,10 @@ var gulp = require('gulp'),
 
 gulp.task('build_libs', function() {
 	gulp.src([
+		'static/libs/angular/angular.min.js',
+		'static/libs/angular/locale/ngLocale.js',
 		'static/libs/moment/min/moment.min.js',
 		'static/libs/moment/locale/ru.js',
-		'static/libs/angular/angular.min.js',
 		'static/libs/sweetalert/dist/sweetalert.min.js',
 		'static/libs/angular-route/angular-route.min.js',
 		'static/libs/angular-touch/angular-touch.min.js',
