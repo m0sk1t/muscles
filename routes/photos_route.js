@@ -3,12 +3,15 @@ module.exports = (app) => {
 		multipart = require('connect-multiparty'),
 		cloudinary = require('./cloudinary.js'),
 		Photos = mongoose.model('Photos', {
+			likes: Array,
+			creDate: Date,
 			title: String,
 			image: String,
 			owner: String,
 			comments: Array,
 		}),
 		Albums = mongoose.model('Albums', {
+			creDate: Date,
 			title: String,
 			cover: String,
 			owner: String,
@@ -33,8 +36,11 @@ module.exports = (app) => {
 			Users.findOne({
 				userid: req.cookies.userid
 			}, (err, user) => {
-				if (req.body.owner === user.id) {
-					Photos.findByIdAndUpdate(req.params.id, {
+				if (req.body.owner === user._id) {
+					Photos.findOneAndUpdate({
+						_id: req.params.id,
+						owner: user._id
+					}, {
 						$set: {
 							title: req.body.title
 						}
@@ -56,7 +62,8 @@ module.exports = (app) => {
 				cloudinary.upload_image(req, (result) => {
 					Photos.create({
 						image: result,
-						owner: user.id,
+						owner: user._id,
+						creDate: Date.now(),
 					}, (err, photo) => {
 						if (err) return console.error(err);
 						res.json(photo);
@@ -68,16 +75,21 @@ module.exports = (app) => {
 			Users.findOne({
 				userid: req.cookies.userid
 			}, (err, user) => {
-				if (req.body.owner === user.id) {
-					Photos.findByIdAndRemove(req.params.id, (err, photo) => {
-						if (err) return console.error(err);
+				console.log(req.cookies.userid);
+				console.log(user._id);
+				Photos.findOneAndRemove({
+					_id: req.params.id,
+					owner: user._id
+				}, (err, photo) => {
+					if (err) return console.error(err);
+					if (photo) {
 						cloudinary.delete_image(photo.image.split('/').pop().split('.')[0], (result) => {
 							res.json(result);
 						});
-					});
-				} else {
-					res.status(403).send('You arn\'t image owner!');
-				}
+					} else {
+						res.status(403).send('You arn\'t image owner!');
+					}
+				});
 			});
 		});
 	app.route('/album/:id')
@@ -98,8 +110,11 @@ module.exports = (app) => {
 			Users.findOne({
 				userid: req.cookies.userid
 			}, (err, user) => {
-				if (req.body.owner === user.id) {
-					Albums.findByIdAndUpdate(req.params.id, {
+				if (req.body.owner === user._id) {
+					Albums.findOneAndUpdate({
+						_id: req.params.id,
+						owner: user._id
+					}, {
 						$set: req.body
 					}, (err, album) => {
 						if (err) return console.error(err);
@@ -111,21 +126,34 @@ module.exports = (app) => {
 			});
 		})
 		.post((req, res) => {
-			if ( /* check for owner */ 0) {
+			Users.findOne({
+				userid: req.cookies.userid
+			}, (err, user) => {
 				Albums.create({
-					title: req.body.title
+					title: req.body.title,
+					owner: user._id
 				}, (err, album) => {
 					if (err) return console.error(err);
 					res.json(album);
 				});
-			}
+			});
 		})
 		.delete((req, res) => {
-			if ( /* check for owner */ 0) {
-				Albums.findByIdAndRemove(req.params.id, (err, album) => {
-					if (err) return console.error(err);
-					res.json(album);
-				});
-			}
+			Users.findOne({
+				userid: req.cookies.userid
+			}, (err, user) => {
+				console.log(user._id);
+				if (req.body.owner === user._id) {
+					Albums.findOneAndRemove({
+						_id: req.params.id,
+						owner: user
+					}, (err, album) => {
+						if (err) return console.error(err);
+						res.json(album);
+					});
+				} else {
+					res.status(403).send('You arn\'t image owner!');
+				}
+			});
 		});
 };

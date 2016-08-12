@@ -1,0 +1,21 @@
+.drop-box {
+  width: 100px;
+  height: 100px;
+  border: 2px dashed #777; }
+
+.photos {
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  -webkit-flex-wrap: wrap;
+  -webkit-box-wrap: wrap;
+  -ms-flexbox-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
+  .photos .photo {
+    width: 200px; }
+    .photos .photo img {
+      width: 100%; }
+
+/*# sourceMappingURL=photo.css.map */

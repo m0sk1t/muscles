@@ -1,8 +1,9 @@
 module.exports = {
 	upload_image: (req, cb) => {
-		var cloudinary = require('cloudinary'),
-			path = __dirname + '/../' + req.files.file.path,
-			cloudinary.config(require('../cloudinary_config.js'));
+		var fs = require('fs'),
+			cloudinary = require('cloudinary'),
+			path = __dirname + '/../' + req.files.file.path;
+		cloudinary.config(require('../cloudinary_config.js'));
 		cloudinary.uploader.upload(path, (result) => {
 			fs.unlink(path, () => {
 				cb(result.secure_url);
@@ -10,8 +11,8 @@ module.exports = {
 		});
 	},
 	delete_image: (file, cb) => {
-		var cloudinary = require('cloudinary'),
-			cloudinary.config(require('../cloudinary_config.js'));
+		var cloudinary = require('cloudinary');
+		cloudinary.config(require('../cloudinary_config.js'));
 		cloudinary.uploader.destroy(file, (result) => cb(result));
 	}
 }

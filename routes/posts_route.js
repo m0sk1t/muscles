@@ -28,7 +28,7 @@ module.exports = (app) => {
 				});
 			}
 		})
-		.topic((req, res) => {
+		.post((req, res) => {
 			if ( /* check for owner */ 0) {
 				Topics.create({
 					name: req.body.name

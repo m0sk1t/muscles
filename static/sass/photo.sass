@@ -1,0 +1,14 @@
+@import mixins
+@import colors
+
+.drop-box
+	width: 100px
+	height: 100px
+	border: 2px dashed #777
+.photos
+	+flexbox()
+	+flex-wrap(wrap)
+	.photo
+		width: 200px
+		img
+			width: 100%

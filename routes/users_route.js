@@ -9,20 +9,22 @@ module.exports = (app) => {
 			name: String,
 			surname: String,
 			status: String,
+
 			creDate: Date,
-			online: Boolean,
+			birthDate: Date,
 			lastOnline: Date,
+
+			online: Boolean,
+
 			phone: String,
 			userid: String,
 			avatar: String,
 
-			birthDate: Date,
+			type: String,
+			hairs: String,
 			sex: Boolean,
 			weight: Number,
 			height: Number,
-			hairs: String,
-			type: String,
-
 			chest: Number, // грудь
 			waist: Number, // талия
 			huckle: Number, // бёдра
@@ -83,7 +85,10 @@ module.exports = (app) => {
 		});
 
 	app.get('/test', (req, res) => {
-		res.send('OK!');
+		var started = Date.now();
+		var c = 0;
+		for (var i = 0; i < 1000000; i++) c++;
+		res.send((Date.now() - started).toString());
 	});
 
 	app.get('/mail/:text', (req, res) => {

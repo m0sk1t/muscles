@@ -12,6 +12,20 @@ angular.module('Services', []).factory('User', ['$http',
 			}
 		};
 	}
+]).factory('Photo', ['$http',
+	function($http) {
+		return {
+			get: function(id, s, e) {
+				return $http.get('/photo/' + id || 'all').then(s, e);
+			},
+			delete: function(options, s, e) {
+				return $http.delete('/photo/' + options).then(s, e);
+			},
+			add_comment: function(opt, s, e) {
+				return $http.put('/photo/' + opt._id, opt).then(s, e);
+			}
+		};
+	}
 ]).factory('LS', function() {
 	return {
 		get: function(item) {
