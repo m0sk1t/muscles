@@ -3,19 +3,19 @@ module.exports = (app) => {
 		multipart = require('connect-multiparty'),
 		cloudinary = require('./cloudinary.js'),
 		Photos = mongoose.model('Photos', {
-			likes: Array,
-			creDate: Date,
 			title: String,
+			album: String,
 			image: String,
 			owner: String,
+			creDate: Date,
+			likes: Array,
 			comments: Array,
 		}),
 		Albums = mongoose.model('Albums', {
+			cover: {},
 			creDate: Date,
 			title: String,
-			cover: String,
 			owner: String,
-			photos: Array,
 		}),
 		Users = mongoose.model('Users');
 	app.route('/photo/:id')
@@ -36,21 +36,18 @@ module.exports = (app) => {
 			Users.findOne({
 				userid: req.cookies.userid
 			}, (err, user) => {
-				if (req.body.owner === user._id) {
-					Photos.findOneAndUpdate({
-						_id: req.params.id,
-						owner: user._id
-					}, {
-						$set: {
-							title: req.body.title
-						}
-					}, (err, photo) => {
-						if (err) return console.error(err);
-						res.json(photo);
-					});
-				} else {
-					res.status(403).send('You arn\'t image owner!');
-				}
+				Photos.findOneAndUpdate({
+					_id: req.params.id,
+					owner: user._id
+				}, {
+					$set: {
+						album: req.body.album,
+						title: req.body.title
+					}
+				}, (err, photo) => {
+					if (err) return console.error(err);
+					res.json(photo);
+				});
 			});
 		})
 		.post(multipart({
@@ -75,8 +72,6 @@ module.exports = (app) => {
 			Users.findOne({
 				userid: req.cookies.userid
 			}, (err, user) => {
-				console.log(req.cookies.userid);
-				console.log(user._id);
 				Photos.findOneAndRemove({
 					_id: req.params.id,
 					owner: user._id
@@ -110,19 +105,17 @@ module.exports = (app) => {
 			Users.findOne({
 				userid: req.cookies.userid
 			}, (err, user) => {
-				if (req.body.owner === user._id) {
-					Albums.findOneAndUpdate({
-						_id: req.params.id,
-						owner: user._id
-					}, {
-						$set: req.body
-					}, (err, album) => {
-						if (err) return console.error(err);
-						res.json(album);
-					});
-				} else {
-
-				}
+				Albums.findOneAndUpdate({
+					_id: req.params.id,
+					owner: user._id
+				}, {
+					$set: {
+						title: req.body.title
+					}
+				}, (err, album) => {
+					if (err) return console.error(err);
+					res.json(album);
+				});
 			});
 		})
 		.post((req, res) => {
@@ -130,8 +123,9 @@ module.exports = (app) => {
 				userid: req.cookies.userid
 			}, (err, user) => {
 				Albums.create({
+					owner: user._id,
+					creDate: Date.now(),
 					title: req.body.title,
-					owner: user._id
 				}, (err, album) => {
 					if (err) return console.error(err);
 					res.json(album);
@@ -142,18 +136,124 @@ module.exports = (app) => {
 			Users.findOne({
 				userid: req.cookies.userid
 			}, (err, user) => {
-				console.log(user._id);
-				if (req.body.owner === user._id) {
-					Albums.findOneAndRemove({
-						_id: req.params.id,
-						owner: user
-					}, (err, album) => {
-						if (err) return console.error(err);
-						res.json(album);
-					});
-				} else {
-					res.status(403).send('You arn\'t image owner!');
-				}
+				Albums.findOneAndRemove({
+					_id: req.params.id,
+					owner: user._id
+				}, (err, album) => {
+					if (err) return console.error(err);
+					res.json(album);
+				});
 			});
 		});
+
+	app.put('/album/:id/add_photo/:photoid', (req, res) => {
+		Users.findOne({
+			userid: req.cookies.userid
+		}, (err, user) => {
+			Albums.findOneAndUpdate({
+				_id: req.params.id,
+				owner: user._id
+			}, {
+				$addToSet: req.params.photoid
+			}, (err, album) => {
+				if (err) return console.error(err);
+				res.json(album);
+			});
+		});
+	});
+	app.put('/album/:id/remove_photo/:photoid', (req, res) => {
+		Users.findOne({
+			userid: req.cookies.userid
+		}, (err, user) => {
+			Albums.findOneAndUpdate({
+				_id: req.params.id,
+				owner: user._id
+			}, {
+				$pull: req.params.photoid
+			}, (err, album) => {
+				if (err) return console.error(err);
+				res.json(album);
+			});
+		});
+	});
+
+	app.put('/photo/:id/add_like', (req, res) => {
+		Users.findOne({
+			userid: req.cookies.userid
+		}, (err, user) => {
+			if (!err && user) {
+				Photos.findOneAndUpdate({
+					_id: req.params.id,
+					owner: user._id
+				}, {
+					$addToSet: {
+						likes: user._id
+					}
+				})
+			} else {
+				res.status(500).send(err);
+			}
+		});
+	});
+	app.put('/photo/:id/remove_like', (req, res) => {
+		Users.findOne({
+			userid: req.cookies.userid
+		}, (err, user) => {
+			if (!err && user) {
+				Photos.findOneAndUpdate({
+					_id: req.params.id,
+					owner: user._id
+				}, {
+					$pull: {
+						likes: user._id
+					}
+				})
+			} else {
+				res.status(500).send(err);
+			}
+		});
+	});
+	app.put('/photo/:id/add_comment', (req, res) => {
+		Users.findOne({
+			userid: req.cookies.userid
+		}, (err, user) => {
+			if (!err && user) {
+				Photos.findOneAndUpdate({
+					_id: req.params.id,
+					owner: user._id
+				}, {
+					$addToSet: {
+						comments: {
+							userid: user._id,
+							date: Date.now(),
+							avatar: user.avatar,
+							comment: req.body.comment
+						}
+					}
+				})
+			} else {
+				res.status(500).send(err);
+			}
+		});
+	});
+	app.put('/photo/:id/remove_comment', (req, res) => {
+		Users.findOne({
+			userid: req.cookies.userid
+		}, (err, user) => {
+			if (!err && user) {
+				Photos.findOneAndUpdate({
+					_id: req.params.id,
+					owner: user._id
+				}, {
+					$pull: {
+						comments: {
+							userid: user._id
+						}
+					}
+				})
+			} else {
+				res.status(500).send(err);
+			}
+		});
+	});
 };

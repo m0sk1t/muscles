@@ -1,12 +1,81 @@
-angular.module('MuscleMan').controller('PhotosCtrl', ['$scope', 'Upload', 'Photo',
-	function($scope, Upload, Photo) {
+angular.module('MuscleMan').controller('PhotosCtrl', ['$scope', 'Upload', 'Photo', 'Album', 'MSG',
+	function($scope, Upload, Photo, Album, MSG) {
 		$scope.photos = [];
+		$scope.albums = [];
+		$scope.layer = {
+			editedAlbum: null,
+			editedPhoto: null
+		};
+
+		Album.get('all', function(res) {
+			$scope.albums = res.data;
+		}, function(res) {
+			console.error(res.data);
+		});
 
 		Photo.get('all', function(res) {
 			$scope.photos = res.data;
 		}, function(res) {
 			console.error(res.data);
 		});
+
+		$scope.createAlbum = function() {
+			MSG.custom({
+				type: 'input',
+				closeOnConfirm: false,
+				showCancelButton: true,
+				cancelButtonText: 'Отмена',
+				inputPlaceholder: "Название",
+				text: 'Введите название альбома',
+				title: 'Название'
+			}, function(title) {
+				if (title) {
+					Album.create(title, function(res) {
+						MSG.ok('Альбом создан!');
+						$scope.albums.push(res.data);
+					}, function(res) {
+						MSG.err(res.data);
+						console.error(res.data);
+					});
+				}
+			});
+		};
+
+		$scope.edit_photo = function(opt) {
+			Photo.edit(opt, function(res) {
+				$scope.photos = $scope.photos.map(function(el) {
+					(el._id === $scope.layer.editedPhoto._id) && (el._id = $scope.layer.editedPhoto._id);
+					return el;
+				});
+				$scope.layer.editedPhoto = null;
+				MSG.ok('Настройки фото успешно изменены!');
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+
+		$scope.edit_album = function(opt) {
+			Album.set_title(opt, function(res) {
+				$scope.albums = $scope.albums.map(function(el) {
+					(el._id === $scope.layer.editedAlbum._id) && (el._id = $scope.layer.editedAlbum._id);
+					return el;
+				});
+				$scope.layer.editedAlbum = null;
+				MSG.ok('Нименование альбома успешно изменено!');
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+
+		$scope.delete_album = function(album) {
+			Album.delete(album, function(res) {
+				$scope.albums = $scope.albums.filter(function(el) {
+					return el._id !== album;
+				});
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
 
 		$scope.delete_photo = function(photo) {
 			Photo.delete(photo, function(res) {

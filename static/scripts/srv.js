@@ -18,15 +18,70 @@ angular.module('Services', []).factory('User', ['$http',
 			get: function(id, s, e) {
 				return $http.get('/photo/' + id || 'all').then(s, e);
 			},
-			delete: function(options, s, e) {
-				return $http.delete('/photo/' + options).then(s, e);
+			edit: function(opt, s, e) {
+				return $http.put('/photo/' + opt._id, opt).then(s, e);
+			},
+			delete: function(id, s, e) {
+				return $http.delete('/photo/' + id).then(s, e);
+			},
+			add_like: function(opt, s, e) {
+				return $http.put('/photo/' + opt._id + '/add_like', opt).then(s, e);
+			},
+			remove_like: function(opt, s, e) {
+				return $http.put('/photo/' + opt._id + '/remove_like', opt).then(s, e);
 			},
 			add_comment: function(opt, s, e) {
-				return $http.put('/photo/' + opt._id, opt).then(s, e);
+				return $http.put('/photo/' + opt._id + '/add_comment', opt).then(s, e);
+			},
+			remove_comment: function(opt, s, e) {
+				return $http.put('/photo/' + opt._id + '/remove_comment', opt).then(s, e);
 			}
 		};
 	}
-]).factory('LS', function() {
+]).factory('Album', ['$http',
+	function($http) {
+		return {
+			get: function(id, s, e) {
+				return $http.get('/album/' + id || 'all').then(s, e);
+			},
+			create: function(title, s, e) {
+				return $http.post('/album/new', {
+					title: title
+				}).then(s, e);
+			},
+			set_title: function(opt, s, e) {
+				return $http.put('/album/' + opt._id, opt).then(s, e);
+			},
+			add_photo: function(opt, s, e) {
+				return $http.put('/album/' + opt._id + '/add_photo/' + opt.photoid, opt).then(s, e);
+			},
+			remove_photo: function(opt, s, e) {
+				return $http.put('/album/' + opt._id + '/remove_photo/' + opt.photoid, opt).then(s, e);
+			},
+			delete: function(id, s, e) {
+				return $http.delete('/album/' + id).then(s, e);
+			}
+		};
+	}
+]).factory('MSG', function() {
+	return {
+		ok: function(msg) {
+			swal('OK!', msg);
+		},
+		info: function(msg) {
+			swal('Info!', msg, 'info');
+		},
+		warn: function(msg) {
+			swal('Warning!', msg, 'warning');
+		},
+		err: function(msg) {
+			swal('Error!', msg, 'error');
+		},
+		custom: function(opt, cb) {
+			swal(opt, cb);
+		}
+	};
+}).factory('LS', function() {
 	return {
 		get: function(item) {
 			try {
