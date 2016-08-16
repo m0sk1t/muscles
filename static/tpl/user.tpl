@@ -3,7 +3,7 @@
 		<span class="avatar">
 			<a href="#/options">
 				<div>
-					<img src="" alt="avatar">
+					<img ng-src="{{options.user.avatar}}" alt="avatar">
 				</div>
 			</a>
 			<div class="name">{{options.user.name}} {{options.user.surname}}</div>
@@ -90,8 +90,7 @@
 					</div>
 				</span>
 				<label>
-					Дата рождения
-					<input type="date" ng-model="options.user.birthDate">
+					Дата рождения:{{birthDate(options.user.birthDate)}}
 				</label><br>
 			</div>
 		</span>
@@ -121,12 +120,12 @@
 		</span>
 		<span class="media">
 			<div class="photo">
-				<a href="#/photos">
+				<a href="#/user/{{options.user._id}}/photos">
 					<i class="fa fa-5x fa-camera"></i>
 				</a>
 			</div>
 			<div class="video">
-				<a href="#/videos">
+				<a href="#/user/{{options.user._id}}/videos">
 					<i class="fa fa-5x fa-video-camera"></i>
 				</a>
 			</div>
@@ -149,14 +148,14 @@
 		</ul>
 	</section>
 	<h3>Мои фото</h3>
-	<section class="photos">
-		<img src="" alt="img">
-		<img src="" alt="img">
-		<img src="" alt="img">
-		<img src="" alt="img">
-		<img src="" alt="img">
-		<img src="" alt="img">
-		<img src="" alt="img">
+	<section>
+		<div class="photos">
+			<img ng-click="gallery.curent = 0;" ng-src="{{photos[0].image}}">
+			<img ng-click="gallery.curent = 1;" ng-src="{{photos[1].image}}">
+			<img ng-click="gallery.curent = 2;" ng-src="{{photos[2].image}}">
+			<img ng-click="gallery.curent = 3;" ng-src="{{photos[3].image}}">
+			<img ng-click="gallery.curent = 4;" ng-src="{{photos[4].image}}">
+		</div>
 	</section>
 	<h3>Мои записи</h3>
 	<section>
@@ -204,6 +203,26 @@
 				<span class="comment-author">asd</span>
 				<span class="comment-text">text</span>
 			</div>
+		</div>
+	</section>
+	<section class="gallery" ng-hide="gallery.current === null">
+		<div class="photo-area">
+			<span
+				class="left"
+				ng-click="turnLeft();"
+			>
+				&lt;
+			</span>
+			<span class="photo">
+				<span ng-click="gallery.current = null">X</span>
+				<img ng-src="{{photos[gallery.current].image}}">
+			</span>
+			<span
+				class="right"
+				ng-click="turnRight()"
+			>
+				&gt;
+			</span>
 		</div>
 	</section>
 </article>

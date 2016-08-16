@@ -20,17 +20,12 @@ module.exports = (app) => {
 		Users = mongoose.model('Users');
 	app.route('/photo/:id')
 		.get((req, res) => {
-			if (req.params.id === 'all') {
-				Photos.find({}, (err, photos) => {
-					if (err) return console.error(err);
-					res.json(photos);
-				});
-			} else {
-				Photos.findById(req.params.id, (err, photo) => {
-					if (err) return console.error(err);
-					res.json(photo);
-				});
-			}
+			Photos.find({
+				owner: req.params.id
+			}, (err, photos) => {
+				if (err) return console.error(err);
+				res.json(photos);
+			});
 		})
 		.put((req, res) => {
 			Users.findOne({
@@ -87,19 +82,20 @@ module.exports = (app) => {
 				});
 			});
 		});
+	app.get('/single_album/:id', (req, res) => {
+		Albums.findById(req.params.id, (err, album) => {
+			if (err) return console.error(err);
+			res.json(album);
+		});
+	});
 	app.route('/album/:id')
 		.get((req, res) => {
-			if (req.params.id === 'all') {
-				Albums.find({}, (err, albums) => {
-					if (err) return console.error(err);
-					res.json(albums);
-				});
-			} else {
-				Albums.findById(req.params.id, (err, album) => {
-					if (err) return console.error(err);
-					res.json(album);
-				});
-			}
+			Albums.find({
+				owner: req.params.id
+			}, (err, albums) => {
+				if (err) return console.error(err);
+				res.json(albums);
+			});
 		})
 		.put((req, res) => {
 			Users.findOne({
@@ -145,37 +141,6 @@ module.exports = (app) => {
 				});
 			});
 		});
-
-	app.put('/album/:id/add_photo/:photoid', (req, res) => {
-		Users.findOne({
-			userid: req.cookies.userid
-		}, (err, user) => {
-			Albums.findOneAndUpdate({
-				_id: req.params.id,
-				owner: user._id
-			}, {
-				$addToSet: req.params.photoid
-			}, (err, album) => {
-				if (err) return console.error(err);
-				res.json(album);
-			});
-		});
-	});
-	app.put('/album/:id/remove_photo/:photoid', (req, res) => {
-		Users.findOne({
-			userid: req.cookies.userid
-		}, (err, user) => {
-			Albums.findOneAndUpdate({
-				_id: req.params.id,
-				owner: user._id
-			}, {
-				$pull: req.params.photoid
-			}, (err, album) => {
-				if (err) return console.error(err);
-				res.json(album);
-			});
-		});
-	});
 
 	app.put('/photo/:id/add_like', (req, res) => {
 		Users.findOne({

@@ -12,7 +12,7 @@ angular.module('MuscleMan').controller('AuthCtrl', ['$scope', '$location', 'User
 					case 202:
 						$scope.options.user = res.data;
 						LS.set('user', res.data);
-						$location.path('/user');
+						$location.path('/user/' + $scope.options.user._id);
 						break;
 					default:
 						$location.path('/options');

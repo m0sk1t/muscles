@@ -8,16 +8,24 @@
 			>
 				<img ng-src="{{p.image}}" ng-click="gallery.current = $index">
 				<span>
-					<i class="fa fa-lg fa-trash" ng-click="delete_photo(p._id)"></i>
-					<i class="fa fa-lg fa-edit" ng-click="editedPhoto = p;"></i>
+					<i
+						class="fa fa-lg fa-trash"
+						ng-click="delete_photo(p._id)"
+						ng-if="options.user._id === p.owner"
+					></i>
+					<i
+						class="fa fa-lg fa-edit"
+						ng-click="editedPhoto = p;"
+						ng-if="options.user._id === p.owner"
+					></i>
 					<i class="fa fa-lg fa-heart-o"></i>
-					<i class="fa fa-lg fa-comment"></i>
+					<i class="fa fa-lg fa-comment"></i>{{p.comments.length}}
 					{{::p.title}}
 				</span>
 			</div>
 		</div>
 	</section>
-	<section class="gallery">
+	<section class="gallery" ng-hide="gallery.current === null">
 		<div class="photo-area">
 			<span
 				class="left"
@@ -25,7 +33,10 @@
 			>
 				&lt;
 			</span>
-			<span class="photo"><img ng-src="{{photos[gallery.current].image}}"></span>
+			<span class="photo">
+				<span ng-click="gallery.current = null">X</span>
+				<img ng-src="{{photos[gallery.current].image}}">
+			</span>
 			<span
 				class="right"
 				ng-click="turnRight()"

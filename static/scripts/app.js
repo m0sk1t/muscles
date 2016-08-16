@@ -1,13 +1,12 @@
 angular.module('MuscleMan', ['ngLocale', 'ngFileUpload', 'ngRoute', '720kb.datepicker', 'Services']).config(['$routeProvider',
 	function($routeProvider) {
-		// Маршрутизация на стороне клиента
 		$routeProvider.when('/', {
 			templateUrl: 'tpl/main.tpl',
 			controller: 'MainCtrl'
 		}).when('/auth', {
 			templateUrl: 'tpl/auth.tpl',
 			controller: 'AuthCtrl'
-		}).when('/album/:id', {
+		}).when('/user/:userid/album/:id', {
 			templateUrl: 'tpl/album.tpl',
 			controller: 'AlbumCtrl'
 		}).when('/articles', {
@@ -34,7 +33,7 @@ angular.module('MuscleMan', ['ngLocale', 'ngFileUpload', 'ngRoute', '720kb.datep
 		}).when('/favs', {
 			templateUrl: 'tpl/favs.tpl',
 			controller: 'FavsCtrl'
-		}).when('/photos', {
+		}).when('/user/:id/photos', {
 			templateUrl: 'tpl/photos.tpl',
 			controller: 'PhotosCtrl'
 		}).when('/options', {
@@ -46,7 +45,7 @@ angular.module('MuscleMan', ['ngLocale', 'ngFileUpload', 'ngRoute', '720kb.datep
 		}).when('/status', {
 			templateUrl: 'tpl/status.tpl',
 			controller: 'StatusCtrl'
-		}).when('/user', {
+		}).when('/user/:id', {
 			templateUrl: 'tpl/user.tpl',
 			controller: 'UserCtrl'
 		}).otherwise({

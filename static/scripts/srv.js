@@ -9,6 +9,9 @@ angular.module('Services', []).factory('User', ['$http',
 			},
 			auth: function(credentials, s, e) {
 				return $http.post('/auth', credentials).then(s, e);
+			},
+			find_users: function(search, s, e) {
+				return $http.post('/find_users', search).then(s, e);
 			}
 		};
 	}
@@ -16,7 +19,7 @@ angular.module('Services', []).factory('User', ['$http',
 	function($http) {
 		return {
 			get: function(id, s, e) {
-				return $http.get('/photo/' + id || 'all').then(s, e);
+				return $http.get('/photo/' + id).then(s, e);
 			},
 			edit: function(opt, s, e) {
 				return $http.put('/photo/' + opt._id, opt).then(s, e);
@@ -24,11 +27,11 @@ angular.module('Services', []).factory('User', ['$http',
 			delete: function(id, s, e) {
 				return $http.delete('/photo/' + id).then(s, e);
 			},
-			add_like: function(opt, s, e) {
-				return $http.put('/photo/' + opt._id + '/add_like', opt).then(s, e);
+			add_like: function(s, e) {
+				return $http.put('/photo/' + opt._id + '/add_like').then(s, e);
 			},
-			remove_like: function(opt, s, e) {
-				return $http.put('/photo/' + opt._id + '/remove_like', opt).then(s, e);
+			remove_like: function(s, e) {
+				return $http.put('/photo/' + opt._id + '/remove_like').then(s, e);
 			},
 			add_comment: function(opt, s, e) {
 				return $http.put('/photo/' + opt._id + '/add_comment', opt).then(s, e);
@@ -42,7 +45,10 @@ angular.module('Services', []).factory('User', ['$http',
 	function($http) {
 		return {
 			get: function(id, s, e) {
-				return $http.get('/album/' + id || 'all').then(s, e);
+				return $http.get('/album/' + id).then(s, e);
+			},
+			get_one: function(id, s, e) {
+				return $http.get('/single_album/' + id).then(s, e);
 			},
 			create: function(title, s, e) {
 				return $http.post('/album/new', {

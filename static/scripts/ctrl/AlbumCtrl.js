@@ -2,9 +2,11 @@ angular.module('MuscleMan').controller('AlbumCtrl', ['$scope', '$routeParams', '
 	function($scope, $routeParams, Photo, Album) {
 		$scope.album = {};
 		$scope.photos = [];
+
 		$scope.gallery = {
-			current: 0
+			current: null
 		};
+
 		$scope.turnLeft = function() {
 			$scope.gallery.current == 0 ? $scope.gallery.current = $scope.photos.length : $scope.gallery.current--;
 		};
@@ -12,14 +14,15 @@ angular.module('MuscleMan').controller('AlbumCtrl', ['$scope', '$routeParams', '
 			$scope.gallery.current == $scope.photos.length - 1 ? $scope.gallery.current = 0 : $scope.gallery.current++;
 		};
 
-		Photo.get('all', function(res) {
+		Photo.get($routeParams.userid, function(res) {
 			$scope.photos = res.data.filter(function(el) {
 				return el.album === $routeParams.id;
 			});
 		}, function(res) {
 			console.error(res.data);
 		});
-		Album.get($routeParams.id, function(res) {
+
+		Album.get_one($routeParams.id, function(res) {
 			$scope.album = res.data;
 		}, function(res) {
 			console.error(res.data);

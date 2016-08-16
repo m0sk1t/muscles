@@ -184,6 +184,7 @@ module.exports = (app) => {
 			info = {
 				mail: 1,
 				name: 1,
+				surname: 1,
 				creDate: 1,
 				phone: 1,
 				age: 1,
@@ -202,6 +203,7 @@ module.exports = (app) => {
 			};
 		req.body.mail && (search.mail = req.body.mail);
 		req.body.name && (search.name = req.body.name);
+		req.body.surname && (search.surname = req.body.surname);
 		req.body.creDate && (search.creDate = req.body.creDate);
 		req.body.phone && (search.phone = req.body.phone);
 		req.body.age && (search.age = req.body.age);

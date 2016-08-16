@@ -64,7 +64,8 @@
     .user-page .media .favs > a {
       color: #93d34a; }
   .user-page .photos img {
-    width: 200px; }
+    width: 200px;
+    height: auto; }
   .user-page .record {
     width: 50%; }
 

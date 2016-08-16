@@ -6,6 +6,13 @@
 	cursor: pointer
 	background-color: rgba(120,220,210,.7)
 
+.photo-area
+	width: 60%
+	.photo
+		img
+			width: 100%
+
+
 .drop-box
 	width: 100px
 	height: 100px
@@ -14,13 +21,13 @@
 .edit-photo,
 .edit-album
 	+flexbox()
+	z-index: 99
+	width: 100%
+	height: 100%
+	position: absolute
 	+align-items(center)
 	+justify-content(center)
 	+transition(top, .3s, ease)
-	width: 100%
-	height: 100%
-	z-index: 99
-	position: absolute
 	background-color: rgba(33,33,33,.3)
 
 .edit-photo.show,

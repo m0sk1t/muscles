@@ -1,19 +1,32 @@
-angular.module('MuscleMan').controller('PhotosCtrl', ['$scope', 'Upload', 'Photo', 'Album', 'MSG',
-	function($scope, Upload, Photo, Album, MSG) {
+angular.module('MuscleMan').controller('PhotosCtrl', ['$scope', '$routeParams', 'Upload', 'Photo', 'Album', 'MSG',
+	function($scope, $routeParams, Upload, Photo, Album, MSG) {
 		$scope.photos = [];
+		$scope.options.userid = $routeParams.id;
+
 		$scope.albums = [];
 		$scope.layer = {
 			editedAlbum: null,
 			editedPhoto: null
 		};
 
-		Album.get('all', function(res) {
+		$scope.gallery = {
+			current: null
+		};
+
+		$scope.turnLeft = function() {
+			$scope.gallery.current == 0 ? $scope.gallery.current = $scope.photos.length : $scope.gallery.current--;
+		};
+		$scope.turnRight = function() {
+			$scope.gallery.current == $scope.photos.length - 1 ? $scope.gallery.current = 0 : $scope.gallery.current++;
+		};
+
+		Album.get($routeParams.id, function(res) {
 			$scope.albums = res.data;
 		}, function(res) {
 			console.error(res.data);
 		});
 
-		Photo.get('all', function(res) {
+		Photo.get($routeParams.id, function(res) {
 			$scope.photos = res.data;
 		}, function(res) {
 			console.error(res.data);

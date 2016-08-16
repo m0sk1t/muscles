@@ -3,7 +3,7 @@
 	<a href="#/auth" class="auth"><i class="fa fa-2x fa-sign-out"></i>ВОЙТИ или Зарегистрироваться</a>
 	<section>
 		<div class="main-page__buttons">
-			<a href="#/user">СОЦ СЕТЬ</a>
+			<a href="#/user/{{options.user._id}}">СОЦ СЕТЬ</a>
 			<a href="#/competitions">Расписание <br>соревнований</a>
 		</div>
 		<p></p>

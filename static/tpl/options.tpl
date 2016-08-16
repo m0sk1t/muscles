@@ -70,7 +70,6 @@
 			Дата рождения
 			<datepicker
 				style="width: 11rem; float: none;"
-				date-format="dd/MM/yyyy"
 			>
 				<input ng-model="options.user.birthDate" type="text"/>
 			</datepicker>

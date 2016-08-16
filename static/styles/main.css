@@ -1,7 +1,8 @@
 body {
-  background-size: cover;
-  background-image: url("https://newevolutiondesigns.com/images/freebies/city-wallpaper-11.jpg"); }
+  background-size: cover; }
 
+/* 	background-image: url("https://newevolutiondesigns.com/images/freebies/city-wallpaper-11.jpg")
+ */
 i {
   cursor: pointer; }
 
