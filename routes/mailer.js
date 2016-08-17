@@ -1,5 +1,5 @@
 module.exports = {
-	send_mail: (options, res) => {
+	send_mail: (options, cb) => {
 		var nodemailer = require('nodemailer'),
 			transporter = nodemailer.createTransport({
 				host: 'smtp.gmail.com',
@@ -17,12 +17,8 @@ module.exports = {
 				text: options.text,
 				html: options.html
 			};
-		transporter.sendMail(mailOptions, function(error, info) {
-			if (error) {
-				return console.log(error);
-			}
-			res.send('OK!');
-			console.log('Message sent: ' + info.response);
+		transporter.sendMail(mailOptions, (error, info) => {
+			cb(error, info);
 		});
 	}
 }

@@ -60,11 +60,17 @@
 						ng-click="layer.editedPhoto = p;"
 						ng-if="options.user._id === p.owner"
 					></i>
-					<i
-						class="fa fa-lg fa-heart-o"
-						ng-click="like_photo()"
-					></i>{{p.likes.length}}
-					<i class="fa fa-lg fa-comment"></i>{{p.comments.length}}
+					<span ng-if="options.user">
+						<i
+							ng-click="like(p, $index)"
+							class="fa fa-lg fa-heart-o"
+						></i>{{p.likes.length}}
+					</span>
+					<span ng-if="options.user">
+						<i
+							class="fa fa-lg fa-comment"
+						></i>{{p.comments.length}}
+					</span>
 					{{::p.title}}
 				</span>
 			</div>
@@ -95,7 +101,25 @@
 			>
 				&lt;
 			</span>
-			<span class="photo"><span ng-click="gallery.current = null">X</span><img ng-src="{{photos[gallery.current].image}}"></span>
+			<span class="photo">
+				<span ng-click="gallery.current = null">X</span>
+				<img ng-src="{{photos[gallery.current].image}}">
+				<span>
+					<div>
+						<div class="comment" ng-repeat="c in photos[gallery.current].comments">
+							<a href="#/user/{{c.userid}}">{{c.name + ' ' + c.surname}}</a>:
+							{{c.comment}}
+							<i
+								class="fa fa-lg fa-close"
+								ng-if="c.userid === options.user._id"
+								ng-click="remove_comment(gallery.current, c.comment)"
+							></i>
+						</div>
+					</div>
+					<input type="text" ng-model="gallery.comment">
+					<button ng-click="add_comment(gallery.current)">&gt;</button>
+				</span>
+				</span>
 			<span
 				class="right"
 				ng-click="turnRight()"

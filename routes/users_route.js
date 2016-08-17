@@ -136,6 +136,15 @@ module.exports = (app) => {
 		});
 	});
 
+	app.get('/user/:id', (req, res) => {
+		Users.findById(req.params.id, {
+			userid: 0
+		}, (err, user) => {
+			if (err) return console.error(err);
+			res.json(user);
+		})
+	})
+
 	app.route('/user')
 		.get((req, res) => {
 			var userid = req.cookies.userid;

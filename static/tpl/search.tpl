@@ -2,8 +2,8 @@
 	<div class="sort">Сортировать</div>
 	<section>
 		<span class="search-results">
-			<a href="#/user/{{options.user._id}}">
-				<div class="search-result" ng-repeat="u in users track by $index">
+			<a ng-repeat="u in users track by $index" href="#/user/{{u._id}}">
+				<div class="search-result">
 					<span class="avatar">
 						<img ng-src="{{u.avatar}}" alt="ava">
 					</span>

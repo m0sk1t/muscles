@@ -1,5 +1,6 @@
 module.exports = (app, io) => {
 	var mongoose = require('mongoose'),
+		mailer = require('./mailer.js'),
 		Users = mongoose.model('Users');
 
 	io.on('connection', (socket) => {
@@ -21,7 +22,19 @@ module.exports = (app, io) => {
 
 		socket.on('message:send', (data) => {
 			io.emit('message:send', data);
-		})
+		});
+
+		socket.on('photo:comment', (data) => {
+			Users.findById(data.target, (err, user) => {
+				user.settings.notify_photo_comments && mailer.send_mail({
+					mail: [user.mail],
+					subj: 'Новый комментарий к вашему фото!',
+					text: data.name + ' ' + data.surname + ' сказал:' + data.comment,
+				}, (error, info) => {
+					user.settings.show_notifications && socket.broadcast.to(user.ioid).emit('photo:comment', data);
+				});
+			});
+		});
 
 		socket.on('disconnect', () => {
 			userid && Users.findOneAndUpdate({

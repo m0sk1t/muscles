@@ -1,5 +1,5 @@
-angular.module('MuscleMan').controller('PhotosCtrl', ['$scope', '$routeParams', 'Upload', 'Photo', 'Album', 'MSG',
-	function($scope, $routeParams, Upload, Photo, Album, MSG) {
+angular.module('MuscleMan').controller('PhotosCtrl', ['$scope', '$routeParams', 'socket', 'Upload', 'Photo', 'Album', 'MSG',
+	function($scope, $routeParams, socket, Upload, Photo, Album, MSG) {
 		$scope.photos = [];
 		$scope.options.userid = $routeParams.id;
 
@@ -62,6 +62,55 @@ angular.module('MuscleMan').controller('PhotosCtrl', ['$scope', '$routeParams', 
 				});
 				$scope.layer.editedPhoto = null;
 				MSG.ok('Настройки фото успешно изменены!');
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+
+		$scope.like = function(p, index) {
+			var likeIndex = p.likes.indexOf($scope.options.user._id);
+			if (likeIndex === -1) {
+				Photo.add_like(p, function(res) {
+					$scope.photos[index].likes.push($scope.options.user._id);
+				}, function(res) {
+					console.error(res.data);
+				});
+			} else {
+				Photo.remove_like(p, function(res) {
+					$scope.photos[index].likes.splice(likeIndex, 1);
+				}, function(res) {
+					console.error(res.data);
+				});
+			}
+		};
+
+		$scope.add_comment = function(index) {
+			var comment = {
+				date: Date.now(),
+				name: $scope.options.user.name,
+				userid: $scope.options.user._id,
+				comment: $scope.gallery.comment,
+				avatar: $scope.options.user.avatar,
+				surname: $scope.options.user.surname,
+				_id: $scope.photos[$scope.gallery.current]._id,
+			};
+			Photo.add_comment(comment, function(res) {
+				$scope.gallery.comment = '';
+				$scope.photos[index].comments.push(comment);
+				($routeParams.id !== $scope.options.user._id) && (comment.target = $routeParams.id, socket.emit('photo:comment', comment));
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+
+		$scope.remove_comment = function(index, comment) {
+			Photo.remove_comment({
+				comment: comment,
+				_id: $scope.photos[$scope.gallery.current]._id,
+			}, function(res) {
+				$scope.photos[index].comments = $scope.photos[index].comments.filter(function(el) {
+					return !(el.userid === $scope.options.user._id && el.comment === comment);
+				});
 			}, function(res) {
 				console.error(res.data);
 			});

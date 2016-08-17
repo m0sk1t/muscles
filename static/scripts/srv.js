@@ -4,6 +4,9 @@ angular.module('Services', []).factory('User', ['$http',
 			get: function(s, e) {
 				return $http.get('/user').then(s, e);
 			},
+			load: function(id, s, e) {
+				return $http.get('/user/' + id).then(s, e);
+			},
 			set: function(options, s, e) {
 				return $http.put('/user', options).then(s, e);
 			},
@@ -27,11 +30,11 @@ angular.module('Services', []).factory('User', ['$http',
 			delete: function(id, s, e) {
 				return $http.delete('/photo/' + id).then(s, e);
 			},
-			add_like: function(s, e) {
-				return $http.put('/photo/' + opt._id + '/add_like').then(s, e);
+			add_like: function(p, s, e) {
+				return $http.put('/photo/' + p._id + '/add_like').then(s, e);
 			},
-			remove_like: function(s, e) {
-				return $http.put('/photo/' + opt._id + '/remove_like').then(s, e);
+			remove_like: function(p, s, e) {
+				return $http.put('/photo/' + p._id + '/remove_like').then(s, e);
 			},
 			add_comment: function(opt, s, e) {
 				return $http.put('/photo/' + opt._id + '/add_comment', opt).then(s, e);

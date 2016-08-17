@@ -148,13 +148,14 @@ module.exports = (app) => {
 		}, (err, user) => {
 			if (!err && user) {
 				Photos.findOneAndUpdate({
-					_id: req.params.id,
-					owner: user._id
+					_id: req.params.id
 				}, {
 					$addToSet: {
 						likes: user._id
 					}
-				})
+				}, function(err, photo) {
+					res.json(photo);
+				});
 			} else {
 				res.status(500).send(err);
 			}
@@ -166,13 +167,14 @@ module.exports = (app) => {
 		}, (err, user) => {
 			if (!err && user) {
 				Photos.findOneAndUpdate({
-					_id: req.params.id,
-					owner: user._id
+					_id: req.params.id
 				}, {
 					$pull: {
 						likes: user._id
 					}
-				})
+				}, function(err, photo) {
+					res.json(photo);
+				});
 			} else {
 				res.status(500).send(err);
 			}
@@ -184,18 +186,21 @@ module.exports = (app) => {
 		}, (err, user) => {
 			if (!err && user) {
 				Photos.findOneAndUpdate({
-					_id: req.params.id,
-					owner: user._id
+					_id: req.params.id
 				}, {
 					$addToSet: {
 						comments: {
+							name: user.name,
 							userid: user._id,
 							date: Date.now(),
 							avatar: user.avatar,
-							comment: req.body.comment
+							surname: user.surname,
+							comment: req.body.comment,
 						}
 					}
-				})
+				}, function(err, photo) {
+					res.json(photo);
+				});
 			} else {
 				res.status(500).send(err);
 			}
@@ -207,15 +212,17 @@ module.exports = (app) => {
 		}, (err, user) => {
 			if (!err && user) {
 				Photos.findOneAndUpdate({
-					_id: req.params.id,
-					owner: user._id
+					_id: req.params.id
 				}, {
 					$pull: {
 						comments: {
-							userid: user._id
+							userid: user._id,
+							comment: req.body.comment,
 						}
 					}
-				})
+				}, function(err, photo) {
+					res.json(photo);
+				});
 			} else {
 				res.status(500).send(err);
 			}

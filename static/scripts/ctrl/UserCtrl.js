@@ -1,6 +1,13 @@
-angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$routeParams', 'Photo',
-	function($scope, $routeParams, Photo) {
+angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Photo',
+	function($scope, $routeParams, User, Photo) {
+		$scope.user = {};
 		$scope.photos = [];
+
+		User.load($routeParams.id, function(res) {
+			$scope.user = res.data;
+		}, function(res) {
+			console.error(res.data);
+		});
 
 		!$scope.options.user && $location.path('/auth');
 

@@ -3,11 +3,14 @@
 		<span class="avatar">
 			<a href="#/options">
 				<div>
-					<img ng-src="{{options.user.avatar}}" alt="avatar">
+					<img ng-src="{{user.avatar}}" alt="avatar">
 				</div>
 			</a>
-			<div class="name">{{options.user.name}} {{options.user.surname}}</div>
-			<div class="city">{{options.user.city}}</div>
+			<div class="name">
+				<a href="#/options"><i class="fa fa-lg fa-cog"></i></a>
+				{{user.name}} {{user.surname}}
+			</div>
+			<div class="city">{{user.city}}</div>
 			<span class="mark">&#9733; &#9733; &#9733; &#9733; &#9733;</span>
 			<span ng-class="{fav: inFav()}">&#9825;</span>
 			<div class="task">
@@ -26,7 +29,7 @@
 			</div>
 		</span>
 		<span class="status-area">
-			<div class="status-text">{{options.user.status}}</div>
+			<div class="status-text">{{user.status}}</div>
 			<div class="status">
 				<label>
 					<input type="checkbox" ng-if="classic_bb" ng-checked="classic_bb">
@@ -61,36 +64,36 @@
 			<div class="params">
 				<span>
 					<div>
-						Возраст: {{getAge(options.user.birthDate)}}
+						Возраст: {{getAge(user.birthDate)}}
 					</div>
 					<div>
-						Рост: {{options.user.height}}
+						Рост: {{user.height}}
 					</div>
 					<div>
-						Вес: {{options.user.weight}}
-					</div>
-				</span>
-				<span>
-					<div>
-						Волосы: {{options.user.hairs}}
-					</div>
-					<div>
-						Типаж: {{options.user.type}}
+						Вес: {{user.weight}}
 					</div>
 				</span>
 				<span>
 					<div>
-						Грудь: {{options.user.chest}}
+						Волосы: {{user.hairs}}
 					</div>
 					<div>
-						Талия: {{options.user.waist}}
+						Типаж: {{user.type}}
+					</div>
+				</span>
+				<span>
+					<div>
+						Грудь: {{user.chest}}
 					</div>
 					<div>
-						Бедра: {{options.user.huckle}}
+						Талия: {{user.waist}}
+					</div>
+					<div>
+						Бедра: {{user.huckle}}
 					</div>
 				</span>
 				<label>
-					Дата рождения:{{birthDate(options.user.birthDate)}}
+					Дата рождения:{{birthDate(user.birthDate)}}
 				</label><br>
 			</div>
 		</span>
@@ -120,12 +123,12 @@
 		</span>
 		<span class="media">
 			<div class="photo">
-				<a href="#/user/{{options.user._id}}/photos">
+				<a href="#/user/{{user._id}}/photos">
 					<i class="fa fa-5x fa-camera"></i>
 				</a>
 			</div>
 			<div class="video">
-				<a href="#/user/{{options.user._id}}/videos">
+				<a href="#/user/{{user._id}}/videos">
 					<i class="fa fa-5x fa-video-camera"></i>
 				</a>
 			</div>
