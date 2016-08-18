@@ -44,6 +44,35 @@ angular.module('Services', []).factory('User', ['$http',
 			}
 		};
 	}
+]).factory('Video', ['$http',
+	function($http) {
+		return {
+			get: function(id, s, e) {
+				return $http.get('/video/' + id).then(s, e);
+			},
+			add: function(opt, s, e) {
+				return $http.post('/video/new', opt).then(s, e);
+			},
+			edit: function(opt, s, e) {
+				return $http.put('/video/' + opt._id, opt).then(s, e);
+			},
+			delete: function(id, s, e) {
+				return $http.delete('/video/' + id).then(s, e);
+			},
+			add_like: function(p, s, e) {
+				return $http.put('/video/' + p._id + '/add_like').then(s, e);
+			},
+			remove_like: function(p, s, e) {
+				return $http.put('/video/' + p._id + '/remove_like').then(s, e);
+			},
+			add_comment: function(opt, s, e) {
+				return $http.put('/video/' + opt._id + '/add_comment', opt).then(s, e);
+			},
+			remove_comment: function(opt, s, e) {
+				return $http.put('/video/' + opt._id + '/remove_comment', opt).then(s, e);
+			}
+		};
+	}
 ]).factory('Album', ['$http',
 	function($http) {
 		return {

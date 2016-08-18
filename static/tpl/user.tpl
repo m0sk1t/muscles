@@ -7,7 +7,9 @@
 				</div>
 			</a>
 			<div class="name">
-				<a href="#/options"><i class="fa fa-lg fa-cog"></i></a>
+				<a href="#/options" ng-if="options.user._id === user._id">
+					<i class="fa fa-lg fa-cog"></i>
+				</a>
 				{{user.name}} {{user.surname}}
 			</div>
 			<div class="city">{{user.city}}</div>
@@ -123,12 +125,12 @@
 		</span>
 		<span class="media">
 			<div class="photo">
-				<a href="#/user/{{user._id}}/photos">
+				<a href="#/user/{{user._id}}/photos/all">
 					<i class="fa fa-5x fa-camera"></i>
 				</a>
 			</div>
 			<div class="video">
-				<a href="#/user/{{user._id}}/videos">
+				<a href="#/user/{{user._id}}/videos/all">
 					<i class="fa fa-5x fa-video-camera"></i>
 				</a>
 			</div>

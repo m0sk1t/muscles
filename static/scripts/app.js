@@ -33,9 +33,12 @@ angular.module('MuscleMan', ['ngLocale', 'ngFileUpload', 'ngRoute', '720kb.datep
 		}).when('/favs', {
 			templateUrl: 'tpl/favs.tpl',
 			controller: 'FavsCtrl'
-		}).when('/user/:id/photos', {
+		}).when('/user/:id/photos/:photoid', {
 			templateUrl: 'tpl/photos.tpl',
 			controller: 'PhotosCtrl'
+		}).when('/user/:id/videos/:videoid', {
+			templateUrl: 'tpl/videos.tpl',
+			controller: 'VideosCtrl'
 		}).when('/options', {
 			templateUrl: 'tpl/options.tpl',
 			controller: 'OptionsCtrl'

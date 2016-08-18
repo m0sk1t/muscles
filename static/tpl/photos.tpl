@@ -2,7 +2,7 @@
 	<section>
 		<div>
 			{{options.user._id === options.userid?'Мои альбомы':'Альбомы пользователя'}}
-			<span class="create-album" ng-click="createAlbum()" ng-if="options.user._id === options.userid">
+			<span class="create-album" ng-click="create_album()" ng-if="options.user._id === options.userid">
 				Создать альбом
 			</span>
 		</div>
@@ -36,9 +36,9 @@
 			class="drop-box"
 			ngf-multiple="true"
 			ngf-pattern="'image/*'"
-			ngf-drop="uploadFiles($files)"
+			ngf-drop="upload_files($files)"
 			ngf-drag-over-class="'dragover'"
-			ngf-select="uploadFiles($files)"
+			ngf-select="upload_files($files)"
 			ng-if="options.user._id === options.userid"
 		>
 			Бросьте сюда картинки либо кликните
@@ -97,7 +97,7 @@
 		<div class="photo-area">
 			<span
 				class="left"
-				ng-click="turnLeft();"
+				ng-click="turn_left();"
 			>
 				&lt;
 			</span>
@@ -122,7 +122,7 @@
 				</span>
 			<span
 				class="right"
-				ng-click="turnRight()"
+				ng-click="turn_right()"
 			>
 				&gt;
 			</span>

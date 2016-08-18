@@ -20,6 +20,11 @@
 			</ul>
 		</nav>
 		<div class="main-view" ng-class="{'full': getloc()}" ng-view></div>
+		<div class="loader" ng-show="options.loading">
+			<div class="cssload-container">
+				<div class="cssload-whirlpool"></div>
+			</div>
+		</div>
 	</body>
 	<script src="app.min.js"></script>
 </html>

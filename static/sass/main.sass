@@ -8,13 +8,21 @@ i
 	cursor: pointer
 
 body,
-article
+article,
+.loader
 	left: 0
 	margin: 0
 	padding: 0
 	width: 100%
 	height: 100%
 	position: absolute
+
+.loader
+	+flexbox()
+	z-index: 100
+	+align-items(center)
+	+justify-content(center)
+	background-color: rgba(33,33,33,.3)
 
 .main-view
 	top: 10%

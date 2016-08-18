@@ -13,10 +13,10 @@ angular.module('MuscleMan').controller('PhotosCtrl', ['$scope', '$routeParams', 
 			current: null
 		};
 
-		$scope.turnLeft = function() {
+		$scope.turn_left = function() {
 			$scope.gallery.current == 0 ? $scope.gallery.current = $scope.photos.length : $scope.gallery.current--;
 		};
-		$scope.turnRight = function() {
+		$scope.turn_right = function() {
 			$scope.gallery.current == $scope.photos.length - 1 ? $scope.gallery.current = 0 : $scope.gallery.current++;
 		};
 
@@ -28,11 +28,16 @@ angular.module('MuscleMan').controller('PhotosCtrl', ['$scope', '$routeParams', 
 
 		Photo.get($routeParams.id, function(res) {
 			$scope.photos = res.data;
+			$routeParams.photoid !== 'all' && $scope.photos.map(function(el, i) {
+				if (el._id === $routeParams.photoid) {
+					$scope.gallery.current = i;
+				}
+			});
 		}, function(res) {
 			console.error(res.data);
 		});
 
-		$scope.createAlbum = function() {
+		$scope.create_album = function() {
 			MSG.custom({
 				type: 'input',
 				closeOnConfirm: false,
@@ -149,7 +154,7 @@ angular.module('MuscleMan').controller('PhotosCtrl', ['$scope', '$routeParams', 
 			});
 		};
 
-		$scope.uploadFiles = function(files) {
+		$scope.upload_files = function(files) {
 			if (files && files.length) {
 				for (var i = 0; i < files.length; i++) {
 					Upload.upload({
