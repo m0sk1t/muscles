@@ -1,5 +1,5 @@
-angular.module('MuscleMan').controller('AuthCtrl', ['$scope', '$location', 'User', 'LS',
-	function($scope, $location, User, LS) {
+angular.module('MuscleMan').controller('AuthCtrl', ['$scope', '$location', 'socket', 'User', 'LS',
+	function($scope, $location, socket, User, LS) {
 		$scope.cred = {
 			mail: '',
 			pass: ''
@@ -10,15 +10,19 @@ angular.module('MuscleMan').controller('AuthCtrl', ['$scope', '$location', 'User
 				$scope.options.loading = false;
 				switch (res.status) {
 					case 202:
-						$scope.options.user = res.data;
 						LS.set('user', res.data);
+						socket.emit('user:created');
+						$scope.options.user = res.data;
 						$location.path('/user/' + $scope.options.user._id);
 						break;
 					default:
+						socket.emit('user:created');
 						$location.path('/options');
 						break;
 				}
-			}, function(res) {});
+			}, function(res) {
+				console.error(res.data)
+			});
 		};
 	}
 ]);

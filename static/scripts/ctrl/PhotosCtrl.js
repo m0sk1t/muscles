@@ -37,6 +37,11 @@ angular.module('MuscleMan').controller('PhotosCtrl', ['$scope', '$routeParams', 
 			console.error(res.data);
 		});
 
+		$scope.set_avatar = function(p) {
+			$scope.options.user.avatar = p.image;
+			$scope.$emit('user_save');
+		};
+
 		$scope.create_album = function() {
 			MSG.custom({
 				type: 'input',

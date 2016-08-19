@@ -1,5 +1,5 @@
-angular.module('MuscleMan').controller('VideosCtrl', ['$sce', '$scope', '$routeParams', 'Video', 'MSG',
-	function($sce, $scope, $routeParams, Video, MSG) {
+angular.module('MuscleMan').controller('VideosCtrl', ['$sce', '$scope', '$routeParams', 'Video', 'socket', 'MSG',
+	function($sce, $scope, $routeParams, Video, socket, MSG) {
 		$scope.videos = [];
 
 		$scope.layer = {

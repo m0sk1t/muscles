@@ -102,7 +102,15 @@
 				&lt;
 			</span>
 			<span class="photo">
-				<span ng-click="gallery.current = null">X</span>
+				<span ng-click="gallery.current = null"><i class="fa fa-lg fa-close"></i></span>
+				<span>
+					<i
+						class="fa fa-lg"
+						ng-if="options.userid === options.user._id"
+						ng-click="set_avatar(photos[gallery.current])"
+						ng-class="{'fa-check-circle-o':photos[gallery.current].image !== options.user.avatar,'fa-check-circle':photos[gallery.current].image === options.user.avatar}"
+					></i>
+				</span>
 				<img ng-src="{{photos[gallery.current].image}}">
 				<span>
 					<div>

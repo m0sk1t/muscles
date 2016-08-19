@@ -99,7 +99,7 @@
 	<section ng-show="active_page === 'common'">
 		<label>
 			<input type="checkbox" ng-model="options.user.enable_comments">
-			Отключить комментарии на странице
+			Отключить комментарии к записям
 		</label><br>
 		<label>
 			Старый пароль
@@ -155,7 +155,7 @@
 			<input
 				type="checkbox"
 				ng-model="options.user.settings.show_notifications"
-				ng-click="options.user.settings.show_notifications && requestPermissions();"
+				ng-click="options.user.settings.show_notifications && request_permissions();"
 			>
 			Включить уведомления
 		</label><br>

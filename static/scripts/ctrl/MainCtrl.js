@@ -10,6 +10,38 @@ angular.module('MuscleMan').controller('MainCtrl', ['$scope', 'socket', 'User', 
 			console.log(data);
 		});
 
+		socket.on('photo:comment', function(data) {
+			console.log('photo:comment');
+			console.log(data);
+			if (
+				Notification.permission !== 'denied' &&
+				$scope.options.user.settings.show_notifications &&
+				$scope.options.user.settings.notify_photo_comments
+			) {
+				var n = new Notification('У вашего фото новый комментарий!', {
+					icon: data.avatar,
+					body: data.name + ' ' + data.surname + ' сказал' + data.comment
+				});
+				setTimeout(n.close.bind(n), 3000);
+			}
+		});
+
+		socket.on('video:comment', function(data) {
+			console.log('video:comment');
+			console.log(data);
+			if (
+				Notification.permission !== 'denied' &&
+				$scope.options.user.settings.show_notifications &&
+				$scope.options.user.settings.notify_video_comments
+			) {
+				var n = new Notification('У вашего видео новый комментарий!', {
+					icon: data.avatar,
+					body: data.name + ' ' + data.surname + ' сказал' + data.comment
+				});
+				setTimeout(n.close.bind(n), 3000);
+			}
+		});
+
 		$scope.message_send = function(text) {
 			socket.emit('message:send', text);
 		};
