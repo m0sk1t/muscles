@@ -1,13 +1,24 @@
 module.exports = (app) => {
 	var mongoose = require('mongoose'),
 		Dialogs = mongoose.model('Dialogs', {
-			title: String
+			creDate: Date,
+			users: Array,
+			messages: Array,
 		});
-	app.route('/Dialog/:id')
+	app.route('/dialog/:id')
 		.get((req, res) => {
 			if (req.params.id === 'all') {
-				Dialogs.find({}, (err, dialogs) => {
-					res.json(dialogs);
+				Users.findOne({
+					userid: req.cookies.userid
+				}, (err, user) => {
+					Dialogs.find({
+						users: user._id,
+					}, {
+						users: 1,
+						creDate: 1,
+					}, (err, dialogs) => {
+						res.json(dialogs);
+					});
 				});
 			} else {
 				Dialogs.findById(req.params.id, (err, dialog) => {
