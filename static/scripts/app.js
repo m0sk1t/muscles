@@ -9,6 +9,9 @@ angular.module('MuscleMan', ['ngLocale', 'ngFileUpload', 'ngRoute', '720kb.datep
 		}).when('/user/:userid/album/:id', {
 			templateUrl: 'tpl/album.tpl',
 			controller: 'AlbumCtrl'
+		}).when('/hobbies', {
+			templateUrl: 'tpl/hobbies.tpl',
+			controller: 'HobbiesCtrl'
 		}).when('/articles', {
 			templateUrl: 'tpl/articles.tpl',
 			controller: 'ArticlesCtrl'

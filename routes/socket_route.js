@@ -25,7 +25,7 @@ module.exports = (app, io) => {
 
 		set_io_id();
 
-		socket.on('user:created', (data) => {
+		socket.on('user:auth', (data) => {
 			set_io_id();
 		});
 

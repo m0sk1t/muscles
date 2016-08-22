@@ -8,6 +8,11 @@ artillery*
 routes/salt.js
 routes/cloudinary_config.js
 
+#minified
+static/app.min.js
+static/libs.min.js
+static/app.min.css
+
 # Runtime data
 pids
 *.pid

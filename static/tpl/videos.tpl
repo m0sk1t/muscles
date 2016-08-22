@@ -12,7 +12,7 @@
 			<div
 				ng-repeat="v in videos track by $index"
 			>
-				<div ng-click="gallery.current = $index">Открыть</div>
+				<div ng-click="gallery.current = $index">Развернуть</div>
 				<iframe ng-if="v.type==='vimeo'" width="310" height="255" ng-src="{{include_video('vimeo', v.link)}}" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen></iframe>
 				<iframe ng-if="v.type==='youtube'" width="310" height="255" ng-src="{{include_video('youtube', v.link)}}" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen></iframe>
 				<div>

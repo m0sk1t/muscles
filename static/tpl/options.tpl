@@ -43,8 +43,9 @@
 		<label>
 			Пол
 			<select ng-model="options.user.sex">
-				<option value="1">Мужчина</option>
-				<option value="0">Женщина</option>
+				<option value="n">Не скажу</option>
+				<option value="m">Мужской</option>
+				<option value="w">Женский</option>
 			</select>
 		</label><br>
 		<label>
