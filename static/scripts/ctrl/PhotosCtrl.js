@@ -150,26 +150,33 @@ angular.module('MuscleMan').controller('PhotosCtrl', ['$scope', '$routeParams', 
 		};
 
 		$scope.delete_photo = function(photo) {
+			$scope.options.loading = true;
 			Photo.delete(photo, function(res) {
 				$scope.photos = $scope.photos.filter(function(el) {
 					return el._id !== photo;
 				});
+				$scope.options.loading = false;
 			}, function(res) {
+				$scope.options.loading = false;
 				console.error(res.data);
 			});
 		};
 
 		$scope.upload_files = function(files) {
+			$scope.options.loading = true;
 			if (files && files.length) {
 				for (var i = 0; i < files.length; i++) {
-					Upload.upload({
-						url: '/photo/new',
-						data: {
-							file: files[i]
-						}
-					}).then(function(res) {
-						$scope.photos.push(res.data);
-					});
+					(function(index) {
+						Upload.upload({
+							url: '/photo/new',
+							data: {
+								file: files[index]
+							}
+						}).then(function(res) {
+							$scope.photos.push(res.data);
+							!(i < files.length) && ($scope.options.loading = false);
+						});
+					})(i);
 				}
 			}
 		};

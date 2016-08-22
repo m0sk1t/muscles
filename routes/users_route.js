@@ -20,9 +20,9 @@ module.exports = (app) => {
 			userid: String,
 			avatar: String,
 
+			sex: String,
 			type: String,
 			hairs: String,
-			sex: Boolean,
 			weight: Number,
 			height: Number,
 			chest: Number, // грудь
@@ -196,7 +196,7 @@ module.exports = (app) => {
 				surname: 1,
 				creDate: 1,
 				phone: 1,
-				age: 1,
+				birthDate: 1,
 				sex: 1,
 				weight: 1,
 				height: 1,
@@ -215,17 +215,41 @@ module.exports = (app) => {
 		req.body.surname && (search.surname = req.body.surname);
 		req.body.creDate && (search.creDate = req.body.creDate);
 		req.body.phone && (search.phone = req.body.phone);
-		req.body.age && (search.age = req.body.age);
-		req.body.sex && (search.sex = req.body.sex);
-		req.body.weight && (search.weight = req.body.weight);
-		req.body.height && (search.height = req.body.height);
+
+		(req.body.agefrom || req.body.ageto) && (search.birthDate = {});
+		req.body.agefrom && (search.birthDate['$lt'] = new Date(Date.now() - (req.body.agefrom * 1000 * 60 * 60 * 24 * 365)));
+		req.body.ageto && (search.birthDate['$gt'] = new Date(Date.now() - (req.body.ageto * 1000 * 60 * 60 * 24 * 365)));
+
+		(req.body.sex && req.body.sex != 'n') && (search.sex = req.body.sex);
+
+		(req.body.weightfrom || req.body.weightto) && (search.weight = {});
+		req.body.weightfrom && (search.weight['$lte'] = req.body.weightto);
+		req.body.weightto && (search.weight['$gte'] = req.body.weightfrom);
+
+		(req.body.heightfrom || req.body.heightto) && (search.height = {});
+		req.body.heightfrom && (search.height['$lte'] = req.body.heightto);
+		req.body.heightto && (search.height['$gte'] = req.body.heightfrom);
+
 		req.body.hairs && (search.hairs = req.body.hairs);
 		req.body.type && (search.type = req.body.type);
-		req.body.chest && (search.chest = req.body.chest);
-		req.body.waist && (search.waist = req.body.waist);
-		req.body.huckle && (search.huckle = req.body.huckle);
+
+		(req.body.chestfrom || req.body.chestto) && (search.chest = {});
+		req.body.chestfrom && (search.chest['$lte'] = req.body.chestto);
+		req.body.chestto && (search.chest['$gte'] = req.body.chestfrom);
+
+		(req.body.waistfrom || req.body.waistto) && (search.waist = {});
+		req.body.waistfrom && (search.waist['$lte'] = req.body.waistto);
+		req.body.waistto && (search.waist['$gte'] = req.body.waistfrom);
+
+		(req.body.hucklefrom || req.body.huckleto) && (search.huckle = {});
+		req.body.hucklefrom && (search.huckle['$lte'] = req.body.huckleto);
+		req.body.huckleto && (search.huckle['$gte'] = req.body.hucklefrom);
+
 		req.body.location_city && (search.location_city = req.body.location_city);
 		req.body.location_country && (search.location_country = req.body.location_country);
+
+		console.log(search);
+
 		Users.find(search, info, (err, users) => {
 			if (!err) {
 				res.json(users);

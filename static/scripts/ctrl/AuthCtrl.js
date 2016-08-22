@@ -11,12 +11,12 @@ angular.module('MuscleMan').controller('AuthCtrl', ['$scope', '$location', 'sock
 				switch (res.status) {
 					case 202:
 						LS.set('user', res.data);
-						socket.emit('user:created');
+						socket.emit('user:auth');
 						$scope.options.user = res.data;
 						$location.path('/user/' + $scope.options.user._id);
 						break;
 					default:
-						socket.emit('user:created');
+						socket.emit('user:auth');
 						$location.path('/options');
 						break;
 				}

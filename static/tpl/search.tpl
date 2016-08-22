@@ -55,48 +55,47 @@
 			</a>
 		</span>
 		<span class="search-options">
-			<h3>Поиск<button ng-click="find_users()">search</button></h3>
+			<h3>Поиск <button ng-click="find_users()">искать!</button></h3>
 			<input type="text" placeholder="Имя Фамилия" ng-model="search.fio">
+			<input type="text" placeholder="почта" ng-model="search.mail">
 			<h5>Город</h5>
 			<select name="" id="">
 				<option value="">Выбор города</option>
 			</select>
 			<h5>Пол</h5>
 			<div>
-				<label for="">
-					<input type="radio">
-					Мужской
-				</label><br>
-				<label for="">
-					<input type="radio">
-					Женский
-				</label><br>
-				<label for="">
-					<input type="radio">
-					Любой
-				</label><br>
+				<select name="" id="" ng-model="search.sex">
+					<option value="n">Неважно</option>
+					<option value="m">Мужской</option>
+					<option value="w">Женский</option>
+				</select>
 			</div>
 			<h5>Возраст</h5>
-			<select name="" id="">
+			<select name="" id="" ng-model="search.agefrom">
 				<option value="">от</option>
+				<option value="25">25</option>
 			</select>
-			<select name="" id="">
+			<select name="" id="" ng-model="search.ageto">
 				<option value="">до</option>
+				<option value="26">26</option>
+				<option value="27">27</option>
+				<option value="28">28</option>
 			</select>
 			<h5>Рост</h5>
-			<select name="" id="">
-				<option value="">от</option>
-			</select>
-			<select name="" id="">
-				<option value="">до</option>
-			</select>
+			<label>от: <input type="number" ng-model="search.heightfrom"></label>
+			<label>до: <input type="number" ng-model="search.heightto"></label>
 			<h5>Вес</h5>
-			<select name="" id="">
-				<option value="">от</option>
-			</select>
-			<select name="" id="">
-				<option value="">до</option>
-			</select>
+			<label>от: <input type="number" ng-model="search.weightfrom"></label>
+			<label>до: <input type="number" ng-model="search.weightto"></label>
+			<h5>Грудь</h5>
+			<label>от: <input type="number" ng-model="search.chestfrom"></label>
+			<label>до: <input type="number" ng-model="search.chestto"></label>
+			<h5>Талия</h5>
+			<label>от: <input type="number" ng-model="search.waistfrom"></label>
+			<label>до: <input type="number" ng-model="search.waistto"></label>
+			<h5>Бёдра</h5>
+			<label>от: <input type="number" ng-model="search.hucklefrom"></label>
+			<label>до: <input type="number" ng-model="search.huckleto"></label>
 			<h5>По объявлению</h5>
 			<input type="text" placeholder="Ключевые слова">
 		</span>
