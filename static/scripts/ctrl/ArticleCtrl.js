@@ -1,5 +1,5 @@
 angular.module('MuscleMan').controller('ArticleCtrl', ['$scope',
 	function($scope) {
-		$scope.options = {};
+		$scope.article = {};
 	}
 ]);

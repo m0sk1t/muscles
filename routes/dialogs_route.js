@@ -1,9 +1,9 @@
 module.exports = (app) => {
 	var mongoose = require('mongoose'),
+		Users = mongoose.model('Users'),
 		Dialogs = mongoose.model('Dialogs', {
 			users: Array,
 			creDate: Date,
-			deleters: Array,
 			messages: Array,
 		});
 	app.route('/dialog/:id')
@@ -12,14 +12,7 @@ module.exports = (app) => {
 				userid: req.cookies.userid
 			}, (err, user) => {
 				Dialogs.find({
-					users: user._id,
-					deleters: {
-						$ne: user._id
-					}
-				}, {
-					users: 1,
-					creDate: 1,
-					messages: 1,
+					'users.id': user._id.toString()
 				}, (err, dialogs) => {
 					res.json(dialogs);
 				});
@@ -30,7 +23,7 @@ module.exports = (app) => {
 				userid: req.cookies.userid
 			}, (err, user) => {
 				Dialogs.findOneAndUpdate({
-					users: user._id,
+					'users.id': user._id.toString(),
 					_id: req.params.id,
 				}, {
 					$addToSet: {
@@ -47,23 +40,57 @@ module.exports = (app) => {
 			}, (err, user) => {
 				Dialogs.findOneAndUpdate({
 					_id: req.params.id,
-					users: user._id
+					'users.id': user._id.toString()
 				}, {
-					$addToSet: {
-						deleters: user._id
+					$pull: {
+						'users.id': user._id
 					}
 				}, (err, dialog) => {
 					res.json(dialog);
 				});
 			});
 		});
+	app.get('/checkdlg/:id', (req, res) => {
+		Users.findOne({
+			userid: req.cookies.userid
+		}, (err, user) => {
+			var search = {
+				users: {
+					$all: [{
+						$elemMatch: {
+							id: user._id.toString()
+						}
+					}, {
+						$elemMatch: {
+							id: req.params.id
+						}
+					}]
+				}
+			};
+			Dialogs.findOne(search, (err, dialog) => {
+				console.log(dialog);
+				if (dialog) {
+					res.json(dialog);
+				} else {
+					res.status(404).send('Not found');
+				}
+			});
+		});
+	});
 	app.post('/dialog', (req, res) => {
 		Users.findOne({
 			userid: req.cookies.userid
 		}, (err, user) => {
+			var messages = [req.body.message];
 			Dialogs.create({
-				messages: [req.body.message],
-				users: [user._id, req.body.addressee],
+				messages: messages,
+				users: [{
+						id: user._id.toString(),
+						avatar: user.avatar,
+						fio: user.name + ' ' + user.surname,
+					},
+					req.body.addressee
+				],
 			}, (err, dialog) => {
 				res.json(dialog);
 			});

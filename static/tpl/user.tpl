@@ -15,6 +15,7 @@
 			<div class="city">{{user.city}}</div>
 			<span class="mark">&#9733; &#9733; &#9733; &#9733; &#9733;</span>
 			<span ng-class="{fav: inFav()}">&#9825;</span>
+			<button  ng-if="options.user._id !== user._id" ng-click="write_message();">Написать сообщение</button>
 			<div class="task">
 				<label>
 					<input type="checkbox" ng-if="classic_bb" ng-checked="classic_bb">

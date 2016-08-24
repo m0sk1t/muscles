@@ -1,5 +1,11 @@
 angular.module('MuscleMan').controller('DialogsCtrl', ['$scope', 'Dialog',
 	function($scope, Dialog) {
-		Dialog.get(function(res) {}, function(res) {});
+		$scope.dialogs = [];
+		$scope.messages = [];
+		Dialog.get(function(res) {
+			$scope.dialogs = res.data;
+		}, function(res) {
+			console.error(res.data);
+		});
 	}
 ]);

@@ -1,5 +1,5 @@
-angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Photo',
-	function($scope, $routeParams, User, Photo) {
+angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$routeParams', 'User', 'MSG', 'Photo', 'Dialog',
+	function($scope, $location, $routeParams, User, MSG, Photo, Dialog) {
 		$scope.user = {};
 		$scope.photos = [];
 
@@ -41,5 +41,47 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$routeParams', 'U
 		$scope.user_save = function() {
 			$scope.$emit('user_save');
 		};
+
+		$scope.write_message = function() {
+			MSG.custom({
+				title: "Новое сообщение!",
+				text: 'Введите текст сообщения',
+				type: 'input',
+				showCancelButton: true,
+				closeOnConfirm: true,
+			}, function(text) {
+				if (text) {
+					var dlg = {
+						addressee: {
+							id: $scope.user._id,
+							avatar: $scope.user.avatar,
+							fio: $scope.user.name + ' ' + $scope.user.surname,
+						},
+						message: {
+							text: text,
+							t: Date.now(),
+							uid: $scope.options.user._id,
+						}
+					};
+					Dialog.check($scope.user._id, function(res) {
+						Dialog.add_message(res.data._id, {
+							message: dlg.message
+						}, function(res) {
+							$location.path('/dialogs');
+						}, function(res) {
+							console.error(res.data);
+						});
+					}, function(res) {
+						Dialog.create(dlg, function(res) {
+							$location.path('/dialogs');
+						}, function(res) {
+							console.error(res.data);
+						});
+					});
+				} else {
+					swal.showInputError('Введите хоть что-нибудь...');
+				}
+			})
+		}
 	}
 ]);

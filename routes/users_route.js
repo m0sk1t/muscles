@@ -84,21 +84,6 @@ module.exports = (app) => {
 			}
 		});
 
-	app.get('/test', (req, res) => {
-		var started = Date.now();
-		var c = 0;
-		for (var i = 0; i < 1000000; i++) c++;
-		res.send((Date.now() - started).toString());
-	});
-
-	app.get('/mail/:text', (req, res) => {
-		mailer.send_mail({
-			mail: ['m0sk1t@bk.ru'],
-			subj: 'Testing email',
-			text: req.params.text
-		}, res);
-	});
-
 	app.post('/auth', (req, res) => {
 		if (!req.body.mail || !req.body.pass) {
 			res.status(500).send('Empty credentials!');
