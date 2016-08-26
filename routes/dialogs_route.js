@@ -27,7 +27,8 @@ module.exports = (app) => {
 					_id: req.params.id,
 				}, {
 					$addToSet: {
-						messages: req.body.message
+						messages: req.body.message,
+						addressee: req.body.addressee
 					}
 				}, (err, dialog) => {
 					res.json(dialog);
@@ -43,7 +44,9 @@ module.exports = (app) => {
 					'users.id': user._id.toString()
 				}, {
 					$pull: {
-						'users.id': user._id
+						users: {
+							id: user._id.toString()
+						}
 					}
 				}, (err, dialog) => {
 					res.json(dialog);

@@ -65,7 +65,8 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 					};
 					Dialog.check($scope.user._id, function(res) {
 						Dialog.add_message(res.data._id, {
-							message: dlg.message
+							addressee: $scope.user._id,
+							message: dlg.message,
 						}, function(res) {
 							$location.path('/dialogs');
 						}, function(res) {
