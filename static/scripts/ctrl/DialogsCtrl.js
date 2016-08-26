@@ -1,5 +1,7 @@
 angular.module('MuscleMan').controller('DialogsCtrl', ['$scope', 'Dialog',
 	function($scope, Dialog) {
+		$scope.dialog = '';
+		$scope.message = '';
 		$scope.dialogs = [];
 		$scope.messages = [];
 		Dialog.get(function(res) {
@@ -7,8 +9,37 @@ angular.module('MuscleMan').controller('DialogsCtrl', ['$scope', 'Dialog',
 		}, function(res) {
 			console.error(res.data);
 		});
-		$scope.set_messages = function(d) {
+		$scope.set_messages = function(d, i) {
 			$scope.messages = d.messages;
+			$scope.dialogIndex = i;
+			$scope.dialog = d._id;
+			$scope.message = '';
+		};
+		$scope.add_message = function() {
+			var message = {
+					t: Date.now(),
+					text: $scope.message,
+					uid: $scope.options.user._id
+				},
+				addressee = $scope.dialogs[$scope.dialogIndex].users.filter(function(el) {
+					return el.id !== $scope.options.user._id;
+				})[0];
+
+			Dialog.add_message($scope.dialog, {
+				message: message,
+				addressee: addressee
+			}, function(res) {
+				$scope.$emit('new_message', {
+					target: addressee.id,
+					message: message.text,
+					avatar: $scope.options.user.avatar,
+					fio: $scope.options.user.name + ' ' + $scope.options.user.surname,
+				});
+				$scope.dialogs[$scope.dialogIndex].messages.push(message);
+				$scope.message = '';
+			}, function(res) {
+				console.error(res.data);
+			});
 		};
 		$scope.delete_dialog = function(d, i) {
 			Dialog.delete(d._id, function(res) {

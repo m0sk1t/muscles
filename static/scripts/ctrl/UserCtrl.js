@@ -42,6 +42,10 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 			$scope.$emit('user_save');
 		};
 
+		$scope.send_message = function(data) {
+			$scope.$emit('new_message', data);
+		};
+
 		$scope.write_message = function() {
 			MSG.custom({
 				title: "Новое сообщение!",
@@ -52,28 +56,36 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 			}, function(text) {
 				if (text) {
 					var dlg = {
-						addressee: {
-							id: $scope.user._id,
-							avatar: $scope.user.avatar,
-							fio: $scope.user.name + ' ' + $scope.user.surname,
+							addressee: {
+								id: $scope.user._id,
+								avatar: $scope.user.avatar,
+								fio: $scope.user.name + ' ' + $scope.user.surname,
+							},
+							message: {
+								text: text,
+								t: Date.now(),
+								uid: $scope.options.user._id,
+							}
 						},
-						message: {
-							text: text,
-							t: Date.now(),
-							uid: $scope.options.user._id,
-						}
-					};
+						msg = {
+							message: text,
+							target: $scope.user._id,
+							avatar: $scope.options.user.avatar,
+							fio: $scope.options.user.name + ' ' + $scope.options.user.surname,
+						};
 					Dialog.check($scope.user._id, function(res) {
 						Dialog.add_message(res.data._id, {
 							addressee: $scope.user._id,
 							message: dlg.message,
 						}, function(res) {
+							$scope.send_message(msg);
 							$location.path('/dialogs');
 						}, function(res) {
 							console.error(res.data);
 						});
 					}, function(res) {
 						Dialog.create(dlg, function(res) {
+							$scope.send_message(msg);
 							$location.path('/dialogs');
 						}, function(res) {
 							console.error(res.data);

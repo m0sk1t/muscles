@@ -1,5 +1,5 @@
-angular.module('MuscleMan').controller('AuthCtrl', ['$scope', '$location', 'socket', 'User', 'LS',
-	function($scope, $location, socket, User, LS) {
+angular.module('MuscleMan').controller('AuthCtrl', ['$scope', '$location', 'socket', 'User', 'MSG', 'LS',
+	function($scope, $location, socket, User, MSG, LS) {
 		$scope.cred = {
 			mail: '',
 			pass: ''
@@ -16,8 +16,34 @@ angular.module('MuscleMan').controller('AuthCtrl', ['$scope', '$location', 'sock
 						$location.path('/user/' + $scope.options.user._id);
 						break;
 					default:
-						socket.emit('user:auth');
-						$location.path('/options');
+						$scope.cred.mail && MSG.custom({
+								type: 'input',
+								closeOnConfirm: false,
+								title: 'Письмо отправлено!',
+								text: 'Введите пин-код, присланный в письме',
+								inputPlaceholder: "ПИН-КОД"
+							},
+							function(pin) {
+								if (pin) {
+									User.pin({
+										pin: pin,
+										mail: $scope.cred.mail
+									}, function(res) {
+										socket.emit('user:auth');
+										$location.path('/options');
+										MSG.ok('Добро пожаловать!');
+									}, function(res) {
+										switch (res.status) {
+											case 403:
+												swal.showInputError('Неверный пин-код, осталось попыток: ' + res.data.attempts);
+												break;
+											default:
+												msg.err('Пин-код был введён неверно 5! раз, пожалуйста запросите заново...');
+												break;
+										}
+									});
+								}
+							});
 						break;
 				}
 			}, function(res) {

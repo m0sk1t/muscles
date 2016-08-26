@@ -3,6 +3,12 @@ module.exports = (app) => {
 		crypto = require('crypto'),
 		mongoose = require('mongoose'),
 		mailer = require('./mailer.js'),
+		PIN = mongoose.model('PIN', {
+			'pin': Number,
+			'mail': String,
+			'userid': String,
+			'attempts': Number
+		}),
 		Users = mongoose.model('Users', {
 			mail: String,
 			ioid: String,
@@ -90,7 +96,34 @@ module.exports = (app) => {
 			return console.error('Empty credentials!');
 		}
 		var mail = req.body.mail.toLowerCase(),
-			userid = crypto.createHash('sha256').update(mail + req.body.pass + salt).digest('hex');
+			userid = crypto.createHash('sha256').update(mail + req.body.pass + salt).digest('hex'),
+			pin = +crypto.createHash('md5').update(mail + salt + String(Date.now())).digest('hex').match(/\d+/g).join('').substr(0, 7),
+			sendPin = function(cb) {
+				PIN.findOneAndUpdate({
+					mail: mail
+				}, {
+					$set: {
+						pin: pin,
+						mail: mail,
+						attempts: 5,
+						userid: userid,
+					}
+				}, {
+					upsert: true
+				}, function(e, newpin) {
+					var mailOptions = {
+						mail: [mail],
+						subj: 'Данные для авторизации',
+						html: 'Для авторизации в системе "Мускульного робота" вы можете ввести пин-код, написанный ниже:<p></p><p></p><span style="padding: 3px; border: 1px solid #ccc; color: #167aaf; font-size: 33px; font-weight: bold">' + pin + '</span>' +
+							'<p></p>С уважением,<br>Команда "Мускульного робота"'
+					};
+					mailer.send_mail(mailOptions, function(error, info) {
+						if (error) return console.log(error);
+						console.log('Был послан: ' + info.response);
+						cb();
+					});
+				});
+			};
 		Users.findOne({
 			mail: mail
 		}, (err, user) => {
@@ -106,18 +139,57 @@ module.exports = (app) => {
 					res.status(403).send('Wrong credentials!');
 				}
 			} else {
-				Users.create({
-					mail: mail,
-					userid: userid,
-					creDate: Date.now(),
-				}, (err, user) => {
-					res.cookie('userid', userid, {
-						expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365 * 10),
-						httpOnly: true,
-						path: '/'
-					}).json(user);
+				sendPin(() => {
+					res.send('OK!');
 				});
 			};
+		});
+	});
+
+	app.get('/pin/:mail/:pin', function(req, res) {
+		var mail = req.params.mail;
+		PIN.findOne({
+			mail: mail,
+		}, function(e, pin) {
+			if (e && !pin) return console.error(e);
+			if (+pin.pin === +req.params.pin) {
+				PIN.remove({
+					mail: mail
+				}, function(e, p) {
+					Users.create({
+						mail: mail,
+						userid: pin.userid,
+						creDate: Date.now(),
+					}, (err, user) => {
+						res.cookie('userid', pin.userid, {
+							expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365 * 10),
+							httpOnly: true,
+							path: '/'
+						}).send('OK!');
+					});
+				});
+			} else {
+				if (pin.attempts > 0) {
+					PIN.findOneAndUpdate({
+						mail: mail
+					}, {
+						$inc: {
+							attempts: -1
+						}
+					}, function(e, upin) {
+						res.status(403).json({
+							msg: 'Wrong pin!',
+							attempts: pin.attempts
+						});
+					});
+				} else {
+					PIN.remove({
+						mail: mail
+					}, function(e, p) {
+						res.status(500).send('Too many wrong attempts!');
+					});
+				}
+			}
 		});
 	});
 

@@ -13,6 +13,9 @@ angular.module('Services', []).factory('User', ['$http',
 			auth: function(credentials, s, e) {
 				return $http.post('/auth', credentials).then(s, e);
 			},
+			pin: function(cred, s, e) {
+				return $http.get('/pin/' + cred.mail + '/' + cred.pin).then(s, e);
+			},
 			find_users: function(search, s, e) {
 				return $http.post('/find_users', search).then(s, e);
 			}

@@ -5,8 +5,7 @@ angular.module('MuscleMan').controller('MainCtrl', ['$scope', 'socket', 'User', 
 			console.log(data);
 		});
 
-		socket.on('message:send', function(data) {
-			console.log('message:send');
+		socket.on('new:message', function(data) {
 			console.log(data);
 		});
 
@@ -42,10 +41,6 @@ angular.module('MuscleMan').controller('MainCtrl', ['$scope', 'socket', 'User', 
 			}
 		});
 
-		$scope.message_send = function(text) {
-			socket.emit('message:send', text);
-		};
-
 		$scope.options = {
 			user: LS.get('user') || 0
 		};
@@ -59,6 +54,10 @@ angular.module('MuscleMan').controller('MainCtrl', ['$scope', 'socket', 'User', 
 			LS.set('user', res.data);
 		}, function(res) {
 			location.hash = '#/auth'
+		});
+
+		$scope.$on('new_message', function(ev, data) {
+			socket.emit('new:message', data);
 		});
 
 		$scope.$on('user_save', function() {

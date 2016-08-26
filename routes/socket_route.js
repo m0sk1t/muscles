@@ -29,6 +29,18 @@ module.exports = (app, io) => {
 			set_io_id();
 		});
 
+		socket.on('new:message', (data) => {
+			Users.findById(data.target, (err, user) => {
+				user.settings.notify_private && mailer.send_mail({
+					mail: [user.mail],
+					subj: 'У вас новое сообщение!',
+					text: data.fio + ' сказал:' + data.message,
+				}, (error, info) => {
+					socket.broadcast.to(user.ioid).emit('new:message', data);
+				});
+			});
+		});
+
 		socket.on('photo:comment', (data) => {
 			Users.findById(data.target, (err, user) => {
 				user.settings.notify_photo_comments && mailer.send_mail({
@@ -36,7 +48,7 @@ module.exports = (app, io) => {
 					subj: 'Новый комментарий к вашему фото!',
 					text: data.name + ' ' + data.surname + ' сказал:' + data.comment,
 				}, (error, info) => {
-					user.settings.show_notifications && socket.broadcast.to(user.ioid).emit('photo:comment', data);
+					socket.broadcast.to(user.ioid).emit('photo:comment', data);
 				});
 			});
 		});
