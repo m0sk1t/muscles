@@ -174,7 +174,7 @@ angular.module('MuscleMan').controller('PhotosCtrl', ['$scope', '$routeParams', 
 							}
 						}).then(function(res) {
 							$scope.photos.push(res.data);
-							!(i < files.length) && ($scope.options.loading = false);
+							!(index < files.length) && ($scope.options.loading = false);
 						});
 					})(i);
 				}

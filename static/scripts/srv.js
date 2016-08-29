@@ -41,6 +41,35 @@ angular.module('Services', []).factory('User', ['$http',
 			}
 		};
 	}
+]).factory('Topic', ['$http',
+	function($http) {
+		return {
+			get: function(id, s, e) {
+				return $http.get('/topic/' + id).then(s, e);
+			},
+			new: function(opt, s, e) {
+				return $http.post('/topic/new', opt).then(s, e);
+			},
+			edit: function(opt, s, e) {
+				return $http.put('/topic/' + opt._id, opt).then(s, e);
+			},
+			delete: function(id, s, e) {
+				return $http.delete('/topic/' + id).then(s, e);
+			},
+			add_like: function(p, s, e) {
+				return $http.put('/topic/' + p._id + '/add_like').then(s, e);
+			},
+			remove_like: function(p, s, e) {
+				return $http.put('/topic/' + p._id + '/remove_like').then(s, e);
+			},
+			add_comment: function(opt, s, e) {
+				return $http.put('/topic/' + opt._id + '/add_comment', opt).then(s, e);
+			},
+			remove_comment: function(opt, s, e) {
+				return $http.put('/topic/' + opt._id + '/remove_comment', opt).then(s, e);
+			}
+		};
+	}
 ]).factory('Photo', ['$http',
 	function($http) {
 		return {

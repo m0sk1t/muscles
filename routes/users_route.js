@@ -4,10 +4,10 @@ module.exports = (app) => {
 		mongoose = require('mongoose'),
 		mailer = require('./mailer.js'),
 		PIN = mongoose.model('PIN', {
-			'pin': Number,
-			'mail': String,
-			'userid': String,
-			'attempts': Number
+			pin: Number,
+			mail: String,
+			userid: String,
+			attempts: Number
 		}),
 		Users = mongoose.model('Users', {
 			mail: String,
@@ -15,6 +15,10 @@ module.exports = (app) => {
 			name: String,
 			surname: String,
 			status: String,
+
+			friends: Array,
+			waiting: Array,
+			subscribers: Array,
 
 			creDate: Date,
 			birthDate: Date,
@@ -39,7 +43,7 @@ module.exports = (app) => {
 			location_country: String,
 
 			settings: {
-				enable_comments: {
+				comments_enabled: {
 					type: Boolean,
 					default: false
 				},

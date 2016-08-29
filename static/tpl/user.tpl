@@ -14,7 +14,7 @@
 			</div>
 			<div class="city">{{user.city}}</div>
 			<span class="mark">&#9733; &#9733; &#9733; &#9733; &#9733;</span>
-			<span ng-class="{fav: inFav()}">&#9825;</span>
+			<span ng-class="{fav: in_fav()}">&#9825;</span>
 			<button  ng-if="options.user._id !== user._id" ng-click="write_message();">Написать сообщение</button>
 			<div class="task">
 				<label>
@@ -67,7 +67,7 @@
 			<div class="params">
 				<span>
 					<div>
-						Возраст: {{getAge(user.birthDate)}}
+						Возраст: {{get_age(user.birthDate)}}
 					</div>
 					<div>
 						Рост: {{user.height}}
@@ -96,7 +96,7 @@
 					</div>
 				</span>
 				<label>
-					Дата рождения:{{birthDate(user.birthDate)}}
+					Дата рождения:{{birth_date(user.birthDate)}}
 				</label><br>
 			</div>
 		</span>
@@ -155,20 +155,30 @@
 	</section>
 	<h3>Мои фото</h3>
 	<section>
+		<div 
+			class="create"
+			ng-click="add_photo()"
+			ng-if="options.user._id === user._id"
+		>Добавить</div>
 		<div class="photos">
-			<img ng-click="gallery.curent = 0;" ng-src="{{photos[0].image}}">
-			<img ng-click="gallery.curent = 1;" ng-src="{{photos[1].image}}">
-			<img ng-click="gallery.curent = 2;" ng-src="{{photos[2].image}}">
-			<img ng-click="gallery.curent = 3;" ng-src="{{photos[3].image}}">
-			<img ng-click="gallery.curent = 4;" ng-src="{{photos[4].image}}">
+			<img ng-click="set_current(0);" ng-src="{{photos[0].image}}">
+			<img ng-click="set_current(1);" ng-src="{{photos[1].image}}">
+			<img ng-click="set_current(2);" ng-src="{{photos[2].image}}">
+			<img ng-click="set_current(3);" ng-src="{{photos[3].image}}">
+			<img ng-click="set_current(4);" ng-src="{{photos[4].image}}">
 		</div>
 	</section>
 	<h3>Мои записи</h3>
 	<section>
+		<div
+			class="create"
+			ng-click="add_topic()"
+			ng-if="options.user._id === user._id"
+		>Добавить</div>
 		<div class="record">
 			<div class="record-area">
-				<img src="" alt="ava">
 				<span class="record-text">text</span>
+				<img src="" alt="ava">
 			</div>
 			<div class="comments">
 				<div class="comment">
@@ -211,21 +221,57 @@
 			</div>
 		</div>
 	</section>
-	<section class="gallery" ng-hide="gallery.current === null">
+	<section>
+		<div ng-show="topic">
+			<div class="create" ng-click="topic = null">Отменить</div>
+			<textarea cols="30" rows="10" ng-model="topic.text"></textarea>
+			<div class="create">Добавить картинки</div>
+			<div class="create" ng-click="new_topic()">Сохранить запись</div>
+		</div>
+	</section>
+	<section>
+		<div
+			class="drop-box"
+			ngf-multiple="true"
+			ngf-pattern="'image/*'"
+			ngf-drop="upload_files($files)"
+			ngf-drag-over-class="'dragover'"
+			ngf-select="upload_files($files)"
+			ng-if="options.user._id === user._id"
+		>
+			Бросьте сюда картинки либо кликните
+		</div>
+	</section>
+	<section ng-hide="gallery.current === null">
 		<div class="photo-area">
 			<span
 				class="left"
-				ng-click="turnLeft();"
+				ng-click="turn_left();"
 			>
 				&lt;
 			</span>
 			<span class="photo">
-				<span ng-click="gallery.current = null">X</span>
-				<img ng-src="{{photos[gallery.current].image}}">
+				<span ng-click="set_current(null)">X</span>
+				<img ng-src="{{photos[gallery.current].image}}" ng-click="turn_right()">
+				<span>
+					<div>
+						<div class="comment" ng-repeat="c in photos[gallery.current].comments">
+							<a href="#/user/{{c.userid}}">{{c.name + ' ' + c.surname}}</a>:
+							{{c.comment}}
+							<i
+								class="fa fa-lg fa-close"
+								ng-if="c.userid === options.user._id"
+								ng-click="remove_comment(gallery.current, c.comment)"
+							></i>
+						</div>
+					</div>
+					<input type="text" ng-model="gallery.comment">
+					<button ng-click="add_comment(gallery.current)">&gt;</button>
+				</span>
 			</span>
 			<span
 				class="right"
-				ng-click="turnRight()"
+				ng-click="turn_right()"
 			>
 				&gt;
 			</span>

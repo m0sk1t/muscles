@@ -2,7 +2,7 @@
 	<section>
 		<div>
 			{{options.user._id === options.userid?'Мои альбомы':'Альбомы пользователя'}}
-			<span class="create-album" ng-click="create_album()" ng-if="options.user._id === options.userid">
+			<span class="create" ng-click="create_album()" ng-if="options.user._id === options.userid">
 				Создать альбом
 			</span>
 		</div>
@@ -111,7 +111,7 @@
 						ng-class="{'fa-check-circle-o':photos[gallery.current].image !== options.user.avatar,'fa-check-circle':photos[gallery.current].image === options.user.avatar}"
 					></i>
 				</span>
-				<img ng-src="{{photos[gallery.current].image}}">
+				<img ng-src="{{photos[gallery.current].image}}" ng-click="turn_right()">
 				<span>
 					<div>
 						<div class="comment" ng-repeat="c in photos[gallery.current].comments">
@@ -127,7 +127,7 @@
 					<input type="text" ng-model="gallery.comment">
 					<button ng-click="add_comment(gallery.current)">&gt;</button>
 				</span>
-				</span>
+			</span>
 			<span
 				class="right"
 				ng-click="turn_right()"

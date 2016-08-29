@@ -33,7 +33,7 @@ module.exports = (app) => {
 			}, (err, user) => {
 				Photos.findOneAndUpdate({
 					_id: req.params.id,
-					owner: user._id
+					owner: user._id.toString()
 				}, {
 					$set: {
 						album: req.body.album,
@@ -54,7 +54,7 @@ module.exports = (app) => {
 				cloudinary.upload_image(req, (result) => {
 					Photos.create({
 						image: result,
-						owner: user._id,
+						owner: user._id.toString(),
 						creDate: Date.now(),
 					}, (err, photo) => {
 						if (err) return console.error(err);
@@ -69,7 +69,7 @@ module.exports = (app) => {
 			}, (err, user) => {
 				Photos.findOneAndRemove({
 					_id: req.params.id,
-					owner: user._id
+					owner: user._id.toString()
 				}, (err, photo) => {
 					if (err) return console.error(err);
 					if (photo) {
@@ -103,7 +103,7 @@ module.exports = (app) => {
 			}, (err, user) => {
 				Albums.findOneAndUpdate({
 					_id: req.params.id,
-					owner: user._id
+					owner: user._id.toString()
 				}, {
 					$set: {
 						title: req.body.title
@@ -119,7 +119,7 @@ module.exports = (app) => {
 				userid: req.cookies.userid
 			}, (err, user) => {
 				Albums.create({
-					owner: user._id,
+					owner: user._id.toString(),
 					creDate: Date.now(),
 					title: req.body.title,
 				}, (err, album) => {
@@ -134,7 +134,7 @@ module.exports = (app) => {
 			}, (err, user) => {
 				Albums.findOneAndRemove({
 					_id: req.params.id,
-					owner: user._id
+					owner: user._id.toString()
 				}, (err, album) => {
 					if (err) return console.error(err);
 					res.json(album);
@@ -151,7 +151,7 @@ module.exports = (app) => {
 					_id: req.params.id
 				}, {
 					$addToSet: {
-						likes: user._id
+						likes: user._id.toString()
 					}
 				}, function(err, photo) {
 					res.json(photo);
@@ -170,7 +170,7 @@ module.exports = (app) => {
 					_id: req.params.id
 				}, {
 					$pull: {
-						likes: user._id
+						likes: user._id.toString()
 					}
 				}, function(err, photo) {
 					res.json(photo);
@@ -191,7 +191,7 @@ module.exports = (app) => {
 					$addToSet: {
 						comments: {
 							name: user.name,
-							userid: user._id,
+							userid: user._id.toString(),
 							date: Date.now(),
 							avatar: user.avatar,
 							surname: user.surname,
@@ -216,7 +216,7 @@ module.exports = (app) => {
 				}, {
 					$pull: {
 						comments: {
-							userid: user._id,
+							userid: user._id.toString(),
 							comment: req.body.comment,
 						}
 					}

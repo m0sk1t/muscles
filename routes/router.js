@@ -1,6 +1,6 @@
 module.exports = (app, io) => {
 	require('./users_route.js')(app);
-	require('./posts_route.js')(app);
+	require('./topics_route.js')(app);
 	require('./status_route.js')(app);
 	require('./photos_route.js')(app);
 	require('./videos_route.js')(app);

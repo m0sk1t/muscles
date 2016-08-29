@@ -8,10 +8,10 @@ angular.module('MuscleMan').controller('AuthCtrl', ['$scope', '$location', 'sock
 			if ($scope.cred.mail.$error) return;
 			User.auth($scope.cred, function(res) {
 				$scope.options.loading = false;
+				socket.emit('user:auth');
 				switch (res.status) {
 					case 202:
 						LS.set('user', res.data);
-						socket.emit('user:auth');
 						$scope.options.user = res.data;
 						$location.path('/user/' + $scope.options.user._id);
 						break;
