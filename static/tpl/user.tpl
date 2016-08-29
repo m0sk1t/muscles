@@ -155,11 +155,6 @@
 	</section>
 	<h3>Мои фото</h3>
 	<section>
-		<div 
-			class="create"
-			ng-click="add_photo()"
-			ng-if="options.user._id === user._id"
-		>Добавить</div>
 		<div class="photos">
 			<img ng-click="set_current(0);" ng-src="{{photos[0].image}}">
 			<img ng-click="set_current(1);" ng-src="{{photos[1].image}}">
@@ -225,11 +220,18 @@
 		<div ng-show="topic">
 			<div class="create" ng-click="topic = null">Отменить</div>
 			<textarea cols="30" rows="10" ng-model="topic.text"></textarea>
-			<div class="create">Добавить картинки</div>
-			<div class="create" ng-click="new_topic()">Сохранить запись</div>
+			<div class="create" ng-click="add_image();">Добавить картинки</div>
+			<div class="photos">
+				<span ng-repeat="i in topic.images">
+					<img ng-src="{{i}}" alt="">
+					<span ng-click="add_to_topic(i);">del</span>
+				</span>
+			</div>
+			<div class="create" ng-click="new_topic();">Сохранить запись</div>
 		</div>
 	</section>
-	<section>
+	<section ng-show="gallery.add_image">
+		<div ng-click="gallery.add_image = null;">close</div>
 		<div
 			class="drop-box"
 			ngf-multiple="true"
@@ -240,6 +242,10 @@
 			ng-if="options.user._id === user._id"
 		>
 			Бросьте сюда картинки либо кликните
+		</div>
+		Или выбрать существующие
+		<div class="photos">
+			<img ng-src="{{p.image}}" alt="" ng-repeat="p in photos" ng-click="add_to_topic(p.image);">
 		</div>
 	</section>
 	<section ng-hide="gallery.current === null">

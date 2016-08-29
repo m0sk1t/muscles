@@ -2,8 +2,10 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 	function($scope, $location, $routeParams, socket, User, MSG, Topic, Photo, Dialog, Upload) {
 		$scope.user = {};
 		$scope.photos = [];
+		$scope.topics = [];
 		$scope.gallery = {
-			current: null
+			current: null,
+			add_image: null,
 		};
 
 		!$scope.options.user && $location.path('/auth');
@@ -48,7 +50,18 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 			$scope.$emit('new_message', data);
 		};
 
-		$scope.add_photo = function() {};
+		$scope.add_image = function() {
+			$scope.gallery.add_image = true;
+		};
+
+		$scope.add_to_topic = function(img) {
+			var i = $scope.topic.images.indexOf(img);
+			if (i === -1) {
+				$scope.topic.images.push(img);
+			} else {
+				$scope.topic.images.splice(i, 1);
+			}
+		};
 
 		$scope.add_topic = function() {
 			$scope.topic = {
@@ -58,7 +71,11 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		};
 
 		$scope.new_topic = function() {
-			Topic.new();
+			Topic.new($scope.topic, function(res) {
+				$scope.topics.push(res.data);
+			}, function(res) {
+				console.error(res.data);
+			});
 		};
 
 		$scope.upload_files = function(files) {
