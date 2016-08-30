@@ -170,7 +170,7 @@
 			ng-click="add_topic()"
 			ng-if="options.user._id === user._id"
 		>Добавить</div>
-		<div class="record">
+		<div class="record" ng-repeat="t in topics track by $index">
 			<div class="record-area">
 				<span class="record-text">text</span>
 				<img src="" alt="ava">
@@ -193,28 +193,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="record">
-			<div class="record-area">
-				<img src="" alt="ava">
-				<span class="record-text">text</span>
-			</div>
-			<div class="comments">
-				<img src="" alt="guest">
-				<span class="comment-author">asd</span>
-				<span class="comment-text">text</span>
-			</div>
-		</div>
-		<div class="record">
-			<div class="record-area">
-				<img src="" alt="ava">
-				<span class="record-text">text</span>
-			</div>
-			<div class="comments">
-				<img src="" alt="guest">
-				<span class="comment-author">asd</span>
-				<span class="comment-text">text</span>
-			</div>
-		</div>
+		<form ng-submit="add_topic_comment($index)">
+			<input type="text" placeholder="Введите комментарий">
+		</form>
 	</section>
 	<section>
 		<div ng-show="topic">

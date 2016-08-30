@@ -129,6 +129,38 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 			});
 		};
 
+		$scope.add_topic_comment = function(index) {
+			var comment = {
+				date: Date.now(),
+				name: $scope.options.user.name,
+				userid: $scope.options.user._id,
+				comment: $scope.gallery.comment,
+				avatar: $scope.options.user.avatar,
+				surname: $scope.options.user.surname,
+				_id: $scope.topics[$scope.gallery.current]._id,
+			};
+			Topic.add_comment(comment, function(res) {
+				$scope.gallery.comment = '';
+				$scope.topics[index].comments.push(comment);
+				($routeParams.id !== $scope.options.user._id) && (comment.target = $routeParams.id, socket.emit('topic:comment', comment));
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+
+		$scope.remove_topic_comment = function(index, comment) {
+			Topic.remove_comment({
+				comment: comment,
+				_id: $scope.topics[$scope.gallery.current]._id,
+			}, function(res) {
+				$scope.topics[index].comments = $scope.topics[index].comments.filter(function(el) {
+					return !(el.userid === $scope.options.user._id && el.comment === comment);
+				});
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+
 		$scope.write_message = function() {
 			MSG.custom({
 				title: "Новое сообщение!",

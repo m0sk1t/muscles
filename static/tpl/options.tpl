@@ -99,7 +99,7 @@
 	</section>
 	<section ng-show="active_page === 'common'">
 		<label>
-			<input type="checkbox" ng-model="options.user.enable_comments">
+			<input type="checkbox" ng-model="options.user.comments_disabled">
 			Отключить комментарии к записям
 		</label><br>
 		<label>
@@ -178,7 +178,7 @@
 		</label><br>
 
 		<label>
-			<input type="checkbox" ng-model="options.user.settings.notify_comments">
+			<input type="checkbox" ng-model="options.user.settings.notify_topic_comments">
 			Комментарии на стене
 		</label><br>
 

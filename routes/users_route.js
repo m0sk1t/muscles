@@ -43,7 +43,7 @@ module.exports = (app) => {
 			location_country: String,
 
 			settings: {
-				comments_enabled: {
+				comments_disabled: {
 					type: Boolean,
 					default: false
 				},
@@ -51,7 +51,7 @@ module.exports = (app) => {
 					type: Boolean,
 					default: false
 				},
-				post_comments_enabled: {
+				posting_enabled: {
 					type: Boolean,
 					default: false
 				},
@@ -67,7 +67,7 @@ module.exports = (app) => {
 					type: Boolean,
 					default: false
 				},
-				notify_comments: {
+				notify_topic_comments: {
 					type: Boolean,
 					default: false
 				},
