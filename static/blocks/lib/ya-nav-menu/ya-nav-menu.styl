@@ -1,0 +1,73 @@
+.ya-nav-menu
+    font-family: titles-font
+    text-transform: menuTransform
+    line-height: 1
+    font-size: menuFontSize
+    +between(960px, 1259px)
+        font-size: 13px
+    &__list
+        margin: 0
+        padding: 0
+        +below(959px)
+            display: none
+        &_visible
+            +below(959px)
+                display: block
+    &__item
+        float: left
+        list-style-type: none
+        padding: 20px 8px
+        +below(959px)
+            float: none
+            padding: 0
+            a
+                padding: 20px 8px
+                display: block
+                text-align: center
+                border-bottom: 1px solid #222222
+        a
+            color: inactiveMenuColor
+            text-decoration: none
+            &:hover
+                color: activeMenuColor
+        &_active
+            > a
+                color: activeMenuColor
+        &_level_1
+            &:hover
+                .ya-nav-menu__container
+                    display: block
+        &_level_2
+            text-align: center
+            > a
+                font-size: menuFontSize
+                color: inactiveMenuColor
+                font-family: font-family
+        &_level_3
+            float: none
+            padding-bottom: 0
+            text-align: left
+    & &__mobile-link
+        display: none
+        +below(959px)
+            display: block
+            padding: 20px 8px
+            display: block
+            text-align: center
+            border-bottom: 1px solid #222222
+            color: inactiveMenuColor
+            text-decoration: none
+            &:hover
+                color: activeMenuColor
+    &_li-like
+        & ^[0]__item
+            float: none
+            padding: 0
+            margin-bottom: 7px
+            text-transform: none
+            &:before
+                content: "-"
+                display: inline-block
+                margin-right: 5px
+            a
+                font-size: 14px
