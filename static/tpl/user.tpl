@@ -50,9 +50,17 @@
 
 			</div>
 			<div class="ya-grid-7-15">
-				<div class="ya-page__block ya-user__text-info">
+				<div class="ya-page__block ya-page__block_bordered ya-user__text-info">
+					<div class="ya-user__info-block ya-info-block ya-info-block_border_no">
+						<div class="ya-user__status">{{user.status}}</div>
+					</div>
+					<div class="ya-user__info-block ya-info-block">
+						<div class="ya-info-block">
+							<h2></h2>
+						</div>
+						<div class="ya-user__status">{{user.status}}</div>
+					</div>
 					<span class="status-area">
-					<div class="status-text">{{user.status}}</div>
 					<div class="status">
 						<label>
 							<input type="checkbox" ng-if="classic_bb" ng-checked="classic_bb">
@@ -168,41 +176,82 @@
 		</section>
 			</div>
 			<div class="ya-grid-1-5">
-				<div class="ya-page__block">
-					<span class="media">
-						<div class="photo">
-							<a href="#/user/{{user._id}}/photos/all">
-							</a>
+				<div class="ya-page__block ya-page__block_colored">
+					<div class="ya-profile-links ya-clearfix">
+							<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
+								<a href="#/dialogs" class="ya-profile-links__link ya-profile-links__link_chat"><span class="ya-profile-links__link-img ya-profile-links__link-img_chat"></span></a>
+							</div>
+							<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
+								<a href="#/user/{{user._id}}/photos/all" class="ya-profile-links__link ya-profile-links__link_photos"><span class="ya-profile-links__link-img ya-profile-links__link-img_photos"></span></a>
+							</div>
+							<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
+								<a href="#/user/{{user._id}}/videos/all" class="ya-profile-links__link ya-profile-links__link_videos"><span class="ya-profile-links__link-img ya-profile-links__link-img_videos"></span></a>
+							</div>
+							<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
+								<a href="#/favs" class="ya-profile-links__link ya-profile-links__link_favs"><span class="ya-profile-links__link-img ya-profile-links__link-img_favs"></span></a>
+							</div>
+					</div>
+					<div class="ya-socials">
+						<h3 class="ya-socials__title">Подписчики</h3>
+						<div class="ya-socials__list">
+							<div class="ya-socials__item ya-clearfix">
+								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_vk">
+									<span class="ya-socials__logo ya-socials__logo_vk"></span>
+								</a>
+								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_friends">2345</a>
+							</div>
+							<div class="ya-socials__item ya-clearfix">
+								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_fb">
+									<span class="ya-socials__logo ya-socials__logo_fb"></span>
+								</a>
+								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_friends">234</a>
+							</div>
+							<div class="ya-socials__item ya-clearfix">
+								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_tw">
+									<span class="ya-socials__logo ya-socials__logo_tw"></span>
+								</a>
+								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_friends">124</a>
+							</div>
+							<div class="ya-socials__item ya-clearfix">
+								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_ok">
+									<span class="ya-socials__logo ya-socials__logo_ok"></span>
+								</a>
+								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_friends">2321</a>
+							</div>
+							<div class="ya-socials__item ya-clearfix">
+								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_ig">
+									<span class="ya-socials__logo ya-socials__logo_ig"></span>
+								</a>
+								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_friends">459</a>
+							</div>
 						</div>
-						<div class="video">
-							<a href="#/user/{{user._id}}/videos/all">
-							</a>
-						</div>
-						<div class="favs">
-							<a href="#/favs">
-							</a>
-						</div>
-						<a href="#/dialogs" class="chat">
-						</a>
-					</span>
-
-					<div class="social">
-						Подписчики
-						<div class="fb">
-							<i class="fa fa-3x fa-facebook-official"></i>
-							<span class="fa fa-2x">14</span>
-						</div>
-						<div class="vk">
-							<i class="fa fa-3x fa-vk"></i>
-							<span class="fa fa-2x">13</span>
-						</div>
-						<div class="gp">
-							<i class="fa fa-3x fa-google-plus-official"></i>
-							<span class="fa fa-2x">12</span>
-						</div>
-						<div class="tw">
-							<i class="fa fa-3x fa-twitter-square"></i>
-							<span class="fa fa-2x">11</span>
+					</div>
+				</div>
+				<div class="ya-page__block ya-page__block_colored">
+					<div class="ya-ads-block">
+						<div class="ya-ads-block__list">
+							<div class="ya-ads-block__item ya-ads-block__item_count_1">
+								<a href="https://yandex.ru" target="_blank" class="ya-ads-block__link">
+									<span class="ya-ads-block__media">
+										<img src="/images/banner.jpg" class="ya-ads-block__img" />
+									</span>
+									<span class="ya-ads-block__text">
+										<span class="ya-ads-block__title">АтлетикШоп рекомендует!</span>
+										<span class="ya-ads-block__content">Современный продукт, очищенный от "вредных" для каждого атлета.</span>
+									</span>
+								</a>
+							</div>
+							<div class="ya-ads-block__item ya-ads-block__item_count_2">
+								<a href="https://yandex.ru" target="_blank" class="ya-ads-block__link">
+									<span class="ya-ads-block__media">
+										<img src="/images/banner.jpg" class="ya-ads-block__img" />
+									</span>
+									<span class="ya-ads-block__text">
+										<span class="ya-ads-block__title">АтлетикШоп рекомендует!</span>
+										<span class="ya-ads-block__content">Современный продукт, очищенный от "вредных" для каждого атлета.</span>
+									</span>
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
