@@ -9,55 +9,57 @@
 		<meta charset="utf-8">
 	</head>
 	<body class="ya-page">
-		<header class="ya-header">
-			<div class="ya-container">
-				<div class="ya-narrower">
-					<div class="ya-row" ng-hide="getloc()">
-						<div class="ya-grid-1-4">
-							<div class="ya-logo">
-								<a href="#/" class="ya-logo__link"><img src="/images/logo.png" class="ya-logo__img" alt="Спорт Проект" /></a>
+		<div class="ya-page__paddinger">
+			<header class="ya-header">
+				<div class="ya-container">
+					<div class="ya-narrower">
+						<div class="ya-row" ng-hide="getloc()">
+							<div class="ya-grid-1-4">
+								<div class="ya-logo">
+									<a href="#/" class="ya-logo__link"><img src="/images/logo.png" class="ya-logo__img" alt="Спорт Проект" /></a>
+								</div>
 							</div>
-						</div>
-						<div class="ya-grid-3-5">
-							<nav class="ya-nav-menu">
-								<ul class="ya-nav-menu__list">
-									<li class="ya-nav-menu__item">
-										<a class="ya-nav-menu__link ya-nav-menu__link_social" href="#/user/{{options.user._id}}">
-											<span class="ya-nav-menu__icon ya-nav-menu__icon_social"></span>
-											<span class="ya-nav-menu__text">Соц.сеть</span>
-										</a>
-									</li>
-									<li class="ya-nav-menu__item">
-										<a class="ya-nav-menu__link ya-nav-menu__link_competitions" href="#/competitions">
-											<span class="ya-nav-menu__icon ya-nav-menu__icon_competitions"></span>
-											<span class="ya-nav-menu__text">Расписание соревнований</span>
-										</a>
-									</li>
-									<li class="ya-nav-menu__item">
-										<a class="ya-nav-menu__link ya-nav-menu__link_contests" href="#/contests">
-											<span class="ya-nav-menu__icon ya-nav-menu__icon_contests"></span>
-											<span class="ya-nav-menu__text">Конкурсы</span>
-										</a>
-									</li>
-									<li class="ya-nav-menu__item">
-										<a class="ya-nav-menu__link ya-nav-menu__link_news" href="#/articles">
-											<span class="ya-nav-menu__icon ya-nav-menu__icon_news"></span>
-											<span class="ya-nav-menu__text">Новости</span>
-										</a>
-									</li>
-								</ul>
-							</nav>
-						</div>
-						<div class="ya-grid-3-20">
-							<div class="ya-btn ya-btn_search">
-								<a href="#/search" class="ya-btn__link ya-btn__link_search">Поиск</a>
+							<div class="ya-grid-3-5">
+								<nav class="ya-nav-menu">
+									<ul class="ya-nav-menu__list">
+										<li class="ya-nav-menu__item">
+											<a class="ya-nav-menu__link ya-nav-menu__link_social" href="#/user/{{options.user._id}}">
+												<span class="ya-nav-menu__icon ya-nav-menu__icon_social"></span>
+												<span class="ya-nav-menu__text">Соц.сеть</span>
+											</a>
+										</li>
+										<li class="ya-nav-menu__item">
+											<a class="ya-nav-menu__link ya-nav-menu__link_competitions" href="#/competitions">
+												<span class="ya-nav-menu__icon ya-nav-menu__icon_competitions"></span>
+												<span class="ya-nav-menu__text">Расписание соревнований</span>
+											</a>
+										</li>
+										<li class="ya-nav-menu__item">
+											<a class="ya-nav-menu__link ya-nav-menu__link_contests" href="#/contests">
+												<span class="ya-nav-menu__icon ya-nav-menu__icon_contests"></span>
+												<span class="ya-nav-menu__text">Конкурсы</span>
+											</a>
+										</li>
+										<li class="ya-nav-menu__item">
+											<a class="ya-nav-menu__link ya-nav-menu__link_news" href="#/articles">
+												<span class="ya-nav-menu__icon ya-nav-menu__icon_news"></span>
+												<span class="ya-nav-menu__text">Новости</span>
+											</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+							<div class="ya-grid-3-20">
+								<div class="ya-btn ya-btn_search">
+									<a href="#/search" class="ya-btn__link ya-btn__link_search">Поиск</a>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</header>
-		<div class="ya-main" ng-class="{'full': getloc()}" ng-view></div>
+			</header>
+			<div class="ya-main" ng-class="{'full': getloc()}" ng-view></div>
+		</div>
 		<div class="loader" ng-show="options.loading">
 			<div class="cssload-container">
 				<div class="cssload-whirlpool"></div>

@@ -2,132 +2,230 @@
 	<div class="ya-narrower">
 		<div class="ya-row">
 			<div class="ya-grid-1-3">
-				<div class="ya-page__block ya-user__main-info">
-
+				<div class="ya-page__block ya-page__block_colored">
+					<div class="ya-user__main-info ya-relative">
+						<span class="ya-online-id ya-online-id_online_yes ya-online-id_large ya-online-id_main">
+						</span>
 						<div class="ya-user__avatar ya-avatar ya-avatar_large">
 							<a class="ya-avatar__link" href="#/options">
-								<img class="ya-avatar__img" ng-src="{{user.avatar}}" alt="{{user.name}} {{user.surname}}">
+								<img class="ya-avatar__img" src="/images/avatar.jpg" ng-src="{{user.avatar}}" alt="{{user.name}} {{user.surname}}">
 							</a>
 						</div>
-					<div class="ya-user__name">
-						<a href="#/options" ng-if="options.user._id === user._id">
-							<i class="fa fa-lg fa-cog"></i>
-						</a>
-						{{user.name}} {{user.surname}}
+						<div class="ya-user__name">
+							{{user.name}} {{user.surname}}, {{get_age(user.birthDate)}}
+						</div>
+						<div class="ya-user__city">
+							{{user.city}} Иваново
+						</div>
 					</div>
-					<div class="city">{{user.city}}</div>
-					<span class="mark">&#9733; &#9733; &#9733; &#9733; &#9733;</span>
-					<span ng-class="{fav: in_fav()}">&#9825;</span>
-					<button  ng-if="options.user._id !== user._id" ng-click="write_message();">Написать сообщение</button>
-				</div>
-				<div class="ya-page__block ya-user__sports">
-					<div class="task">
-						<label>
-							<input type="checkbox" ng-if="classic_bb" ng-checked="classic_bb">
-							Классический бодибилдинг
-						</label>
-						<label>
-							<input type="checkbox" ng-if="crossfit" ng-checked="crossfit">
-							Кроссфит
-						</label>
-						<label>
-							<input type="checkbox" ng-if="fitness" ng-checked="fitness">
-							Фитнесс
-						</label>
+					<div class="ya-user__config-block ya-clearfix">
+						<div class="ya-span-2-3">
+							<div class="ya-user__raiting ya-raiting">
+								<span class="ya-raiting__star ya-raiting__star_full"></span>
+								<span class="ya-raiting__star ya-raiting__star_full"></span>
+								<span class="ya-raiting__star ya-raiting__star_full"></span>
+								<span class="ya-raiting__star ya-raiting__star_half"></span>
+								<span class="ya-raiting__star ya-raiting__star_empty"></span>
+							</div>
+						</div>
+						<div class="ya-user__options ya ya-span-1-3">
+							<a href="#/options" class="ya-user__options-btn" ng-if="options.user._id === user._id"></a>
+							<a href="#" class="ya-user__logout-btn ya-logout-btn"></a>
+						</div>
 					</div>
 				</div>
-				<div class="ya-page__block ya-user__awards">
-					<h3>Достижения</h3>
-					<section>
-						<ul>
-							<li>1 Место Мистер Иваново 2016</li>
-							<li>2 Место Мистер Иваново 2015</li>
-							<li>3 Место Мистер Иваново 2014</li>
-						</ul>
-					</section>
+				<span ng-class="{fav: in_fav()}">&#9825;</span>
+				<button  ng-if="options.user._id !== user._id" ng-click="write_message();">Написать сообщение</button>
+				<div class="ya-user__sports ya-sidebar-info ya-relative">
+					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_sports"></div>
+					<div class="ya-page__block ya-page__block_rounded">
+						<h2 class="ya-sidebar-info__title">
+							Виды спорта
+						</h2>
+						<div class="ya-sidebar-info__content-wrapper">
+							<div class="ya-sidebar-info__content">
+								<div class="ya-sidebar-info__item">
+									Классический бодибилдинг
+								</div>
+								<div class="ya-sidebar-info__item">
+									Кроссфит
+								</div>
+								<div class="ya-sidebar-info__item">
+									Фитнесс
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-
-
+				<div class="ya-user__awards ya-sidebar-info ya-relative">
+					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_awards"></div>
+					<div class="ya-page__block ya-page__block_rounded">
+						<h2 class="ya-sidebar-info__title">
+							Достижения
+						</h2>
+						<div class="ya-sidebar-info__content-wrapper">
+							<div class="ya-sidebar-info__content">
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Год</span> 2016
+								</div>
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Город</span> Москва
+								</div>
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Название</span> Открытый Кубок
+								</div>
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Место</span> 1 место
+								</div>
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Комментарии</span> Я победитель, и мне в этом мире нет равных
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ya-user__work ya-sidebar-info ya-relative">
+					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_work"></div>
+					<div class="ya-page__block ya-page__block_rounded">
+						<h2 class="ya-sidebar-info__title">
+							Работа
+						</h2>
+						<div class="ya-sidebar-info__content-wrapper">
+							<div class="ya-sidebar-info__content">
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Год</span> 2015 - 2016
+								</div>
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Компания</span> РБК-Маркетинг
+								</div>
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Должность</span> Директор
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ya-user__edu ya-sidebar-info ya-relative">
+					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_edu"></div>
+					<div class="ya-page__block ya-page__block_rounded">
+						<h2 class="ya-sidebar-info__title">
+							Образование
+						</h2>
+						<div class="ya-sidebar-info__content-wrapper">
+							<div class="ya-sidebar-info__content">
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Год</span> 2013
+								</div>
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Учреждение</span> ИвГУ
+								</div>
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Специальность</span> Специалист по рекламе
+								</div>
+							</div>
+						</div>
+						<div class="ya-sidebar-info__content-wrapper">
+							<div class="ya-sidebar-info__content">
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Год</span> 2013
+								</div>
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Учреждение</span> ИвГУ
+								</div>
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Специальность</span> Специалист по рекламе
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="ya-grid-7-15">
 				<div class="ya-page__block ya-page__block_bordered ya-user__text-info">
 					<div class="ya-user__info-block ya-info-block ya-info-block_border_no">
 						<div class="ya-user__status">{{user.status}}</div>
 					</div>
-					<div class="ya-user__info-block ya-info-block">
+					<div class="ya-user__info-block">
 						<div class="ya-info-block">
-							<h2></h2>
+							<h2 class="ya-info-block__title ya-info-block__title_data">Данные спортсмена</h2>
+							<div class="ya-info-block__content ya-clearfix">
+								<div class="ya-inner-grid-1-2">
+									<div class="ya-info-block__record ya-clearfix">
+										<div class="ya-info-block__label ya-span-1-2">Возраст:</div>
+										<div class="ya-info-block__value ya-span-1-2">{{get_age(user.birthDate)}}</div>
+									</div>
+									<div class="ya-info-block__record ya-clearfix">
+										<div class="ya-info-block__label ya-span-1-2">Рост:</div>
+										<div class="ya-info-block__value ya-span-1-2">{{user.height}}</div>
+									</div>
+									<div class="ya-info-block__record ya-clearfix">
+										<div class="ya-info-block__label ya-span-1-2">Вес:</div>
+										<div class="ya-info-block__value ya-span-1-2">{{user.weight}}</div>
+									</div>
+									<div class="ya-info-block__record ya-clearfix">
+										<div class="ya-info-block__label ya-span-1-2">Цвет волос:</div>
+										<div class="ya-info-block__value ya-span-1-2">{{user.hairs}}</div>
+									</div>
+								</div>
+								<div class="ya-inner-grid-1-2">
+									<div class="ya-info-block__record ya-clearfix">
+										<div class="ya-info-block__label ya-span-1-2">Грудь:</div>
+										<div class="ya-info-block__value ya-span-1-2">{{user.chest}}</div>
+									</div>
+									<div class="ya-info-block__record ya-clearfix">
+										<div class="ya-info-block__label ya-span-1-2">Талия:</div>
+										<div class="ya-info-block__value ya-span-1-2">{{user.waist}}</div>
+									</div>
+									<div class="ya-info-block__record ya-clearfix">
+										<div class="ya-info-block__label ya-span-1-2">Бедра:</div>
+										<div class="ya-info-block__value ya-span-1-2">{{user.huckle}}</div>
+									</div>
+									<div class="ya-info-block__record ya-clearfix">
+										<div class="ya-info-block__label ya-span-1-2">Телосложение:</div>
+										<div class="ya-info-block__value ya-span-1-2">{{user.type}}</div>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="ya-user__status">{{user.status}}</div>
 					</div>
-					<span class="status-area">
-					<div class="status">
-						<label>
-							<input type="checkbox" ng-if="classic_bb" ng-checked="classic_bb">
-							Классический бодибилдинг
-							<select name="" id="">
-								<option value=""></option>
-							</select>
-						</label>
-						<label>
-							<input type="checkbox" ng-if="crossfit" ng-checked="crossfit">
-							Кроссфит
-							<select name="" id="">
-								<option value=""></option>
-							</select>
-						</label>
-						<label>
-							<input type="checkbox" ng-if="fitness" ng-checked="fitness">
-							Фитнесс
-							<select name="" id="">
-								<option value=""></option>
-							</select>
-						</label>
+					<div class="ya-user__info-block">
+						<div class="ya-info-block">
+							<h2 class="ya-info-block__title ya-info-block__title_add">Доп.информация</h2>
+							<div class="ya-info-block__content">
+								<div class="ya-info-block__record ya-clearfix">
+									<div class="ya-info-block__label ya-inner-grid-1-4">Предлагаю</div>
+									<div class="ya-info-block__value ya-inner-grid-3-4">Услуги фотографа</div>
+								</div>
+								<div class="ya-info-block__record ya-clearfix">
+									<div class="ya-info-block__label ya-inner-grid-1-4">Продаю</div>
+									<div class="ya-info-block__value ya-inner-grid-3-4">Спортпит+</div>
+								</div>
+								<div class="ya-info-block__record ya-clearfix">
+									<div class="ya-info-block__label ya-inner-grid-1-4">Предлагаю</div>
+									<div class="ya-info-block__value ya-inner-grid-3-4">Одежду для фитнесса</div>
+								</div>
+								<div class="ya-info-block__record ya-clearfix">
+									<div class="ya-info-block__label ya-inner-grid-1-4">Спонсор</div>
+									<div class="ya-info-block__value ya-inner-grid-3-4">Ищу спонсора</div>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="vacancies">
-						<select name="" id="">
-							<option value=""></option>
-						</select>
-						<select name="" id="">
-							<option value=""></option>
-						</select>
+					<div class="ya-user__info-block">
+						<div class="ya-info-block">
+							<h2 class="ya-info-block__title ya-info-block__title_work">Работа</h2>
+							<div class="ya-info-block__content">
+								<div class="ya-info-block__record ya-clearfix">
+									<div class="ya-info-block__label ya-inner-grid-1-4">Требуется</div>
+									<div class="ya-info-block__value ya-inner-grid-3-4">Фитнесс Тренер</div>
+								</div>
+								<div class="ya-info-block__record ya-clearfix">
+									<div class="ya-info-block__label ya-inner-grid-1-4">Куда</div>
+									<div class="ya-info-block__value ya-inner-grid-3-4">Боксерский клуб "Rocky"</div>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="params">
-						<span>
-							<div>
-								Возраст: {{get_age(user.birthDate)}}
-							</div>
-							<div>
-								Рост: {{user.height}}
-							</div>
-							<div>
-								Вес: {{user.weight}}
-							</div>
-						</span>
-						<span>
-							<div>
-								Волосы: {{user.hairs}}
-							</div>
-							<div>
-								Типаж: {{user.type}}
-							</div>
-						</span>
-						<span>
-							<div>
-								Грудь: {{user.chest}}
-							</div>
-							<div>
-								Талия: {{user.waist}}
-							</div>
-							<div>
-								Бедра: {{user.huckle}}
-							</div>
-						</span>
-						<label>
-							Дата рождения:{{birth_date(user.birthDate)}}
-						</label><br>
-					</div>
-				</span>
 				</div>
 
 				<h3>Мои фото</h3>
