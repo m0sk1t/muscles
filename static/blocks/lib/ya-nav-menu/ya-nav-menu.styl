@@ -1,3 +1,6 @@
+@import 'jeet'
+@import 'rupture'
+
 .ya-nav-menu
     font-family: titles-font
     text-transform: menuTransform
@@ -20,18 +23,19 @@
         +below(959px)
             float: none
             padding: 0
-            a
+            & ^[0]__link
                 padding: 20px 8px
                 display: block
                 text-align: center
                 border-bottom: 1px solid #222222
-        a
+        & ^[0]__link
             color: inactiveMenuColor
             text-decoration: none
+            cursor: pointer
             &:hover
                 color: activeMenuColor
         &_active
-            > a
+            & > ^[0]__link
                 color: activeMenuColor
         &_level_1
             &:hover
@@ -39,7 +43,7 @@
                     display: block
         &_level_2
             text-align: center
-            > a
+            & > ^[0]__link
                 font-size: menuFontSize
                 color: inactiveMenuColor
                 font-family: font-family
@@ -69,5 +73,20 @@
                 content: "-"
                 display: inline-block
                 margin-right: 5px
-            a
+            & ^[0]__link
                 font-size: 14px
+    &_view_buttons
+        min-width: auto
+        & ^[0]__list
+            float: none
+        & ^[0]__item
+            padding: 0
+            col(1/5)
+            +below(767px)
+                stack()
+        & ^[0]__link
+            border-radius: 3px
+            background: #223d58
+            text-align: center
+            line-height: 1
+            padding: 15px 0

@@ -227,51 +227,133 @@
 						</div>
 					</div>
 				</div>
-
-				<h3>Мои фото</h3>
-		<section>
-			<div class="photos">
-				<img ng-click="set_current(0);" ng-src="{{photos[0].image}}">
-				<img ng-click="set_current(1);" ng-src="{{photos[1].image}}">
-				<img ng-click="set_current(2);" ng-src="{{photos[2].image}}">
-				<img ng-click="set_current(3);" ng-src="{{photos[3].image}}">
-				<img ng-click="set_current(4);" ng-src="{{photos[4].image}}">
-			</div>
-		</section>
-		<h3>Мои записи</h3>
-		<section>
-			<div
+				<div class="ya-page__block ya-user__photos">
+					<div class="ya-photos ya-photos_profile">
+						<h2 class="ya-photos__title"><a href="#/user/{{user._id}}/photos/all" class="ya-photos__link">Фото</a></h2>
+						<div class="ya-photos__list ya-clearfix">
+							<div class="ya-photos__item ya-grid-1-4">
+								<div class="ya-photos__wrapper">
+									<div class="ya-photos__img" ng-click="set_current(0);" ng-style="{'background-image':'url(' + photos[0].image + ')'}"></div>
+								</div>
+							</div>
+							<div class="ya-photos__item ya-grid-1-4">
+								<div class="ya-photos__wrapper">
+									<div class="ya-photos__img" ng-click="set_current(1);" ng-style="{'background-image':'url(' + photos[1].image + ')'}"></div>
+								</div>
+							</div>
+							<div class="ya-photos__item ya-grid-1-4">
+								<div class="ya-photos__wrapper">
+									<div class="ya-photos__img" ng-click="set_current(2);" ng-style="{'background-image':'url(' + photos[2].image + ')'}"></div>
+								</div>
+							</div>
+							<div class="ya-photos__item ya-grid-1-4">
+								<div class="ya-photos__wrapper">
+									<div class="ya-photos__img" ng-click="set_current(3);" ng-style="{'background-image':'url(' + photos[3].image + ')'}"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div
 				class="create"
 				ng-click="add_topic()"
-				ng-if="options.user._id === user._id"
-			>Добавить</div>
-			<div class="record" ng-repeat="t in topics track by $index">
-				<div class="record-area">
-					<span class="record-text">text</span>
-					<img src="" alt="ava">
+				ng-if="options.user._id === user._id">
+					Добавить новость
 				</div>
-				<div class="comments">
-					<div class="comment">
-						<img src="" alt="guest">
-						<span class="comment-author">asd</span>
-						<span class="comment-text">text</span>
+				<section>
+					<div ng-show="topic">
+						<div class="create" ng-click="topic = null">Отменить</div>
+						<textarea cols="30" rows="10" ng-model="topic.text"></textarea>
+						<div class="create" ng-click="add_image();">Добавить картинки</div>
+						<div class="photos">
+							<span ng-repeat="i in topic.images">
+								<img ng-src="{{i}}" alt="">
+								<span ng-click="add_to_topic(i);">del</span>
+							</span>
+						</div>
+						<div class="create" ng-click="new_topic();">Сохранить запись</div>
 					</div>
-					<div class="comment">
-						<img src="" alt="guest">
-						<span class="comment-author">asd</span>
-						<span class="comment-text">text</span>
-					</div>
-					<div class="comment">
-						<img src="" alt="guest">
-						<span class="comment-author">asd</span>
-						<span class="comment-text">text</span>
+				</section>
+				<div class="ya-page__block ya-page__block_bordered ya-user__wall">
+					<div class="ya-wall">
+						<h2 class="ya-wall__title">Мои объявления</h2>
+						<div class="ya-wall__news">
+							<div class="ya-wall__news-list">
+								<div class="ya-wall__news-item" ng-repeat="t in topics track by $index">
+									<div class="ya-wall__news-content">
+										<div class="ya-wall__news-author ya-clearfix">
+											<div class="ya-avatar ya-avatar_small ya-wall__avatar">
+												<img src="/images/avatar-small.jpg" class="ya-avatar__img" />
+											</div>
+											<div class="ya-wall__news-info">
+												<div class="ya-wall__author-name">
+													Иван Иванов
+												</div>
+												<div class="ya-wall__news-date">
+													14.09.2016
+												</div>
+											</div>
+										</div>
+										<div class="ya-wall__news-text">
+											Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum, ante eget auctor dictum, odio justo tincidunt turpis, id congue tortor odio at dolor. Praesent dapibus nunc ornare nunc eleifend, quis bibendum mi feugiat. Suspendisse sollicitudin a risus vitae sodales.<br><br>
+											Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc eget enim metus. Phasellus dignissim felis nulla, a maximus libero ultricies vitae. Nam non arcu iaculis, gravida ante aliquet, varius tellus. Donec ex mauris, facilisis ac purus in, interdum cursus massa. Praesent tortor nisl, luctus quis imperdiet et, pellentesque vitae elit.
+										</div>
+										<div class="ya-wall__news-media">
+											<img src="/images/post.jpg"  class="ya-wall__news-img" />
+										</div>
+									</div>
+									<div class="ya-wall__news-comments">
+										<div class="ya-walls__comments">
+											<div class="ya-comments">
+												<div class="ya-comments__list">
+													<div class="ya-comments__item">
+														<div class="ya-wall__news-author ya-clearfix">
+															<div class="ya-avatar ya-avatar_small ya-wall__avatar">
+																<img src="/images/avatar-small.jpg" class="ya-avatar__img" />
+															</div>
+															<div class="ya-wall__news-info">
+																<div class="ya-wall__author-name">
+																	Иван Иванов
+																</div>
+																<div class="ya-wall__news-date">
+																	14.09.2016
+																</div>
+															</div>
+														</div>
+														<div class="ya-wall__news-text">
+															Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum, ante eget auctor dictum, odio justo tincidunt turpis, id congue tortor odio at dolor. Praesent dapibus nunc ornare nunc eleifend, quis bibendum mi feugiat. Suspendisse sollicitudin a risus vitae sodales.
+														</div>
+													</div>
+													<div class="ya-comments__item">
+														<div class="ya-wall__news-author ya-clearfix">
+															<div class="ya-avatar ya-avatar_small ya-wall__avatar">
+																<img src="/images/avatar-small.jpg" class="ya-avatar__img" />
+															</div>
+															<div class="ya-wall__news-info">
+																<div class="ya-wall__author-name">
+																	Иван Иванов
+																</div>
+																<div class="ya-wall__news-date">
+																	14.09.2016
+																</div>
+															</div>
+														</div>
+														<div class="ya-wall__news-text">
+															Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+														</div>
+													</div>
+												</div>
+												<form ng-submit="add_topic_comment($index)" class="ya-comments__add-form ya-input">
+													<input type="text" placeholder="Комментировать" class="ya-comments__add-field ya-input__field">
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-			<form ng-submit="add_topic_comment($index)">
-				<input type="text" placeholder="Введите комментарий">
-			</form>
-		</section>
 			</div>
 			<div class="ya-grid-1-5">
 				<div class="ya-page__block ya-page__block_colored">
@@ -355,22 +437,6 @@
 				</div>
 			</div>
 		</div>
-
-
-		<section>
-			<div ng-show="topic">
-				<div class="create" ng-click="topic = null">Отменить</div>
-				<textarea cols="30" rows="10" ng-model="topic.text"></textarea>
-				<div class="create" ng-click="add_image();">Добавить картинки</div>
-				<div class="photos">
-					<span ng-repeat="i in topic.images">
-						<img ng-src="{{i}}" alt="">
-						<span ng-click="add_to_topic(i);">del</span>
-					</span>
-				</div>
-				<div class="create" ng-click="new_topic();">Сохранить запись</div>
-			</div>
-		</section>
 		<section ng-show="gallery.add_image">
 			<div ng-click="gallery.add_image = null;">close</div>
 			<div

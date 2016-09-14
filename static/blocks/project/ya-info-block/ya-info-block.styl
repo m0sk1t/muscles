@@ -3,10 +3,32 @@
     color: #757575
     padding-bottom: 5px
     &__title
-        font-size: 15px
+        font-size: 14px
         color: black
-        padding: 20px 0 20px 15px
+        padding: 20px 0 20px 20px
         line-height: 1
+        position: relative
+        &:before
+            content: ""
+            display: block
+            width: 12px
+            position: absolute
+            left: 0
+        &_data:before
+            height: 17px
+            top: 19px
+            background: url(images/sprite.png) -268px -76px no-repeat
+        &_add:before
+            height: 16px
+            top: 18px
+            background: url(images/sprite.png) -268px -105px no-repeat
+        &_work:before
+            height: 11px
+            top: 21px
+            background: url(images/sprite.png) -268px -94px no-repeat
     &__record
         margin-bottom: 15px
         line-height: 1
+    &__value
+        color: #223d57
+        font-weight: bold
