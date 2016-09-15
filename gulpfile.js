@@ -59,8 +59,8 @@ gulp.task('build_css', function() {
 		.pipe(gulp.dest('static/'));
 });
 
-gulp.task('watch', ['build_libs', 'build_js', 'build_css'], function() {
+gulp.task('watch', ['build_libs', 'build_js'/*, 'build_css'*/], function() {
 	gulp.watch('static/scripts/*.js', ['build_js']);
 	gulp.watch('static/scripts/ctrl/*.js', ['build_js']);
-	gulp.watch('static/styles/*.css', ['build_css']);
+	//gulp.watch('static/styles/*.css', ['build_css']);
 });
