@@ -113,11 +113,11 @@ module.exports = (app) => {
 					$addToSet: {
 						comments: {
 							name: user.name,
-							userid: user._id.toString(),
 							date: Date.now(),
 							avatar: user.avatar,
 							surname: user.surname,
 							comment: req.body.comment,
+							userid: user._id.toString(),
 						}
 					}
 				}, function(err, topic) {

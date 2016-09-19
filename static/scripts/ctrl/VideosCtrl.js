@@ -1,5 +1,5 @@
-angular.module('MuscleMan').controller('VideosCtrl', ['$sce', '$scope', '$routeParams', 'Video', 'socket', 'MSG',
-	function($sce, $scope, $routeParams, Video, socket, MSG) {
+angular.module('MuscleMan').controller('VideosCtrl', ['$sce', '$http', '$scope', '$routeParams', 'Video', 'socket', 'MSG',
+	function($sce, $http, $scope, $routeParams, Video, socket, MSG) {
 		$scope.videos = [];
 
 		$scope.layer = {
@@ -23,6 +23,15 @@ angular.module('MuscleMan').controller('VideosCtrl', ['$sce', '$scope', '$routeP
 		}, function(res) {
 			console.error(res.data);
 		});
+
+		$scope.get_vimeo_preview = function(id) {
+			$http.get('https://vimeo.com/api/oembed.json?url=https%3A//vimeo.com/' + id).then(function(res) {
+				console.log(res.data.thumbnail_url);
+			}, function(res) {
+				console.error(res.data);
+			});
+			return 0;
+		};
 
 		$scope.include_video = function(type, id) {
 			switch (type) {

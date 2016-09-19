@@ -110,8 +110,8 @@
 				</section>
 	<section ng-show="active_page === 'common'">
 		<label>
-			<input type="checkbox" ng-model="options.user.comments_disabled">
-			Отключить комментарии к записям
+			<input type="checkbox" ng-model="options.user.comments_enabled">
+			Включить комментарии к записям
 		</label><br>
 		<label>
 			Старый пароль

@@ -43,7 +43,7 @@ module.exports = (app) => {
 			location_country: String,
 
 			settings: {
-				comments_disabled: {
+				comments_enabled: {
 					type: Boolean,
 					default: false
 				},

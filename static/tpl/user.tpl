@@ -8,7 +8,7 @@
 						</span>
 						<div class="ya-user__avatar ya-avatar ya-avatar_large">
 							<a class="ya-avatar__link" href="#/options">
-								<img class="ya-avatar__img" src="/images/avatar.jpg" ng-src="{{user.avatar}}" alt="{{user.name}} {{user.surname}}">
+								<img class="ya-avatar__img" ng-src="{{user.avatar || '/images/avatar.jpg'}}" alt="{{user.name}} {{user.surname}}">
 							</a>
 						</div>
 						<div class="ya-user__name">
@@ -34,7 +34,7 @@
 						</div>
 					</div>
 				</div>
-				<span ng-class="{fav: in_fav()}">&#9825;</span>
+				<span ng-class="{fav: in_fav()}" ng-click="fav();">&#9825;</span>
 				<button  ng-if="options.user._id !== user._id" ng-click="write_message();">Написать сообщение</button>
 				<div class="ya-user__sports ya-sidebar-info ya-relative">
 					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_sports"></div>
@@ -263,8 +263,8 @@
 				<section>
 					<div ng-show="topic">
 						<div class="create" ng-click="topic = null">Отменить</div>
-						<textarea cols="30" rows="10" ng-model="topic.text"></textarea>
-						<div class="create" ng-click="add_image();">Добавить картинки</div>
+						<textarea rows="10" ng-model="topic.text" style="width: 100%;"></textarea>
+						<div class="create" ng-click="gallery.add_image = !gallery.add_image;">Добавить картинки</div>
 						<div class="photos">
 							<span ng-repeat="i in topic.images">
 								<img ng-src="{{i}}" alt="">
@@ -282,69 +282,61 @@
 								<div class="ya-wall__news-item" ng-repeat="t in topics track by $index">
 									<div class="ya-wall__news-content">
 										<div class="ya-wall__news-author ya-clearfix">
+											<div ng-click="del_topic($index)">x</div>
 											<div class="ya-avatar ya-avatar_small ya-wall__avatar">
-												<img src="/images/avatar-small.jpg" class="ya-avatar__img" />
+												<img ng-src="{{user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
 											</div>
 											<div class="ya-wall__news-info">
 												<div class="ya-wall__author-name">
-													Иван Иванов
+													{{user.name}} {{user.surname}}
 												</div>
 												<div class="ya-wall__news-date">
-													14.09.2016
+													{{birth_date(t.creDate)}}
 												</div>
 											</div>
 										</div>
 										<div class="ya-wall__news-text">
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum, ante eget auctor dictum, odio justo tincidunt turpis, id congue tortor odio at dolor. Praesent dapibus nunc ornare nunc eleifend, quis bibendum mi feugiat. Suspendisse sollicitudin a risus vitae sodales.<br><br>
-											Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc eget enim metus. Phasellus dignissim felis nulla, a maximus libero ultricies vitae. Nam non arcu iaculis, gravida ante aliquet, varius tellus. Donec ex mauris, facilisis ac purus in, interdum cursus massa. Praesent tortor nisl, luctus quis imperdiet et, pellentesque vitae elit.
+											{{t.text}}
 										</div>
 										<div class="ya-wall__news-media">
-											<img src="/images/post.jpg"  class="ya-wall__news-img" />
+											<img ng-src="{{i}}" ng-repeat="i in t.images" class="ya-wall__news-img" />
 										</div>
 									</div>
 									<div class="ya-wall__news-comments">
 										<div class="ya-walls__comments">
 											<div class="ya-comments">
 												<div class="ya-comments__list">
-													<div class="ya-comments__item">
+													<div class="ya-comments__item" ng-repeat="c in t.comments">
 														<div class="ya-wall__news-author ya-clearfix">
+															<div ng-click="remove_topic_comment($index, c.comment)">x</div>
 															<div class="ya-avatar ya-avatar_small ya-wall__avatar">
-																<img src="/images/avatar-small.jpg" class="ya-avatar__img" />
+																<img ng-src="{{c.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
 															</div>
 															<div class="ya-wall__news-info">
 																<div class="ya-wall__author-name">
-																	Иван Иванов
+																	{{c.name}} {{c.surname}}
 																</div>
 																<div class="ya-wall__news-date">
-																	14.09.2016
+																	{{birth_date(c.date)}}
 																</div>
 															</div>
 														</div>
 														<div class="ya-wall__news-text">
-															Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum, ante eget auctor dictum, odio justo tincidunt turpis, id congue tortor odio at dolor. Praesent dapibus nunc ornare nunc eleifend, quis bibendum mi feugiat. Suspendisse sollicitudin a risus vitae sodales.
-														</div>
-													</div>
-													<div class="ya-comments__item">
-														<div class="ya-wall__news-author ya-clearfix">
-															<div class="ya-avatar ya-avatar_small ya-wall__avatar">
-																<img src="/images/avatar-small.jpg" class="ya-avatar__img" />
-															</div>
-															<div class="ya-wall__news-info">
-																<div class="ya-wall__author-name">
-																	Иван Иванов
-																</div>
-																<div class="ya-wall__news-date">
-																	14.09.2016
-																</div>
-															</div>
-														</div>
-														<div class="ya-wall__news-text">
-															Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+															{{c.comment}}
 														</div>
 													</div>
 												</div>
-												<form ng-submit="add_topic_comment($index)" class="ya-comments__add-form ya-input">
-													<input type="text" placeholder="Комментировать" class="ya-comments__add-field ya-input__field">
+												<form
+													ng-if="user.comments_enabled"
+													ng-submit="add_topic_comment($index)"
+													class="ya-comments__add-form ya-input"
+												>
+													<input
+														type="text"
+														ng-model="topic.comment"
+														placeholder="Комментировать"
+														class="ya-comments__add-field ya-input__field"
+													>
 												</form>
 											</div>
 										</div>

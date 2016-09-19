@@ -1,6 +1,11 @@
 angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$routeParams', 'socket', 'User', 'MSG', 'Topic', 'Photo', 'Dialog', 'Upload',
 	function($scope, $location, $routeParams, socket, User, MSG, Topic, Photo, Dialog, Upload) {
 		$scope.user = {};
+		$scope.topic = {
+			text: '',
+			images: [],
+			comment: '',
+		};
 		$scope.photos = [];
 		$scope.topics = [];
 		$scope.gallery = {
@@ -23,7 +28,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		};
 
 		$scope.birth_date = function(birthDate) {
-			return moment(birthDate).format("DD-MM-YYYY");
+			return moment(birthDate).format("DD.MM.YYYY");
 		};
 
 		$scope.set_current = function(index) {
@@ -42,16 +47,18 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 			console.error(res.data);
 		});
 
+		Topic.get($routeParams.id, function(res) {
+			$scope.topics = res.data;
+		}, function(res) {
+			console.error(res.data);
+		});
+
 		$scope.user_save = function() {
 			$scope.$emit('user_save');
 		};
 
 		$scope.send_message = function(data) {
 			$scope.$emit('new_message', data);
-		};
-
-		$scope.add_image = function() {
-			$scope.gallery.add_image = true;
 		};
 
 		$scope.add_to_topic = function(img) {
@@ -66,13 +73,27 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		$scope.add_topic = function() {
 			$scope.topic = {
 				text: '',
-				images: []
+				images: [],
+				comment: '',
 			};
 		};
 
 		$scope.new_topic = function() {
 			Topic.new($scope.topic, function(res) {
 				$scope.topics.push(res.data);
+				$scope.topic = {
+					text: '',
+					images: [],
+					comment: '',
+				};
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+
+		$scope.del_topic = function(index) {
+			Topic.del($scope.topics[index]._id, function(res) {
+				$scope.topics.splice(index, 1);
 			}, function(res) {
 				console.error(res.data);
 			});
@@ -100,12 +121,12 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		$scope.add_comment = function(index) {
 			var comment = {
 				date: Date.now(),
+				_id: $scope.photos[index]._id,
 				name: $scope.options.user.name,
 				userid: $scope.options.user._id,
 				comment: $scope.gallery.comment,
 				avatar: $scope.options.user.avatar,
 				surname: $scope.options.user.surname,
-				_id: $scope.photos[$scope.gallery.current]._id,
 			};
 			Photo.add_comment(comment, function(res) {
 				$scope.gallery.comment = '';
@@ -132,15 +153,15 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		$scope.add_topic_comment = function(index) {
 			var comment = {
 				date: Date.now(),
+				comment: $scope.topic.comment,
+				_id: $scope.topics[index]._id,
 				name: $scope.options.user.name,
 				userid: $scope.options.user._id,
-				comment: $scope.gallery.comment,
 				avatar: $scope.options.user.avatar,
 				surname: $scope.options.user.surname,
-				_id: $scope.topics[$scope.gallery.current]._id,
 			};
 			Topic.add_comment(comment, function(res) {
-				$scope.gallery.comment = '';
+				$scope.topic.comment = '';
 				$scope.topics[index].comments.push(comment);
 				($routeParams.id !== $scope.options.user._id) && (comment.target = $routeParams.id, socket.emit('topic:comment', comment));
 			}, function(res) {
@@ -151,7 +172,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		$scope.remove_topic_comment = function(index, comment) {
 			Topic.remove_comment({
 				comment: comment,
-				_id: $scope.topics[$scope.gallery.current]._id,
+				_id: $scope.topics[index]._id,
 			}, function(res) {
 				$scope.topics[index].comments = $scope.topics[index].comments.filter(function(el) {
 					return !(el.userid === $scope.options.user._id && el.comment === comment);

@@ -12,9 +12,21 @@
 			<div
 				ng-repeat="v in videos track by $index"
 			>
-				<div ng-click="gallery.current = $index">Развернуть</div>
+				<img
+					width="300"
+					ng-if="v.type === 'youtube'"
+					ng-click="gallery.current = $index"
+					ng-src="//img.youtube.com/vi/{{v.link}}/0.jpg"
+				 />
+				<img
+					width="300"
+					ng-if="v.type === 'vimeo'"
+					ng-click="gallery.current = $index"
+				 />
+<!-- 
 				<iframe ng-if="v.type==='vimeo'" width="310" height="255" ng-src="{{include_video('vimeo', v.link)}}" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen></iframe>
 				<iframe ng-if="v.type==='youtube'" width="310" height="255" ng-src="{{include_video('youtube', v.link)}}" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen></iframe>
+ -->
 				<div>
 					<i
 						class="fa fa-lg fa-trash"
