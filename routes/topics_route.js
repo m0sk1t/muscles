@@ -6,6 +6,7 @@ module.exports = (app) => {
 			creDate: Date,
 			likes: Array,
 			images: Array,
+			videos: Array,
 			comments: Array
 		}),
 		Users = mongoose.model('Users');

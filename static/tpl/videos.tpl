@@ -14,23 +14,13 @@
 			>
 				<img
 					width="300"
-					ng-if="v.type === 'youtube'"
-					ng-click="gallery.current = $index"
-					ng-src="//img.youtube.com/vi/{{v.link}}/0.jpg"
-				 />
-				<img
-					width="300"
-					ng-if="v.type === 'vimeo'"
+					ng-src="{{v.thumbnail}}"
 					ng-click="gallery.current = $index"
 				 />
-<!-- 
-				<iframe ng-if="v.type==='vimeo'" width="310" height="255" ng-src="{{include_video('vimeo', v.link)}}" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen></iframe>
-				<iframe ng-if="v.type==='youtube'" width="310" height="255" ng-src="{{include_video('youtube', v.link)}}" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen></iframe>
- -->
 				<div>
 					<i
 						class="fa fa-lg fa-trash"
-						ng-click="delete_video(v._id)"
+						ng-click="delete_video($index)"
 						ng-if="options.user._id === v.owner"
 					></i>
 					<i
@@ -40,8 +30,9 @@
 					></i>
 					<span ng-if="options.user">
 						<i
+							class="fa fa-lg"
 							ng-click="like(v, $index)"
-							class="fa fa-lg fa-heart-o"
+							ng-class="{'fa-heart-o':!i_like_it(v.likes),'fa-heart':i_like_it(v.likes)}"
 						></i>{{v.likes.length}}
 					</span>
 					<span ng-if="options.user">
@@ -65,7 +56,6 @@
 	<section class="edit-video" ng-show="layer.editedVideo">
 		<div>
 			<input type="text" placeholder="Название видео" ng-model="layer.editedVideo.title">
-			<input type="text" placeholder="Ссылка на видео" ng-model="layer.editedVideo.link">
 			<button ng-click="layer.editedVideo = null;">Отменить!</button>
 			<button ng-click="edit_video(layer.editedVideo)">Сохранить!</button>
 		</div>

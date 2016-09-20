@@ -24,15 +24,6 @@ angular.module('MuscleMan').controller('VideosCtrl', ['$sce', '$http', '$scope',
 			console.error(res.data);
 		});
 
-		$scope.get_vimeo_preview = function(id) {
-			$http.get('https://vimeo.com/api/oembed.json?url=https%3A//vimeo.com/' + id).then(function(res) {
-				console.log(res.data.thumbnail_url);
-			}, function(res) {
-				console.error(res.data);
-			});
-			return 0;
-		};
-
 		$scope.include_video = function(type, id) {
 			switch (type) {
 				case 'vimeo':
@@ -75,12 +66,27 @@ angular.module('MuscleMan').controller('VideosCtrl', ['$sce', '$http', '$scope',
 					return;
 					break;
 			}
-			Video.add(video, function(res) {
-				$scope.videos.push(res.data);
-				$scope.layer.addVideo = null;
-			}, function(res) {
-				console.error(res.data);
-			});
+			if (video.type === 'vimeo') {
+				$http.get('https://vimeo.com/api/oembed.json?url=https%3A//vimeo.com/' + video.link).then(function(res) {
+					video.thumbnail = res.data.thumbnail_url;
+					Video.add(video, function(res) {
+						$scope.videos.push(res.data);
+						$scope.layer.addVideo = null;
+					}, function(res) {
+						console.error(res.data);
+					});
+				}, function(res) {
+					console.error(res.data);
+				});
+			} else {
+				video.thumbnail = '//img.youtube.com/vi/' + video.link + '/0.jpg';
+				Video.add(video, function(res) {
+					$scope.videos.push(res.data);
+					$scope.layer.addVideo = null;
+				}, function(res) {
+					console.error(res.data);
+				});
+			}
 		};
 
 		$scope.edit_video = function(opt) {
@@ -94,6 +100,18 @@ angular.module('MuscleMan').controller('VideosCtrl', ['$sce', '$http', '$scope',
 			}, function(res) {
 				console.error(res.data);
 			});
+		};
+
+		$scope.delete_video = function(index) {
+			Video.delete($scope.videos[index]._id, function(res) {
+				$scope.videos.splice(index, 1);
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+
+		$scope.i_like_it = function(likes) {
+			return likes.indexOf($scope.options.user._id) !== -1;
 		};
 
 		$scope.like = function(p, index) {

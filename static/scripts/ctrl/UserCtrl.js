@@ -1,5 +1,5 @@
-angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$routeParams', 'socket', 'User', 'MSG', 'Topic', 'Photo', 'Dialog', 'Upload',
-	function($scope, $location, $routeParams, socket, User, MSG, Topic, Photo, Dialog, Upload) {
+angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$routeParams', 'socket', 'VK', 'User', 'MSG', 'Topic', 'Photo', 'Video', 'Dialog', 'Upload',
+	function($scope, $location, $routeParams, socket, VK, User, MSG, Topic, Photo, Video, Dialog, Upload) {
 		$scope.user = {};
 		$scope.topic = {
 			text: '',
@@ -61,7 +61,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 			$scope.$emit('new_message', data);
 		};
 
-		$scope.add_to_topic = function(img) {
+		$scope.add_image_to_topic = function(img) {
 			var i = $scope.topic.images.indexOf(img);
 			if (i === -1) {
 				$scope.topic.images.push(img);
@@ -70,11 +70,45 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 			}
 		};
 
+		$scope.add_video_to_topic = function(v) {
+			var i = -1;
+			$scope.topic.videos.map(function(el, index) {
+				el._id === v._id && (i = index);
+			});
+			if (i === -1) {
+				$scope.topic.videos.push(v);
+			} else {
+				$scope.topic.videos.splice(i, 1);
+			}
+		};
+
 		$scope.add_topic = function() {
 			$scope.topic = {
 				text: '',
 				images: [],
+				videos: [],
 				comment: '',
+			};
+		};
+
+		$scope.add_university = function() {
+			$scope.university = {
+				year_end: '',
+				year_start: '',
+				city: {},
+				chair: {},
+				faculty: {},
+				speciality: '',
+			};
+		};
+
+		$scope.add_workplace = function() {
+			$scope.workplace = {
+				city: {},
+				company: '',
+				year_end: '',
+				year_start: '',
+				speciality: '',
 			};
 		};
 

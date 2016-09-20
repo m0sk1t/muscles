@@ -4,7 +4,10 @@
 			<div class="ya-grid-1-3">
 				<div class="ya-page__block ya-page__block_colored">
 					<div class="ya-user__main-info ya-relative">
-						<span class="ya-online-id ya-online-id_online_yes ya-online-id_large ya-online-id_main">
+						<span
+							class="ya-online-id ya-online-id_large ya-online-id_main"
+							ng-class="{'ya-online-id_online_yes': user.online,'ya-online-id_online_no': !user.online}"
+						>
 						</span>
 						<div class="ya-user__avatar ya-avatar ya-avatar_large">
 							<a class="ya-avatar__link" href="#/options">
@@ -85,7 +88,7 @@
 					</div>
 				</div>
 				<div class="ya-user__work ya-sidebar-info ya-relative">
-					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_work"></div>
+					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_work" ng-click="add_workplace();"></div>
 					<div class="ya-page__block ya-page__block_rounded">
 						<h2 class="ya-sidebar-info__title">
 							Работа
@@ -104,9 +107,16 @@
 							</div>
 						</div>
 					</div>
+					<div class="add-work" ng-show="workplace">
+						<form ng-submit="save_university();">
+							<input type="text" ng-model="workplace.company">
+							<input type="text" ng-model="workplace.speciality">
+							<input type="submit" value="save" />
+						</form>
+					</div>
 				</div>
 				<div class="ya-user__edu ya-sidebar-info ya-relative">
-					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_edu"></div>
+					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_edu" ng-click="add_university();"></div>
 					<div class="ya-page__block ya-page__block_rounded">
 						<h2 class="ya-sidebar-info__title">
 							Образование
@@ -138,12 +148,19 @@
 							</div>
 						</div>
 					</div>
+					<div class="add-university" ng-show="university">
+						<form ng-submit="save_university();">
+							<input type="text" ng-value="university.speciality">
+							<input type="submit" value="save" />
+						</form>
+					</div>					
 				</div>
 			</div>
 			<div class="ya-grid-7-15">
 				<div class="ya-page__block ya-page__block_bordered ya-user__text-info">
 					<div class="ya-user__info-block ya-info-block ya-info-block_border_no">
 						<div class="ya-user__status">{{user.status}}</div>
+						<div class="ya-user__status">Был в сети: {{user.lastOnline}}</div>
 					</div>
 					<div class="ya-user__info-block">
 						<div class="ya-info-block">
@@ -255,9 +272,10 @@
 					</div>
 				</div>
 				<div
-				class="create"
-				ng-click="add_topic()"
-				ng-if="options.user._id === user._id">
+					class="create"
+					ng-click="add_topic()"
+					ng-if="options.user._id === user._id"
+				>
 					Добавить новость
 				</div>
 				<section>
@@ -265,10 +283,17 @@
 						<div class="create" ng-click="topic = null">Отменить</div>
 						<textarea rows="10" ng-model="topic.text" style="width: 100%;"></textarea>
 						<div class="create" ng-click="gallery.add_image = !gallery.add_image;">Добавить картинки</div>
+						<div class="create" ng-click="gallery.add_video = !gallery.add_video;">Добавить видеозаписи</div>
 						<div class="photos">
 							<span ng-repeat="i in topic.images">
 								<img ng-src="{{i}}" alt="">
-								<span ng-click="add_to_topic(i);">del</span>
+								<span ng-click="add_image_to_topic(i);">del</span>
+							</span>
+						</div>
+						<div class="photos">
+							<span ng-repeat="v in topic.videos">
+								<img ng-src="{{v.thumbnail}}" alt="">
+								<span ng-click="add_video_to_topic(v);">del</span>
 							</span>
 						</div>
 						<div class="create" ng-click="new_topic();">Сохранить запись</div>

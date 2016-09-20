@@ -20,6 +20,11 @@ module.exports = (app) => {
 			waiting: Array,
 			subscribers: Array,
 
+			sports: Array,
+			workplaces: Array,
+			acievements: Array,
+			universities: Array,
+
 			creDate: Date,
 			birthDate: Date,
 			lastOnline: Date,

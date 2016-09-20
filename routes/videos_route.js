@@ -8,6 +8,7 @@ module.exports = (app) => {
 			creDate: Date,
 			likes: Array,
 			comments: Array,
+			thumbnail: String,
 		}),
 		Users = mongoose.model('Users');
 	app.route('/video/:id')
@@ -46,6 +47,7 @@ module.exports = (app) => {
 					link: req.body.link,
 					type: req.body.type,
 					title: req.body.title,
+					thumbnail: req.body.thumbnail,
 				}, (err, video) => {
 					if (err) return console.error(err);
 					res.json(video);
