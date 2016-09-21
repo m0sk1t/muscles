@@ -4,6 +4,18 @@ angular.module('Services', []).factory('User', ['$http',
 			get: function(s, e) {
 				return $http.get('/user').then(s, e);
 			},
+			add_university: function(id, opt, s, e) {
+				return $http.put('/user/' + id + '/add_university', opt).then(s, e);
+			},
+			rm_university: function(id, opt, s, e) {
+				return $http.put('/user/' + id + '/add_university', opt).then(s, e);
+			},
+			add_workplace: function(id, opt, s, e) {
+				return $http.put('/user/' + id + '/add_workplace', opt).then(s, e);
+			},
+			rm_workplace: function(id, opt, s, e) {
+				return $http.put('/user/' + id + '/add_workplace', opt).then(s, e);
+			},
 			load: function(id, s, e) {
 				return $http.get('/user/' + id).then(s, e);
 			},
@@ -45,28 +57,19 @@ angular.module('Services', []).factory('User', ['$http',
 	function($http) {
 		return {
 			get_countries: function(s, e) {
-				return $http.post('https://api.vk.com/method/database.getCountries', {}).then(s, e);
+				return $http.post('vk/database.getCountries', {}).then(s, e);
 			},
 			get_cities: function(opt, s, e) {
-				return $http.post('https://api.vk.com/method/database.getCities', {
-					country_id: opt.country_id
-				}).then(s, e);
+				return $http.post('vk/database.getCities', opt).then(s, e);
 			},
 			get_universities: function(opt, s, e) {
-				return $http.post('https://api.vk.com/method/database.getUniversities', {
-					city_id: opt.city_id,
-					country_id: opt.country_id
-				}).then(s, e);
+				return $http.post('vk/database.getUniversities', opt).then(s, e);
 			},
 			get_faculties: function(opt, s, e) {
-				return $http.post('https://api.vk.com/method/database.getFaculties', {
-					university_id: opt.university_id
-				}).then(s, e);
+				return $http.post('vk/database.getFaculties', opt).then(s, e);
 			},
 			get_chairs: function(opt, s, e) {
-				return $http.post('https://api.vk.com/method/database.getChairs', {
-					faculty_id: opt.faculty_id
-				}).then(s, e);
+				return $http.post('vk/database.getChairs', opt).then(s, e);
 			},
 		}
 	}

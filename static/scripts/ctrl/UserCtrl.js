@@ -90,17 +90,77 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 				comment: '',
 			};
 		};
-
+		$scope.load_countries = function() {
+			VK.get_countries(function(res) {
+				$scope.countries = res.data;
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+		$scope.load_cities = function() {
+			VK.get_cities({
+				country_id: $scope.university.country_id
+			}, function(res) {
+				$scope.cities = res.data;
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+		$scope.load_universities = function() {
+			VK.get_universities({
+				city_id: $scope.university.city,
+				country_id: $scope.university.country_id,
+			}, function(res) {
+				$scope.universities = res.data;
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+		$scope.load_faculties = function() {
+			VK.get_faculties({
+				university_id: $scope.university.university_id
+			}, function(res) {
+				$scope.faculties = res.data;
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+		$scope.load_chairs = function() {
+			VK.get_chairs({
+				faculty_id: $scope.university.faculty_id
+			}, function(res) {
+				$scope.chairs = res.data;
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
 		$scope.add_university = function() {
+			$scope.load_countries();
 			$scope.university = {
-				year_end: '',
-				year_start: '',
-				city: {},
-				chair: {},
-				faculty: {},
+				year_end: +(new Date()).getFullYear(),
+				year_start: +(new Date()).getFullYear(),
+				city_id: '',
+				country_id: '',
+				university_id: '',
+				faculty_id: '',
+				chair_id: '',
+				city: '',
+				country: '',
+				university: '',
+				faculty: '',
+				chair: '',
 				speciality: '',
 			};
 		};
+
+		$scope.save_university = function() {
+			User.add_university($scope.university, function(res) {
+				$scope.options.user.$scope.universities.push($scope.university);
+				$scope.university = null;
+			}, function(res) {
+				console.error(res.data)
+			});
+		}
 
 		$scope.add_workplace = function() {
 			$scope.workplace = {

@@ -1,5 +1,7 @@
 module.exports = (app) => {
 	var salt = require('./salt.js').salt,
+		qs = require('qs'),
+		request = require('request'),
 		crypto = require('crypto'),
 		mongoose = require('mongoose'),
 		mailer = require('./mailer.js'),
@@ -323,5 +325,17 @@ module.exports = (app) => {
 				res.status(500).json(err);
 			}
 		});
-	})
+	});
+
+	app.post('/vk/:method', (req, res) => {
+		console.log('req.body', req.body);
+		request.post({
+			url: 'https://api.vk.com/method/' + req.params.method,
+			formData: req.body
+		}, (err, response) => {
+			if (err) return console.error(err);
+			console.log('response.body', response.body);
+			res.json(JSON.parse(response.body).response);
+		});
+	});
 }

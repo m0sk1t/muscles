@@ -108,7 +108,7 @@
 						</div>
 					</div>
 					<div class="add-work" ng-show="workplace">
-						<form ng-submit="save_university();">
+						<form ng-submit="save_workplace();">
 							<input type="text" ng-model="workplace.company">
 							<input type="text" ng-model="workplace.speciality">
 							<input type="submit" value="save" />
@@ -149,8 +149,26 @@
 						</div>
 					</div>
 					<div class="add-university" ng-show="university">
+						<div ng-click="university = null;">x</div>
 						<form ng-submit="save_university();">
-							<input type="text" ng-value="university.speciality">
+							<select ng-model="university.country_id" ng-change="load_cities();">
+								<option value="{{c.cid}}" ng-repeat="c in countries" ng-click="university.country = c.title">{{c.title}}</option>
+							</select><br />
+							<select ng-model="university.city_id" ng-change="load_universities();">
+								<option value="{{ci.cid}}" ng-repeat="ci in cities" ng-click="university.city = ci.title">{{ci.title}}</option>
+							</select><br />
+							<select ng-model="university.university_id" ng-change="load_faculties()">
+								<option value="{{u.id}}" ng-repeat="u in universities" ng-click="university.university = u.title">{{u.title}}</option>
+							</select><br />
+							<select ng-model="university.faculty_id" ng-change="load_chairs()">
+								<option value="{{f.id}}" ng-repeat="f in faculties" ng-click="university.faculty = f.title">{{f.title}}</option>
+							</select><br />
+							<select ng-model="university.chair_id">
+								<option value="{{ch.id}}" ng-repeat="ch in chairs" ng-click="university.chair = ch.title">{{ch.title}}</option>
+							</select><br />
+							с: <input type="number" ng-model="university.year_start" /><br />
+							по:<input type="number" ng-model="university.year_end" /><br />
+							<input type="text" ng-value="university.speciality" placeholder="специальность"><br />
 							<input type="submit" value="save" />
 						</form>
 					</div>					
