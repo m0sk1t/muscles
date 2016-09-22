@@ -210,8 +210,8 @@ module.exports = (app) => {
 		}, (err, user) => {
 			if (err) return console.error(err);
 			res.json(user);
-		})
-	})
+		});
+	});
 
 	app.route('/user')
 		.get((req, res) => {
@@ -221,7 +221,7 @@ module.exports = (app) => {
 					userid: userid
 				}, (err, user) => {
 					res.json(user);
-				})
+				});
 			} else {
 				res.status(404).send('Need to register first!');
 			}
@@ -239,7 +239,7 @@ module.exports = (app) => {
 					upsert: false
 				}, (err, user) => {
 					res.json(user);
-				})
+				});
 			} else {
 				res.status(404).send('Need to register first!');
 			}
@@ -250,11 +250,60 @@ module.exports = (app) => {
 					userid: userid
 				}, (err, user) => {
 					res.clearCookie('userid').redirect('/');
-				})
+				});
 			} else {
 				res.status(404).send('Need to register first!');
 			}
 		});
+
+	app.put('/user/add_university', (req, res) => {
+		Users.findOneAndUpdate({
+			userid: req.cookies.userid
+		}, {
+			$addToSet: {
+				universities: req.body
+			}
+		}, (err, user) => {
+			if (err) return console.error(err);
+			res.json(user);
+		});
+	});
+	app.put('/user/rm_university', (req, res) => {
+		Users.findOneAndUpdate({
+			userid: req.cookies.userid
+		}, {
+			$pull: {
+				universities: req.body
+			}
+		}, (err, user) => {
+			if (err) return console.error(err);
+			res.json(user);
+		});
+	});
+	app.put('/user/add_workplace', (req, res) => {
+		Users.findOneAndUpdate({
+			userid: req.cookies.userid
+		}, {
+			$addToSet: {
+				workplaces: req.body
+			}
+		}, (err, user) => {
+			if (err) return console.error(err);
+			res.json(user);
+		});
+	});
+	app.put('/user/rm_workplace', (req, res) => {
+		Users.findOneAndUpdate({
+			userid: req.cookies.userid
+		}, {
+			$pull: {
+				workplaces: req.body
+			}
+		}, (err, user) => {
+			if (err) return console.error(err);
+			res.json(user);
+		});
+	});
 
 	app.post('/find_users', (req, res) => {
 		var search = {},

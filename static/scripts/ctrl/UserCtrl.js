@@ -90,6 +90,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 				comment: '',
 			};
 		};
+
 		$scope.load_countries = function() {
 			VK.get_countries(function(res) {
 				$scope.countries = res.data;
@@ -97,18 +98,20 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 				console.error(res.data);
 			});
 		};
+
 		$scope.load_cities = function() {
 			VK.get_cities({
-				country_id: $scope.university.country_id
+				country_id: ($scope.university ? $scope.university.country_id : $scope.workplace.country_id)
 			}, function(res) {
 				$scope.cities = res.data;
 			}, function(res) {
 				console.error(res.data);
 			});
 		};
+
 		$scope.load_universities = function() {
 			VK.get_universities({
-				city_id: $scope.university.city,
+				city_id: $scope.university.city_id,
 				country_id: $scope.university.country_id,
 			}, function(res) {
 				$scope.universities = res.data;
@@ -116,6 +119,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 				console.error(res.data);
 			});
 		};
+
 		$scope.load_faculties = function() {
 			VK.get_faculties({
 				university_id: $scope.university.university_id
@@ -125,6 +129,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 				console.error(res.data);
 			});
 		};
+
 		$scope.load_chairs = function() {
 			VK.get_chairs({
 				faculty_id: $scope.university.faculty_id
@@ -134,11 +139,10 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 				console.error(res.data);
 			});
 		};
+
 		$scope.add_university = function() {
 			$scope.load_countries();
 			$scope.university = {
-				year_end: +(new Date()).getFullYear(),
-				year_start: +(new Date()).getFullYear(),
 				city_id: '',
 				country_id: '',
 				university_id: '',
@@ -150,26 +154,61 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 				faculty: '',
 				chair: '',
 				speciality: '',
+				year_end: +(new Date()).getFullYear(),
+				year_start: +(new Date()).getFullYear(),
 			};
 		};
 
 		$scope.save_university = function() {
 			User.add_university($scope.university, function(res) {
-				$scope.options.user.$scope.universities.push($scope.university);
+				$scope.options.user._id === $scope.user._id && $scope.user.universities.push($scope.university);
+				$scope.options.user.universities.push($scope.university);
 				$scope.university = null;
 			}, function(res) {
 				console.error(res.data)
 			});
-		}
+		};
+
+		$scope.rm_university = function(u, i) {
+			User.rm_university(u, function(res) {
+				$scope.options.user.universities.splice(i, 1);
+				$scope.user.universities.splice(i, 1);
+			}, function(res) {
+				console.error(res.data)
+			});
+		};
 
 		$scope.add_workplace = function() {
+			$scope.load_countries();
 			$scope.workplace = {
-				city: {},
+				city: '',
+				country: '',
+				city_id: '',
+				country_id: '',
 				company: '',
-				year_end: '',
-				year_start: '',
 				speciality: '',
+				year_end: +(new Date()).getFullYear(),
+				year_start: +(new Date()).getFullYear(),
 			};
+		};
+
+		$scope.save_workplace = function() {
+			User.add_workplace($scope.workplace, function(res) {
+				$scope.options.user._id === $scope.user._id && $scope.user.workplaces.push($scope.workplace);
+				$scope.options.user.workplaces.push($scope.workplace);
+				$scope.workplace = null;
+			}, function(res) {
+				console.error(res.data)
+			});
+		};
+
+		$scope.rm_workplace = function(w, i) {
+			User.rm_workplace(w, function(res) {
+				$scope.options.user.workplaces.splice(i, 1);
+				$scope.user.workplaces.splice(i, 1);
+			}, function(res) {
+				console.error(res.data)
+			});
 		};
 
 		$scope.new_topic = function() {

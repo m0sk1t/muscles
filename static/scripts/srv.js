@@ -4,17 +4,17 @@ angular.module('Services', []).factory('User', ['$http',
 			get: function(s, e) {
 				return $http.get('/user').then(s, e);
 			},
-			add_university: function(id, opt, s, e) {
-				return $http.put('/user/' + id + '/add_university', opt).then(s, e);
+			add_university: function(opt, s, e) {
+				return $http.put('/user/add_university', opt).then(s, e);
 			},
-			rm_university: function(id, opt, s, e) {
-				return $http.put('/user/' + id + '/add_university', opt).then(s, e);
+			rm_university: function(opt, s, e) {
+				return $http.put('/user/rm_university', opt).then(s, e);
 			},
-			add_workplace: function(id, opt, s, e) {
-				return $http.put('/user/' + id + '/add_workplace', opt).then(s, e);
+			add_workplace: function(opt, s, e) {
+				return $http.put('/user/add_workplace', opt).then(s, e);
 			},
-			rm_workplace: function(id, opt, s, e) {
-				return $http.put('/user/' + id + '/add_workplace', opt).then(s, e);
+			rm_workplace: function(opt, s, e) {
+				return $http.put('/user/rm_workplace', opt).then(s, e);
 			},
 			load: function(id, s, e) {
 				return $http.get('/user/' + id).then(s, e);
@@ -60,6 +60,7 @@ angular.module('Services', []).factory('User', ['$http',
 				return $http.post('vk/database.getCountries', {}).then(s, e);
 			},
 			get_cities: function(opt, s, e) {
+				opt.count = 333;
 				return $http.post('vk/database.getCities', opt).then(s, e);
 			},
 			get_universities: function(opt, s, e) {

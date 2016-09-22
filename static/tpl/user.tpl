@@ -88,62 +88,84 @@
 					</div>
 				</div>
 				<div class="ya-user__work ya-sidebar-info ya-relative">
-					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_work" ng-click="add_workplace();"></div>
+					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_work" ng-click="options.user._id === user._id && add_workplace();"></div>
 					<div class="ya-page__block ya-page__block_rounded">
 						<h2 class="ya-sidebar-info__title">
 							Работа
 						</h2>
-						<div class="ya-sidebar-info__content-wrapper">
+						<div class="ya-sidebar-info__content-wrapper" ng-repeat="w in user.workplaces track by $index">
+							<div
+								ng-click="rm_workplace(w, $index)"
+								ng-if="options.user._id === user._id"
+							>x</div>
 							<div class="ya-sidebar-info__content">
 								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Год</span> 2015 - 2016
+									<span class="ya-sidebar-info__label">Страна</span> {{w.country}}
 								</div>
 								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Компания</span> РБК-Маркетинг
+									<span class="ya-sidebar-info__label">Город</span> {{w.city}}
 								</div>
 								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Должность</span> Директор
+									<span class="ya-sidebar-info__label">Годы</span> {{w.year_start}} - {{w.year_end}}
+								</div>
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Компания</span> {{w.company}}
+								</div>
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Должность</span> {{w.speciality}}
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="add-work" ng-show="workplace">
+						<div ng-click="workplace = null;">x</div>
 						<form ng-submit="save_workplace();">
-							<input type="text" ng-model="workplace.company">
-							<input type="text" ng-model="workplace.speciality">
+							<select ng-model="workplace.country_id" ng-change="load_cities();">
+								<option value="{{c.cid}}" ng-repeat="c in countries" ng-click="workplace.country = c.title">{{c.title}}</option>
+							</select><br />
+							<select ng-model="workplace.city_id">
+								<option value="{{ci.cid}}" ng-repeat="ci in cities" ng-click="workplace.city = ci.title">{{ci.title}}</option>
+							</select><br />
+							с: <input type="number" ng-model="workplace.year_start" /><br />
+							по:<input type="number" ng-model="workplace.year_end" /><br />
+							<input type="text" ng-model="workplace.company" placeholder="Компания" />
+							<input type="text" ng-model="workplace.speciality" placeholder="Специальность" />
 							<input type="submit" value="save" />
 						</form>
 					</div>
 				</div>
 				<div class="ya-user__edu ya-sidebar-info ya-relative">
-					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_edu" ng-click="add_university();"></div>
+					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_edu" ng-click="options.user._id === user._id && add_university();"></div>
 					<div class="ya-page__block ya-page__block_rounded">
 						<h2 class="ya-sidebar-info__title">
 							Образование
 						</h2>
-						<div class="ya-sidebar-info__content-wrapper">
+						<div class="ya-sidebar-info__content-wrapper" ng-repeat="u in user.universities track by $index">
+							<div 
+								ng-click="rm_university(u, $index)"
+								ng-if="options.user._id === user._id"
+								>x</div>
 							<div class="ya-sidebar-info__content">
 								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Год</span> 2013
+									<span class="ya-sidebar-info__label">Страна</span> {{u.country}}
 								</div>
 								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Учреждение</span> ИвГУ
+									<span class="ya-sidebar-info__label">Город</span> {{u.city}}
 								</div>
 								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Специальность</span> Специалист по рекламе
-								</div>
-							</div>
-						</div>
-						<div class="ya-sidebar-info__content-wrapper">
-							<div class="ya-sidebar-info__content">
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Год</span> 2013
+									<span class="ya-sidebar-info__label">Годы</span> {{u.year_start}} - {{u.year_end}}
 								</div>
 								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Учреждение</span> ИвГУ
+									<span class="ya-sidebar-info__label">Учреждение</span> {{u.university}}
 								</div>
 								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Специальность</span> Специалист по рекламе
+									<span class="ya-sidebar-info__label">Факультет</span> {{u.faculty}}
+								</div>
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Кафедра</span> {{u.chair}}
+								</div>
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Специальность</span> {{u.speciality}}
 								</div>
 							</div>
 						</div>
@@ -168,7 +190,7 @@
 							</select><br />
 							с: <input type="number" ng-model="university.year_start" /><br />
 							по:<input type="number" ng-model="university.year_end" /><br />
-							<input type="text" ng-value="university.speciality" placeholder="специальность"><br />
+							<input type="text" ng-model="university.speciality" placeholder="специальность"><br />
 							<input type="submit" value="save" />
 						</form>
 					</div>					
