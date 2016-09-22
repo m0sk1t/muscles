@@ -16,6 +16,12 @@ angular.module('Services', []).factory('User', ['$http',
 			rm_workplace: function(opt, s, e) {
 				return $http.put('/user/rm_workplace', opt).then(s, e);
 			},
+			add_achievement: function(opt, s, e) {
+				return $http.put('/user/add_achievement', opt).then(s, e);
+			},
+			rm_achievement: function(opt, s, e) {
+				return $http.put('/user/rm_achievement', opt).then(s, e);
+			},
 			load: function(id, s, e) {
 				return $http.get('/user/' + id).then(s, e);
 			},

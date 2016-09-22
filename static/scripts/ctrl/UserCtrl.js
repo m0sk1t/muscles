@@ -101,7 +101,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 
 		$scope.load_cities = function() {
 			VK.get_cities({
-				country_id: ($scope.university ? $scope.university.country_id : $scope.workplace.country_id)
+				country_id: ($scope.university ? $scope.university.country_id : ($scope.workplace ? $scope.workplace.country_id : $scope.achievement.country_id))
 			}, function(res) {
 				$scope.cities = res.data;
 			}, function(res) {
@@ -206,6 +206,39 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 			User.rm_workplace(w, function(res) {
 				$scope.options.user.workplaces.splice(i, 1);
 				$scope.user.workplaces.splice(i, 1);
+			}, function(res) {
+				console.error(res.data)
+			});
+		};
+
+		$scope.add_achievement = function() {
+			$scope.load_countries();
+			$scope.achievement = {
+				city: '',
+				country: '',
+				city_id: '',
+				country_id: '',
+				title: '',
+				place: '',
+				comment: '',
+				year: +(new Date()).getFullYear(),
+			};
+		};
+
+		$scope.save_achievement = function() {
+			User.add_achievement($scope.achievement, function(res) {
+				$scope.options.user._id === $scope.user._id && $scope.user.achievements.push($scope.achievement);
+				$scope.options.user.achievements.push($scope.achievement);
+				$scope.achievement = null;
+			}, function(res) {
+				console.error(res.data)
+			});
+		};
+
+		$scope.rm_achievement = function(w, i) {
+			User.rm_achievement(w, function(res) {
+				$scope.options.user.achievements.splice(i, 1);
+				$scope.user.achievements.splice(i, 1);
 			}, function(res) {
 				console.error(res.data)
 			});

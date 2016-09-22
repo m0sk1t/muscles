@@ -18,14 +18,14 @@ module.exports = (app) => {
 			surname: String,
 			status: String,
 
-			friends: Array,
-			waiting: Array,
-			subscribers: Array,
+			friends: { type: Array, default: [] },
+			waiting: { type: Array, default: [] },
+			subscribers: { type: Array, default: [] },
 
-			sports: Array,
-			workplaces: Array,
-			acievements: Array,
-			universities: Array,
+			sports: { type: Array, default: [] },
+			workplaces: { type: Array, default: [] },
+			achievements: { type: Array, default: [] },
+			universities: { type: Array, default: [] },
 
 			creDate: Date,
 			birthDate: Date,
@@ -268,6 +268,7 @@ module.exports = (app) => {
 			res.json(user);
 		});
 	});
+
 	app.put('/user/rm_university', (req, res) => {
 		Users.findOneAndUpdate({
 			userid: req.cookies.userid
@@ -280,6 +281,7 @@ module.exports = (app) => {
 			res.json(user);
 		});
 	});
+
 	app.put('/user/add_workplace', (req, res) => {
 		Users.findOneAndUpdate({
 			userid: req.cookies.userid
@@ -292,12 +294,39 @@ module.exports = (app) => {
 			res.json(user);
 		});
 	});
+
 	app.put('/user/rm_workplace', (req, res) => {
 		Users.findOneAndUpdate({
 			userid: req.cookies.userid
 		}, {
 			$pull: {
 				workplaces: req.body
+			}
+		}, (err, user) => {
+			if (err) return console.error(err);
+			res.json(user);
+		});
+	});
+
+	app.put('/user/add_achievement', (req, res) => {
+		Users.findOneAndUpdate({
+			userid: req.cookies.userid
+		}, {
+			$addToSet: {
+				achievements: req.body
+			}
+		}, (err, user) => {
+			if (err) return console.error(err);
+			res.json(user);
+		});
+	});
+
+	app.put('/user/rm_achievement', (req, res) => {
+		Users.findOneAndUpdate({
+			userid: req.cookies.userid
+		}, {
+			$pull: {
+				achievements: req.body
 			}
 		}, (err, user) => {
 			if (err) return console.error(err);

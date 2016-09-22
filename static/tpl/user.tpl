@@ -61,30 +61,53 @@
 					</div>
 				</div>
 				<div class="ya-user__awards ya-sidebar-info ya-relative">
-					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_awards"></div>
+					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_awards" ng-click="add_achievement();"></div>
 					<div class="ya-page__block ya-page__block_rounded">
 						<h2 class="ya-sidebar-info__title">
 							Достижения
 						</h2>
-						<div class="ya-sidebar-info__content-wrapper">
+						<div class="ya-sidebar-info__content-wrapper" ng-repeat="a in user.achievements track by $index">
+							<div
+								ng-click="rm_achievement(a, $index)"
+								ng-if="options.user._id === user._id"
+							>x</div>
 							<div class="ya-sidebar-info__content">
 								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Год</span> 2016
+									<span class="ya-sidebar-info__label">Страна</span> {{a.country}}
 								</div>
 								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Город</span> Москва
+									<span class="ya-sidebar-info__label">Город</span> {{a.city}}
 								</div>
 								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Название</span> Открытый Кубок
+									<span class="ya-sidebar-info__label">Год</span> {{a.year}}
 								</div>
 								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Место</span> 1 место
+									<span class="ya-sidebar-info__label">Название</span> {{a.title}}
 								</div>
 								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Комментарии</span> Я победитель, и мне в этом мире нет равных
+									<span class="ya-sidebar-info__label">Место</span> {{a.place}}
+								</div>
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Комментарии</span> {{a.comment}}
 								</div>
 							</div>
 						</div>
+					</div>
+					<div class="add-achievement" ng-show="achievement">
+						<div ng-click="achievement = null;">x</div>
+						<form ng-submit="save_achievement();">
+							<select ng-model="achievement.country_id" ng-change="load_cities();">
+								<option value="{{c.cid}}" ng-repeat="c in countries" ng-click="achievement.country = c.title">{{c.title}}</option>
+							</select><br />
+							<select ng-model="achievement.city_id">
+								<option value="{{ci.cid}}" ng-repeat="ci in cities" ng-click="achievement.city = ci.title">{{ci.title}}</option>
+							</select><br />
+							<input type="number" ng-model="achievement.year" /><br />
+							<input type="text" ng-model="achievement.title" placeholder="Наименование конкурса" /><br />
+							<input type="text" ng-model="achievement.place" placeholder="Место" /><br/ >
+							<input type="text" ng-model="achievement.comment" placeholder="Комментарий" /><br/>
+							<input type="submit" value="save" />
+						</form>
 					</div>
 				</div>
 				<div class="ya-user__work ya-sidebar-info ya-relative">
