@@ -1,6 +1,11 @@
-angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$routeParams', 'socket', 'User', 'MSG', 'Topic', 'Photo', 'Dialog', 'Upload',
-	function($scope, $location, $routeParams, socket, User, MSG, Topic, Photo, Dialog, Upload) {
+angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$routeParams', 'socket', 'VK', 'User', 'MSG', 'Topic', 'Photo', 'Video', 'Dialog', 'Upload',
+	function($scope, $location, $routeParams, socket, VK, User, MSG, Topic, Photo, Video, Dialog, Upload) {
 		$scope.user = {};
+		$scope.topic = {
+			text: '',
+			images: [],
+			comment: '',
+		};
 		$scope.photos = [];
 		$scope.topics = [];
 		$scope.gallery = {
@@ -23,7 +28,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		};
 
 		$scope.birth_date = function(birthDate) {
-			return moment(birthDate).format("DD-MM-YYYY");
+			return moment(birthDate).format("DD.MM.YYYY");
 		};
 
 		$scope.set_current = function(index) {
@@ -42,6 +47,12 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 			console.error(res.data);
 		});
 
+		Topic.get($routeParams.id, function(res) {
+			$scope.topics = res.data;
+		}, function(res) {
+			console.error(res.data);
+		});
+
 		$scope.user_save = function() {
 			$scope.$emit('user_save');
 		};
@@ -50,11 +61,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 			$scope.$emit('new_message', data);
 		};
 
-		$scope.add_image = function() {
-			$scope.gallery.add_image = true;
-		};
-
-		$scope.add_to_topic = function(img) {
+		$scope.add_image_to_topic = function(img) {
 			var i = $scope.topic.images.indexOf(img);
 			if (i === -1) {
 				$scope.topic.images.push(img);
@@ -63,16 +70,196 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 			}
 		};
 
+		$scope.add_video_to_topic = function(v) {
+			var i = -1;
+			$scope.topic.videos.map(function(el, index) {
+				el._id === v._id && (i = index);
+			});
+			if (i === -1) {
+				$scope.topic.videos.push(v);
+			} else {
+				$scope.topic.videos.splice(i, 1);
+			}
+		};
+
 		$scope.add_topic = function() {
 			$scope.topic = {
 				text: '',
-				images: []
+				images: [],
+				videos: [],
+				comment: '',
 			};
+		};
+
+		$scope.load_countries = function() {
+			VK.get_countries(function(res) {
+				$scope.countries = res.data;
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+
+		$scope.load_cities = function() {
+			VK.get_cities({
+				country_id: ($scope.university ? $scope.university.country_id : ($scope.workplace ? $scope.workplace.country_id : $scope.achievement.country_id))
+			}, function(res) {
+				$scope.cities = res.data;
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+
+		$scope.load_universities = function() {
+			VK.get_universities({
+				city_id: $scope.university.city_id,
+				country_id: $scope.university.country_id,
+			}, function(res) {
+				$scope.universities = res.data;
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+
+		$scope.load_faculties = function() {
+			VK.get_faculties({
+				university_id: $scope.university.university_id
+			}, function(res) {
+				$scope.faculties = res.data;
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+
+		$scope.load_chairs = function() {
+			VK.get_chairs({
+				faculty_id: $scope.university.faculty_id
+			}, function(res) {
+				$scope.chairs = res.data;
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+
+		$scope.add_university = function() {
+			$scope.load_countries();
+			$scope.university = {
+				city_id: '',
+				country_id: '',
+				university_id: '',
+				faculty_id: '',
+				chair_id: '',
+				city: '',
+				country: '',
+				university: '',
+				faculty: '',
+				chair: '',
+				speciality: '',
+				year_end: +(new Date()).getFullYear(),
+				year_start: +(new Date()).getFullYear(),
+			};
+		};
+
+		$scope.save_university = function() {
+			User.add_university($scope.university, function(res) {
+				$scope.options.user._id === $scope.user._id && $scope.user.universities.push($scope.university);
+				$scope.options.user.universities.push($scope.university);
+				$scope.university = null;
+			}, function(res) {
+				console.error(res.data)
+			});
+		};
+
+		$scope.rm_university = function(u, i) {
+			User.rm_university(u, function(res) {
+				$scope.options.user.universities.splice(i, 1);
+				$scope.user.universities.splice(i, 1);
+			}, function(res) {
+				console.error(res.data)
+			});
+		};
+
+		$scope.add_workplace = function() {
+			$scope.load_countries();
+			$scope.workplace = {
+				city: '',
+				country: '',
+				city_id: '',
+				country_id: '',
+				company: '',
+				speciality: '',
+				year_end: +(new Date()).getFullYear(),
+				year_start: +(new Date()).getFullYear(),
+			};
+		};
+
+		$scope.save_workplace = function() {
+			User.add_workplace($scope.workplace, function(res) {
+				$scope.options.user._id === $scope.user._id && $scope.user.workplaces.push($scope.workplace);
+				$scope.options.user.workplaces.push($scope.workplace);
+				$scope.workplace = null;
+			}, function(res) {
+				console.error(res.data)
+			});
+		};
+
+		$scope.rm_workplace = function(w, i) {
+			User.rm_workplace(w, function(res) {
+				$scope.options.user.workplaces.splice(i, 1);
+				$scope.user.workplaces.splice(i, 1);
+			}, function(res) {
+				console.error(res.data)
+			});
+		};
+
+		$scope.add_achievement = function() {
+			$scope.load_countries();
+			$scope.achievement = {
+				city: '',
+				country: '',
+				city_id: '',
+				country_id: '',
+				title: '',
+				place: '',
+				comment: '',
+				year: +(new Date()).getFullYear(),
+			};
+		};
+
+		$scope.save_achievement = function() {
+			User.add_achievement($scope.achievement, function(res) {
+				$scope.options.user._id === $scope.user._id && $scope.user.achievements.push($scope.achievement);
+				$scope.options.user.achievements.push($scope.achievement);
+				$scope.achievement = null;
+			}, function(res) {
+				console.error(res.data)
+			});
+		};
+
+		$scope.rm_achievement = function(w, i) {
+			User.rm_achievement(w, function(res) {
+				$scope.options.user.achievements.splice(i, 1);
+				$scope.user.achievements.splice(i, 1);
+			}, function(res) {
+				console.error(res.data)
+			});
 		};
 
 		$scope.new_topic = function() {
 			Topic.new($scope.topic, function(res) {
 				$scope.topics.push(res.data);
+				$scope.topic = {
+					text: '',
+					images: [],
+					comment: '',
+				};
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+
+		$scope.del_topic = function(index) {
+			Topic.del($scope.topics[index]._id, function(res) {
+				$scope.topics.splice(index, 1);
 			}, function(res) {
 				console.error(res.data);
 			});
@@ -100,12 +287,12 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		$scope.add_comment = function(index) {
 			var comment = {
 				date: Date.now(),
+				_id: $scope.photos[index]._id,
 				name: $scope.options.user.name,
 				userid: $scope.options.user._id,
 				comment: $scope.gallery.comment,
 				avatar: $scope.options.user.avatar,
 				surname: $scope.options.user.surname,
-				_id: $scope.photos[$scope.gallery.current]._id,
 			};
 			Photo.add_comment(comment, function(res) {
 				$scope.gallery.comment = '';
@@ -132,15 +319,15 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		$scope.add_topic_comment = function(index) {
 			var comment = {
 				date: Date.now(),
+				comment: $scope.topic.comment,
+				_id: $scope.topics[index]._id,
 				name: $scope.options.user.name,
 				userid: $scope.options.user._id,
-				comment: $scope.gallery.comment,
 				avatar: $scope.options.user.avatar,
 				surname: $scope.options.user.surname,
-				_id: $scope.topics[$scope.gallery.current]._id,
 			};
 			Topic.add_comment(comment, function(res) {
-				$scope.gallery.comment = '';
+				$scope.topic.comment = '';
 				$scope.topics[index].comments.push(comment);
 				($routeParams.id !== $scope.options.user._id) && (comment.target = $routeParams.id, socket.emit('topic:comment', comment));
 			}, function(res) {
@@ -151,7 +338,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		$scope.remove_topic_comment = function(index, comment) {
 			Topic.remove_comment({
 				comment: comment,
-				_id: $scope.topics[$scope.gallery.current]._id,
+				_id: $scope.topics[index]._id,
 			}, function(res) {
 				$scope.topics[index].comments = $scope.topics[index].comments.filter(function(el) {
 					return !(el.userid === $scope.options.user._id && el.comment === comment);

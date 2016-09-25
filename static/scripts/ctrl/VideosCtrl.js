@@ -1,5 +1,5 @@
-angular.module('MuscleMan').controller('VideosCtrl', ['$sce', '$scope', '$routeParams', 'Video', 'socket', 'MSG',
-	function($sce, $scope, $routeParams, Video, socket, MSG) {
+angular.module('MuscleMan').controller('VideosCtrl', ['$sce', '$http', '$scope', '$routeParams', 'Video', 'socket', 'MSG',
+	function($sce, $http, $scope, $routeParams, Video, socket, MSG) {
 		$scope.videos = [];
 
 		$scope.layer = {
@@ -66,12 +66,27 @@ angular.module('MuscleMan').controller('VideosCtrl', ['$sce', '$scope', '$routeP
 					return;
 					break;
 			}
-			Video.add(video, function(res) {
-				$scope.videos.push(res.data);
-				$scope.layer.addVideo = null;
-			}, function(res) {
-				console.error(res.data);
-			});
+			if (video.type === 'vimeo') {
+				$http.get('https://vimeo.com/api/oembed.json?url=https%3A//vimeo.com/' + video.link).then(function(res) {
+					video.thumbnail = res.data.thumbnail_url;
+					Video.add(video, function(res) {
+						$scope.videos.push(res.data);
+						$scope.layer.addVideo = null;
+					}, function(res) {
+						console.error(res.data);
+					});
+				}, function(res) {
+					console.error(res.data);
+				});
+			} else {
+				video.thumbnail = '//img.youtube.com/vi/' + video.link + '/0.jpg';
+				Video.add(video, function(res) {
+					$scope.videos.push(res.data);
+					$scope.layer.addVideo = null;
+				}, function(res) {
+					console.error(res.data);
+				});
+			}
 		};
 
 		$scope.edit_video = function(opt) {
@@ -85,6 +100,18 @@ angular.module('MuscleMan').controller('VideosCtrl', ['$sce', '$scope', '$routeP
 			}, function(res) {
 				console.error(res.data);
 			});
+		};
+
+		$scope.delete_video = function(index) {
+			Video.delete($scope.videos[index]._id, function(res) {
+				$scope.videos.splice(index, 1);
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+
+		$scope.i_like_it = function(likes) {
+			return likes.indexOf($scope.options.user._id) !== -1;
 		};
 
 		$scope.like = function(p, index) {

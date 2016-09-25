@@ -1,5 +1,7 @@
 module.exports = (app) => {
 	var salt = require('./salt.js').salt,
+		qs = require('qs'),
+		request = require('request'),
 		crypto = require('crypto'),
 		mongoose = require('mongoose'),
 		mailer = require('./mailer.js'),
@@ -16,9 +18,14 @@ module.exports = (app) => {
 			surname: String,
 			status: String,
 
-			friends: Array,
-			waiting: Array,
-			subscribers: Array,
+			friends: { type: Array, default: [] },
+			waiting: { type: Array, default: [] },
+			subscribers: { type: Array, default: [] },
+
+			sports: { type: Array, default: [] },
+			workplaces: { type: Array, default: [] },
+			achievements: { type: Array, default: [] },
+			universities: { type: Array, default: [] },
 
 			creDate: Date,
 			birthDate: Date,
@@ -43,7 +50,7 @@ module.exports = (app) => {
 			location_country: String,
 
 			settings: {
-				comments_disabled: {
+				comments_enabled: {
 					type: Boolean,
 					default: false
 				},
@@ -203,8 +210,8 @@ module.exports = (app) => {
 		}, (err, user) => {
 			if (err) return console.error(err);
 			res.json(user);
-		})
-	})
+		});
+	});
 
 	app.route('/user')
 		.get((req, res) => {
@@ -214,7 +221,7 @@ module.exports = (app) => {
 					userid: userid
 				}, (err, user) => {
 					res.json(user);
-				})
+				});
 			} else {
 				res.status(404).send('Need to register first!');
 			}
@@ -232,7 +239,7 @@ module.exports = (app) => {
 					upsert: false
 				}, (err, user) => {
 					res.json(user);
-				})
+				});
 			} else {
 				res.status(404).send('Need to register first!');
 			}
@@ -243,11 +250,89 @@ module.exports = (app) => {
 					userid: userid
 				}, (err, user) => {
 					res.clearCookie('userid').redirect('/');
-				})
+				});
 			} else {
 				res.status(404).send('Need to register first!');
 			}
 		});
+
+	app.put('/user/add_university', (req, res) => {
+		Users.findOneAndUpdate({
+			userid: req.cookies.userid
+		}, {
+			$addToSet: {
+				universities: req.body
+			}
+		}, (err, user) => {
+			if (err) return console.error(err);
+			res.json(user);
+		});
+	});
+
+	app.put('/user/rm_university', (req, res) => {
+		Users.findOneAndUpdate({
+			userid: req.cookies.userid
+		}, {
+			$pull: {
+				universities: req.body
+			}
+		}, (err, user) => {
+			if (err) return console.error(err);
+			res.json(user);
+		});
+	});
+
+	app.put('/user/add_workplace', (req, res) => {
+		Users.findOneAndUpdate({
+			userid: req.cookies.userid
+		}, {
+			$addToSet: {
+				workplaces: req.body
+			}
+		}, (err, user) => {
+			if (err) return console.error(err);
+			res.json(user);
+		});
+	});
+
+	app.put('/user/rm_workplace', (req, res) => {
+		Users.findOneAndUpdate({
+			userid: req.cookies.userid
+		}, {
+			$pull: {
+				workplaces: req.body
+			}
+		}, (err, user) => {
+			if (err) return console.error(err);
+			res.json(user);
+		});
+	});
+
+	app.put('/user/add_achievement', (req, res) => {
+		Users.findOneAndUpdate({
+			userid: req.cookies.userid
+		}, {
+			$addToSet: {
+				achievements: req.body
+			}
+		}, (err, user) => {
+			if (err) return console.error(err);
+			res.json(user);
+		});
+	});
+
+	app.put('/user/rm_achievement', (req, res) => {
+		Users.findOneAndUpdate({
+			userid: req.cookies.userid
+		}, {
+			$pull: {
+				achievements: req.body
+			}
+		}, (err, user) => {
+			if (err) return console.error(err);
+			res.json(user);
+		});
+	});
 
 	app.post('/find_users', (req, res) => {
 		var search = {},
@@ -318,5 +403,17 @@ module.exports = (app) => {
 				res.status(500).json(err);
 			}
 		});
-	})
+	});
+
+	app.post('/vk/:method', (req, res) => {
+		console.log('req.body', req.body);
+		request.post({
+			url: 'https://api.vk.com/method/' + req.params.method,
+			formData: req.body
+		}, (err, response) => {
+			if (err) return console.error(err);
+			console.log('response.body', response.body);
+			res.json(JSON.parse(response.body).response);
+		});
+	});
 }

@@ -4,6 +4,24 @@ angular.module('Services', []).factory('User', ['$http',
 			get: function(s, e) {
 				return $http.get('/user').then(s, e);
 			},
+			add_university: function(opt, s, e) {
+				return $http.put('/user/add_university', opt).then(s, e);
+			},
+			rm_university: function(opt, s, e) {
+				return $http.put('/user/rm_university', opt).then(s, e);
+			},
+			add_workplace: function(opt, s, e) {
+				return $http.put('/user/add_workplace', opt).then(s, e);
+			},
+			rm_workplace: function(opt, s, e) {
+				return $http.put('/user/rm_workplace', opt).then(s, e);
+			},
+			add_achievement: function(opt, s, e) {
+				return $http.put('/user/add_achievement', opt).then(s, e);
+			},
+			rm_achievement: function(opt, s, e) {
+				return $http.put('/user/rm_achievement', opt).then(s, e);
+			},
 			load: function(id, s, e) {
 				return $http.get('/user/' + id).then(s, e);
 			},
@@ -41,6 +59,27 @@ angular.module('Services', []).factory('User', ['$http',
 			}
 		};
 	}
+]).factory('VK', ['$http',
+	function($http) {
+		return {
+			get_countries: function(s, e) {
+				return $http.post('vk/database.getCountries', {}).then(s, e);
+			},
+			get_cities: function(opt, s, e) {
+				opt.count = 333;
+				return $http.post('vk/database.getCities', opt).then(s, e);
+			},
+			get_universities: function(opt, s, e) {
+				return $http.post('vk/database.getUniversities', opt).then(s, e);
+			},
+			get_faculties: function(opt, s, e) {
+				return $http.post('vk/database.getFaculties', opt).then(s, e);
+			},
+			get_chairs: function(opt, s, e) {
+				return $http.post('vk/database.getChairs', opt).then(s, e);
+			},
+		}
+	}
 ]).factory('Topic', ['$http',
 	function($http) {
 		return {
@@ -53,14 +92,11 @@ angular.module('Services', []).factory('User', ['$http',
 			edit: function(opt, s, e) {
 				return $http.put('/topic/' + opt._id, opt).then(s, e);
 			},
-			delete: function(id, s, e) {
-				return $http.delete('/topic/' + id).then(s, e);
+			add_like: function(opt, s, e) {
+				return $http.put('/topic/' + opt._id + '/add_like').then(s, e);
 			},
-			add_like: function(p, s, e) {
-				return $http.put('/topic/' + p._id + '/add_like').then(s, e);
-			},
-			remove_like: function(p, s, e) {
-				return $http.put('/topic/' + p._id + '/remove_like').then(s, e);
+			remove_like: function(opt, s, e) {
+				return $http.put('/topic/' + opt._id + '/remove_like').then(s, e);
 			},
 			add_comment: function(opt, s, e) {
 				return $http.put('/topic/' + opt._id + '/add_comment', opt).then(s, e);

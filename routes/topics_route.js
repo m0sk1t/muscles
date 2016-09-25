@@ -6,6 +6,7 @@ module.exports = (app) => {
 			creDate: Date,
 			likes: Array,
 			images: Array,
+			videos: Array,
 			comments: Array
 		}),
 		Users = mongoose.model('Users');
@@ -113,11 +114,11 @@ module.exports = (app) => {
 					$addToSet: {
 						comments: {
 							name: user.name,
-							userid: user._id.toString(),
 							date: Date.now(),
 							avatar: user.avatar,
 							surname: user.surname,
 							comment: req.body.comment,
+							userid: user._id.toString(),
 						}
 					}
 				}, function(err, topic) {
