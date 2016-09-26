@@ -8,14 +8,18 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 			add_image: null,
 		};
 
-		$scope.myVKFriends = function() {
+		$scope.last_seen = function() {
+			return moment($scope.user.lastOnline).fromNow();
+		};
+
+		$scope.my_vk_friends = function() {
 			VK.api('friends.get', function(res) {
 				$scope.options.user.social ? ($scope.options.user.social.vk_subscribers = res.data.count) : $scope.options.user.social = { vk_subscribers: res.data.count };
 				$scope.user_save();
 			});
-		}
+		};
 
-		$scope.myFacebookFriends = function() {
+		$scope.my_facebook_friends = function() {
 			$facebook.login('public_profile,email,user_friends,user_photos,user_videos').then(function(res) {
 				$facebook.api('/me').then(function(res) {
 					console.log(res);

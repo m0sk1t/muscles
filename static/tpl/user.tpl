@@ -223,7 +223,7 @@
 				<div class="ya-page__block ya-page__block_bordered ya-user__text-info">
 					<div class="ya-user__info-block ya-info-block ya-info-block_border_no">
 						<div class="ya-user__status">{{user.status}}</div>
-						<div class="ya-user__status">Был в сети: {{user.lastOnline}}</div>
+						<div class="ya-user__status">Был в сети: {{last_seen()}}</div>
 					</div>
 					<div class="ya-user__info-block">
 						<div class="ya-info-block">
