@@ -59,7 +59,7 @@ angular.module('Services', []).factory('User', ['$http',
 			}
 		};
 	}
-]).factory('VK', ['$http',
+]).factory('$VK', ['$http',
 	function($http) {
 		return {
 			get_countries: function(s, e) {

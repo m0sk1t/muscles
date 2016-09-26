@@ -455,16 +455,16 @@
 						<h3 class="ya-socials__title">Подписчики</h3>
 						<div class="ya-socials__list">
 							<div class="ya-socials__item ya-clearfix">
-								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_vk">
-									<span class="ya-socials__logo ya-socials__logo_vk"></span>
-								</a>
-								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_friends">2345</a>
+								<span class="ya-socials__link ya-socials__link_profile ya-socials__link_vk">
+									<span class="ya-socials__logo ya-socials__logo_vk" ng-click="myVKFriends();"></span>
+								</span>
+								<span class="ya-socials__link ya-socials__link_friends">{{options.user.social.vk_subscribers}}</span>
 							</div>
 							<div class="ya-socials__item ya-clearfix">
-								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_fb">
-									<span class="ya-socials__logo ya-socials__logo_fb"></span>
-								</a>
-								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_friends">234</a>
+								<span href="" class="ya-socials__link ya-socials__link_profile ya-socials__link_fb">
+									<span class="ya-socials__logo ya-socials__logo_fb" ng-click="myFacebookFriends();"></span>
+								</span>
+								<span class="ya-socials__link ya-socials__link_friends">{{options.user.social.fb_subscribers}}</span>
 							</div>
 							<div class="ya-socials__item ya-clearfix">
 								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_tw">

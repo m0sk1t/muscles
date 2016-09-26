@@ -4,6 +4,7 @@ module.exports = (app, io) => {
 	require('./status_route.js')(app);
 	require('./photos_route.js')(app);
 	require('./videos_route.js')(app);
+	require('./sports_route.js')(app);
 	require('./article_route.js')(app);
 	require('./contest_route.js')(app);
 	require('./dialogs_route.js')(app);

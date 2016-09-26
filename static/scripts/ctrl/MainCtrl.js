@@ -1,5 +1,11 @@
 angular.module('MuscleMan').controller('MainCtrl', ['$scope', 'socket', 'User', 'LS',
 	function($scope, socket, User, LS) {
+		VK.init(function() {
+			console.log('VK succeed!');
+		}, function() {
+			console.log('VK fails!');
+		}, '5.53');
+
 		socket.on('user:online', function(data) {
 			console.log('user:online');
 			console.log(data);
@@ -76,6 +82,6 @@ angular.module('MuscleMan').controller('MainCtrl', ['$scope', 'socket', 'User', 
 			}, function(res) {
 				console.error(res.data);
 			});
-		})
+		});
 	}
 ]);

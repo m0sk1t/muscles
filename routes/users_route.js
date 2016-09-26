@@ -18,6 +18,14 @@ module.exports = (app) => {
 			surname: String,
 			status: String,
 
+			social: {
+				fb_subscribers: String,
+				vk_subscribers: String,
+				ok_subscribers: String,
+				tw_subscribers: String,
+				im_subscribers: String,
+			},
+
 			friends: { type: Array, default: [] },
 			waiting: { type: Array, default: [] },
 			subscribers: { type: Array, default: [] },
@@ -128,7 +136,7 @@ module.exports = (app) => {
 						html: 'Для авторизации в системе "Мускульного робота" вы можете ввести пин-код, написанный ниже:<p></p><p></p><span style="padding: 3px; border: 1px solid #ccc; color: #167aaf; font-size: 33px; font-weight: bold">' + pin + '</span>' +
 							'<p></p>С уважением,<br>Команда "Мускульного робота"'
 					};
-					mailer.send_mail(mailOptions, function(error, info) {
+					mailer.send_mail(mailOptions, (error, info) => {
 						if (error) return console.log(error);
 						console.log('Был послан: ' + info.response);
 						cb();
@@ -157,16 +165,16 @@ module.exports = (app) => {
 		});
 	});
 
-	app.get('/pin/:mail/:pin', function(req, res) {
+	app.get('/pin/:mail/:pin', (req, res) => {
 		var mail = req.params.mail;
 		PIN.findOne({
 			mail: mail,
-		}, function(e, pin) {
+		}, (e, pin) => {
 			if (e && !pin) return console.error(e);
 			if (+pin.pin === +req.params.pin) {
 				PIN.remove({
 					mail: mail
-				}, function(e, p) {
+				}, (e, p) => {
 					Users.create({
 						mail: mail,
 						userid: pin.userid,
@@ -187,7 +195,7 @@ module.exports = (app) => {
 						$inc: {
 							attempts: -1
 						}
-					}, function(e, upin) {
+					}, (e, upin) => {
 						res.status(403).json({
 							msg: 'Wrong pin!',
 							attempts: pin.attempts
@@ -196,7 +204,7 @@ module.exports = (app) => {
 				} else {
 					PIN.remove({
 						mail: mail
-					}, function(e, p) {
+					}, (e, p) => {
 						res.status(500).send('Too many wrong attempts!');
 					});
 				}
