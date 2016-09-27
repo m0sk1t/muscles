@@ -456,7 +456,7 @@
 						<div class="ya-socials__list">
 							<div class="ya-socials__item ya-clearfix">
 								<span class="ya-socials__link ya-socials__link_profile ya-socials__link_vk">
-									<span class="ya-socials__logo ya-socials__logo_vk" ng-click="myVKFriends();"></span>
+									<span class="ya-socials__logo ya-socials__logo_vk" ng-click="my_vk_friends();"></span>
 								</span>
 								<span class="ya-socials__link ya-socials__link_friends">{{options.user.social.vk_subscribers}}</span>
 							</div>

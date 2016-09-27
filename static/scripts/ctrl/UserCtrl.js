@@ -13,10 +13,12 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		};
 
 		$scope.my_vk_friends = function() {
-			VK.api('friends.get', function(res) {
-				$scope.options.user.social ? ($scope.options.user.social.vk_subscribers = res.data.count) : $scope.options.user.social = { vk_subscribers: res.data.count };
-				$scope.user_save();
-			});
+			VK.Auth.login(function(res) {
+				VK.Api.call('friends.get', {}, function(res) {
+					$scope.options.user.social ? ($scope.options.user.social.vk_subscribers = res.response.length) : $scope.options.user.social = { vk_subscribers: res.response.length };
+					$scope.user_save();
+				});
+			}, 2);
 		};
 
 		$scope.my_facebook_friends = function() {
