@@ -15,12 +15,12 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		$scope.my_vk_friends = function() {
 			$vk.status().then(function(res) {
 				res.status === 'connected' ? VK.Api.call('friends.get', {}, function(res) {
-					$scope.options.user.social ? ($scope.options.user.social.vk_subscribers = res.response.length) : $scope.options.user.social = { vk_subscribers: res.response.length };
+					$scope.options.user.social ? ($scope.options.user.social.vk_subscribers = res.response.length) : ($scope.options.user.social = { vk_subscribers: res.response.length });
 					$scope.user_save();
 					console.log('vk_subscribers received');
 				}) : VK.Auth.login(function(res) {
 					VK.Api.call('friends.get', {}, function(res) {
-						$scope.options.user.social ? ($scope.options.user.social.vk_subscribers = res.response.length) : $scope.options.user.social = { vk_subscribers: res.response.length };
+						$scope.options.user.social ? ($scope.options.user.social.vk_subscribers = res.response.length) : ($scope.options.user.social = { vk_subscribers: res.response.length });
 						$scope.user_save();
 					});
 				}, 2);
@@ -34,7 +34,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 				$facebook.api('/me').then(function(res) {
 					console.log(res);
 					$facebook.api('/' + res.id + '/friends').then(function(res) {
-						$scope.options.user.social ? ($scope.options.user.social.fb_subscribers = res.summary.total_count) : $scope.options.user.social = { fb_subscribers: res.summary.total_count };
+						$scope.options.user.social ? ($scope.options.user.social.fb_subscribers = res.summary.total_count) : ($scope.options.user.social = { fb_subscribers: res.summary.total_count });
 						$scope.user_save();
 						console.log(res);
 					}, function(err) {

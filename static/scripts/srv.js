@@ -65,24 +65,23 @@ angular.module('Services', []).factory('User', ['$http',
 			status: function() {
 				var defer = $q.defer();
 				VK.Auth.getLoginStatus(function(res) {
-					if (res) defer.resolve(res): defer.reject(res);
+					(res) ? defer.resolve(res): defer.reject('response error');
 				});
 				return defer.promise;
 			},
 			login: function() {
 				var defer = $q.defer();
 				VK.Auth.login(function(res) {
-					if (res) defer.resolve(res): defer.reject(res);
+					(res) ? defer.resolve(res): defer.reject('response error');
 				});
 				return defer.promise;
 			},
 			call: function(method, params) {
 				var defer = $q.defer();
 				VK.Api.call(method, params, function(res) {
-					if (res) defer.resolve(res): defer.reject(res);
+					(res) ? defer.resolve(res): defer.reject('response error');
 				});
 				return defer.promise;
-
 			},
 			get_countries: function(s, e) {
 				return $http.post('vk/database.getCountries', {}).then(s, e);
