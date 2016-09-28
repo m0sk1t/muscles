@@ -223,7 +223,7 @@
 				<div class="ya-page__block ya-page__block_bordered ya-user__text-info">
 					<div class="ya-user__info-block ya-info-block ya-info-block_border_no">
 						<div class="ya-user__status">{{user.status}}</div>
-						<div class="ya-user__status">Был в сети: {{user.lastOnline}}</div>
+						<div class="ya-user__status">Был в сети: {{last_seen()}}</div>
 					</div>
 					<div class="ya-user__info-block">
 						<div class="ya-info-block">
@@ -455,16 +455,16 @@
 						<h3 class="ya-socials__title">Подписчики</h3>
 						<div class="ya-socials__list">
 							<div class="ya-socials__item ya-clearfix">
-								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_vk">
-									<span class="ya-socials__logo ya-socials__logo_vk"></span>
-								</a>
-								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_friends">2345</a>
+								<span class="ya-socials__link ya-socials__link_profile ya-socials__link_vk">
+									<span class="ya-socials__logo ya-socials__logo_vk" ng-click="my_vk_friends();"></span>
+								</span>
+								<span class="ya-socials__link ya-socials__link_friends">{{options.user.social.vk_subscribers}}</span>
 							</div>
 							<div class="ya-socials__item ya-clearfix">
-								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_fb">
-									<span class="ya-socials__logo ya-socials__logo_fb"></span>
-								</a>
-								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_friends">234</a>
+								<span href="" class="ya-socials__link ya-socials__link_profile ya-socials__link_fb">
+									<span class="ya-socials__logo ya-socials__logo_fb" ng-click="myFacebookFriends();"></span>
+								</span>
+								<span class="ya-socials__link ya-socials__link_friends">{{options.user.social.fb_subscribers}}</span>
 							</div>
 							<div class="ya-socials__item ya-clearfix">
 								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_tw">

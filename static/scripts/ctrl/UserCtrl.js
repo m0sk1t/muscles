@@ -1,16 +1,43 @@
-angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$routeParams', 'socket', 'VK', 'User', 'MSG', 'Topic', 'Photo', 'Video', 'Dialog', 'Upload',
-	function($scope, $location, $routeParams, socket, VK, User, MSG, Topic, Photo, Video, Dialog, Upload) {
+angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$routeParams', 'socket', '$VK', '$facebook', 'User', 'MSG', 'Topic', 'Photo', 'Video', 'Dialog', 'Upload',
+	function($scope, $location, $routeParams, socket, $VK, $facebook, User, MSG, Topic, Photo, Video, Dialog, Upload) {
 		$scope.user = {};
-		$scope.topic = {
-			text: '',
-			images: [],
-			comment: '',
-		};
 		$scope.photos = [];
 		$scope.topics = [];
 		$scope.gallery = {
 			current: null,
 			add_image: null,
+		};
+
+		$scope.last_seen = function() {
+			return moment($scope.user.lastOnline).fromNow();
+		};
+
+		$scope.my_vk_friends = function() {
+			VK.Auth.login(function(res) {
+				VK.Api.call('friends.get', {}, function(res) {
+					$scope.options.user.social ? ($scope.options.user.social.vk_subscribers = res.response.length) : $scope.options.user.social = { vk_subscribers: res.response.length };
+					$scope.user_save();
+				});
+			}, 2);
+		};
+
+		$scope.my_facebook_friends = function() {
+			$facebook.login('public_profile,email,user_friends,user_photos,user_videos').then(function(res) {
+				$facebook.api('/me').then(function(res) {
+					console.log(res);
+					$facebook.api('/' + res.id + '/friends').then(function(res) {
+						$scope.options.user.social ? ($scope.options.user.social.fb_subscribers = res.summary.total_count) : $scope.options.user.social = { fb_subscribers: res.summary.total_count };
+						$scope.user_save();
+						console.log(res);
+					}, function(err) {
+						console.error(err);
+					});
+				}, function(err) {
+					console.error(err);
+				});
+			}, function(err) {
+				console.error(err);
+			});
 		};
 
 		!$scope.options.user && $location.path('/auth');
@@ -92,7 +119,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		};
 
 		$scope.load_countries = function() {
-			VK.get_countries(function(res) {
+			$VK.get_countries(function(res) {
 				$scope.countries = res.data;
 			}, function(res) {
 				console.error(res.data);
@@ -100,7 +127,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		};
 
 		$scope.load_cities = function() {
-			VK.get_cities({
+			$VK.get_cities({
 				country_id: ($scope.university ? $scope.university.country_id : ($scope.workplace ? $scope.workplace.country_id : $scope.achievement.country_id))
 			}, function(res) {
 				$scope.cities = res.data;
@@ -110,7 +137,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		};
 
 		$scope.load_universities = function() {
-			VK.get_universities({
+			$VK.get_universities({
 				city_id: $scope.university.city_id,
 				country_id: $scope.university.country_id,
 			}, function(res) {
@@ -121,7 +148,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		};
 
 		$scope.load_faculties = function() {
-			VK.get_faculties({
+			$VK.get_faculties({
 				university_id: $scope.university.university_id
 			}, function(res) {
 				$scope.faculties = res.data;
@@ -131,7 +158,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		};
 
 		$scope.load_chairs = function() {
-			VK.get_chairs({
+			$VK.get_chairs({
 				faculty_id: $scope.university.faculty_id
 			}, function(res) {
 				$scope.chairs = res.data;
@@ -396,7 +423,10 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 				} else {
 					swal.showInputError('Введите хоть что-нибудь...');
 				}
-			})
+			});
 		}
+		$scope.user_save = function() {
+			$scope.$emit('user_save');
+		};
 	}
 ]);

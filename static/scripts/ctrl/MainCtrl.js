@@ -76,6 +76,6 @@ angular.module('MuscleMan').controller('MainCtrl', ['$scope', 'socket', 'User', 
 			}, function(res) {
 				console.error(res.data);
 			});
-		})
+		});
 	}
 ]);
