@@ -1,5 +1,5 @@
-angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$routeParams', 'socket', '$VK', '$facebook', 'User', 'MSG', 'Topic', 'Photo', 'Video', 'Dialog', 'Upload',
-	function($scope, $location, $routeParams, socket, $VK, $facebook, User, MSG, Topic, Photo, Video, Dialog, Upload) {
+angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$routeParams', 'socket', '$vk', '$facebook', 'User', 'MSG', 'Topic', 'Photo', 'Video', 'Dialog', 'Upload',
+	function($scope, $location, $routeParams, socket, $vk, $facebook, User, MSG, Topic, Photo, Video, Dialog, Upload) {
 		$scope.user = {};
 		$scope.photos = [];
 		$scope.topics = [];
@@ -13,12 +13,20 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		};
 
 		$scope.my_vk_friends = function() {
-			VK.Auth.login(function(res) {
-				VK.Api.call('friends.get', {}, function(res) {
+			$vk.status().then(function(res) {
+				res.status === 'connected' ? VK.Api.call('friends.get', {}, function(res) {
 					$scope.options.user.social ? ($scope.options.user.social.vk_subscribers = res.response.length) : $scope.options.user.social = { vk_subscribers: res.response.length };
 					$scope.user_save();
-				});
-			}, 2);
+					console.log('vk_subscribers received');
+				}) : VK.Auth.login(function(res) {
+					VK.Api.call('friends.get', {}, function(res) {
+						$scope.options.user.social ? ($scope.options.user.social.vk_subscribers = res.response.length) : $scope.options.user.social = { vk_subscribers: res.response.length };
+						$scope.user_save();
+					});
+				}, 2);
+			}, function(err) {
+				console.log('vk_subscribers receive error');
+			});
 		};
 
 		$scope.my_facebook_friends = function() {
@@ -119,7 +127,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		};
 
 		$scope.load_countries = function() {
-			$VK.get_countries(function(res) {
+			$vk.get_countries(function(res) {
 				$scope.countries = res.data;
 			}, function(res) {
 				console.error(res.data);
@@ -127,7 +135,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		};
 
 		$scope.load_cities = function() {
-			$VK.get_cities({
+			$vk.get_cities({
 				country_id: ($scope.university ? $scope.university.country_id : ($scope.workplace ? $scope.workplace.country_id : $scope.achievement.country_id))
 			}, function(res) {
 				$scope.cities = res.data;
@@ -137,7 +145,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		};
 
 		$scope.load_universities = function() {
-			$VK.get_universities({
+			$vk.get_universities({
 				city_id: $scope.university.city_id,
 				country_id: $scope.university.country_id,
 			}, function(res) {
@@ -148,7 +156,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		};
 
 		$scope.load_faculties = function() {
-			$VK.get_faculties({
+			$vk.get_faculties({
 				university_id: $scope.university.university_id
 			}, function(res) {
 				$scope.faculties = res.data;
@@ -158,7 +166,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		};
 
 		$scope.load_chairs = function() {
-			$VK.get_chairs({
+			$vk.get_chairs({
 				faculty_id: $scope.university.faculty_id
 			}, function(res) {
 				$scope.chairs = res.data;
