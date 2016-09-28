@@ -22,7 +22,7 @@
             border-radius: 3px
             display: block
             margin: 0 15px 0 0
-            height: 27px
+            height: 18px
             padding: 2px
         &_friends
             width: 63px
@@ -31,7 +31,9 @@
             background: white
             color: mainTextColor
             text-align: center
-            line-height: 31px
+            line-height: 16px
+            height: 16px
+            font-size: 11px
             &:hover
                 text-decoration: underline
     &__logo
@@ -40,12 +42,26 @@
         width: 100%
         height: 100%
         &_vk
-            background-position: -115px 0
+            background-position: -84px -159px
         &_fb
-            background-position: -86px 0
+            background-position: -63px -159px
         &_ok
-            background-position: -28px 0
+            background-position: -21px -159px
         &_tw
-            background-position: -57px 0
+            background-position: -42px -159px
         &_ig
-            background-position: 0 0
+            background-position: 0 -159px
+    &_inline
+        & ^[0]__item
+            display: inline-block
+            margin: 0 6px 0 0
+            width: auto
+        & ^[0]__link
+            &_profile
+                margin: 0 5px 0 0
+                width: 20px
+                padding: 0
+                border: none
+            &_friends
+                width: 47px
+                border: 1px solid #223e56

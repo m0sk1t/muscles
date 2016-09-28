@@ -22,9 +22,20 @@ module.exports = function (grunt) {
             }
         },
 
+        concat: {
+
+            styles: {
+                options: {
+                    separator: '',
+                },
+                src: ['static/tmp/styles.css', 'static/libs/sweetalert/dist/sweetalert.css', 'static/libs/angularjs-datepicker/dist/angular-datepicker.min.css'],
+                dest: 'static/tmp/styles-merged.css'
+            }
+        },
+
         cssmin: {
             styles: {
-                src: 'static/tmp/styles.css',
+                src: 'static/tmp/styles-merged.css',
                 dest: 'static/app.min.css'
             }
         },
@@ -49,7 +60,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-clean');
 
-    grunt.registerTask('styles', 'Build and minify css files', ['stylus', 'cssmin', 'clean']);
+    grunt.registerTask('styles', 'Build and minify css files', ['stylus', 'concat', 'cssmin', 'clean']);
 
     grunt.registerTask('default', ['styles']);
 }
