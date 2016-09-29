@@ -1,8 +1,9 @@
-angular.module('MuscleMan').controller('MainCtrl', ['$scope', 'socket', 'User', 'LS',
-	function($scope, socket, User, LS) {
+angular.module('MuscleMan').controller('MainCtrl', ['$scope', 'socket', 'User', 'LS', 'notify',
+	function($scope, socket, User, LS, notify) {
 		socket.on('user:online', function(data) {
 			console.log('user:online');
 			console.log(data);
+			notify.play();
 		});
 
 		socket.on('new:message', function(data) {

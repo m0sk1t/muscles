@@ -255,6 +255,13 @@ angular.module('Services', []).factory('User', ['$http',
 			}
 		}
 	};
+}).factory('notify', function() {
+	var a = new Audio('alarm.mp3');
+	return {
+		play: function() {
+			a.play();
+		}
+	};
 }).factory('socket', function($rootScope) {
 	var socket = io();
 	return {
