@@ -11,7 +11,7 @@ module.exports = {
 				}
 			}),
 			mailOptions = {
-				from: '"Мускульный Робот 👥" <muscles.robot@gmail.com>',
+				from: '"Команда сети СпортПроект 👥" <muscles.robot@gmail.com>',
 				to: options.mail.join(','),
 				subject: options.subj,
 				text: options.text,

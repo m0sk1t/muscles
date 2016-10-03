@@ -69,6 +69,7 @@ angular.module('MuscleMan', ['ngFacebook', 'ngLocale', 'ngFileUpload', 'ngRoute'
 		js.src = "//connect.facebook.net/en_US/sdk.js";
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));
+
 	(function(d, s, id) {
 		var js, fjs = d.getElementsByTagName(s)[0];
 		if (d.getElementById(id)) return;
@@ -81,5 +82,5 @@ angular.module('MuscleMan', ['ngFacebook', 'ngLocale', 'ngFileUpload', 'ngRoute'
 		VK.init({
 			apiId: 5644041
 		});
-	}
+	};
 });
