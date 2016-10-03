@@ -133,8 +133,16 @@ module.exports = (app) => {
 					var mailOptions = {
 						mail: [mail],
 						subj: 'Данные для авторизации',
-						html: 'Для авторизации в системе "Мускульного робота" вы можете ввести пин-код, написанный ниже:<p></p><p></p><span style="padding: 3px; border: 1px solid #ccc; color: #167aaf; font-size: 33px; font-weight: bold">' + pin + '</span>' +
-							'<p></p>С уважением,<br>Команда "Мускульного робота"'
+						html: [
+							'Для авторизации в сети СпортПроекта',
+							' вам необходимо ввести пин-код, написанный ниже',
+							':<p></p><p></p>',
+							'<span style="padding: 3px; border: 1px solid #ccc; color: #167aaf; font-size: 33px; font-weight: bold">',
+							pin,
+							'</span><br />',
+							'на странице авторизации',
+							'<p></p>С уважением,<br>Команда СпортПроекта!'
+						].join()
 					};
 					mailer.send_mail(mailOptions, (error, info) => {
 						if (error) return console.log(error);

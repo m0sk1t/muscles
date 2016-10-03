@@ -462,7 +462,7 @@
 							</div>
 							<div class="ya-socials__item ya-clearfix">
 								<span href="" class="ya-socials__link ya-socials__link_profile ya-socials__link_fb">
-									<span class="ya-socials__logo ya-socials__logo_fb" ng-click="myFacebookFriends();"></span>
+									<span class="ya-socials__logo ya-socials__logo_fb" ng-click="my_facebook_friends();"></span>
 								</span>
 								<span class="ya-socials__link ya-socials__link_friends">{{options.user.social.fb_subscribers}}</span>
 							</div>

@@ -59,9 +59,30 @@ angular.module('Services', []).factory('User', ['$http',
 			}
 		};
 	}
-]).factory('$VK', ['$http',
-	function($http) {
+]).factory('$vk', ['$http', '$q',
+	function($http, $q) {
 		return {
+			status: function() {
+				var defer = $q.defer();
+				VK.Auth.getLoginStatus(function(res) {
+					(res) ? defer.resolve(res): defer.reject('response error');
+				});
+				return defer.promise;
+			},
+			login: function() {
+				var defer = $q.defer();
+				VK.Auth.login(function(res) {
+					(res) ? defer.resolve(res): defer.reject('response error');
+				});
+				return defer.promise;
+			},
+			call: function(method, params) {
+				var defer = $q.defer();
+				VK.Api.call(method, params, function(res) {
+					(res) ? defer.resolve(res): defer.reject('response error');
+				});
+				return defer.promise;
+			},
 			get_countries: function(s, e) {
 				return $http.post('vk/database.getCountries', {}).then(s, e);
 			},
@@ -232,6 +253,13 @@ angular.module('Services', []).factory('User', ['$http',
 				console.error(e);
 				return false;
 			}
+		}
+	};
+}).factory('notify', function() {
+	var a = new Audio('alarm.mp3');
+	return {
+		play: function() {
+			a.play();
 		}
 	};
 }).factory('socket', function($rootScope) {
