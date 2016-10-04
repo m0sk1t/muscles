@@ -535,7 +535,7 @@
 				<img ng-src="{{p.image}}" alt="" ng-repeat="p in photos" ng-click="add_to_topic(p.image);">
 			</div>
 		</section>
-		<section ng-hide="gallery.current === null">
+		<section tabindex="0" ng-hide="gallery.current === null" ng-keypress="escape_pressed($event) && (gallery.current = null);">
 			<div class="photo-area">
 				<span
 					class="left"
