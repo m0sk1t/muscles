@@ -37,8 +37,10 @@
 						</div>
 					</div>
 				</div>
-				<span ng-class="{fav: in_fav()}" ng-click="fav();">&#9825;</span>
-				<button  ng-if="options.user._id !== user._id" ng-click="write_message();">Написать сообщение</button>
+				<div ng-if="options.user._id !== user._id" class="actions">
+					<span ng-class="{fav: in_fav()}" ng-click="fav();">&#9825;</span>
+					<button ng-click="write_message();">Написать сообщение</button>
+				</div>
 				<div class="ya-user__sports ya-sidebar-info ya-relative">
 					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_sports"></div>
 					<div class="ya-page__block ya-page__block_rounded">
@@ -164,7 +166,7 @@
 							Образование
 						</h2>
 						<div class="ya-sidebar-info__content-wrapper" ng-repeat="u in user.universities track by $index">
-							<div 
+							<div
 								ng-click="rm_university(u, $index)"
 								ng-if="options.user._id === user._id"
 								>x</div>
@@ -216,14 +218,16 @@
 							<input type="text" ng-model="university.speciality" placeholder="специальность"><br />
 							<input type="submit" value="save" />
 						</form>
-					</div>					
+					</div>
 				</div>
 			</div>
 			<div class="ya-grid-7-15">
 				<div class="ya-page__block ya-page__block_bordered ya-user__text-info">
 					<div class="ya-user__info-block ya-info-block ya-info-block_border_no">
-						<div class="ya-user__status">{{user.status}}</div>
-						<div class="ya-user__status">Был в сети: {{last_seen()}}</div>
+						<div class="ya-clearfix ya-user__status-line">
+							<div class="ya-user__status ya-grid-1-2">{{user.status}}</div>
+							<div class="ya-user__status ya-grid-1-2">Заходил {{last_seen()}}</div>
+						</div>
 					</div>
 					<div class="ya-user__info-block">
 						<div class="ya-info-block">
@@ -306,6 +310,48 @@
 							</div>
 						</div>
 					</div>
+					<div class="ya-user__info-block">
+						<div class="ya-info-block">
+							<h2 class="ya-info-block__title ya-info-block__title_subscribers">Подписчики</h2>
+							<div class="ya-info-block__content">
+								<div class="ya-socials ya-socials_inline ya-socials_theme_white">
+									<div class="ya-socials__list">
+										<div class="ya-socials__item ya-clearfix">
+											<span class="ya-socials__link ya-socials__link_profile ya-socials__link_vk">
+												<span class="ya-socials__logo ya-socials__logo_vk" ng-click="my_vk_friends();"></span>
+											</span>
+											<span class="ya-socials__link ya-socials__link_friends">{{options.user.social.vk_subscribers}}</span>
+										</div>
+										<div class="ya-socials__item ya-clearfix">
+											<span href="" class="ya-socials__link ya-socials__link_profile ya-socials__link_fb">
+												<span class="ya-socials__logo ya-socials__logo_fb" ng-click="my_facebook_friends();"></span>
+											</span>
+											<span class="ya-socials__link ya-socials__link_friends">{{options.user.social.fb_subscribers}}</span>
+										</div>
+										<div class="ya-socials__item ya-clearfix">
+											<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_tw">
+												<span class="ya-socials__logo ya-socials__logo_tw"></span>
+											</a>
+											<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_friends">124</a>
+										</div>
+										<div class="ya-socials__item ya-clearfix">
+											<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_ok">
+												<span class="ya-socials__logo ya-socials__logo_ok"></span>
+											</a>
+											<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_friends">2321</a>
+										</div>
+										<div class="ya-socials__item ya-clearfix">
+											<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_ig">
+												<span class="ya-socials__logo ya-socials__logo_ig"></span>
+											</a>
+											<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_friends">459</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
 				</div>
 				<div class="ya-page__block ya-user__photos">
 					<div class="ya-photos ya-photos_profile">
@@ -436,6 +482,11 @@
 				</div>
 			</div>
 			<div class="ya-grid-1-5">
+				<div class="ya-page__block">
+					<div class="ya-btn ya-btn_search">
+						<a href="#/search" class="ya-btn__link ya-btn__link_search">Поиск</a>
+					</div>
+				</div>
 				<div class="ya-page__block ya-page__block_colored">
 					<div class="ya-profile-links ya-clearfix">
 							<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
@@ -450,41 +501,6 @@
 							<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
 								<a href="#/favs" class="ya-profile-links__link ya-profile-links__link_favs"><span class="ya-profile-links__link-img ya-profile-links__link-img_favs"></span></a>
 							</div>
-					</div>
-					<div class="ya-socials">
-						<h3 class="ya-socials__title">Подписчики</h3>
-						<div class="ya-socials__list">
-							<div class="ya-socials__item ya-clearfix">
-								<span class="ya-socials__link ya-socials__link_profile ya-socials__link_vk">
-									<span class="ya-socials__logo ya-socials__logo_vk" ng-click="my_vk_friends();"></span>
-								</span>
-								<span class="ya-socials__link ya-socials__link_friends">{{options.user.social.vk_subscribers}}</span>
-							</div>
-							<div class="ya-socials__item ya-clearfix">
-								<span href="" class="ya-socials__link ya-socials__link_profile ya-socials__link_fb">
-									<span class="ya-socials__logo ya-socials__logo_fb" ng-click="my_facebook_friends();"></span>
-								</span>
-								<span class="ya-socials__link ya-socials__link_friends">{{options.user.social.fb_subscribers}}</span>
-							</div>
-							<div class="ya-socials__item ya-clearfix">
-								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_tw">
-									<span class="ya-socials__logo ya-socials__logo_tw"></span>
-								</a>
-								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_friends">124</a>
-							</div>
-							<div class="ya-socials__item ya-clearfix">
-								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_ok">
-									<span class="ya-socials__logo ya-socials__logo_ok"></span>
-								</a>
-								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_friends">2321</a>
-							</div>
-							<div class="ya-socials__item ya-clearfix">
-								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_ig">
-									<span class="ya-socials__logo ya-socials__logo_ig"></span>
-								</a>
-								<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_friends">459</a>
-							</div>
-						</div>
 					</div>
 				</div>
 				<div class="ya-page__block ya-page__block_colored">
@@ -517,22 +533,28 @@
 				</div>
 			</div>
 		</div>
-		<section ng-show="gallery.add_image">
-			<div ng-click="gallery.add_image = null;">close</div>
-			<div
-				class="drop-box"
-				ngf-multiple="true"
-				ngf-pattern="'image/*'"
-				ngf-drop="upload_files($files)"
-				ngf-drag-over-class="'dragover'"
-				ngf-select="upload_files($files)"
-				ng-if="options.user._id === user._id"
-			>
-				Бросьте сюда картинки либо кликните
-			</div>
-			Или выбрать существующие
-			<div class="photos">
-				<img ng-src="{{p.image}}" alt="" ng-repeat="p in photos" ng-click="add_to_topic(p.image);">
+		<div ng-show="gallery.add_image">
+			<div class="ya-pop-up ya-pop-up_active">
+				<div class="ya-pop-up__wrapper">
+					<div class="ya-pop-up__content">
+						<div ng-click="gallery.add_image = null;">close</div>
+						<div
+							class="drop-box"
+							ngf-multiple="true"
+							ngf-pattern="'image/*'"
+							ngf-drop="upload_files($files)"
+							ngf-drag-over-class="'dragover'"
+							ngf-select="upload_files($files)"
+							ng-if="options.user._id === user._id"
+						>
+							Бросьте сюда картинки либо кликните
+						</div>
+						Или выбрать существующие
+						<div class="photos">
+							<img ng-src="{{p.image}}" alt="" ng-repeat="p in photos" ng-click="add_to_topic(p.image);">
+						</div>
+					</div>
+				</div>
 			</div>
 		</section>
 		<section tabindex="0" ng-hide="gallery.current === null" ng-keypress="escape_pressed($event) && (gallery.current = null);">
@@ -557,18 +579,47 @@
 									ng-click="remove_comment(gallery.current, c.comment)"
 								></i>
 							</div>
+		</div>
+		<div ng-hide="gallery.current === null">
+			<div class="ya-pop-up ya-pop-up_active">
+				<div class="ya-pop-up__wrapper">
+					<div class="ya-pop-up__content">
+						<div class="photo-area">
+							<span
+								class="left"
+								ng-click="turn_left();"
+							>
+								&lt;
+							</span>
+							<span class="photo">
+								<span ng-click="set_current(null)">X</span>
+								<img ng-src="{{photos[gallery.current].image}}" ng-click="turn_right()">
+								<span>
+									<div>
+										<div class="comment" ng-repeat="c in photos[gallery.current].comments">
+											<a href="#/user/{{c.userid}}">{{c.name + ' ' + c.surname}}</a>:
+											{{c.comment}}
+											<i
+												class="fa fa-lg fa-close"
+												ng-if="c.userid === options.user._id"
+												ng-click="remove_comment(gallery.current, c.comment)"
+											></i>
+										</div>
+									</div>
+									<input type="text" ng-model="gallery.comment">
+									<button ng-click="add_comment(gallery.current)">&gt;</button>
+								</span>
+							</span>
+							<span
+								class="right"
+								ng-click="turn_right()"
+							>
+								&gt;
+							</span>
 						</div>
-						<input type="text" ng-model="gallery.comment">
-						<button ng-click="add_comment(gallery.current)">&gt;</button>
-					</span>
-				</span>
-				<span
-					class="right"
-					ng-click="turn_right()"
-				>
-					&gt;
-				</span>
+					</div>
+				</div>
 			</div>
-		</section>
+		</div>
 	</div>
 </article>
