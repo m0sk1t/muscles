@@ -50,6 +50,7 @@
     "passport-odnoklassniki": "^0.2.0",
     "passport-twitter": "^1.0.4",
     "passport-vkontakte": "^0.3.2",
+    "qs": "^6.2.1",
     "request": "^2.75.0",
     "serve-favicon": "^2.3.0",
     "serve-static": "^1.11.1",

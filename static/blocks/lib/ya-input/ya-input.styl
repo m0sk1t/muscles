@@ -1,13 +1,40 @@
 .ya-input
+    margin-bottom: 15px
     &__field
         width: 100%
         display: inline-block
-        border: 1px solid #afafaf
+        border: 1px solid #223d58
         border-radius: 3px
         box-sizing: border-box
         outline: none
         line-height: 1
+        background: white
         font-size: 13px
-        padding: 4px 10px
+        padding: 4px 7px
         &:focus
-            border: 1px solid #233d58
+            border: 1px solid #0e1e2d
+            box-shadow: 0 0 3px rgba(0,0,0,.4)
+        &_select
+            overflow: hidden
+        &_file
+            position: relative
+            padding: 0
+            cursor: pointer
+            overflow: hidden
+            background: mainLinksColor
+        &_hidden
+            display: none
+    &__label
+        color: #757575
+        font-size: 13px
+        display: inline-block
+        line-height: 1
+        padding: 4px 0
+    &__field-wrapper
+        max-width: 240px
+    &__file-wrapper
+        padding: 4px 7px
+        display: block
+    &__file-title
+        background: white
+        overflow: hidden
