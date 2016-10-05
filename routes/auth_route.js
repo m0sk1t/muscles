@@ -3,17 +3,26 @@ module.exports = (app) => {
 		passport = require('passport'),
 		User = require('../models/User'),
 		LocalStrategy = require('passport-local').Strategy,
+		VKStrategy = require('passport-vkontakte').Strategy,
 		TwitterStrategy = require('passport-twitter').Strategy,
+		OKStrategy = require('passport-odnoklassniki').Strategy,
 		FacebookStrategy = require('passport-facebook').Strategy,
 		InstagramStrategy = require('passport-instagram').Strategy;
 
-	passport.use(new LocalStrategy({ usernameField: 'mail', passwordField: 'pass' }, (mail, pass, done) => {
-		User.findOne({ mail: mail.toLowerCase() }, (err, user) => {
+	passport.use(new LocalStrategy({
+		usernameField: 'mail',
+		passwordField: 'pass'
+	}, (mail, pass, done) => {
+		User.findOne({
+			mail: mail.toLowerCase()
+		}, (err, user) => {
 			if (err) {
 				return done(err);
 			}
 			if (!user) {
-				return done(null, false, { msg: `Email ${mail} not found.` });
+				return done(null, false, {
+					msg: `Email ${mail} not found.`
+				});
 			}
 			user.comparePassword(pass, (err, isMatch) => {
 				if (err) {
@@ -22,7 +31,9 @@ module.exports = (app) => {
 				if (isMatch) {
 					return done(null, user);
 				}
-				return done(null, false, { msg: 'Invalid mail or password.' });
+				return done(null, false, {
+					msg: 'Invalid mail or password.'
+				});
 			});
 		});
 	}));
@@ -37,8 +48,8 @@ module.exports = (app) => {
 		(accessToken, refreshToken, profile, done) => {
 			var user = profile._json;
 			Users.findOneAndUpdate({
-				'mail': user.email,
 				'profile.fb.id': user.id,
+				'mail': user.email.toLowerCase(),
 			}, {
 				'profile.fb': user,
 				'name': user.first_name,
@@ -65,8 +76,10 @@ module.exports = (app) => {
 
 	app.post('/signup', (req, res, next) => {
 		req.assert('mail', 'Email is not valid').isEmail();
-		req.sanitize('mail').normalizeEmail({ remove_dots: false });
-		req.assert('password', 'Password must be at least 4 characters long').len(4);
+		req.sanitize('mail').normalizeEmail({
+			remove_dots: false
+		});
+		req.assert('pass', 'Password must be at least 4 characters long').len(4);
 
 		const errors = req.validationErrors();
 
@@ -76,16 +89,17 @@ module.exports = (app) => {
 		}
 
 		const user = new User({
-			mail: req.body.mail,
-			password: req.body.pass
+			pass: req.body.pass,
+			mail: req.body.mail.toLowerCase(),
 		});
 
-		User.findOne({ mail: req.body.mail }, (err, existingUser) => {
+		User.findOne({
+			mail: req.body.mail
+		}, (err, existingUser) => {
 			if (err) {
 				return next(err);
 			}
 			if (existingUser) {
-				req.flash('errors', { msg: 'Account with that email address already exists.' });
 				return res.redirect('/#/signin');
 			}
 			user.save((err) => {
@@ -96,20 +110,24 @@ module.exports = (app) => {
 					if (err) {
 						return next(err);
 					}
-					res.redirect('/');
+					res.json(user);
 				});
 			});
 		});
 	});
 
-	app.post('/auth/local', passport.authenticate('local'))
+	app.post('/auth/local', passport.authenticate('local'));
 
 	app.get('/auth/facebook',
-		passport.authenticate('facebook', { scope: ['public_profile', 'email', 'publish_actions', 'user_friends'] })
+		passport.authenticate('facebook', {
+			scope: ['public_profile', 'email', 'publish_actions', 'user_friends']
+		})
 	);
 
 	app.get('/auth/facebook/callback',
-		passport.authenticate('facebook', { failureRedirect: '/#/auth' }),
+		passport.authenticate('facebook', {
+			failureRedirect: '/#/auth'
+		}),
 		(req, res) => {
 			res.redirect('/#/options');
 		}
@@ -120,7 +138,9 @@ module.exports = (app) => {
 	);
 
 	app.get('/auth/twitter/callback',
-		passport.authenticate('twitter', { failureRedirect: '/login' }),
+		passport.authenticate('twitter', {
+			failureRedirect: '/login'
+		}),
 		(req, res) => {
 			res.redirect('/#/options');
 		}
@@ -131,7 +151,9 @@ module.exports = (app) => {
 	);
 
 	app.get('/auth/instagram/callback',
-		passport.authenticate('instagram', { failureRedirect: '/login' }),
+		passport.authenticate('instagram', {
+			failureRedirect: '/login'
+		}),
 		(req, res) => {
 			res.redirect('/#/options');
 		}
@@ -142,7 +164,9 @@ module.exports = (app) => {
 	);
 
 	app.get('/auth/twitter/callback',
-		passport.authenticate('twitter', { failureRedirect: '/login' }),
+		passport.authenticate('twitter', {
+			failureRedirect: '/login'
+		}),
 		(req, res) => {
 			res.redirect('/#/options');
 		}

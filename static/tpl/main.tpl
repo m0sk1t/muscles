@@ -1,6 +1,8 @@
 <article class="main-page">
 	<a href="#/" class="logo">ЛОГОТИП</a>
-	<a href="#/auth" class="auth"><i class="fa fa-2x fa-sign-out"></i>ВОЙТИ или Зарегистрироваться</a>
+	<a href="#/signin" class="auth"><i class="fa fa-2x fa-sign-in"></i>ВОЙТИ</a>
+	или
+	<a href="#/signup" class="auth"><i class="fa fa-2x fa-sign-in"></i>Зарегистрироваться</a>
 	<section>
 		<div class="main-page__buttons">
 			<a href="#/user/{{options.user._id}}">МОЙ ПРОФИЛЬ</a>

@@ -1,15 +1,19 @@
 var app = require('express')(),
 	morgan = require('morgan'),
-	session = require('session'),
+	flash = require('req-flash'),
 	passport = require('passport'),
 	mongoose = require('mongoose'),
-	http = require('http').Server(e),
+	http = require('http').Server(app),
 	io = require('socket.io')(http),
 	bodyParser = require('body-parser'),
 	compression = require('compression'),
+	session = require('express-session'),
 	serveStatic = require('serve-static'),
 	serveFavicon = require('serve-favicon'),
-	cookieParser = require('cookie-parser');
+	cookieParser = require('cookie-parser'),
+	expressValidator = require('express-validator');
+
+app.disable('x-powered-by');
 
 app.use(morgan('combined'));
 
@@ -26,7 +30,7 @@ app.use(bodyParser.json({
 	limit: '3mb'
 }));
 
-app.disable('x-powered-by');
+app.use(expressValidator());
 
 app.use(session({
 	resave: false,
@@ -40,6 +44,8 @@ app.use(session({
 		expires: Date.now() + 100 * 365 * 24 * 60 * 60 * 1000
 	}
 }));
+
+app.use(flash());
 
 app.use(passport.initialize());
 
@@ -77,4 +83,4 @@ process.on('uncaughtException', exitHandler.bind(null, {
 	exit: false
 }));
 
-module.exports = e;
+module.exports = app;
