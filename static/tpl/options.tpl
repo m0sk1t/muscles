@@ -27,17 +27,21 @@
 							<div class="ya-form">
 								<div class="ya-options__avatar ya-form__input ya-input">
 									<div class="ya-avatar ya-avatar_large">
-										<img class="ya-avatar__img" ng-src="{{user.avatar || '/images/avatar.jpg'}}" alt="{{user.name}} {{user.surname}}">
+										<img class="ya-avatar__img" ng-src="{{options.user.avatar || '/images/avatar.jpg'}}" alt="{{user.name}} {{user.surname}}">
 									</div>
 									<div class="ya-form__input ya-input">
 										<label class="ya-input__field ya-input__field_file ya-clearfix">
 											<span class="ya-span-2-3">
-												<mark class="ya-input__file-title ya-input__file-wrapper">Файл не выбран</mark>
+												<mark class="ya-input__file-title ya-input__file-wrapper">{{fileName|| 'Файл не выбран'}}</mark>
 											</span>
 											<span class="ya-span-1-3">
 												<span class="ya-btn ya-input__file-wrapper ya-btn_primary ya-input__btn">Файл</span>
 											</span>
-											<input class="ya-input__field ya-input__field_hidden" type="file" />
+											<input
+												ngf-multiple="false"
+												ngf-pattern="'image/*'"
+												ngf-select="upload_photo($files[0])"
+												class="ya-input__field ya-input__field_hidden" type="file" />
 										</label>
 									</div>
 								</div>

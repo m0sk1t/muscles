@@ -25,17 +25,24 @@ module.exports = (app) => {
 	app.use(passport.session());
 
 	passport.use(new FacebookStrategy({
+			enableProof: true,
 			clientID: '1782419512001549',
 			clientSecret: '5b67b4ba8b40c064d0a10b714ba90232',
-			callbackURL: "http://localhost:4321/auth/facebook/callback"
+			callbackURL: "http://localhost:4321/auth/facebook/callback",
+			profileFields: ['id', 'email', 'friends', 'first_name', 'last_name'],
 		},
-		function(accessToken, refreshToken, profile, done) {
-			console.log(profile);
+		(accessToken, refreshToken, profile, done) => {
+			var user = profile._json;
 			Users.findOneAndUpdate({
-				'profile.fb': profile
+				'mail': user.email,
+				'profile.fb.id': user.id,
 			}, {
-				'profile.fb': profile,
-				'tokens.fb': accessToken
+				'mail': user.email,
+				'profile.fb': user,
+				'name': user.first_name,
+				'tokens.fb': accessToken,
+				'surname': user.last_name,
+				'social.fb_subscribers': user.friends.summary.total_count,
 			}, {
 				upsert: true
 			}, (err, user) => {
@@ -44,18 +51,21 @@ module.exports = (app) => {
 			});
 		}
 	));
-	passport.serializeUser(function(user, done) {
+	passport.serializeUser((user, done) => {
 		done(null, user._id);
 	});
 
-	passport.deserializeUser(function(id, done) {
-		User.findById(id, function(err, user) {
+	passport.deserializeUser((id, done) => {
+		User.findById(id, (err, user) => {
 			done(err, user);
 		});
 	});
-	app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['public_profile', 'email', 'publish_actions'] }));
-	app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-		successRedirect: '/',
-		failureRedirect: '/#/auth'
-	}));
+	app.get('/auth/facebook',
+		passport.authenticate('facebook', { scope: ['public_profile', 'email', 'publish_actions', 'user_friends'] })
+	);
+	app.get('/auth/facebook/callback',
+		passport.authenticate('facebook', { failureRedirect: '/#/auth' }),
+		(req, res) => {
+			res.redirect('/#/options');
+		});
 };

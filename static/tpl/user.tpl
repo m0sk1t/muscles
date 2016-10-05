@@ -556,6 +556,7 @@
 					</div>
 				</div>
 			</div>
+		</div>
 		</section>
 		<section tabindex="0" ng-hide="gallery.current === null" ng-keypress="escape_pressed($event) && (gallery.current = null);">
 			<div class="photo-area">
@@ -579,47 +580,51 @@
 									ng-click="remove_comment(gallery.current, c.comment)"
 								></i>
 							</div>
-		</div>
-		<div ng-hide="gallery.current === null">
-			<div class="ya-pop-up ya-pop-up_active">
-				<div class="ya-pop-up__wrapper">
-					<div class="ya-pop-up__content">
-						<div class="photo-area">
-							<span
-								class="left"
-								ng-click="turn_left();"
-							>
-								&lt;
-							</span>
-							<span class="photo">
-								<span ng-click="set_current(null)">X</span>
-								<img ng-src="{{photos[gallery.current].image}}" ng-click="turn_right()">
-								<span>
-									<div>
-										<div class="comment" ng-repeat="c in photos[gallery.current].comments">
-											<a href="#/user/{{c.userid}}">{{c.name + ' ' + c.surname}}</a>:
-											{{c.comment}}
-											<i
-												class="fa fa-lg fa-close"
-												ng-if="c.userid === options.user._id"
-												ng-click="remove_comment(gallery.current, c.comment)"
-											></i>
-										</div>
-									</div>
-									<input type="text" ng-model="gallery.comment">
-									<button ng-click="add_comment(gallery.current)">&gt;</button>
+						</div>
+					</span>
+				</span>
+			</div>
+			<div ng-hide="gallery.current === null">
+				<div class="ya-pop-up ya-pop-up_active">
+					<div class="ya-pop-up__wrapper">
+						<div class="ya-pop-up__content">
+							<div class="photo-area">
+								<span
+									class="left"
+									ng-click="turn_left();"
+								>
+									&lt;
 								</span>
-							</span>
-							<span
-								class="right"
-								ng-click="turn_right()"
-							>
-								&gt;
-							</span>
+								<span class="photo">
+									<span ng-click="set_current(null)">X</span>
+									<img ng-src="{{photos[gallery.current].image}}" ng-click="turn_right()">
+									<span>
+										<div>
+											<div class="comment" ng-repeat="c in photos[gallery.current].comments">
+												<a href="#/user/{{c.userid}}">{{c.name + ' ' + c.surname}}</a>:
+												{{c.comment}}
+												<i
+													class="fa fa-lg fa-close"
+													ng-if="c.userid === options.user._id"
+													ng-click="remove_comment(gallery.current, c.comment)"
+												></i>
+											</div>
+										</div>
+										<input type="text" ng-model="gallery.comment">
+										<button ng-click="add_comment(gallery.current)">&gt;</button>
+									</span>
+								</span>
+								<span
+									class="right"
+									ng-click="turn_right()"
+								>
+									&gt;
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 	</div>
 </article>
