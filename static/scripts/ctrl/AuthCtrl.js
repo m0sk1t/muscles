@@ -19,8 +19,8 @@ angular.module('MuscleMan').controller('AuthCtrl', ['$scope', '$location', 'sock
 						$scope.cred.mail && MSG.custom({
 								type: 'input',
 								closeOnConfirm: false,
-								title: 'Письмо отправлено!',
-								text: 'Введите пин-код, присланный в письме',
+								title: 'Письмо отправлено на почту "' + $scope.cred.mail + '"!',
+								text: 'Для подтверждения почты, необходимо ввести ниже пин-код, присланный в письме',
 								inputPlaceholder: "ПИН-КОД"
 							},
 							function(pin) {

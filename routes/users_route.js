@@ -12,9 +12,9 @@ module.exports = (app) => {
 			attempts: Number
 		})),
 		Users = mongoose.model('Users', mongoose.Schema({
-			mail: { type: String, default: '' },
 			ioid: { type: String, default: '' },
 			name: { type: String, default: '' },
+			mail: { type: String, default: '' },
 			surname: { type: String, default: '' },
 			status: { type: String, default: '' },
 
@@ -35,11 +35,11 @@ module.exports = (app) => {
 			},
 
 			social: {
-				fb_subscribers: { type: String, default: '' },
-				vk_subscribers: { type: String, default: '' },
-				ok_subscribers: { type: String, default: '' },
-				tw_subscribers: { type: String, default: '' },
-				im_subscribers: { type: String, default: '' },
+				fb_subscribers: Number,
+				vk_subscribers: Number,
+				ok_subscribers: Number,
+				tw_subscribers: Number,
+				im_subscribers: Number,
 			},
 
 			friends: { type: Array, default: [] },
@@ -97,7 +97,7 @@ module.exports = (app) => {
 		var mail = req.body.mail.toLowerCase(),
 			userid = crypto.createHash('sha256').update(mail + req.body.pass + salt).digest('hex'),
 			pin = +crypto.createHash('md5').update(mail + salt + String(Date.now())).digest('hex').match(/\d+/g).join('').substr(0, 7),
-			sendPin = function(cb) {
+			sendPin = (cb) => {
 				PIN.findOneAndUpdate({
 					mail: mail
 				}, {
@@ -109,7 +109,7 @@ module.exports = (app) => {
 					}
 				}, {
 					upsert: true
-				}, function(e, newpin) {
+				}, (e, newpin) => {
 					var mailOptions = {
 						mail: [mail],
 						subj: 'Данные для авторизации',
@@ -122,7 +122,7 @@ module.exports = (app) => {
 							'</span><br />',
 							'на странице авторизации',
 							'<p></p>С уважением,<br>Команда СпортПроекта!'
-						].join()
+						].join('')
 					};
 					mailer.send_mail(mailOptions, (error, info) => {
 						if (error) return console.log(error);
