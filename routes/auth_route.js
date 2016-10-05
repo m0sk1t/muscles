@@ -1,28 +1,31 @@
 module.exports = (app) => {
 	var express = require('express'),
 		passport = require('passport'),
-		session = require('express-session'),
-		Users = require('mongoose').model('Users'),
-		FacebookStrategy = require('passport-facebook').Strategy;
+		User = require('../models/User'),
+		LocalStrategy = require('passport-local').Strategy,
+		TwitterStrategy = require('passport-twitter').Strategy,
+		FacebookStrategy = require('passport-facebook').Strategy,
+		InstagramStrategy = require('passport-instagram').Strategy;
 
-	app.disable('x-powered-by');
-
-	app.use(session({
-		resave: false,
-		saveUninitialized: true,
-		name: 'sportSessionID',
-		secret: 'J(8uH*hFHIJShsidjisjvnau9h878t*^G^*g8g987G',
-		cookie: {
-			path: '/',
-			secure: true,
-			httpOnly: true,
-			expires: Date.now() + 100 * 365 * 24 * 60 * 60 * 1000
-		}
+	passport.use(new LocalStrategy({ usernameField: 'mail', passwordField: 'pass' }, (mail, pass, done) => {
+		User.findOne({ mail: mail.toLowerCase() }, (err, user) => {
+			if (err) {
+				return done(err);
+			}
+			if (!user) {
+				return done(null, false, { msg: `Email ${mail} not found.` });
+			}
+			user.comparePassword(pass, (err, isMatch) => {
+				if (err) {
+					return done(err);
+				}
+				if (isMatch) {
+					return done(null, user);
+				}
+				return done(null, false, { msg: 'Invalid mail or password.' });
+			});
+		});
 	}));
-
-	app.use(passport.initialize());
-
-	app.use(passport.session());
 
 	passport.use(new FacebookStrategy({
 			enableProof: true,
@@ -37,12 +40,10 @@ module.exports = (app) => {
 				'mail': user.email,
 				'profile.fb.id': user.id,
 			}, {
-				'mail': user.email,
 				'profile.fb': user,
 				'name': user.first_name,
 				'tokens.fb': accessToken,
 				'surname': user.last_name,
-				'social.fb_subscribers': user.friends.summary.total_count,
 			}, {
 				upsert: true
 			}, (err, user) => {
@@ -51,6 +52,7 @@ module.exports = (app) => {
 			});
 		}
 	));
+
 	passport.serializeUser((user, done) => {
 		done(null, user._id);
 	});
@@ -60,12 +62,89 @@ module.exports = (app) => {
 			done(err, user);
 		});
 	});
+
+	app.post('/signup', (req, res, next) => {
+		req.assert('mail', 'Email is not valid').isEmail();
+		req.sanitize('mail').normalizeEmail({ remove_dots: false });
+		req.assert('password', 'Password must be at least 4 characters long').len(4);
+
+		const errors = req.validationErrors();
+
+		if (errors) {
+			req.flash('errors', errors);
+			return res.redirect('/#/signup');
+		}
+
+		const user = new User({
+			mail: req.body.mail,
+			password: req.body.pass
+		});
+
+		User.findOne({ mail: req.body.mail }, (err, existingUser) => {
+			if (err) {
+				return next(err);
+			}
+			if (existingUser) {
+				req.flash('errors', { msg: 'Account with that email address already exists.' });
+				return res.redirect('/#/signin');
+			}
+			user.save((err) => {
+				if (err) {
+					return next(err);
+				}
+				req.logIn(user, (err) => {
+					if (err) {
+						return next(err);
+					}
+					res.redirect('/');
+				});
+			});
+		});
+	});
+
+	app.post('/auth/local', passport.authenticate('local'))
+
 	app.get('/auth/facebook',
 		passport.authenticate('facebook', { scope: ['public_profile', 'email', 'publish_actions', 'user_friends'] })
 	);
+
 	app.get('/auth/facebook/callback',
 		passport.authenticate('facebook', { failureRedirect: '/#/auth' }),
 		(req, res) => {
 			res.redirect('/#/options');
-		});
+		}
+	);
+
+	app.get('/auth/twitter',
+		passport.authenticate('twitter')
+	);
+
+	app.get('/auth/twitter/callback',
+		passport.authenticate('twitter', { failureRedirect: '/login' }),
+		(req, res) => {
+			res.redirect('/#/options');
+		}
+	);
+
+	app.get('/auth/instagram',
+		passport.authenticate('instagram')
+	);
+
+	app.get('/auth/instagram/callback',
+		passport.authenticate('instagram', { failureRedirect: '/login' }),
+		(req, res) => {
+			res.redirect('/#/options');
+		}
+	);
+
+	app.get('/auth/twitter',
+		passport.authenticate('twitter')
+	);
+
+	app.get('/auth/twitter/callback',
+		passport.authenticate('twitter', { failureRedirect: '/login' }),
+		(req, res) => {
+			res.redirect('/#/options');
+		}
+	);
 };

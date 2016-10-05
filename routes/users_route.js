@@ -1,92 +1,16 @@
 module.exports = (app) => {
 	var salt = require('./salt.js').salt,
 		qs = require('qs'),
-		request = require('request'),
 		crypto = require('crypto'),
+		request = require('request'),
 		mongoose = require('mongoose'),
 		mailer = require('./mailer.js'),
+		User = require('../models/User'),
 		PIN = mongoose.model('PIN', mongoose.Schema({
 			pin: Number,
 			mail: String,
 			userid: String,
 			attempts: Number
-		})),
-		Users = mongoose.model('Users', mongoose.Schema({
-			ioid: { type: String, default: '' },
-			name: { type: String, default: '' },
-			mail: { type: String, default: '' },
-			surname: { type: String, default: '' },
-			status: { type: String, default: '' },
-
-			profile: {
-				fb: {},
-				vk: {},
-				ok: {},
-				tw: {},
-				im: {},
-			},
-
-			tokens: {
-				fb: {},
-				vk: {},
-				ok: {},
-				tw: {},
-				im: {},
-			},
-
-			social: {
-				fb_subscribers: Number,
-				vk_subscribers: Number,
-				ok_subscribers: Number,
-				tw_subscribers: Number,
-				im_subscribers: Number,
-			},
-
-			friends: { type: Array, default: [] },
-			waiting: { type: Array, default: [] },
-			subscribers: { type: Array, default: [] },
-
-			sports: { type: Array, default: [] },
-			workplaces: { type: Array, default: [] },
-			achievements: { type: Array, default: [] },
-			universities: { type: Array, default: [] },
-
-			creDate: { type: Date, default: new Date() },
-			birthDate: Date,
-			lastOnline: { type: Date, default: new Date() },
-
-			online: Boolean,
-
-			phone: { type: String, default: '' },
-			userid: { type: String, default: '' },
-			avatar: { type: String, default: '' },
-
-			sex: { type: String, default: '' },
-			type: { type: String, default: '' },
-			hairs: { type: String, default: '' },
-			weight: Number,
-			height: Number,
-			chest: Number, // грудь
-			waist: Number, // талия
-			huckle: Number, // бёдра
-
-			location_city: { type: String, default: '' },
-			location_country: { type: String, default: '' },
-
-			settings: {
-				comments_enabled: { type: Boolean, default: false },
-				use_large_fonts: { type: Boolean, default: false },
-				posting_enabled: { type: Boolean, default: false },
-				show_notifications: { type: Boolean, default: false },
-				show_notifications_text: { type: Boolean, default: false },
-				notify_private: { type: Boolean, default: false },
-				notify_topic_comments: { type: Boolean, default: false },
-				notify_photo_comments: { type: Boolean, default: false },
-				notify_video_comments: { type: Boolean, default: false },
-				notify_competitions: { type: Boolean, default: false },
-				notify_contests: { type: Boolean, default: false },
-				notify_birthdays: { type: Boolean, default: false },
-			}
 		}));
 
 	app.post('/auth', (req, res) => {
@@ -131,7 +55,7 @@ module.exports = (app) => {
 					});
 				});
 			};
-		Users.findOne({
+		User.findOne({
 			mail: mail
 		}, (err, user) => {
 			if (err) return console.error(err);
@@ -163,7 +87,7 @@ module.exports = (app) => {
 				PIN.remove({
 					mail: mail
 				}, (e, p) => {
-					Users.create({
+					User.create({
 						mail: mail,
 						userid: pin.userid,
 						creDate: Date.now(),
@@ -201,7 +125,7 @@ module.exports = (app) => {
 	});
 
 	app.get('/user/:id', (req, res) => {
-		Users.findById(req.params.id, {
+		User.findById(req.params.id, {
 			userid: 0
 		}, (err, user) => {
 			if (err) return console.error(err);
@@ -213,7 +137,7 @@ module.exports = (app) => {
 		.get((req, res) => {
 			var userid = req.cookies.userid;
 			if (userid) {
-				Users.findOne({
+				User.findOne({
 					userid: userid
 				}, (err, user) => {
 					res.json(user);
@@ -227,7 +151,7 @@ module.exports = (app) => {
 			delete req.body._id;
 			delete req.body.__v;
 			if (userid) {
-				Users.findOneAndUpdate({
+				User.findOneAndUpdate({
 					userid: userid
 				}, {
 					$set: req.body
@@ -242,7 +166,7 @@ module.exports = (app) => {
 		})
 		.delete((req, res) => {
 			if (userid) {
-				Users.findOneAndRemove({
+				User.findOneAndRemove({
 					userid: userid
 				}, (err, user) => {
 					res.clearCookie('userid').redirect('/');
@@ -253,7 +177,7 @@ module.exports = (app) => {
 		});
 
 	app.put('/user/add_university', (req, res) => {
-		Users.findOneAndUpdate({
+		User.findOneAndUpdate({
 			userid: req.cookies.userid
 		}, {
 			$addToSet: {
@@ -266,7 +190,7 @@ module.exports = (app) => {
 	});
 
 	app.put('/user/rm_university', (req, res) => {
-		Users.findOneAndUpdate({
+		User.findOneAndUpdate({
 			userid: req.cookies.userid
 		}, {
 			$pull: {
@@ -279,7 +203,7 @@ module.exports = (app) => {
 	});
 
 	app.put('/user/add_workplace', (req, res) => {
-		Users.findOneAndUpdate({
+		User.findOneAndUpdate({
 			userid: req.cookies.userid
 		}, {
 			$addToSet: {
@@ -292,7 +216,7 @@ module.exports = (app) => {
 	});
 
 	app.put('/user/rm_workplace', (req, res) => {
-		Users.findOneAndUpdate({
+		User.findOneAndUpdate({
 			userid: req.cookies.userid
 		}, {
 			$pull: {
@@ -305,7 +229,7 @@ module.exports = (app) => {
 	});
 
 	app.put('/user/add_achievement', (req, res) => {
-		Users.findOneAndUpdate({
+		User.findOneAndUpdate({
 			userid: req.cookies.userid
 		}, {
 			$addToSet: {
@@ -318,7 +242,7 @@ module.exports = (app) => {
 	});
 
 	app.put('/user/rm_achievement', (req, res) => {
-		Users.findOneAndUpdate({
+		User.findOneAndUpdate({
 			userid: req.cookies.userid
 		}, {
 			$pull: {
@@ -392,7 +316,7 @@ module.exports = (app) => {
 
 		console.log(search);
 
-		Users.find(search, info, (err, users) => {
+		User.find(search, info, (err, users) => {
 			if (!err) {
 				res.json(users);
 			} else {

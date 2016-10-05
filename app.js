@@ -1,5 +1,7 @@
-var e = require('express')(),
+var app = require('express')(),
 	morgan = require('morgan'),
+	session = require('session'),
+	passport = require('passport'),
 	mongoose = require('mongoose'),
 	http = require('http').Server(e),
 	io = require('socket.io')(http),
@@ -9,27 +11,46 @@ var e = require('express')(),
 	serveFavicon = require('serve-favicon'),
 	cookieParser = require('cookie-parser');
 
-e.use(morgan('combined'));
+app.use(morgan('combined'));
 
-e.use(compression());
+app.use(compression());
 
-e.use(cookieParser());
+app.use(cookieParser());
 
-e.use(bodyParser.urlencoded({
+app.use(bodyParser.urlencoded({
 	limit: '3mb',
 	extended: true
 }));
 
-e.use(bodyParser.json({
+app.use(bodyParser.json({
 	limit: '3mb'
 }));
 
-e.use(serveStatic(__dirname + '/static'));
+app.disable('x-powered-by');
+
+app.use(session({
+	resave: false,
+	saveUninitialized: true,
+	name: 'sportSessionID',
+	secret: 'J(8uH*hFHIJShsidjisjvnau9h878t*^G^*g8g987G',
+	cookie: {
+		path: '/',
+		secure: true,
+		httpOnly: true,
+		expires: Date.now() + 100 * 365 * 24 * 60 * 60 * 1000
+	}
+}));
+
+app.use(passport.initialize());
+
+app.use(passport.session());
+
+app.use(serveStatic(__dirname + '/static'));
 
 //e.use(serveFavicon(__dirname + "/pub/img/favicon.ico"));
 
 http.listen(4321, () => {
-	require(__dirname + '/routes/router.js')(e, io);
+	require(__dirname + '/routes/router.js')(app, io);
 	mongoose.connect('mongodb://localhost:27017/muscles');
 	console.log('Server started at: ', new Date(), 'http://localhost:4321/');
 });
