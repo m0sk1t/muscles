@@ -5,25 +5,41 @@ module.exports = (app) => {
 		crypto = require('crypto'),
 		mongoose = require('mongoose'),
 		mailer = require('./mailer.js'),
-		PIN = mongoose.model('PIN', {
+		PIN = mongoose.model('PIN', mongoose.Schema({
 			pin: Number,
 			mail: String,
 			userid: String,
 			attempts: Number
-		}),
-		Users = mongoose.model('Users', {
-			mail: String,
-			ioid: String,
-			name: String,
-			surname: String,
-			status: String,
+		})),
+		Users = mongoose.model('Users', mongoose.Schema({
+			mail: { type: String, default: '' },
+			ioid: { type: String, default: '' },
+			name: { type: String, default: '' },
+			surname: { type: String, default: '' },
+			status: { type: String, default: '' },
+
+			profile: {
+				fb: {},
+				vk: {},
+				ok: {},
+				tw: {},
+				im: {},
+			},
+
+			tokens: {
+				fb: {},
+				vk: {},
+				ok: {},
+				tw: {},
+				im: {},
+			},
 
 			social: {
-				fb_subscribers: String,
-				vk_subscribers: String,
-				ok_subscribers: String,
-				tw_subscribers: String,
-				im_subscribers: String,
+				fb_subscribers: { type: String, default: '' },
+				vk_subscribers: { type: String, default: '' },
+				ok_subscribers: { type: String, default: '' },
+				tw_subscribers: { type: String, default: '' },
+				im_subscribers: { type: String, default: '' },
 			},
 
 			friends: { type: Array, default: [] },
@@ -35,79 +51,43 @@ module.exports = (app) => {
 			achievements: { type: Array, default: [] },
 			universities: { type: Array, default: [] },
 
-			creDate: Date,
+			creDate: { type: Date, default: new Date() },
 			birthDate: Date,
-			lastOnline: Date,
+			lastOnline: { type: Date, default: new Date() },
 
 			online: Boolean,
 
-			phone: String,
-			userid: String,
-			avatar: String,
+			phone: { type: String, default: '' },
+			userid: { type: String, default: '' },
+			avatar: { type: String, default: '' },
 
-			sex: String,
-			type: String,
-			hairs: String,
+			sex: { type: String, default: '' },
+			type: { type: String, default: '' },
+			hairs: { type: String, default: '' },
 			weight: Number,
 			height: Number,
 			chest: Number, // грудь
 			waist: Number, // талия
 			huckle: Number, // бёдра
 
-			location_city: String,
-			location_country: String,
+			location_city: { type: String, default: '' },
+			location_country: { type: String, default: '' },
 
 			settings: {
-				comments_enabled: {
-					type: Boolean,
-					default: false
-				},
-				use_large_fonts: {
-					type: Boolean,
-					default: false
-				},
-				posting_enabled: {
-					type: Boolean,
-					default: false
-				},
-				show_notifications: {
-					type: Boolean,
-					default: false
-				},
-				show_notifications_text: {
-					type: Boolean,
-					default: false
-				},
-				notify_private: {
-					type: Boolean,
-					default: false
-				},
-				notify_topic_comments: {
-					type: Boolean,
-					default: false
-				},
-				notify_photo_comments: {
-					type: Boolean,
-					default: false
-				},
-				notify_video_comments: {
-					type: Boolean,
-					default: false
-				},
-				notify_competitions: {
-					type: Boolean,
-					default: false
-				},
-				notify_contests: {
-					type: Boolean,
-					default: false
-				},
-				notify_birthdays: {
-					type: Boolean,
-					default: false
-				},
+				comments_enabled: { type: Boolean, default: false },
+				use_large_fonts: { type: Boolean, default: false },
+				posting_enabled: { type: Boolean, default: false },
+				show_notifications: { type: Boolean, default: false },
+				show_notifications_text: { type: Boolean, default: false },
+				notify_private: { type: Boolean, default: false },
+				notify_topic_comments: { type: Boolean, default: false },
+				notify_photo_comments: { type: Boolean, default: false },
+				notify_video_comments: { type: Boolean, default: false },
+				notify_competitions: { type: Boolean, default: false },
+				notify_contests: { type: Boolean, default: false },
+				notify_birthdays: { type: Boolean, default: false },
 			}
-		});
+		}));
 
 	app.post('/auth', (req, res) => {
 		if (!req.body.mail || !req.body.pass) {
