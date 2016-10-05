@@ -262,122 +262,433 @@
 										</div>
 									</div>
 								</div>
-
-								<button ng-click="user_save();">save</button>
+								<div class="ya-form__input ya-input ya-input_inline">
+									<div class="ya-clearfix">
+										<div class="ya-grid-1-1 ya-center">
+											<button ng-click="user_save();" class="ya-btn ya-btn_secondary ya-btn_inline">Сохранить</button>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-					<section ng-show="active_page === 'common'">
-						<label>
-							<input type="checkbox" ng-model="options.user.comments_enabled">
-							Включить комментарии к записям
-						</label><br>
-						<label>
-							Старый пароль
-							<input type="password" ng-model="cred.old_password">
-						</label><br>
-						<label>
-							Новый пароль
-							<input type="password" ng-model="cred.new_password">
-						</label><br>
-						<button>Изменить пароль</button>
-						<label>
-							Номер телефона
-							<input type="tel" ng-model="options.user.phone">
-						</label><br>
-						<label>
-							<input type="checkbox" ng-model="options.user.use_large_fonts">
-							Использовать увеличенные шрифты
-						</label><br>
-						<button ng-click="user_save();">save</button>
-					</section>
-					<section ng-show="active_page === 'privacy'">
-						<h3>Моя страница</h3>
-						<label>
-							Кто видит информацию обо мне
-							<select>
-								<option>Все</option>
-								<option>Друзья и друзья друзей</option>
-								<option>Только друзья</option>
-							</select>
-						</label><br>
-						<h3>Записи на странице</h3>
-						<label>
-							<select>
-								<option>Все</option>
-								<option>Друзья и друзья друзей</option>
-								<option>Только друзья</option>
-							</select>
-						</label><br>
-						<h3>Связь со мной</h3>
-						<label>
-							<select>
-								<option>Все</option>
-								<option>Друзья и друзья друзей</option>
-								<option>Только друзья</option>
-							</select>
-						</label><br>
-						<button ng-click="user_save();">save</button>
-					</section>
-					<section ng-show="active_page === 'notifications'">
-						<h3>Моментальные оповещения на сайте</h3>
-
-						<label>
-							<input
-								type="checkbox"
-								ng-model="options.user.settings.show_notifications"
-								ng-click="options.user.settings.show_notifications && request_permissions();"
-							>
-							Включить уведомления
-						</label><br>
-						<label>
-						<input
-							type="checkbox"
-							ng-model="options.user.settings.show_notifications_text"
-						>
-							Показывать текст сообщений
-						</label><br>
-
-						<button>Сохранить</button>
-
-						<h3>Оповещение по электронной почте</h3>
-
-						<label>
-							<input type="checkbox" ng-model="options.user.settings.notify_private">
-							Личные сообщения
-						</label><br>
-
-						<label>
-							<input type="checkbox" ng-model="options.user.settings.notify_topic_comments">
-							Комментарии на стене
-						</label><br>
-
-						<label>
-							<input type="checkbox" ng-model="options.user.settings.notify_photo_comments">
-							Комментарии к фотографиям
-						</label><br>
-
-						<label>
-							<input type="checkbox" ng-model="options.user.settings.notify_video_comments">
-							Комментарии к видео
-						</label><br>
-
-						<label>
-							<input type="checkbox" ng-model="options.user.settings.notify_competitions">
-							Оповещения о мероприятиях
-						</label><br>
-
-						<label>
-							<input type="checkbox" ng-model="options.user.settings.notify_contests">
-							Оповещения о конкурсах
-						</label><br>
-
-						<label>
-							<input type="checkbox" ng-model="options.user.settings.notify_birthdays">
-							Дни рождения
-						</label><br>
-						<button ng-click="user_save();">save</button>
-					</section>
+					<div class="ya-options__info-block" ng-show="active_page === 'common'">
+						<div class="ya-info-block">
+							<div class="ya-info-block__content">
+								<div class="ya-form">
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-1">
+												<label>
+													<input type="checkbox" ng-model="options.user.comments_enabled">
+													Включить комментарии к записям
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ya-info-block">
+							<div class="ya-info-block__title">
+								Адрес вашей электронной почты
+							</div>
+							<div class="ya-info-block__content">
+								<div class="ya-form">
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-3 ya-right">
+												<label for="ya-old-mail" class="ya-input__label">
+													Текущий адрес
+												</label>
+											</div>
+											<div class="ya-grid-2-3">
+												<div class="ya-input__field-wrapper">
+													<input id="ya-old-mail" class="ya-input__field" type="text" />
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-3 ya-right">
+												<label for="ya-new-mail" class="ya-input__label">
+													Новый адрес
+												</label>
+											</div>
+											<div class="ya-grid-2-3">
+												<div class="ya-input__field-wrapper">
+													<input id="ya-new-mail" class="ya-input__field" type="text" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ya-info-block">
+							<div class="ya-info-block__title">
+								Изменить пароль
+							</div>
+							<div class="ya-info-block__content">
+								<div class="ya-form">
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-3 ya-right">
+												<label for="ya-old-pwd" class="ya-input__label">
+													Текущий адрес
+												</label>
+											</div>
+											<div class="ya-grid-2-3">
+												<div class="ya-input__field-wrapper">
+													<input id="ya-old-pwd" class="ya-input__field" type="password" ng-model="cred.old_password" />
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-3 ya-right">
+												<label for="ya-new-pwd" class="ya-input__label">
+													Новый пароль
+												</label>
+											</div>
+											<div class="ya-grid-2-3">
+												<div class="ya-input__field-wrapper">
+													<input id="ya-new-pwd" class="ya-input__field" type="password" ng-model="cred.new_password" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ya-info-block">
+							<div class="ya-info-block__title">
+								Номер вашего телефона
+							</div>
+							<div class="ya-info-block__content">
+								<div class="ya-form">
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-3 ya-right">
+												<label for="ya-old-phone" class="ya-input__label">
+													Текущий номер
+												</label>
+											</div>
+											<div class="ya-grid-2-3">
+												<div class="ya-input__field-wrapper">
+													<input id="ya-old-phone" class="ya-input__field" type="tel" />
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-3 ya-right">
+												<label for="ya-new-phone" class="ya-input__label">
+													Новый номер
+												</label>
+											</div>
+											<div class="ya-grid-2-3">
+												<div class="ya-input__field-wrapper">
+													<input id="ya-new-phone" class="ya-input__field" type="tel" ng-model="options.user.phone" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ya-info-block">
+							<div class="ya-info-block__content">
+								<div class="ya-form">
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-1">
+												<label>
+													<input type="checkbox" ng-model="options.user.use_large_fonts">
+													Использовать увеличенные шрифты
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-1 ya-center">
+												<button ng-click="user_save();" class="ya-btn ya-btn_secondary ya-btn_inline">Сохранить</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ya-options__info-block" ng-show="active_page === 'privacy'">
+						<div class="ya-info-block">
+							<div class="ya-info-block__title">
+								Моя страница
+							</div>
+							<div class="ya-info-block__content">
+								<div class="ya-form">
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-3 ya-right">
+												<label for="ya-see-profile" class="ya-input__label">
+													Кто видит информацию обо мне
+												</label>
+											</div>
+											<div class="ya-grid-2-3">
+												<div class="ya-input__field-wrapper">
+													<select id="ya-see-profile" class="ya-input__field ya-input__field_select ya-input__select" >
+														<option>Все</option>
+														<option>Друзья и друзья друзей</option>
+														<option>Только друзья</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ya-info-block">
+							<div class="ya-info-block__title">
+								Записи на странице
+							</div>
+							<div class="ya-info-block__content">
+								<div class="ya-form">
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-3 ya-right">
+												<label for="ya-see-comments" class="ya-input__label">
+													Кто видит комментарии к записям
+												</label>
+											</div>
+											<div class="ya-grid-2-3">
+												<div class="ya-input__field-wrapper">
+													<select id="ya-see-comments" class="ya-input__field ya-input__field_select ya-input__select" >
+														<option>Все</option>
+														<option>Друзья и друзья друзей</option>
+														<option>Только друзья</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ya-info-block">
+							<div class="ya-info-block__title">
+								Связь со мной
+							</div>
+							<div class="ya-info-block__content">
+								<div class="ya-form">
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-3 ya-right">
+												<label for="ya-can-write" class="ya-input__label">
+													Кто может писать мне сообщения
+												</label>
+											</div>
+											<div class="ya-grid-2-3">
+												<div class="ya-input__field-wrapper">
+													<select id="ya-can-write" class="ya-input__field ya-input__field_select ya-input__select" >
+														<option>Все</option>
+														<option>Друзья и друзья друзей</option>
+														<option>Только друзья</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-1 ya-center">
+												<button ng-click="user_save();" class="ya-btn ya-btn_secondary ya-btn_inline">Сохранить</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ya-options__info-block" ng-show="active_page === 'notifications'">
+						<div class="ya-info-block">
+							<div class="ya-info-block__title">
+								Моментальные оповещения на сайте
+							</div>
+							<div class="ya-info-block__content">
+								<div class="ya-form">
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-1">
+												<label>
+													<input
+														type="checkbox"
+														ng-model="options.user.settings.show_notifications"
+														ng-click="options.user.settings.show_notifications && request_permissions();"
+													>
+													Включить уведомления
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-1">
+												<label>
+													<input
+														type="checkbox"
+														ng-model="options.user.settings.show_notifications_text"
+													>
+														Показывать текст сообщений
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ya-info-block">
+							<div class="ya-info-block__title">
+								Оповещение по электронной почте
+							</div>
+							<div class="ya-info-block__content">
+								<div class="ya-form">
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-1">
+												<label>
+													<input type="checkbox" ng-model="options.user.settings.notify_private">
+													Личные сообщения
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-1">
+												<label>
+													<input type="checkbox" ng-model="options.user.settings.notify_topic_comments">
+													Комментарии на стене
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-1">
+												<label>
+													<input type="checkbox" ng-model="options.user.settings.notify_photo_comments">
+													Комментарии к фотографиям
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-1">
+												<label>
+													<input type="checkbox" ng-model="options.user.settings.notify_video_comments">
+													Комментарии к видео
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-1">
+												<label>
+													<input type="checkbox" ng-model="options.user.settings.notify_competitions">
+													Оповещения о мероприятиях
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-1">
+												<label>
+													<input type="checkbox" ng-model="options.user.settings.notify_contests">
+													Оповещения о конкурсах
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-1">
+												<label>
+													<input type="checkbox" ng-model="options.user.settings.notify_birthdays">
+													Дни рождения
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-1 ya-center">
+												<button ng-click="user_save();" class="ya-btn ya-btn_secondary ya-btn_inline">Сохранить</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ya-grid-1-5">
+				<div class="ya-page__block">
+					<!--div class="ya-btn ya-btn_search"-->
+						<a href="#/search" class="ya-btn__link ya-btn__link_search">Поиск</a>
+					<!--/div-->
+				</div>
+				<div class="ya-page__block ya-page__block_colored">
+					<div class="ya-profile-links ya-clearfix">
+							<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
+								<a href="#/dialogs" class="ya-profile-links__link ya-profile-links__link_chat"><span class="ya-profile-links__link-img ya-profile-links__link-img_chat"></span></a>
+							</div>
+							<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
+								<a href="#/user/{{user._id}}/photos/all" class="ya-profile-links__link ya-profile-links__link_photos"><span class="ya-profile-links__link-img ya-profile-links__link-img_photos"></span></a>
+							</div>
+							<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
+								<a href="#/user/{{user._id}}/videos/all" class="ya-profile-links__link ya-profile-links__link_videos"><span class="ya-profile-links__link-img ya-profile-links__link-img_videos"></span></a>
+							</div>
+							<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
+								<a href="#/favs" class="ya-profile-links__link ya-profile-links__link_favs"><span class="ya-profile-links__link-img ya-profile-links__link-img_favs"></span></a>
+							</div>
+					</div>
+				</div>
+				<div class="ya-page__block ya-page__block_colored">
+					<div class="ya-ads-block">
+						<div class="ya-ads-block__list">
+							<div class="ya-ads-block__item ya-ads-block__item_count_1">
+								<a href="https://yandex.ru" target="_blank" class="ya-ads-block__link">
+									<span class="ya-ads-block__media">
+										<img src="/images/banner.jpg" class="ya-ads-block__img" />
+									</span>
+									<span class="ya-ads-block__text">
+										<span class="ya-ads-block__title">АтлетикШоп рекомендует!</span>
+										<span class="ya-ads-block__content">Современный продукт, очищенный от "вредных" для каждого атлета.</span>
+									</span>
+								</a>
+							</div>
+							<div class="ya-ads-block__item ya-ads-block__item_count_2">
+								<a href="https://yandex.ru" target="_blank" class="ya-ads-block__link">
+									<span class="ya-ads-block__media">
+										<img src="/images/banner.jpg" class="ya-ads-block__img" />
+									</span>
+									<span class="ya-ads-block__text">
+										<span class="ya-ads-block__title">АтлетикШоп рекомендует!</span>
+										<span class="ya-ads-block__content">Современный продукт, очищенный от "вредных" для каждого атлета.</span>
+									</span>
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
