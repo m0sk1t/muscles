@@ -29,6 +29,7 @@ module.exports = (app) => {
 					return done(err);
 				}
 				if (isMatch) {
+					delete user.pass;
 					return done(null, user);
 				}
 				return done(null, false, {
@@ -100,7 +101,10 @@ module.exports = (app) => {
 				return next(err);
 			}
 			if (existingUser) {
-				return res.redirect('/#/signin');
+				res.status(302).json({
+					msg: 'Пользователь с такой почтой уже зарегистрирован! Если это вы, попробуйте войти на сайт со своим логином и паролем'
+				});
+				return;
 			}
 			user.save((err) => {
 				if (err) {
@@ -110,13 +114,18 @@ module.exports = (app) => {
 					if (err) {
 						return next(err);
 					}
+					delete user.pass;
 					res.json(user);
 				});
 			});
 		});
 	});
 
-	app.post('/auth/local', passport.authenticate('local'));
+	app.post('/auth/local',
+		passport.authenticate('local'),
+		(req, res) => {
+			res.json(req.user);
+		});
 
 	app.get('/auth/facebook',
 		passport.authenticate('facebook', {

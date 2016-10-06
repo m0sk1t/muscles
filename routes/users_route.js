@@ -1,132 +1,12 @@
 module.exports = (app) => {
-	var salt = require('./salt.js').salt,
-		qs = require('qs'),
-		crypto = require('crypto'),
+	var crypto = require('crypto'),
 		request = require('request'),
 		mongoose = require('mongoose'),
-		mailer = require('./mailer.js'),
-		User = require('../models/User'),
-		PIN = mongoose.model('PIN', mongoose.Schema({
-			pin: Number,
-			mail: String,
-			userid: String,
-			attempts: Number
-		}));
-
-	app.post('/auth', (req, res) => {
-		if (!req.body.mail || !req.body.pass) {
-			res.status(500).send('Empty credentials!');
-			return console.error('Empty credentials!');
-		}
-		var mail = req.body.mail.toLowerCase(),
-			userid = crypto.createHash('sha256').update(mail + req.body.pass + salt).digest('hex'),
-			pin = +crypto.createHash('md5').update(mail + salt + String(Date.now())).digest('hex').match(/\d+/g).join('').substr(0, 7),
-			sendPin = (cb) => {
-				PIN.findOneAndUpdate({
-					mail: mail
-				}, {
-					$set: {
-						pin: pin,
-						mail: mail,
-						attempts: 5,
-						userid: userid,
-					}
-				}, {
-					upsert: true
-				}, (e, newpin) => {
-					var mailOptions = {
-						mail: [mail],
-						subj: 'Данные для авторизации',
-						html: [
-							'Для авторизации в сети СпортПроекта',
-							' вам необходимо ввести пин-код, написанный ниже',
-							':<p></p><p></p>',
-							'<span style="padding: 3px; border: 1px solid #ccc; color: #167aaf; font-size: 33px; font-weight: bold">',
-							pin,
-							'</span><br />',
-							'на странице авторизации',
-							'<p></p>С уважением,<br>Команда СпортПроекта!'
-						].join('')
-					};
-					mailer.send_mail(mailOptions, (error, info) => {
-						if (error) return console.log(error);
-						console.log('Был послан: ' + info.response);
-						cb();
-					});
-				});
-			};
-		User.findOne({
-			mail: mail
-		}, (err, user) => {
-			if (err) return console.error(err);
-			if (user) {
-				if (user.userid === userid) {
-					res.status(202).cookie("userid", userid, {
-						expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365 * 77),
-						httpOnly: true,
-						path: '/'
-					}).json(user);
-				} else {
-					res.status(403).send('Wrong credentials!');
-				}
-			} else {
-				sendPin(() => {
-					res.send('OK!');
-				});
-			};
-		});
-	});
-
-	app.get('/pin/:mail/:pin', (req, res) => {
-		var mail = req.params.mail;
-		PIN.findOne({
-			mail: mail,
-		}, (e, pin) => {
-			if (e && !pin) return console.error(e);
-			if (+pin.pin === +req.params.pin) {
-				PIN.remove({
-					mail: mail
-				}, (e, p) => {
-					User.create({
-						mail: mail,
-						userid: pin.userid,
-						creDate: Date.now(),
-					}, (err, user) => {
-						res.cookie('userid', pin.userid, {
-							expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365 * 10),
-							httpOnly: true,
-							path: '/'
-						}).send('OK!');
-					});
-				});
-			} else {
-				if (pin.attempts > 0) {
-					PIN.findOneAndUpdate({
-						mail: mail
-					}, {
-						$inc: {
-							attempts: -1
-						}
-					}, (e, upin) => {
-						res.status(403).json({
-							msg: 'Wrong pin!',
-							attempts: pin.attempts
-						});
-					});
-				} else {
-					PIN.remove({
-						mail: mail
-					}, (e, p) => {
-						res.status(500).send('Too many wrong attempts!');
-					});
-				}
-			}
-		});
-	});
+		User = require('../models/User');
 
 	app.get('/user/:id', (req, res) => {
 		User.findById(req.params.id, {
-			userid: 0
+			pass: 0
 		}, (err, user) => {
 			if (err) return console.error(err);
 			res.json(user);
@@ -135,16 +15,9 @@ module.exports = (app) => {
 
 	app.route('/user')
 		.get((req, res) => {
-			var userid = req.cookies.userid;
-			if (userid) {
-				User.findOne({
-					userid: userid
-				}, (err, user) => {
-					res.json(user);
-				});
-			} else {
-				res.status(404).send('Need to register first!');
-			}
+			User.findById(req.user.id, (err, user) => {
+				res.json(user);
+			});
 		})
 		.put((req, res) => {
 			var userid = req.cookies.userid;
@@ -254,7 +127,7 @@ module.exports = (app) => {
 		});
 	});
 
-	app.post('/find_users', (req, res) => {
+	app.post('/user/search', (req, res) => {
 		var search = {},
 			info = {
 				mail: 1,

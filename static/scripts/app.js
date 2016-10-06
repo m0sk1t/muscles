@@ -1,6 +1,6 @@
-angular.module('MuscleMan', [ /*'ngFacebook', */ 'ngLocale', 'ngFileUpload', 'ngRoute', '720kb.datepicker', 'Services']).config(['$routeProvider', /*'$facebookProvider',*/
+angular.module('MuscleMan', ['ngLocale', 'ngFileUpload', 'ngRoute', '720kb.datepicker', 'Services']).config(['$routeProvider', /*'$facebookProvider',*/
 
-    function($routeProvider /*, $facebookProvider*/ ) {
+    function($routeProvider) {
         $routeProvider.when('/', {
             templateUrl: 'tpl/main.tpl',
             controller: 'MainCtrl'
@@ -61,32 +61,7 @@ angular.module('MuscleMan', [ /*'ngFacebook', */ 'ngLocale', 'ngFileUpload', 'ng
         }).otherwise({
             redirectTo: '/'
         });
-        /*		$facebookProvider.setAppId('1782419512001549');
-        		$facebookProvider.setPermissions('public_profile,email,user_friends,user_photos,user_videos');
-        */
     }
 ]).run(function($rootScope) {
-    /*	(function(d, s, id) {
-    		var js, fjs = d.getElementsByTagName(s)[0];
-    		if (d.getElementById(id)) return;
-    		js = d.createElement(s);
-    		js.id = id;
-    		js.src = "//connect.facebook.net/en_US/sdk.js";
-    		fjs.parentNode.insertBefore(js, fjs);
-    	}(document, 'script', 'facebook-jssdk'));
-
-    	(function(d, s, id) {
-    		var js, fjs = d.getElementsByTagName(s)[0];
-    		if (d.getElementById(id)) return;
-    		js = d.createElement(s);
-    		js.id = id;
-    		js.src = "//vk.com/js/api/openapi.js";
-    		fjs.parentNode.insertBefore(js, fjs);
-    	}(document, 'script', 'vk-openapi'));
-    	window.vkAsyncInit = function() {
-    		VK.init({
-    			apiId: 5644041
-    		});
-    	};
-    */
+    console.log('App loaded!');
 });

@@ -1,10 +1,6 @@
 angular.module('MuscleMan').controller('MainCtrl', ['$scope', 'socket', 'User', 'LS', 'notify',
 	function($scope, socket, User, LS, notify) {
-		socket.on('user:online', function(data) {
-			console.log('user:online');
-			console.log(data);
-		});
-
+		$scope.options.user._id && socket.emit('user:online', { id: $scope.options.user._id });
 		socket.on('new:message', function(data) {
 			console.log('new:message');
 			console.log(data);

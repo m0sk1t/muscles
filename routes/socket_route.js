@@ -5,13 +5,11 @@ module.exports = (app, io) => {
 
 	io.on('connection', (socket) => {
 		console.log('io:connection socket.id: ', socket.id);
+		var id = '';
 
-		function set_io_id() {
-			var userid = (/userid=\w+/).exec(socket.client.request.headers.cookie) ? (/userid=\w+/).exec(socket.client.request.headers.cookie)[0].split('=')[1] : '';
-			console.log('io:connection userid: ', userid);
-			userid && Users.findOneAndUpdate({
-				userid: userid
-			}, {
+		socket.on('user:online', (data) => {
+			id = data.id;
+			Users.findByIdAndUpdate(id, {
 				'$set': {
 					'ioid': socket.id,
 					'online': true
@@ -20,13 +18,6 @@ module.exports = (app, io) => {
 				if (err) return console.error(err);
 				user && socket.emit('user:online', user.id);
 			});
-
-		}
-
-		set_io_id();
-
-		socket.on('user:auth', (data) => {
-			set_io_id();
 		});
 
 		socket.on('new:message', (data) => {
@@ -78,10 +69,7 @@ module.exports = (app, io) => {
 		});
 
 		socket.on('disconnect', () => {
-			var userid = (/userid=\w+/).exec(socket.client.request.headers.cookie) ? (/userid=\w+/).exec(socket.client.request.headers.cookie)[0].split('=')[1] : '';
-			userid && Users.findOneAndUpdate({
-				userid: userid
-			}, {
+			Users.findByIdAndUpdate(id, {
 				'$set': {
 					'online': false,
 					'lastOnline': Date.now()
@@ -92,4 +80,4 @@ module.exports = (app, io) => {
 			});
 		});
 	});
-}
+};
