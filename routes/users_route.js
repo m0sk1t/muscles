@@ -15,9 +15,13 @@ module.exports = (app) => {
 
 	app.route('/user')
 		.get((req, res) => {
-			User.findById(req.user.id, (err, user) => {
-				res.json(user);
-			});
+			if (req.user.id) {
+				User.findById(req.user.id, (err, user) => {
+					res.json(user);
+				});
+			} else {
+				res.status(500).send('No session');
+			}
 		})
 		.put((req, res) => {
 			var userid = req.cookies.userid;
