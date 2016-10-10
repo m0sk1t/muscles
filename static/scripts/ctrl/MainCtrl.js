@@ -1,8 +1,15 @@
 angular.module('MuscleMan').controller('MainCtrl', ['$scope', 'socket', 'User', 'LS', 'notify',
 	function($scope, socket, User, LS, notify) {
-		socket.on('user:online', function(data) {
-			console.log('user:online');
-			console.log(data);
+		$scope.options = {
+			user: LS.get('user') || 0
+		};
+
+		$scope.getloc = function() {
+			return location.hash === '#/';
+		};
+
+		$scope.options.user && socket.emit('user:online', {
+			id: $scope.options.user._id
 		});
 
 		socket.on('new:message', function(data) {
@@ -53,19 +60,11 @@ angular.module('MuscleMan').controller('MainCtrl', ['$scope', 'socket', 'User', 
 			}
 		});
 
-		$scope.options = {
-			user: LS.get('user') || 0
-		};
-
-		$scope.getloc = function() {
-			return location.hash === '#/';
-		};
-
 		!!$scope.options.user && User.get(function(res) {
 			$scope.options.user = res.data;
 			LS.set('user', res.data);
 		}, function(res) {
-			location.hash = '#/auth'
+			location.hash = '#/singin'
 		});
 
 		$scope.$on('new_message', function(ev, data) {

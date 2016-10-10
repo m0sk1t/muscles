@@ -28,6 +28,12 @@ angular.module('Services', []).factory('User', ['$http',
 			set: function(options, s, e) {
 				return $http.put('/user', options).then(s, e);
 			},
+			signup: function(credentials, s, e) {
+				return $http.post('/signup', credentials).then(s, e);
+			},
+			signin: function(credentials, s, e) {
+				return $http.post('/auth/local', credentials).then(s, e);
+			},
 			auth: function(credentials, s, e) {
 				return $http.post('/auth', credentials).then(s, e);
 			},
@@ -35,7 +41,7 @@ angular.module('Services', []).factory('User', ['$http',
 				return $http.get('/pin/' + cred.mail + '/' + cred.pin).then(s, e);
 			},
 			find_users: function(search, s, e) {
-				return $http.post('/find_users', search).then(s, e);
+				return $http.post('/user/search', search).then(s, e);
 			}
 		};
 	}

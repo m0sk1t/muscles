@@ -48,20 +48,6 @@
 								<div class="ya-form__input ya-input ya-input_inline">
 									<div class="ya-clearfix">
 										<div class="ya-grid-1-3 ya-right">
-											<label for="ya-surname" class="ya-input__label">
-												Фамилия
-											</label>
-										</div>
-										<div class="ya-grid-2-3">
-											<div class="ya-input__field-wrapper">
-												<input id="ya-surname" class="ya-input__field" type="text" ng-model="options.user.surname" />
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="ya-form__input ya-input ya-input_inline">
-									<div class="ya-clearfix">
-										<div class="ya-grid-1-3 ya-right">
 											<label for="ya-name" class="ya-input__label">
 												Имя
 											</label>
@@ -69,6 +55,20 @@
 										<div class="ya-grid-2-3">
 											<div class="ya-input__field-wrapper">
 												<input id="ya-name" class="ya-input__field" type="text" ng-model="options.user.name" />
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="ya-form__input ya-input ya-input_inline">
+									<div class="ya-clearfix">
+										<div class="ya-grid-1-3 ya-right">
+											<label for="ya-surname" class="ya-input__label">
+												Фамилия
+											</label>
+										</div>
+										<div class="ya-grid-2-3">
+											<div class="ya-input__field-wrapper">
+												<input id="ya-surname" class="ya-input__field" type="text" ng-model="options.user.surname" />
 											</div>
 										</div>
 									</div>
