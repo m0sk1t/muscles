@@ -20,8 +20,7 @@ var mongoose = require('mongoose'),
 			default: ''
 		},
 		pass: {
-			type: String,
-			required: true
+			type: String
 		},
 		mail: {
 			type: String,

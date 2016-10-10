@@ -17,7 +17,7 @@ angular.module('MuscleMan').controller('SignInCtrl', ['$scope', '$location', 'so
 
 			}, function(res) {
 				$scope.options.loading = false;
-				console.error(res);
+				console.error(res.data);
 			});
 		};
 	}

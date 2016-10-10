@@ -33,7 +33,7 @@
 						</div>
 						<div class="ya-user__options ya ya-span-1-3">
 							<a href="#/options" class="ya-user__options-btn" ng-if="options.user._id === user._id"></a>
-							<a href="#" class="ya-user__logout-btn ya-logout-btn"></a>
+							<a href="/logout" class="ya-user__logout-btn ya-logout-btn"></a>
 						</div>
 					</div>
 				</div>

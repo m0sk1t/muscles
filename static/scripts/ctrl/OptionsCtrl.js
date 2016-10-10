@@ -1,5 +1,5 @@
-angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload', 'User',
-	function($scope, MSG, Upload, User) {
+angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload', 'User', 'LS',
+	function($scope, MSG, Upload, User, LS) {
 		$scope.cred = {
 			old_password: '',
 			new_password: ''
@@ -9,7 +9,7 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 			$scope.options.user = res.data;
 			LS.set('user', res.data);
 		}, function(res) {
-			location.hash = '#/auth'
+			console.error(res.data);
 		});
 
 		$scope.active_page = 'profile';
