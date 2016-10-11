@@ -15,47 +15,33 @@ var app = require('express')(),
 	MongoStore = require('connect-mongo')(session),
 	expressValidator = require('express-validator');
 
-app.disable('x-powered-by');
-
-app.use(morgan('combined'));
-
 app.use(compression());
 
+app.use(morgan('dev'));
+
+app.use(serveStatic(__dirname + '/static'));
+
+app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(cookieParser());
-
-app.use(bodyParser.urlencoded({
-	limit: '3mb',
-	extended: true
-}));
-
-app.use(bodyParser.json({
-	limit: '3mb'
-}));
 
 app.use(expressValidator());
 
 app.use(session({
 	resave: true,
 	saveUninitialized: true,
-	name: 'sportSessionID',
 	secret: 'J(8uH*hFHIJShsidjisjvnau9h878t*^G^*g8g987G',
 	store: new MongoStore({
 		autoReconnect: true,
 		url: 'mongodb://localhost:27017/muscles',
-	}),
-	cookie: {
-		path: '/',
-		secure: true,
-		httpOnly: true,
-		expires: Date.now() + 100 * 365 * 24 * 60 * 60 * 1000
-	}
+	})
 }));
 
 app.use(passport.initialize());
 
 app.use(passport.session());
-
-app.use(serveStatic(__dirname + '/static'));
 
 //e.use(serveFavicon(__dirname + "/pub/img/favicon.ico"));
 
@@ -73,8 +59,8 @@ http.listen(4321, () => {
 	});
 });
 
-app.use(errorHandler());
-/*
+//app.use(errorHandler());
+
 process.stdin.resume();
 
 function exitHandler(options, err) {
@@ -96,5 +82,5 @@ process.on('SIGINT', exitHandler.bind(null, {
 process.on('uncaughtException', exitHandler.bind(null, {
 	exit: false
 }));
-*/
+
 module.exports = app;
