@@ -15,9 +15,6 @@ module.exports = (app) => {
 
 	app.route('/user')
 		.get(ensureAuthenticated, (req, res) => {
-			console.log('req.user: ', req.user);
-			console.log('req.account: ', req.account);
-			console.log('req.session: ', req.session);
 			req.user ? User.findById(req.user._id, (err, user) => {
 				if (err) return console.error(err);
 				res.json(user);
@@ -34,9 +31,7 @@ module.exports = (app) => {
 			}) : res.status(403).send('Please, login first');
 		})
 		.delete(ensureAuthenticated, (req, res) => {
-			req.user ? User.findOneAndRemove({
-				userid: userid
-			}, (err, user) => {
+			req.user ? User.findByIdAndRemove(req.user._id, (err, user) => {
 				if (err) return console.error(err);
 				res.clearCookie('userid').redirect('/');
 			}) : res.status(403).send('Please, login first');

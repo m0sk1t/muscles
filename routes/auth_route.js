@@ -9,6 +9,16 @@ module.exports = (app) => {
 		FacebookStrategy = require('passport-facebook').Strategy,
 		InstagramStrategy = require('passport-instagram').Strategy;
 
+	passport.serializeUser((user, done) => {
+		done(null, user.id);
+	});
+
+	passport.deserializeUser((id, done) => {
+		User.findById(id, (err, user) => {
+			done(err, user);
+		});
+	});
+
 	passport.use(new LocalStrategy({
 		usernameField: 'mail',
 		passwordField: 'pass'
@@ -35,18 +45,17 @@ module.exports = (app) => {
 	}));
 
 	passport.use(new FacebookStrategy({
-			enableProof: true,
 			passReqToCallback: true,
 			clientID: '1782419512001549',
+			callbackURL: "/auth/fb/callback",
 			clientSecret: '5b67b4ba8b40c064d0a10b714ba90232',
-			callbackURL: "http://localhost:4321/auth/fb/callback",
 			profileFields: ['id', 'email', 'friends', 'first_name', 'last_name'],
 		},
 		(req, accessToken, refreshToken, profile, done) => {
 			var fb_user = profile._json;
 			if (req.user) {
 				User.findById(req.user._id, (err, existingUser) => {
-					if (err) return done(err);
+					if (err) return done(err, false);
 					if (existingUser) {
 						existingUser.social.fb = fb_user;
 						existingUser.tokens.fb = accessToken;
@@ -58,7 +67,7 @@ module.exports = (app) => {
 						});
 					} else {
 						User.findOne({ mail: fb_user.email }, (err, existingUser) => {
-							if (err) return done(err);
+							if (err) return done(err, false);
 							if (existingUser) {
 								existingUser.social.fb = fb_user;
 								existingUser.tokens.fb = accessToken;
@@ -69,14 +78,14 @@ module.exports = (app) => {
 									done(null, existingUser);
 								});
 							} else {
-								const user = new User();
-								user.mail = fb_user.email;
-								user.social.fb = fb_user;
-								user.tokens.fb = accessToken;
-								user.name = fb_user.first_name;
-								user.surname = fb_user.last_name;
-								user.save((err) => {
-									done(err, user);
+								const newUser = new User();
+								newUser.mail = fb_user.email;
+								newUser.social.fb = fb_user;
+								newUser.tokens.fb = accessToken;
+								newUser.name = fb_user.first_name;
+								newUser.surname = fb_user.last_name;
+								newUser.save((err) => {
+									done(err, newUser);
 								});
 							}
 						});
@@ -84,7 +93,7 @@ module.exports = (app) => {
 				});
 			} else {
 				User.findOne({ mail: fb_user.email }, (err, existingUser) => {
-					if (err) return done(err);
+					if (err) return done(err, false);
 					if (existingUser) {
 						existingUser.social.fb = fb_user;
 						existingUser.tokens.fb = accessToken;
@@ -95,46 +104,20 @@ module.exports = (app) => {
 							done(null, existingUser);
 						});
 					} else {
-						const user = new User();
-						user.mail = fb_user.email;
-						user.social.fb = fb_user;
-						user.tokens.fb = accessToken;
-						user.name = fb_user.first_name;
-						user.surname = fb_user.last_name;
-						user.save((err) => {
-							done(err, user);
+						const newUser = new User();
+						newUser.mail = fb_user.email;
+						newUser.social.fb = fb_user;
+						newUser.tokens.fb = accessToken;
+						newUser.name = fb_user.first_name;
+						newUser.surname = fb_user.last_name;
+						newUser.save((err) => {
+							done(err, newUser);
 						});
 					}
 				});
 			}
-			/*			var user = profile._json;
-						User.findOneAndUpdate({
-							'mail': user.email.toLowerCase(),
-						}, {
-							'social.fb': user,
-							'name': user.first_name,
-							'tokens.fb': accessToken,
-							'surname': user.last_name,
-						}, {
-							upsert: true
-						}, (err, user) => {
-							if (err) return done(err);
-							return done(null, user);
-						});
-					}
-			*/
 		}
 	));
-
-	passport.serializeUser((user, done) => {
-		done(null, user._id);
-	});
-
-	passport.deserializeUser((id, done) => {
-		User.findById(id, (err, user) => {
-			done(err, user);
-		});
-	});
 
 	app.post('/signup', (req, res, next) => {
 		req.assert('mail', 'Email is not valid').isEmail();
