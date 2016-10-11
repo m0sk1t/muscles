@@ -289,11 +289,11 @@
 							Номер телефона
 							<input type="tel" ng-model="options.user.phone">
 						</label><br>
-						<label>
+<!-- 						<label>
 							<input type="checkbox" ng-model="options.user.use_large_fonts">
 							Использовать увеличенные шрифты
 						</label><br>
-						<button ng-click="user_save();">save</button>
+ -->						<button ng-click="user_save();">save</button>
 					</section>
 					<section ng-show="active_page === 'privacy'">
 						<h3>Моя страница</h3>
@@ -301,7 +301,6 @@
 							Кто видит информацию обо мне
 							<select>
 								<option>Все</option>
-								<option>Друзья и друзья друзей</option>
 								<option>Только друзья</option>
 							</select>
 						</label><br>
@@ -309,7 +308,6 @@
 						<label>
 							<select>
 								<option>Все</option>
-								<option>Друзья и друзья друзей</option>
 								<option>Только друзья</option>
 							</select>
 						</label><br>
@@ -317,10 +315,36 @@
 						<label>
 							<select>
 								<option>Все</option>
-								<option>Друзья и друзья друзей</option>
 								<option>Только друзья</option>
 							</select>
 						</label><br>
+						<div>
+							<div>
+								FB
+								<a ng-show="options.user.tokens.fb" ng-click="unlink('fb')">отвязать</a>
+								<a ng-hide="options.user.tokens.fb" href="/auth/fb">привязать</a>
+							</div>
+							<div>
+								VK
+								<a ng-show="options.user.tokens.vk" ng-click="unlink('vk')">отвязать</a>
+								<a ng-hide="options.user.tokens.vk" href="/auth/vk">привязать</a>
+							</div>
+							<div>
+								TW
+								<a ng-show="options.user.tokens.tw" ng-click="unlink('tw')">отвязать</a>
+								<a ng-hide="options.user.tokens.tw" href="/auth/tw">привязать</a>
+							</div>
+							<div>
+								IM
+								<a ng-show="options.user.tokens.im" ng-click="unlink('im')">отвязать</a>
+								<a ng-hide="options.user.tokens.im" href="/auth/im">привязать</a>
+							</div>
+							<div>
+								OK
+								<a ng-show="options.user.tokens.ok" ng-click="unlink('ok')">отвязать</a>
+								<a ng-hide="options.user.tokens.ok" href="/auth/ok">привязать</a>
+							</div>
+						</div>
 						<button ng-click="user_save();">save</button>
 					</section>
 					<section ng-show="active_page === 'notifications'">

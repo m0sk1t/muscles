@@ -14,6 +14,15 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 
 		$scope.active_page = 'profile';
 
+		$scope.unlink = function(provider) {
+			User.unlink(provider, function(res) {
+				$scope.options.user.social[provider] = undefined;
+				$scope.options.user.tokens[provider] = undefined;
+			}, function(res) {
+				console.error(res.data);
+			});
+		}
+
 		$scope.upload_photo = function(photo) {
 			console.log(photo);
 			$scope.options.loading = true;

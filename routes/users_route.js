@@ -21,6 +21,7 @@ module.exports = (app) => {
 			}) : res.status(403).send('Please, login first');
 		})
 		.put(ensureAuthenticated, (req, res) => {
+			delete req.body._id;
 			req.user ? User.findByIdAndUpdate(req.user._id, {
 				$set: req.body
 			}, {
@@ -36,6 +37,17 @@ module.exports = (app) => {
 				res.clearCookie('userid').redirect('/');
 			}) : res.status(403).send('Please, login first');
 		});
+
+	app.put('/unlink/:provider', ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, (err, user) => {
+			if (err) return console.error(err);
+			user.social[req.params.provider] = undefined;
+			user.tokens[req.params.provider] = undefined;
+			user.save((err) => {
+				res.json(user);
+			});
+		}) : res.status(403).send('Please, login first');
+	})
 
 	app.put('/user/add_university', ensureAuthenticated, (req, res) => {
 		req.user ? User.findById(req.user._id, {
@@ -188,7 +200,6 @@ module.exports = (app) => {
 
 	function ensureAuthenticated(req, res, next) {
 		var isAuth = req.isAuthenticated();
-		isAuth && console.log('Authenticated!');
 		if (isAuth) return next();
 		res.redirect('/');
 	}

@@ -119,6 +119,76 @@ module.exports = (app) => {
 		}
 	));
 
+	passport.use(new TwitterStrategy({
+			passReqToCallback: true,
+			callbackURL: '/auth/tw/callback',
+			consumerKey: 'C3nDiK9uZyQUYSGKy9b8rolvM',
+			consumerSecret: '4Bq5CYp2VfQZYHWmc4ryXjOuEAiGk549GzyXDtLmjCdGZtDx7A',
+		},
+		(req, accessToken, refreshToken, profile, done) => {
+			var tw_user = profile,
+				tw_mail = `${profile.username}@twitter.com`;
+			if (req.user) {
+				User.findById(req.user._id, (err, existingUser) => {
+					if (err) return done(err, false);
+					if (existingUser) {
+						existingUser.social.tw = tw_user;
+						existingUser.tokens.tw = accessToken;
+						existingUser.mail = existingUser.mail || tw_mail;
+						existingUser.name = existingUser.name || tw_user.displayName;
+						existingUser.save((err) => {
+							done(null, existingUser);
+						});
+					} else {
+						User.findOne({ mail: tw_mail }, (err, existingUser) => {
+							if (err) return done(err, false);
+							if (existingUser) {
+								existingUser.social.tw = tw_user;
+								existingUser.tokens.tw = accessToken;
+								existingUser.mail = existingUser.mail || tw_mail;
+								existingUser.name = existingUser.name || tw_user.displayName;
+								existingUser.save((err) => {
+									done(null, existingUser);
+								});
+							} else {
+								const newUser = new User();
+								newUser.mail = tw_mail;
+								newUser.social.tw = tw_user;
+								newUser.tokens.tw = accessToken;
+								newUser.name = tw_user.displayName;
+								newUser.save((err) => {
+									done(err, newUser);
+								});
+							}
+						});
+					}
+				});
+			} else {
+				User.findOne({ mail: tw_mail }, (err, existingUser) => {
+					if (err) return done(err, false);
+					if (existingUser) {
+						existingUser.social.tw = tw_user;
+						existingUser.tokens.tw = accessToken;
+						existingUser.mail = existingUser.mail || tw_mail;
+						existingUser.name = existingUser.name || tw_user.displayName;
+						existingUser.save((err) => {
+							done(null, existingUser);
+						});
+					} else {
+						const newUser = new User();
+						newUser.mail = tw_mail;
+						newUser.social.tw = tw_user;
+						newUser.tokens.tw = accessToken;
+						newUser.name = tw_user.displayName;
+						newUser.save((err) => {
+							done(err, newUser);
+						});
+					}
+				});
+			}
+		}
+	));
+
 	app.post('/signup', (req, res, next) => {
 		req.assert('mail', 'Email is not valid').isEmail();
 		req.sanitize('mail').normalizeEmail({
@@ -145,9 +215,7 @@ module.exports = (app) => {
 				return next(err);
 			}
 			if (existingUser) {
-				res.status(302).json({
-					msg: 'Пользователь с такой почтой уже зарегистрирован! Если это вы, попробуйте войти на сайт со своим логином и паролем'
-				});
+				res.redirect('/#/signin');
 				return;
 			}
 			user.save((err) => {
