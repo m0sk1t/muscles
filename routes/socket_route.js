@@ -9,12 +9,13 @@ module.exports = (app, io) => {
 
 		socket.on('user:online', (data) => {
 			id = data.id;
-			Users.findByIdAndUpdate(id, {
+			id && Users.findByIdAndUpdate(id, {
 				'$set': {
 					'ioid': socket.id,
 					'online': true
 				}
 			}, (err, user) => {
+				console.log('user:online - ', id);
 				if (err) return console.error(err);
 				user && socket.emit('user:online', user.id);
 			});
@@ -69,7 +70,7 @@ module.exports = (app, io) => {
 		});
 
 		socket.on('disconnect', () => {
-			Users.findByIdAndUpdate(id, {
+			id && Users.findByIdAndUpdate(id, {
 				'$set': {
 					'online': false,
 					'lastOnline': Date.now()

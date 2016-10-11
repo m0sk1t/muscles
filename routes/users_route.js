@@ -14,121 +14,98 @@ module.exports = (app) => {
 	});
 
 	app.route('/user')
-		.get((req, res) => {
-			if (req.user.id) {
-				User.findById(req.user.id, (err, user) => {
-					res.json(user);
-				});
-			} else {
-				res.status(500).send('No session');
-			}
+		.get(ensureAuthenticated, (req, res) => {
+			console.log('req.user: ', req.user);
+			console.log('req.account: ', req.account);
+			console.log('req.session: ', req.session);
+			req.user ? User.findById(req.user._id, (err, user) => {
+				if (err) return console.error(err);
+				res.json(user);
+			}) : res.status(403).send('Please, login first');
 		})
-		.put((req, res) => {
-			var userid = req.cookies.userid;
-			delete req.body._id;
-			delete req.body.__v;
-			if (userid) {
-				User.findOneAndUpdate({
-					userid: userid
-				}, {
-					$set: req.body
-				}, {
-					upsert: false
-				}, (err, user) => {
-					res.json(user);
-				});
-			} else {
-				res.status(404).send('Need to register first!');
-			}
+		.put(ensureAuthenticated, (req, res) => {
+			req.user ? User.findByIdAndUpdate(req.user._id, {
+				$set: req.body
+			}, {
+				upsert: false
+			}, (err, user) => {
+				if (err) return console.error(err);
+				res.json(user);
+			}) : res.status(403).send('Please, login first');
 		})
-		.delete((req, res) => {
-			if (userid) {
-				User.findOneAndRemove({
-					userid: userid
-				}, (err, user) => {
-					res.clearCookie('userid').redirect('/');
-				});
-			} else {
-				res.status(404).send('Need to register first!');
-			}
+		.delete(ensureAuthenticated, (req, res) => {
+			req.user ? User.findOneAndRemove({
+				userid: userid
+			}, (err, user) => {
+				if (err) return console.error(err);
+				res.clearCookie('userid').redirect('/');
+			}) : res.status(403).send('Please, login first');
 		});
 
-	app.put('/user/add_university', (req, res) => {
-		User.findOneAndUpdate({
-			userid: req.cookies.userid
-		}, {
+	app.put('/user/add_university', ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, {
 			$addToSet: {
 				universities: req.body
 			}
 		}, (err, user) => {
 			if (err) return console.error(err);
 			res.json(user);
-		});
+		}) : res.status(403).send('Please, login first');
 	});
 
-	app.put('/user/rm_university', (req, res) => {
-		User.findOneAndUpdate({
-			userid: req.cookies.userid
-		}, {
+	app.put('/user/rm_university', ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, {
 			$pull: {
 				universities: req.body
 			}
 		}, (err, user) => {
 			if (err) return console.error(err);
 			res.json(user);
-		});
+		}) : res.status(403).send('Please, login first');
 	});
 
-	app.put('/user/add_workplace', (req, res) => {
-		User.findOneAndUpdate({
-			userid: req.cookies.userid
-		}, {
+	app.put('/user/add_workplace', ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, {
 			$addToSet: {
 				workplaces: req.body
 			}
 		}, (err, user) => {
 			if (err) return console.error(err);
 			res.json(user);
-		});
+		}) : res.status(403).send('Please, login first');
 	});
 
-	app.put('/user/rm_workplace', (req, res) => {
-		User.findOneAndUpdate({
-			userid: req.cookies.userid
-		}, {
+	app.put('/user/rm_workplace', ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, {
 			$pull: {
 				workplaces: req.body
 			}
 		}, (err, user) => {
 			if (err) return console.error(err);
 			res.json(user);
-		});
+		}) : res.status(403).send('Please, login first');
 	});
 
-	app.put('/user/add_achievement', (req, res) => {
-		User.findOneAndUpdate({
-			userid: req.cookies.userid
-		}, {
+	app.put('/user/add_achievement', ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, {
 			$addToSet: {
 				achievements: req.body
 			}
 		}, (err, user) => {
 			if (err) return console.error(err);
 			res.json(user);
-		});
+		}) : res.status(403).send('Please, login first');
 	});
 
-	app.put('/user/rm_achievement', (req, res) => {
-		User.findOneAndUpdate({
-			userid: req.cookies.userid
-		}, {
+	app.put('/user/rm_achievement', ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, {
 			$pull: {
 				achievements: req.body
 			}
 		}, (err, user) => {
 			if (err) return console.error(err);
 			res.json(user);
-		});
+		}) : res.status(403).send('Please, login first');
 	});
 
 	app.post('/user/search', (req, res) => {
@@ -213,4 +190,11 @@ module.exports = (app) => {
 			res.json(JSON.parse(response.body).response);
 		});
 	});
+
+	function ensureAuthenticated(req, res, next) {
+		var isAuth = req.isAuthenticated();
+		isAuth && console.log('Authenticated!');
+		if (isAuth) return next();
+		res.redirect('/');
+	}
 }

@@ -54,7 +54,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
             });
         };
 
-        !$scope.options.user && $location.path('/auth');
+        !$scope.options.user && $location.path('/signin');
 
         User.load($routeParams.id, function(res) {
             $scope.user = res.data;

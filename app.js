@@ -1,6 +1,6 @@
 var app = require('express')(),
+	chalk = require('chalk'),
 	morgan = require('morgan'),
-	flash = require('req-flash'),
 	passport = require('passport'),
 	mongoose = require('mongoose'),
 	http = require('http').Server(app),
@@ -9,8 +9,10 @@ var app = require('express')(),
 	compression = require('compression'),
 	session = require('express-session'),
 	serveStatic = require('serve-static'),
+	errorHandler = require('errorhandler'),
 	serveFavicon = require('serve-favicon'),
 	cookieParser = require('cookie-parser'),
+	MongoStore = require('connect-mongo')(session),
 	expressValidator = require('express-validator');
 
 app.disable('x-powered-by');
@@ -33,10 +35,14 @@ app.use(bodyParser.json({
 app.use(expressValidator());
 
 app.use(session({
-	resave: false,
+	resave: true,
 	saveUninitialized: true,
 	name: 'sportSessionID',
 	secret: 'J(8uH*hFHIJShsidjisjvnau9h878t*^G^*g8g987G',
+	store: new MongoStore({
+		autoReconnect: true,
+		url: 'mongodb://localhost:27017/muscles',
+	}),
 	cookie: {
 		path: '/',
 		secure: true,
@@ -44,8 +50,6 @@ app.use(session({
 		expires: Date.now() + 100 * 365 * 24 * 60 * 60 * 1000
 	}
 }));
-
-app.use(flash());
 
 app.use(passport.initialize());
 
@@ -56,11 +60,21 @@ app.use(serveStatic(__dirname + '/static'));
 //e.use(serveFavicon(__dirname + "/pub/img/favicon.ico"));
 
 http.listen(4321, () => {
+	mongoose.Promise = global.Promise;
 	require(__dirname + '/routes/router.js')(app, io);
 	mongoose.connect('mongodb://localhost:27017/muscles');
-	console.log('Server started at: ', new Date(), 'http://localhost:4321/');
+	console.log('%s Server started at: %s, path: %s', chalk.green('✓'), new Date(), 'http://localhost:4321/');
+	mongoose.connection.on('connected', () => {
+		console.log('%s MongoDB connection established!', chalk.green('✓'));
+	});
+	mongoose.connection.on('error', () => {
+		console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
+		process.exit();
+	});
 });
 
+app.use(errorHandler());
+/*
 process.stdin.resume();
 
 function exitHandler(options, err) {
@@ -82,5 +96,5 @@ process.on('SIGINT', exitHandler.bind(null, {
 process.on('uncaughtException', exitHandler.bind(null, {
 	exit: false
 }));
-
+*/
 module.exports = app;
