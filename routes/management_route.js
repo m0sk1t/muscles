@@ -73,25 +73,25 @@ module.exports = (app) => {
 			}): res.status(403).send('Permission denied');
 		});
 
-	app.get('/manager/users', management_check, (req, res) => {
+	app.get('/manage/users', management_check, (req, res) => {
 		User.find({}, (err, users) => {
 			if (err) return console.error(err);
 			res.json(users);
 		});
 	});
-	app.delete('/manager/user/:id', management_check, (req, res) => {
+	app.delete('/manage/user/:id', management_check, (req, res) => {
 		req.manager.permission.users ? User.findByIdAndRemove(req.params.id, (err, user) => {
 			if (err) return console.error(err);
 			res.json(user);
 		}) : res.status(403).send('Permission denied');
 	});
-	app.get('/manager/photos', management_check, (req, res) => {
+	app.get('/manage/photos', management_check, (req, res) => {
 		Photo.find({}, (err, photos) => {
 			if (err) return console.error(err);
 			res.json(photos);
 		});
 	});
-	app.delete('/manager/photo/:id', management_check, (req, res) => {
+	app.delete('/manage/photo/:id', management_check, (req, res) => {
 		req.manager.permission.photos ? Photo.findByIdAndRemove(req.params.id, (err, photo) => {
 			if (err) return console.error(err);
 			cloudinary.delete_image(photo.image.split('/').pop().split('.')[0], (result) => {
@@ -99,73 +99,73 @@ module.exports = (app) => {
 			});
 		}) : res.status(403).send('Permission denied');
 	});
-	app.get('/manager/videos', management_check, (req, res) => {
+	app.get('/manage/videos', management_check, (req, res) => {
 		Video.find({}, (err, videos) => {
 			if (err) return console.error(err);
 			res.json(videos);
 		});
 	});
-	app.delete('/manager/video/:id', management_check, (req, res) => {
+	app.delete('/manage/video/:id', management_check, (req, res) => {
 		req.manager.permission.videos ? Video.findByIdAndRemove(req.params.id, (err, video) => {
 			if (err) return console.error(err);
 			res.json(video);
 		}) : res.status(403).send('Permission denied');
 	});
-	app.get('/manager/topics', management_check, (req, res) => {
+	app.get('/manage/topics', management_check, (req, res) => {
 		Topic.find({}, (err, topics) => {
 			if (err) return console.error(err);
 			res.json(topics);
 		});
 	});
-	app.delete('/manager/topic/:id', management_check, (req, res) => {
+	app.delete('/manage/topic/:id', management_check, (req, res) => {
 		req.manager.permission.topics ? Topic.findByIdAndRemove(req.params.id, (err, topic) => {
 			if (err) return console.error(err);
 			res.json(topic);
 		}) : res.status(403).send('Permission denied');
 	});
-	app.get('/manager/hobbies', management_check, (req, res) => {
+	app.get('/manage/hobbies', management_check, (req, res) => {
 		Hobbie.find({}, (err, hobbies) => {
 			if (err) return console.error(err);
 			res.json(hobbies);
 		});
 	});
-	app.delete('/manager/hobbie/:id', management_check, (req, res) => {
+	app.delete('/manage/hobbie/:id', management_check, (req, res) => {
 		req.manager.permission.hobbies ? Hobbie.findByIdAndRemove(req.params.id, (err, hobbie) => {
 			if (err) return console.error(err);
 			res.json(hobbie);
 		}) : res.status(403).send('Permission denied');
 	});
-	app.get('/manager/articles', management_check, (req, res) => {
+	app.get('/manage/articles', management_check, (req, res) => {
 		Article.find({}, (err, articles) => {
 			if (err) return console.error(err);
 			res.json(articles);
 		});
 	});
-	app.delete('/manager/article/:id', management_check, (req, res) => {
+	app.delete('/manage/article/:id', management_check, (req, res) => {
 		req.manager.permission.articles ? Article.findByIdAndRemove(req.params.id, (err, article) => {
 			if (err) return console.error(err);
 			res.json(article);
 		}) : res.status(403).send('Permission denied');
 	});
-	app.get('/manager/contests', management_check, (req, res) => {
+	app.get('/manage/contests', management_check, (req, res) => {
 		Contest.find({}, (err, contests) => {
 			if (err) return console.error(err);
 			res.json(contests);
 		});
 	});
-	app.delete('/manager/contest/:id', management_check, (req, res) => {
+	app.delete('/manage/contest/:id', management_check, (req, res) => {
 		req.manager.permission.contests ? Contest.findByIdAndRemove(req.params.id, (err, contest) => {
 			if (err) return console.error(err);
 			res.json(contest);
 		}) : res.status(403).send('Permission denied');
 	});
-	app.get('/manager/competitions', management_check, (req, res) => {
+	app.get('/manage/competitions', management_check, (req, res) => {
 		Competition.find({}, (err, competitions) => {
 			if (err) return console.error(err);
 			res.json(competitions);
 		});
 	});
-	app.delete('/manager/competition/:id', management_check, (req, res) => {
+	app.delete('/manage/competition/:id', management_check, (req, res) => {
 		req.manager.permission.competitions ? Competition.findByIdAndRemove(req.params.id, (err, competition) => {
 			if (err) return console.error(err);
 			res.json(competition);

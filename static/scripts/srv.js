@@ -64,52 +64,52 @@ angular.module('Services', []).factory('User', ['$http',
 				return $http.put('/manager/' + id, opt).then(s, e);
 			},
 			get_users: function(s, e) {
-				return $http.get('/manager/users').then(s, e);
+				return $http.get('/manage/users').then(s, e);
 			},
 			get_hobbies: function(s, e) {
-				return $http.get('/manager/hobbies').then(s, e);
+				return $http.get('/manage/hobbies').then(s, e);
 			},
 			get_photos: function(s, e) {
-				return $http.get('/manager/photos').then(s, e);
+				return $http.get('/manage/photos').then(s, e);
 			},
 			get_videos: function(s, e) {
-				return $http.get('/manager/videos').then(s, e);
+				return $http.get('/manage/videos').then(s, e);
 			},
 			get_topics: function(s, e) {
-				return $http.get('/manager/topics').then(s, e);
+				return $http.get('/manage/topics').then(s, e);
 			},
 			get_articles: function(s, e) {
-				return $http.get('/manager/articles').then(s, e);
+				return $http.get('/manage/articles').then(s, e);
 			},
 			get_contests: function(s, e) {
-				return $http.get('/manager/contests').then(s, e);
+				return $http.get('/manage/contests').then(s, e);
 			},
 			get_competitions: function(s, e) {
-				return $http.get('/manager/competitions').then(s, e);
+				return $http.get('/manage/competitions').then(s, e);
 			},
 			delete_user: function(id, s, e) {
-				return $http.delete('/manager/user/' + id).then(s, e);
+				return $http.delete('/manage/user/' + id).then(s, e);
 			},
 			delete_hobbie: function(id, s, e) {
-				return $http.delete('/manager/hobbie/' + id).then(s, e);
+				return $http.delete('/manage/hobbie/' + id).then(s, e);
 			},
 			delete_photo: function(id, s, e) {
-				return $http.delete('/manager/photo/' + id).then(s, e);
+				return $http.delete('/manage/photo/' + id).then(s, e);
 			},
 			delete_video: function(id, s, e) {
-				return $http.delete('/manager/video/' + id).then(s, e);
+				return $http.delete('/manage/video/' + id).then(s, e);
 			},
 			delete_topic: function(id, s, e) {
-				return $http.delete('/manager/topic/' + id).then(s, e);
+				return $http.delete('/manage/topic/' + id).then(s, e);
 			},
 			delete_article: function(id, s, e) {
-				return $http.delete('/manager/article/' + id).then(s, e);
+				return $http.delete('/manage/article/' + id).then(s, e);
 			},
 			delete_contest: function(id, s, e) {
-				return $http.delete('/manager/contest/' + id).then(s, e);
+				return $http.delete('/manage/contest/' + id).then(s, e);
 			},
 			delete_competition: function(id, s, e) {
-				return $http.delete('/manager/competition/' + id).then(s, e);
+				return $http.delete('/manage/competition/' + id).then(s, e);
 			}
 		};
 	}
