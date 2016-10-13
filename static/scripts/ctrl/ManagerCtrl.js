@@ -187,7 +187,9 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$scope', '$location', 'M
 			});
 		};
 		$scope.delete_competition = function(id, i) {
-			Manager.delete_competition(id, f $scope.competitions.splice(i, 1); unction(res) {}, function(res) {
+			Manager.delete_competition(id, function(res) {
+				$scope.competitions.splice(i, 1);
+			}, function(res) {
 				console.error(res.data);
 			})
 		};
