@@ -1,16 +1,14 @@
 module.exports = (app) => {
-	var mongoose = require('mongoose'),
-		Articles = mongoose.model('Articles', {
-			title: String
-		});
+	var Article = require('../models/Article');
+
 	app.route('/article/:id')
 		.get((req, res) => {
 			if (req.params.id === 'all') {
-				Articles.find({}, (err, articles) => {
+				Article.find({}, (err, articles) => {
 					res.json(articles);
 				});
 			} else {
-				Articles.findById(req.params.id, (err, article) => {
+				Article.findById(req.params.id, (err, article) => {
 					res.json(article);
 				});
 			}
@@ -18,7 +16,7 @@ module.exports = (app) => {
 		.put((req, res) => {
 			delete req.body._id;
 			delete req.body.__v;
-			Articles.findByIdUpdate(req.params.id, {
+			Article.findByIdUpdate(req.params.id, {
 				$set: req.body
 			}, {
 				upsert: false
@@ -27,7 +25,7 @@ module.exports = (app) => {
 			});
 		})
 		.delete((req, res) => {
-			Articles.findByIdAndRemove(req.params.id, (err, article) => {
+			Article.findByIdAndRemove(req.params.id, (err, article) => {
 				res.json(article);
 			});
 		});

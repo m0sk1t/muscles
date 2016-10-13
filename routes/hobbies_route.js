@@ -1,17 +1,15 @@
 module.exports = (app) => {
-	var mongoose = require('mongoose'),
-		Hobbies = mongoose.model('Hobbies', {
-			name: String
-		});
+	var Hobbie = require('../models/Hobbie');
+
 	app.route('/hobbie/:id')
 		.get((req, res) => {
 			if (req.params.id === all) {
-				Hobbies.find({}, (err, hobbies) => {
+				Hobbie.find({}, (err, hobbies) => {
 					if (err) return console.error(err);
 					res.json(hobbies);
 				});
 			} else {
-				Hobbies.findById(req.params.id, (err, hobbie) => {
+				Hobbie.findById(req.params.id, (err, hobbie) => {
 					if (err) return console.error(err);
 					res.json(hobbie);
 				});
@@ -19,7 +17,7 @@ module.exports = (app) => {
 		})
 		.put((req, res) => {
 			if ( /* check for admin */ 0) {
-				Hobbies.findByIdAndUpdate(req.params.id, {
+				Hobbie.findByIdAndUpdate(req.params.id, {
 					name: req.body.name
 				}, (err, hobbie) => {
 					if (err) return console.error(err);
@@ -29,7 +27,7 @@ module.exports = (app) => {
 		})
 		.post((req, res) => {
 			if ( /* check for admin */ 0) {
-				Hobbies.create({
+				Hobbie.create({
 					name: req.body.name
 				}, (err, hobbie) => {
 					if (err) return console.error(err);
@@ -39,7 +37,7 @@ module.exports = (app) => {
 		})
 		.delete((req, res) => {
 			if ( /* check for admin */ 0) {
-				Hobbies.findByIdAndRemove(req.params.id, (err, hobbie) => {
+				Hobbie.findByIdAndRemove(req.params.id, (err, hobbie) => {
 					if (err) return console.error(err);
 					res.json(hobbie);
 				});
