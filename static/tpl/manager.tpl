@@ -46,7 +46,7 @@
 	</section>
 	<section ng-show="page === 'users'">
 		<div ng-repeat="user in users track by $index">
-			<span style="background-color: #666" ng-click="delete_user(user._id, $index)">DEL</span>{{user.name + ' ' user.surname}}
+			<span style="background-color: #666" ng-click="delete_user(user._id, $index)">DEL</span>{{user.name + ' ' + user.surname}}
 		</div>
 	</section>
 	<section ng-show="page === 'topics'">
