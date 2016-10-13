@@ -1,7 +1,6 @@
 module.exports = (app) => {
-	var crypto = require('crypto'),
+	var tools = require('./tools'),
 		request = require('request'),
-		mongoose = require('mongoose'),
 		User = require('../models/User');
 
 	app.get('/user/:id', (req, res) => {
@@ -14,13 +13,13 @@ module.exports = (app) => {
 	});
 
 	app.route('/user')
-		.get(ensureAuthenticated, (req, res) => {
+		.get(tools.ensureAuthenticated, (req, res) => {
 			req.user ? User.findById(req.user._id, (err, user) => {
 				if (err) return console.error(err);
 				res.json(user);
 			}) : res.status(403).send('Please, login first');
 		})
-		.put(ensureAuthenticated, (req, res) => {
+		.put(tools.ensureAuthenticated, (req, res) => {
 			delete req.body._id;
 			req.user ? User.findByIdAndUpdate(req.user._id, {
 				$set: req.body
@@ -31,14 +30,14 @@ module.exports = (app) => {
 				res.json(user);
 			}) : res.status(403).send('Please, login first');
 		})
-		.delete(ensureAuthenticated, (req, res) => {
+		.delete(tools.ensureAuthenticated, (req, res) => {
 			req.user ? User.findByIdAndRemove(req.user._id, (err, user) => {
 				if (err) return console.error(err);
 				res.clearCookie('userid').redirect('/');
 			}) : res.status(403).send('Please, login first');
 		});
 
-	app.put('/unlink/:provider', ensureAuthenticated, (req, res) => {
+	app.put('/unlink/:provider', tools.ensureAuthenticated, (req, res) => {
 		req.user ? User.findById(req.user._id, (err, user) => {
 			if (err) return console.error(err);
 			user.social[req.params.provider] = undefined;
@@ -49,8 +48,8 @@ module.exports = (app) => {
 		}) : res.status(403).send('Please, login first');
 	})
 
-	app.put('/user/add_university', ensureAuthenticated, (req, res) => {
-		req.user ? User.findById(req.user._id, {
+	app.put('/user/add_university', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findByIdAndUpdate(req.user._id, {
 			$addToSet: {
 				universities: req.body
 			}
@@ -60,8 +59,8 @@ module.exports = (app) => {
 		}) : res.status(403).send('Please, login first');
 	});
 
-	app.put('/user/rm_university', ensureAuthenticated, (req, res) => {
-		req.user ? User.findById(req.user._id, {
+	app.put('/user/rm_university', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findByIdAndUpdate(req.user._id, {
 			$pull: {
 				universities: req.body
 			}
@@ -71,8 +70,8 @@ module.exports = (app) => {
 		}) : res.status(403).send('Please, login first');
 	});
 
-	app.put('/user/add_workplace', ensureAuthenticated, (req, res) => {
-		req.user ? User.findById(req.user._id, {
+	app.put('/user/add_workplace', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findByIdAndUpdate(req.user._id, {
 			$addToSet: {
 				workplaces: req.body
 			}
@@ -82,8 +81,8 @@ module.exports = (app) => {
 		}) : res.status(403).send('Please, login first');
 	});
 
-	app.put('/user/rm_workplace', ensureAuthenticated, (req, res) => {
-		req.user ? User.findById(req.user._id, {
+	app.put('/user/rm_workplace', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findByIdAndUpdate(req.user._id, {
 			$pull: {
 				workplaces: req.body
 			}
@@ -93,8 +92,8 @@ module.exports = (app) => {
 		}) : res.status(403).send('Please, login first');
 	});
 
-	app.put('/user/add_achievement', ensureAuthenticated, (req, res) => {
-		req.user ? User.findById(req.user._id, {
+	app.put('/user/add_achievement', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findByIdAndUpdate(req.user._id, {
 			$addToSet: {
 				achievements: req.body
 			}
@@ -104,8 +103,8 @@ module.exports = (app) => {
 		}) : res.status(403).send('Please, login first');
 	});
 
-	app.put('/user/rm_achievement', ensureAuthenticated, (req, res) => {
-		req.user ? User.findById(req.user._id, {
+	app.put('/user/rm_achievement', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findByIdAndUpdate(req.user._id, {
 			$pull: {
 				achievements: req.body
 			}
@@ -197,10 +196,4 @@ module.exports = (app) => {
 			res.json(JSON.parse(response.body).response);
 		});
 	});
-
-	function ensureAuthenticated(req, res, next) {
-		var isAuth = req.isAuthenticated();
-		if (isAuth) return next();
-		res.redirect('/');
-	}
 }

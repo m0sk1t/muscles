@@ -1,58 +1,42 @@
 module.exports = (app) => {
-	var mongoose = require('mongoose'),
-		multipart = require('connect-multiparty'),
+	var multipart = require('connect-multiparty'),
 		cloudinary = require('./cloudinary.js'),
-		Photos = mongoose.model('Photos', {
-			title: String,
-			album: String,
-			image: String,
-			owner: String,
-			creDate: Date,
-			likes: Array,
-			comments: Array,
-		}),
-		Albums = mongoose.model('Albums', {
-			cover: {},
-			creDate: Date,
-			title: String,
-			owner: String,
-		}),
-		Users = mongoose.model('Users');
+		Album = require('../models/Album'),
+		Photo = require('../models/Photo'),
+		User = require('../models/User'),
+		tools = require('./tools');
+
 	app.route('/photo/:id')
-		.get((req, res) => {
-			Photos.find({
+		.get(tools.ensureAuthenticated, (req, res) => {
+			Photo.find({
 				owner: req.params.id
 			}, (err, photos) => {
 				if (err) return console.error(err);
 				res.json(photos);
 			});
 		})
-		.put((req, res) => {
-			Users.findOne({
-				userid: req.cookies.userid
-			}, (err, user) => {
-				Photos.findOneAndUpdate({
+		.put(tools.ensureAuthenticated, (req, res) => {
+			req.user ? User.findById(req.user._id, (err, user) => {
+				Photo.findOneAndUpdate({
 					_id: req.params.id,
 					owner: user._id.toString()
 				}, {
 					$set: {
 						album: req.body.album,
-						title: req.body.title
+						title: req.body.title,
 					}
 				}, (err, photo) => {
 					if (err) return console.error(err);
 					res.json(photo);
 				});
-			});
+			}) : res.status(403).send('Please, login first');
 		})
 		.post(multipart({
 			uploadDir: 'tmp'
-		}), (req, res) => {
-			Users.findOne({
-				userid: req.cookies.userid
-			}, (err, user) => {
+		}), tools.ensureAuthenticated, (req, res) => {
+			req.user ? User.findById(req.user._id, (err, user) => {
 				cloudinary.upload_image(req, (result) => {
-					Photos.create({
+					Photo.create({
 						image: result,
 						owner: user._id.toString(),
 						creDate: Date.now(),
@@ -61,13 +45,11 @@ module.exports = (app) => {
 						res.json(photo);
 					});
 				});
-			});
+			}) : res.status(403).send('Please, login first');
 		})
-		.delete((req, res) => {
-			Users.findOne({
-				userid: req.cookies.userid
-			}, (err, user) => {
-				Photos.findOneAndRemove({
+		.delete(tools.ensureAuthenticated, (req, res) => {
+			req.user ? User.findById(req.user._id, (err, user) => {
+				Photo.findOneAndRemove({
 					_id: req.params.id,
 					owner: user._id.toString()
 				}, (err, photo) => {
@@ -80,28 +62,28 @@ module.exports = (app) => {
 						res.status(403).send('You arn\'t image owner!');
 					}
 				});
-			});
+			}) : res.status(403).send('Please, login first');
 		});
-	app.get('/single_album/:id', (req, res) => {
-		Albums.findById(req.params.id, (err, album) => {
+
+	app.get('/single_album/:id', tools.ensureAuthenticated, (req, res) => {
+		Album.findById(req.params.id, (err, album) => {
 			if (err) return console.error(err);
 			res.json(album);
 		});
 	});
+
 	app.route('/album/:id')
-		.get((req, res) => {
-			Albums.find({
+		.get(tools.ensureAuthenticated, (req, res) => {
+			Album.find({
 				owner: req.params.id
 			}, (err, albums) => {
 				if (err) return console.error(err);
 				res.json(albums);
 			});
 		})
-		.put((req, res) => {
-			Users.findOne({
-				userid: req.cookies.userid
-			}, (err, user) => {
-				Albums.findOneAndUpdate({
+		.put(tools.ensureAuthenticated, (req, res) => {
+			req.user ? User.findById(req.user._id, (err, user) => {
+				Album.findOneAndUpdate({
 					_id: req.params.id,
 					owner: user._id.toString()
 				}, {
@@ -112,13 +94,11 @@ module.exports = (app) => {
 					if (err) return console.error(err);
 					res.json(album);
 				});
-			});
+			}) : res.status(403).send('Please, login first');
 		})
-		.post((req, res) => {
-			Users.findOne({
-				userid: req.cookies.userid
-			}, (err, user) => {
-				Albums.create({
+		.post(tools.ensureAuthenticated, (req, res) => {
+			req.user ? User.findById(req.user._id, (err, user) => {
+				Album.create({
 					owner: user._id.toString(),
 					creDate: Date.now(),
 					title: req.body.title,
@@ -126,30 +106,24 @@ module.exports = (app) => {
 					if (err) return console.error(err);
 					res.json(album);
 				});
-			});
+			}) : res.status(403).send('Please, login first');
 		})
-		.delete((req, res) => {
-			Users.findOne({
-				userid: req.cookies.userid
-			}, (err, user) => {
-				Albums.findOneAndRemove({
+		.delete(tools.ensureAuthenticated, (req, res) => {
+			req.user ? User.findById(req.user._id, (err, user) => {
+				Album.findOneAndRemove({
 					_id: req.params.id,
 					owner: user._id.toString()
 				}, (err, album) => {
 					if (err) return console.error(err);
 					res.json(album);
 				});
-			});
+			}) : res.status(403).send('Please, login first');
 		});
 
-	app.put('/photo/:id/add_like', (req, res) => {
-		Users.findOne({
-			userid: req.cookies.userid
-		}, (err, user) => {
+	app.put('/photo/:id/add_like', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, (err, user) => {
 			if (!err && user) {
-				Photos.findOneAndUpdate({
-					_id: req.params.id
-				}, {
+				Photo.findByIdAndUpdate(req.params.id, {
 					$addToSet: {
 						likes: user._id.toString()
 					}
@@ -159,16 +133,13 @@ module.exports = (app) => {
 			} else {
 				res.status(500).send(err);
 			}
-		});
+		}) : res.status(403).send('Please, login first');
 	});
-	app.put('/photo/:id/remove_like', (req, res) => {
-		Users.findOne({
-			userid: req.cookies.userid
-		}, (err, user) => {
+
+	app.put('/photo/:id/remove_like', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, (err, user) => {
 			if (!err && user) {
-				Photos.findOneAndUpdate({
-					_id: req.params.id
-				}, {
+				Photo.findByIdAndUpdate(req.params.id, {
 					$pull: {
 						likes: user._id.toString()
 					}
@@ -178,16 +149,12 @@ module.exports = (app) => {
 			} else {
 				res.status(500).send(err);
 			}
-		});
+		}) : res.status(403).send('Please, login first');
 	});
-	app.put('/photo/:id/add_comment', (req, res) => {
-		Users.findOne({
-			userid: req.cookies.userid
-		}, (err, user) => {
+	app.put('/photo/:id/add_comment', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, (err, user) => {
 			if (!err && user) {
-				Photos.findOneAndUpdate({
-					_id: req.params.id
-				}, {
+				Photo.findByIdAndUpdate(req.params.id, {
 					$addToSet: {
 						comments: {
 							name: user.name,
@@ -204,16 +171,12 @@ module.exports = (app) => {
 			} else {
 				res.status(500).send(err);
 			}
-		});
+		}) : res.status(403).send('Please, login first');
 	});
-	app.put('/photo/:id/remove_comment', (req, res) => {
-		Users.findOne({
-			userid: req.cookies.userid
-		}, (err, user) => {
+	app.put('/photo/:id/remove_comment', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, (err, user) => {
 			if (!err && user) {
-				Photos.findOneAndUpdate({
-					_id: req.params.id
-				}, {
+				Photo.findByIdAndUpdate(req.params.id, {
 					$pull: {
 						comments: {
 							userid: user._id.toString(),
@@ -226,6 +189,6 @@ module.exports = (app) => {
 			} else {
 				res.status(500).send(err);
 			}
-		});
+		}) : res.status(403).send('Please, login first');
 	});
 };

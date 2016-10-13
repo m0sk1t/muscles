@@ -29,7 +29,7 @@ app.use(cookieParser());
 
 app.use(expressValidator());
 
-app.use(session({
+var sessionMiddleware = session({
 	resave: true,
 	saveUninitialized: true,
 	secret: 'J(8uH*hFHIJShsidjisjvnau9h878t*^G^*g8g987G',
@@ -37,7 +37,13 @@ app.use(session({
 		autoReconnect: true,
 		url: 'mongodb://localhost:27017/muscles',
 	})
-}));
+});
+
+io.use((socket, next) => {
+	sessionMiddleware(socket.request, socket.request.res, next);
+});
+
+app.use(sessionMiddleware);
 
 app.use(passport.initialize());
 

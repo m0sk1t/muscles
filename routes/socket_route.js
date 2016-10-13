@@ -1,15 +1,25 @@
 module.exports = (app, io) => {
-	var mongoose = require('mongoose'),
-		mailer = require('./mailer.js'),
-		Users = mongoose.model('Users');
+	var mailer = require('./mailer.js'),
+		User = require('../models/User');
 
 	io.on('connection', (socket) => {
-		console.log('io:connection socket.id: ', socket.id);
-		var id = '';
+		var id = socket.request.session.passport.user;
+
+		((s) => {
+			id && User.findByIdAndUpdate(id, {
+				'$set': {
+					'ioid': s.id,
+					'online': true
+				}
+			}, (err, user) => {
+				user && socket.emit('user:online', user.id);
+				if (err) return console.error(err);
+				console.log('user:online', id);
+			});
+		})(socket);
 
 		socket.on('user:online', (data) => {
-			id = data.id;
-			id && Users.findByIdAndUpdate(id, {
+			id && User.findByIdAndUpdate(id, {
 				'$set': {
 					'ioid': socket.id,
 					'online': true
@@ -22,7 +32,7 @@ module.exports = (app, io) => {
 		});
 
 		socket.on('new:message', (data) => {
-			Users.findById(data.target, (err, user) => {
+			User.findById(data.target, (err, user) => {
 				user.settings.notify_private && mailer.send_mail({
 					mail: [user.mail],
 					subj: 'У вас новое сообщение!',
@@ -34,7 +44,7 @@ module.exports = (app, io) => {
 		});
 
 		socket.on('topic:comment', (data) => {
-			Users.findById(data.target, (err, user) => {
+			User.findById(data.target, (err, user) => {
 				user.settings.post_comments_enabled && mailer.send_mail({
 					mail: [user.mail],
 					subj: 'Новый комментарий к вашей записи!',
@@ -46,7 +56,7 @@ module.exports = (app, io) => {
 		});
 
 		socket.on('photo:comment', (data) => {
-			Users.findById(data.target, (err, user) => {
+			User.findById(data.target, (err, user) => {
 				user.settings.notify_photo_comments && mailer.send_mail({
 					mail: [user.mail],
 					subj: 'Новый комментарий к вашему фото!',
@@ -58,7 +68,7 @@ module.exports = (app, io) => {
 		});
 
 		socket.on('video:comment', (data) => {
-			Users.findById(data.target, (err, user) => {
+			User.findById(data.target, (err, user) => {
 				user.settings.notify_video_comments && mailer.send_mail({
 					mail: [user.mail],
 					subj: 'Новый комментарий к вашему видео!',
@@ -70,7 +80,7 @@ module.exports = (app, io) => {
 		});
 
 		socket.on('disconnect', () => {
-			id && Users.findByIdAndUpdate(id, {
+			id && User.findByIdAndUpdate(id, {
 				'$set': {
 					'online': false,
 					'lastOnline': Date.now()

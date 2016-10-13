@@ -1,28 +1,21 @@
 module.exports = (app) => {
-	var mongoose = require('mongoose'),
-		Users = mongoose.model('Users'),
-		Dialogs = mongoose.model('Dialogs', {
-			users: Array,
-			creDate: Date,
-			messages: Array,
-		});
+	var tools = require('./tools'),
+		User = require('../models/User'),
+		Dialog = require('../models/Dialog');
+
 	app.route('/dialog/:id')
-		.get((req, res) => {
-			Users.findOne({
-				userid: req.cookies.userid
-			}, (err, user) => {
-				Dialogs.find({
+		.get(tools.ensureAuthenticated, (req, res) => {
+			req.user ? User.findById(req.user._id, (err, user) => {
+				Dialog.find({
 					'users.id': user._id.toString()
 				}, (err, dialogs) => {
 					res.json(dialogs);
 				});
-			});
+			}) : res.status(403).send('Please, login first');
 		})
-		.put((req, res) => {
-			Users.findOne({
-				userid: req.cookies.userid
-			}, (err, user) => {
-				Dialogs.findOneAndUpdate({
+		.put(tools.ensureAuthenticated, (req, res) => {
+			req.user ? User.findById(req.user._id, (err, user) => {
+				Dialog.findOneAndUpdate({
 					'users.id': user._id.toString(),
 					_id: req.params.id,
 				}, {
@@ -33,13 +26,11 @@ module.exports = (app) => {
 				}, (err, dialog) => {
 					res.json(dialog);
 				});
-			});
+			}) : res.status(403).send('Please, login first');
 		})
-		.delete((req, res) => {
-			Users.findOne({
-				userid: req.cookies.userid
-			}, (err, user) => {
-				Dialogs.findOneAndUpdate({
+		.delete(tools.ensureAuthenticated, (req, res) => {
+			req.user ? User.findById(req.user._id, (err, user) => {
+				Dialog.findOneAndUpdate({
 					_id: req.params.id,
 					'users.id': user._id.toString()
 				}, {
@@ -51,12 +42,11 @@ module.exports = (app) => {
 				}, (err, dialog) => {
 					res.json(dialog);
 				});
-			});
+			}) : res.status(403).send('Please, login first');
 		});
-	app.get('/checkdlg/:id', (req, res) => {
-		Users.findOne({
-			userid: req.cookies.userid
-		}, (err, user) => {
+
+	app.get('/checkdlg/:id', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, (err, user) => {
 			var search = {
 				users: {
 					$all: [{
@@ -70,7 +60,7 @@ module.exports = (app) => {
 					}]
 				}
 			};
-			Dialogs.findOne(search, (err, dialog) => {
+			Dialog.findOne(search, (err, dialog) => {
 				console.log(dialog);
 				if (dialog) {
 					res.json(dialog);
@@ -78,14 +68,13 @@ module.exports = (app) => {
 					res.status(404).send('Not found');
 				}
 			});
-		});
+		}) : res.status(403).send('Please, login first');
 	});
-	app.post('/dialog', (req, res) => {
-		Users.findOne({
-			userid: req.cookies.userid
-		}, (err, user) => {
+
+	app.post('/dialog', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, (err, user) => {
 			var messages = [req.body.message];
-			Dialogs.create({
+			Dialog.create({
 				messages: messages,
 				users: [{
 						id: user._id.toString(),
@@ -97,6 +86,6 @@ module.exports = (app) => {
 			}, (err, dialog) => {
 				res.json(dialog);
 			});
-		});
+		}) : res.status(403).send('Please, login first');
 	});
 };
