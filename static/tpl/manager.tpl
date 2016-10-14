@@ -55,6 +55,8 @@
 		</div>
 	</section>
 	<section ng-show="page === 'articles'">
+		<div ng-click="article = {}">Add</div>
+		<text-angular ng-model="article"></text-angular>
 		<div ng-repeat="article in articles track by $index">
 			<span style="background-color: #666" ng-click="delete_article(article._id, $index)">DEL</span>{{article.title}}
 		</div>
