@@ -85,8 +85,12 @@ module.exports = (app) => {
 			res.json(user);
 		}) : res.status(403).send('Permission denied');
 	});
-	app.get('/manage/photos', management_check, (req, res) => {
-		Photo.find({}, (err, photos) => {
+	app.get('/manage/photos/:credate', management_check, (req, res) => {
+		Photo.find({
+			creDate: {
+				$lt: req.params.credate
+			}
+		}).limit(3).sort({ creDate: -1 }).exec((err, photos) => {
 			if (err) return console.error(err);
 			res.json(photos);
 		});

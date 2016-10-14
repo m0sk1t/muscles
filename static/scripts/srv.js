@@ -78,8 +78,8 @@ angular.module('Services', []).factory('User', ['$http',
 			get_hobbies: function(s, e) {
 				return $http.get('/manage/hobbies').then(s, e);
 			},
-			get_photos: function(s, e) {
-				return $http.get('/manage/photos').then(s, e);
+			get_photos: function(credate, s, e) {
+				return $http.get('/manage/photos/' + credate).then(s, e);
 			},
 			get_videos: function(s, e) {
 				return $http.get('/manage/videos').then(s, e);

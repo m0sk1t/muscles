@@ -1,5 +1,6 @@
 angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$location', 'Manager', '$routeParams',
 	function($sce, $scope, $location, Manager, $routeParams) {
+		$scope.creDate = new Date();
 		$scope.add_manager = function() {
 			$scope.cred = {
 				login: '',
@@ -39,8 +40,9 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 			});
 		};
 		$scope.get_photos = function() {
-			Manager.get_photos(function(res) {
+			Manager.get_photos($scope.creDate, function(res) {
 				$scope.photos = res.data;
+				$scope.creDate = $scope.photos[0].creDate;
 			}, function(res) {
 				console.error(res.data);
 			});
