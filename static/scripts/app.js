@@ -1,4 +1,4 @@
-angular.module('MuscleMan', ['ngLocale', 'ngFileUpload', 'ngRoute', '720kb.datepicker', 'textAngular', 'Services']).config(['$routeProvider',
+angular.module('MuscleMan', ['ngLocale', 'ngFileUpload', 'ngRoute', '720kb.datepicker', 'froala', 'Services']).config(['$routeProvider',
 
     function($routeProvider) {
         $routeProvider.when('/', {
@@ -7,6 +7,9 @@ angular.module('MuscleMan', ['ngLocale', 'ngFileUpload', 'ngRoute', '720kb.datep
         }).when('/manager/signin', {
             templateUrl: 'tpl/manager_signin.tpl',
             controller: 'ManagerSignInCtrl'
+        }).when('/manage/article/:id', {
+            templateUrl: 'tpl/manage_article.tpl',
+            controller: 'ManageArticleCtrl'
         }).when('/manager/:id', {
             templateUrl: 'tpl/manager.tpl',
             controller: 'ManagerCtrl'

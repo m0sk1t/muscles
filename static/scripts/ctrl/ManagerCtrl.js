@@ -1,57 +1,14 @@
-angular.module('MuscleMan').controller('ManagerCtrl', ['$scope', '$location', 'Manager', '$routeParams',
-	function($scope, $location, Manager, $routeParams) {
+angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$location', 'Manager', '$routeParams',
+	function($sce, $scope, $location, Manager, $routeParams) {
 		$scope.add_manager = function() {
 			$scope.cred = {
 				login: '',
 				password: '',
 			};
 		};
-		Manager.get($routeParams.id, function(res) {
-			$scope.manager = res.data;
-			switch (true) {
-				case $scope.manager.permission.users:
-					$scope.page = 'users';
-					$scope.get_users();
-					break;
-				case $scope.manager.permission.photos:
-					$scope.page = 'photos';
-					$scope.get_photos();
-					break;
-				case $scope.manager.permission.videos:
-					$scope.page = 'videos';
-					$scope.get_videos();
-					break;
-				case $scope.manager.permission.topics:
-					$scope.page = 'topics';
-					$scope.get_topics();
-					break;
-				case $scope.manager.permission.articles:
-					$scope.page = 'article';
-					$scope.get_articles();
-					break;
-				case $scope.manager.permission.contests:
-					$scope.page = 'contests';
-					$scope.get_contests();
-					break;
-				case $scope.manager.permission.hobbies:
-					$scope.page = 'hobbies';
-					$scope.get_hobbies();
-					break;
-				case $scope.manager.permission.managers:
-					$scope.page = 'managers';
-					$scope.get_managers();
-					break;
-				case $scope.manager.permission.competitions:
-					$scope.page = 'competitions';
-					$scope.get_competitions();
-					break;
-				default:
-					$location.path('/manager/signin');
-					break;
-			}
-		}, function(res) {
-			console.error(res.data);
-		});
+		$scope.article_html = function(html) {
+			return $sce.trustAsHtml(html);
+		};
 		$scope.create_manager = function() {
 			Manager.create($scope.cred, function(res) {
 				$scope.cred = null;
@@ -158,6 +115,16 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$scope', '$location', 'M
 				console.error(res.data);
 			});
 		};
+		$scope.create_article = function() {
+			Manager.create_article($scope.new_article, function(res) {
+				$location.path('/manage/article/' + res.data._id);
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+		$scope.edit_article = function(id) {
+			$location.path('/manage/article/' + id);
+		};
 		$scope.delete_article = function(id, i) {
 			Manager.delete_article(id, function(res) {
 				$scope.articles.splice(i, 1);
@@ -193,5 +160,51 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$scope', '$location', 'M
 				console.error(res.data);
 			})
 		};
+		Manager.get($routeParams.id, function(res) {
+			$scope.manager = res.data;
+			switch (true) {
+				case $scope.manager.permission.articles:
+					$scope.page = 'article';
+					$scope.get_articles();
+					break;
+				case $scope.manager.permission.users:
+					$scope.page = 'users';
+					$scope.get_users();
+					break;
+				case $scope.manager.permission.photos:
+					$scope.page = 'photos';
+					$scope.get_photos();
+					break;
+				case $scope.manager.permission.videos:
+					$scope.page = 'videos';
+					$scope.get_videos();
+					break;
+				case $scope.manager.permission.topics:
+					$scope.page = 'topics';
+					$scope.get_topics();
+					break;
+				case $scope.manager.permission.contests:
+					$scope.page = 'contests';
+					$scope.get_contests();
+					break;
+				case $scope.manager.permission.hobbies:
+					$scope.page = 'hobbies';
+					$scope.get_hobbies();
+					break;
+				case $scope.manager.permission.managers:
+					$scope.page = 'managers';
+					$scope.get_managers();
+					break;
+				case $scope.manager.permission.competitions:
+					$scope.page = 'competitions';
+					$scope.get_competitions();
+					break;
+				default:
+					$location.path('/manager/signin');
+					break;
+			}
+		}, function(res) {
+			console.error(res.data);
+		});
 	}
 ]);

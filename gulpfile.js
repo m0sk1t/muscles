@@ -7,6 +7,7 @@ var gulp = require('gulp'),
 
 gulp.task('build_libs', function() {
 	gulp.src([
+			'static/libs/jquery/dist/jquery.min.js',
 			'static/libs/angular/angular.min.js',
 			'static/libs/ng-facebook/ngFacebook.js',
 			'static/libs/angular/locale/ngLocale.js',
@@ -15,10 +16,19 @@ gulp.task('build_libs', function() {
 			'static/libs/sweetalert/dist/sweetalert.min.js',
 			'static/libs/angular-route/angular-route.min.js',
 			'static/libs/angular-touch/angular-touch.min.js',
-			'static/libs/textAngular/dist/textAngular-rangy.min.js',
-			'static/libs/textAngular/dist/textAngular-sanitize.min.js',
-			'static/libs/textAngular/dist/textAngular.min.js',
 			'static/libs/ng-file-upload/ng-file-upload-all.min.js',
+			'static/libs/froala-wysiwyg-editor/js/froala_editor.min.js',
+			'static/libs/froala-wysiwyg-editor/js/languages/ru.js',
+			'static/libs/froala-wysiwyg-editor/js/plugins/quote.min.js',
+			'static/libs/froala-wysiwyg-editor/js/plugins/lists.min.js',
+			'static/libs/froala-wysiwyg-editor/js/plugins/image.min.js',
+			'static/libs/froala-wysiwyg-editor/js/plugins/colors.min.js',
+			'static/libs/froala-wysiwyg-editor/js/plugins/emoticons.min.js',
+			'static/libs/froala-wysiwyg-editor/js/plugins/font_size.min.js',
+			'static/libs/froala-wysiwyg-editor/js/plugins/paragraph_style.min.js',
+			'static/libs/froala-wysiwyg-editor/js/plugins/paragraph_format.min.js',
+			'static/libs/angular-froala/src/angular-froala.js',
+			'static/libs/angular-froala/src/froala-sanitize.js',
 			'static/libs/angularjs-datepicker/dist/angular-datepicker.min.js',
 		])
 		.pipe(concat('libs.js'))

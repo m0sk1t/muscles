@@ -57,6 +57,15 @@ angular.module('Services', []).factory('User', ['$http',
 			create: function(opt, s, e) {
 				return $http.post('/manager/new', opt).then(s, e);
 			},
+			get_article: function(id, s, e) {
+				return $http.get('/manage/article/' + id).then(s, e);
+			},
+			create_article: function(opt, s, e) {
+				return $http.post('/manage/article/new', opt).then(s, e);
+			},
+			update_article: function(id, opt, s, e) {
+				return $http.put('/manage/article/' + id, opt).then(s, e);
+			},
 			delete: function(id, s, e) {
 				return $http.delete('/manager/' + id).then(s, e);
 			},

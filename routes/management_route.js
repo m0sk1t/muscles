@@ -141,12 +141,39 @@ module.exports = (app) => {
 			res.json(articles);
 		});
 	});
-	app.delete('/manage/article/:id', management_check, (req, res) => {
-		req.manager.permission.articles ? Article.findByIdAndRemove(req.params.id, (err, article) => {
-			if (err) return console.error(err);
-			res.json(article);
-		}) : res.status(403).send('Permission denied');
-	});
+	app.route('/manage/article/:id')
+		.get(management_check, (req, res) => {
+			req.manager.permission.articles ? Article.findById(req.params.id, (err, article) => {
+				res.json(article);
+			}) : res.status(403).send('Permission denied');
+		})
+		.put(management_check, (req, res) => {
+			req.manager.permission.articles ? Article.findByIdAndUpdate(req.params.id, {
+				$set: { title: req.body.title, text: req.body.text }
+			}, (err, article) => {
+				res.json(article);
+			}) : res.status(403).send('Permission denied');
+		})
+		.post(management_check, (req, res) => {
+			if (req.manager.permission.articles) {
+				var article = new Article();
+				article.text = req.body.text;
+				article.creDate = new Date();
+				article.title = req.body.title;
+				article.owner = req.manager._id;
+				article.save((err) => {
+					res.json(article);
+				});
+			} else {
+				res.status(403).send('Permission denied');
+			}
+		}).delete(management_check, (req, res) => {
+			req.manager.permission.articles ? Article.findByIdAndRemove(req.params.id, (err, article) => {
+				if (err) return console.error(err);
+				res.json(article);
+			}) : res.status(403).send('Permission denied');
+		});
+
 	app.get('/manage/contests', management_check, (req, res) => {
 		Contest.find({}, (err, contests) => {
 			if (err) return console.error(err);
