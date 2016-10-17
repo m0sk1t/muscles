@@ -69,10 +69,6 @@
 							Достижения
 						</h2>
 						<div class="ya-sidebar-info__content-wrapper" ng-repeat="a in user.achievements track by $index">
-							<div
-								ng-click="rm_achievement(a, $index)"
-								ng-if="options.user._id === user._id"
-							>x</div>
 							<div class="ya-sidebar-info__content">
 								<div class="ya-sidebar-info__item">
 									<span class="ya-sidebar-info__label">Страна</span> {{a.country}}
@@ -103,10 +99,6 @@
 							Работа
 						</h2>
 						<div class="ya-sidebar-info__content-wrapper" ng-repeat="w in user.workplaces track by $index">
-							<div
-								ng-click="rm_workplace(w, $index)"
-								ng-if="options.user._id === user._id"
-							>x</div>
 							<div class="ya-sidebar-info__content">
 								<div class="ya-sidebar-info__item">
 									<span class="ya-sidebar-info__label">Страна</span> {{w.country}}
@@ -134,10 +126,6 @@
 							Образование
 						</h2>
 						<div class="ya-sidebar-info__content-wrapper" ng-repeat="u in user.universities track by $index">
-							<div
-								ng-click="rm_university(u, $index)"
-								ng-if="options.user._id === user._id"
-								>x</div>
 							<div class="ya-sidebar-info__content">
 								<div class="ya-sidebar-info__item">
 									<span class="ya-sidebar-info__label">Страна</span> {{u.country}}

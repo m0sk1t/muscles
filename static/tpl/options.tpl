@@ -7,6 +7,9 @@
 						<li class="ya-nav-menu__item" ng-click="active_page = 'profile'">
 							<span class="ya-nav-menu__link" ng-class="{'ya-nav-menu__link_active': active_page === 'profile'}">Профиль<span>
 						</li>
+						<li class="ya-nav-menu__item" ng-click="active_page = 'work_n_study'">
+							<span class="ya-nav-menu__link" ng-class="{'ya-nav-menu__link_active': active_page === 'work_n_study'}">Работа, образование<span>
+						</li>
 						<li class="ya-nav-menu__item" ng-click="active_page = 'common'">
 							<span class="ya-nav-menu__link" ng-class="{'ya-nav-menu__link_active': active_page === 'common'}">Общие<span>
 						</li>
@@ -411,11 +414,8 @@
 							<h2 class="ya-sidebar-info__title">
 								Достижения
 							</h2>
-							<div class="ya-sidebar-info__content-wrapper" ng-repeat="a in user.achievements track by $index">
-								<div
-									ng-click="rm_achievement(a, $index)"
-									ng-if="options.user._id === user._id"
-								>x</div>
+							<div class="ya-sidebar-info__content-wrapper" ng-repeat="a in options.user.achievements track by $index">
+								<div ng-click="rm_achievement(a, $index)">x</div>
 								<div class="ya-sidebar-info__content">
 									<div class="ya-sidebar-info__item">
 										<span class="ya-sidebar-info__label">Страна</span> {{a.country}}
@@ -459,11 +459,8 @@
 							<h2 class="ya-sidebar-info__title">
 								Работа
 							</h2>
-							<div class="ya-sidebar-info__content-wrapper" ng-repeat="w in user.workplaces track by $index">
-								<div
-									ng-click="rm_workplace(w, $index)"
-									ng-if="options.user._id === user._id"
-								>x</div>
+							<div class="ya-sidebar-info__content-wrapper" ng-repeat="w in options.user.workplaces track by $index">
+								<div ng-click="rm_workplace(w, $index)">x</div>
 								<div class="ya-sidebar-info__content">
 									<div class="ya-sidebar-info__item">
 										<span class="ya-sidebar-info__label">Страна</span> {{w.country}}
@@ -482,7 +479,7 @@
 									</div>
 								</div>
 							</div>
-							<div ng-click="options.user._id === user._id && add_workplace();">Добавить</div>
+							<div ng-click="add_workplace();">Добавить</div>
 							<div class="add-work" ng-show="workplace">
 								<div ng-click="workplace = null;">x</div>
 								<form ng-submit="save_workplace();">
@@ -504,11 +501,8 @@
 							<h2 class="ya-sidebar-info__title">
 								Образование
 							</h2>
-							<div class="ya-sidebar-info__content-wrapper" ng-repeat="u in user.universities track by $index">
-								<div
-									ng-click="rm_university(u, $index)"
-									ng-if="options.user._id === user._id"
-									>x</div>
+							<div class="ya-sidebar-info__content-wrapper" ng-repeat="u in options.user.universities track by $index">
+								<div ng-click="rm_university(u, $index)">x</div>
 								<div class="ya-sidebar-info__content">
 									<div class="ya-sidebar-info__item">
 										<span class="ya-sidebar-info__label">Страна</span> {{u.country}}
@@ -533,7 +527,7 @@
 									</div>
 								</div>
 							</div>
-							<div ng-click="options.user._id === user._id && add_university();">Добавить</div>
+							<div ng-click="add_university();">Добавить</div>
 							<div class="add-university" ng-show="university">
 								<div ng-click="university = null;">x</div>
 								<form ng-submit="save_university();">

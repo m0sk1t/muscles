@@ -134,7 +134,6 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 
 		$scope.save_university = function() {
 			User.add_university($scope.university, function(res) {
-				$scope.options.user._id === $scope.user._id && $scope.user.universities.push($scope.university);
 				$scope.options.user.universities.push($scope.university);
 				$scope.university = null;
 			}, function(res) {
@@ -145,7 +144,6 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 		$scope.rm_university = function(u, i) {
 			User.rm_university(u, function(res) {
 				$scope.options.user.universities.splice(i, 1);
-				$scope.user.universities.splice(i, 1);
 			}, function(res) {
 				console.error(res.data);
 			});
@@ -167,7 +165,6 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 
 		$scope.save_workplace = function() {
 			User.add_workplace($scope.workplace, function(res) {
-				$scope.options.user._id === $scope.user._id && $scope.user.workplaces.push($scope.workplace);
 				$scope.options.user.workplaces.push($scope.workplace);
 				$scope.workplace = null;
 			}, function(res) {
@@ -178,7 +175,6 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 		$scope.rm_workplace = function(w, i) {
 			User.rm_workplace(w, function(res) {
 				$scope.options.user.workplaces.splice(i, 1);
-				$scope.user.workplaces.splice(i, 1);
 			}, function(res) {
 				console.error(res.data);
 			});
@@ -200,7 +196,6 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 
 		$scope.save_achievement = function() {
 			User.add_achievement($scope.achievement, function(res) {
-				$scope.options.user._id === $scope.user._id && $scope.user.achievements.push($scope.achievement);
 				$scope.options.user.achievements.push($scope.achievement);
 				$scope.achievement = null;
 			}, function(res) {
@@ -211,7 +206,6 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 		$scope.rm_achievement = function(w, i) {
 			User.rm_achievement(w, function(res) {
 				$scope.options.user.achievements.splice(i, 1);
-				$scope.user.achievements.splice(i, 1);
 			}, function(res) {
 				console.error(res.data);
 			});

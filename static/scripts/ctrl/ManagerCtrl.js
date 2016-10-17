@@ -1,6 +1,14 @@
 angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$location', 'Manager', '$routeParams',
 	function($sce, $scope, $location, Manager, $routeParams) {
-		$scope.creDate = new Date();
+		$scope.creDate = {
+			user: new Date(),
+			photo: new Date(),
+			video: new Date(),
+			topic: new Date(),
+			article: new Date(),
+			contest: new Date(),
+			competition: new Date(),
+		};
 		$scope.add_manager = function() {
 			$scope.cred = {
 				login: '',
@@ -55,8 +63,9 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 			})
 		};
 		$scope.get_videos = function() {
-			Manager.get_videos(function(res) {
+			Manager.get_videos($scope.creDate, function(res) {
 				$scope.videos = res.data;
+				$scope.creDate = $scope.videos[0].creDate;
 			}, function(res) {
 				console.error(res.data);
 			});
@@ -69,8 +78,9 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 			})
 		};
 		$scope.get_topics = function() {
-			Manager.get_topics(function(res) {
+			Manager.get_topics($scope.creDate, function(res) {
 				$scope.topics = res.data;
+				$scope.creDate = $scope.topics[0].creDate;
 			}, function(res) {
 				console.error(res.data);
 			});

@@ -73,8 +73,12 @@ module.exports = (app) => {
 			}): res.status(403).send('Permission denied');
 		});
 
-	app.get('/manage/users', management_check, (req, res) => {
-		User.find({}, (err, users) => {
+	app.get('/manage/users/:credate', management_check, (req, res) => {
+		User.find({
+			creDate: {
+				$lt: req.params.credate
+			}
+		}).limit(3).sort({ creDate: -1 }).exec((err, users) => {
 			if (err) return console.error(err);
 			res.json(users);
 		});
@@ -103,8 +107,12 @@ module.exports = (app) => {
 			});
 		}) : res.status(403).send('Permission denied');
 	});
-	app.get('/manage/videos', management_check, (req, res) => {
-		Video.find({}, (err, videos) => {
+	app.get('/manage/videos/:credate', management_check, (req, res) => {
+		Video.find({
+			creDate: {
+				$lt: req.params.credate
+			}
+		}).limit(3).sort({ creDate: -1 }).exec((err, videos) => {
 			if (err) return console.error(err);
 			res.json(videos);
 		});
@@ -115,8 +123,12 @@ module.exports = (app) => {
 			res.json(video);
 		}) : res.status(403).send('Permission denied');
 	});
-	app.get('/manage/topics', management_check, (req, res) => {
-		Topic.find({}, (err, topics) => {
+	app.get('/manage/topics/:credate', management_check, (req, res) => {
+		Topic.find({
+			creDate: {
+				$lt: req.params.credate
+			}
+		}).limit(3).sort({ creDate: -1 }).exec((err, topics) => {
 			if (err) return console.error(err);
 			res.json(topics);
 		});
@@ -139,8 +151,12 @@ module.exports = (app) => {
 			res.json(hobbie);
 		}) : res.status(403).send('Permission denied');
 	});
-	app.get('/manage/articles', management_check, (req, res) => {
-		Article.find({}, (err, articles) => {
+	app.get('/manage/articles/:credate', management_check, (req, res) => {
+		Article.find({
+			creDate: {
+				$lt: req.params.credate
+			}
+		}).limit(3).sort({ creDate: -1 }).exec((err, articles) => {
 			if (err) return console.error(err);
 			res.json(articles);
 		});
@@ -178,8 +194,12 @@ module.exports = (app) => {
 			}) : res.status(403).send('Permission denied');
 		});
 
-	app.get('/manage/contests', management_check, (req, res) => {
-		Contest.find({}, (err, contests) => {
+	app.get('/manage/contests/:credate', management_check, (req, res) => {
+		Contest.find({
+			creDate: {
+				$lt: req.params.credate
+			}
+		}).limit(3).sort({ creDate: -1 }).exec((err, contests) => {
 			if (err) return console.error(err);
 			res.json(contests);
 		});
@@ -190,8 +210,12 @@ module.exports = (app) => {
 			res.json(contest);
 		}) : res.status(403).send('Permission denied');
 	});
-	app.get('/manage/competitions', management_check, (req, res) => {
-		Competition.find({}, (err, competitions) => {
+	app.get('/manage/competitions/:credate', management_check, (req, res) => {
+		Competition.find({
+			creDate: {
+				$lt: req.params.credate
+			}
+		}).limit(3).sort({ creDate: -1 }).exec((err, competitions) => {
 			if (err) return console.error(err);
 			res.json(competitions);
 		});
