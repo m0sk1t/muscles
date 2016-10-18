@@ -15,11 +15,11 @@ var app = require('express')(),
 	MongoStore = require('connect-mongo')(session),
 	expressValidator = require('express-validator');
 
+app.use(serveStatic(__dirname + '/static'));
+
 app.use(compression());
 
 app.use(morgan('dev'));
-
-app.use(serveStatic(__dirname + '/static'));
 
 app.use(bodyParser.json());
 
