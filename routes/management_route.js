@@ -11,6 +11,9 @@ module.exports = (app) => {
 		Contest = require('../models/Contest'),
 		Competition = require('../models/Competition');
 
+	/*
+		Manager routes
+	*/
 	var management_check = function(req, res, next) {
 		if (!req.cookies.manager_uid) {
 			res.status(403).send('You shall not pass!');
@@ -22,7 +25,6 @@ module.exports = (app) => {
 			next();
 		});
 	};
-
 	app.post('/manager/signin', (req, res) => {
 		var manager_uid = crypto.createHash('sha256').update(req.body.login + salt + req.body.password).digest('hex');
 		Manager.findOne({ manager_uid: manager_uid }, (err, manager) => {
@@ -34,7 +36,6 @@ module.exports = (app) => {
 			}).json(manager);
 		})
 	});
-
 	app.route('/manager/:id')
 		.get(management_check, (req, res) => {
 			if (req.params.id === 'all') {
@@ -73,6 +74,9 @@ module.exports = (app) => {
 			}): res.status(403).send('Permission denied');
 		});
 
+	/*
+		User routes
+	*/
 	app.get('/manage/users/:credate', management_check, (req, res) => {
 		User.find({
 			creDate: {
@@ -89,6 +93,10 @@ module.exports = (app) => {
 			res.json(user);
 		}) : res.status(403).send('Permission denied');
 	});
+
+	/*
+		Photo routes
+	*/
 	app.get('/manage/photos/:credate', management_check, (req, res) => {
 		Photo.find({
 			creDate: {
@@ -107,6 +115,10 @@ module.exports = (app) => {
 			});
 		}) : res.status(403).send('Permission denied');
 	});
+
+	/*
+		Video routes
+	*/
 	app.get('/manage/videos/:credate', management_check, (req, res) => {
 		Video.find({
 			creDate: {
@@ -123,6 +135,10 @@ module.exports = (app) => {
 			res.json(video);
 		}) : res.status(403).send('Permission denied');
 	});
+
+	/*
+		Topic routes
+	*/
 	app.get('/manage/topics/:credate', management_check, (req, res) => {
 		Topic.find({
 			creDate: {
@@ -139,6 +155,10 @@ module.exports = (app) => {
 			res.json(topic);
 		}) : res.status(403).send('Permission denied');
 	});
+
+	/*
+		Hobbie routes
+	*/
 	app.get('/manage/hobbies', management_check, (req, res) => {
 		Hobbie.find({}, (err, hobbies) => {
 			if (err) return console.error(err);
@@ -151,6 +171,10 @@ module.exports = (app) => {
 			res.json(hobbie);
 		}) : res.status(403).send('Permission denied');
 	});
+
+	/*
+		Article routes
+	*/
 	app.get('/manage/articles/:credate', management_check, (req, res) => {
 		Article.find({
 			creDate: {
@@ -194,6 +218,9 @@ module.exports = (app) => {
 			}) : res.status(403).send('Permission denied');
 		});
 
+	/*
+		Contest routes
+	*/
 	app.get('/manage/contests/:credate', management_check, (req, res) => {
 		Contest.find({
 			creDate: {
@@ -204,12 +231,59 @@ module.exports = (app) => {
 			res.json(contests);
 		});
 	});
-	app.delete('/manage/contest/:id', management_check, (req, res) => {
-		req.manager.permission.contests ? Contest.findByIdAndRemove(req.params.id, (err, contest) => {
-			if (err) return console.error(err);
-			res.json(contest);
-		}) : res.status(403).send('Permission denied');
-	});
+	app.route('/manage/contest/:id')
+		.get(management_check, (req, res) => {
+			req.manager.permission.contests ? Contest.findById(req.params.id, (err, contest) => {
+				res.json(contest);
+			}) : res.status(403).send('Permission denied');
+		})
+		.put(management_check, (req, res) => {
+			req.manager.permission.contests ? Contest.findByIdAndUpdate(req.params.id, {
+				$set: {
+					type: req.body.type,
+					title: req.body.title,
+					prize: req.body.prize,
+					dateEnd: req.body.dateEnd,
+					dateStart: req.body.dateStart,
+					freeVoices: req.body.freeVoices,
+					paidVoices: req.body.paidVoices,
+					description: req.body.description,
+					participants: req.body.participants
+				}
+			}, (err, contest) => {
+				res.json(contest);
+			}) : res.status(403).send('Permission denied');
+		})
+		.post(management_check, (req, res) => {
+			if (req.manager.permission.contests) {
+				var contest = new Contest();
+				contest.type = req.body.type;
+				contest.creDate = new Date();
+				contest.title = req.body.title;
+				contest.prize = req.body.prize;
+				contest.owner = req.manager._id;
+				contest.dateEnd = req.body.dateEnd;
+				contest.dateStart = req.body.dateStart;
+				contest.freeVoices = req.body.freeVoices;
+				contest.paidVoices = req.body.paidVoices;
+				contest.description = req.body.description;
+				contest.participants = req.body.participants;
+				contest.save((err) => {
+					res.json(contest);
+				});
+			} else {
+				res.status(403).send('Permission denied');
+			}
+		}).delete(management_check, (req, res) => {
+			req.manager.permission.contests ? Contest.findByIdAndRemove(req.params.id, (err, contest) => {
+				if (err) return console.error(err);
+				res.json(contest);
+			}) : res.status(403).send('Permission denied');
+		});
+
+	/*
+		Competition routes
+	*/
 	app.get('/manage/competitions/:credate', management_check, (req, res) => {
 		Competition.find({
 			creDate: {
@@ -220,10 +294,47 @@ module.exports = (app) => {
 			res.json(competitions);
 		});
 	});
-	app.delete('/manage/competition/:id', management_check, (req, res) => {
-		req.manager.permission.competitions ? Competition.findByIdAndRemove(req.params.id, (err, competition) => {
-			if (err) return console.error(err);
-			res.json(competition);
-		}) : res.status(403).send('Permission denied');
-	});
+	app.route('/manage/competition/:id')
+		.get(management_check, (req, res) => {
+			req.manager.permission.competitions ? Competition.findById(req.params.id, (err, competition) => {
+				res.json(competition);
+			}) : res.status(403).send('Permission denied');
+		})
+		.put(management_check, (req, res) => {
+			req.manager.permission.competitions ? Competition.findByIdAndUpdate(req.params.id, {
+				$set: {
+					date: req.body.date,
+					city: req.body.city,
+					place: req.body.place,
+					title: req.body.title,
+					nomination: req.body.nomination,
+					description: req.body.description,
+				}
+			}, (err, competition) => {
+				res.json(competition);
+			}) : res.status(403).send('Permission denied');
+		})
+		.post(management_check, (req, res) => {
+			if (req.manager.permission.competitions) {
+				var competition = new Competition();
+				competition.date = req.body.date;
+				competition.creDate = new Date();
+				competition.city = req.body.city;
+				competition.place = req.body.place;
+				competition.title = req.body.title;
+				competition.nomination = req.body.nomination;
+				competition.description = req.body.description;
+				competition.owner = req.manager._id;
+				competition.save((err) => {
+					res.json(competition);
+				});
+			} else {
+				res.status(403).send('Permission denied');
+			}
+		}).delete(management_check, (req, res) => {
+			req.manager.permission.competitions ? Competition.findByIdAndRemove(req.params.id, (err, competition) => {
+				if (err) return console.error(err);
+				res.json(competition);
+			}) : res.status(403).send('Permission denied');
+		});
 };

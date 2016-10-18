@@ -79,6 +79,7 @@
 	<section 
 		style="display: inline-block; width: 90%; overflow-y: auto; max-height: 80%; height: 80%;"
 		ng-show="page === 'contests'">
+		<button ng-click="create_contest()">Add</button>
 		<div ng-repeat="contest in contests track by $index">
 			<span style="background-color: #666" ng-click="delete_contest(contest._id, $index)">DEL</span>{{contest.title}}
 		</div>
@@ -93,6 +94,7 @@
 	<section 
 		style="display: inline-block; width: 90%; overflow-y: auto; max-height: 80%; height: 80%;"
 		ng-show="page === 'competitions'">
+		<button ng-click="create_competition()">Add</button>
 		<div ng-repeat="competition in competitions track by $index">
 			<span style="background-color: #666" ng-click="delete_competition(competition._id, $index)">DEL</span>{{competition.title}}
 		</div>

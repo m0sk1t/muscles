@@ -10,6 +10,12 @@ angular.module('MuscleMan', ['ngLocale', 'ngFileUpload', 'ngRoute', '720kb.datep
         }).when('/manage/article/:id', {
             templateUrl: 'tpl/manage_article.tpl',
             controller: 'ManageArticleCtrl'
+        }).when('/manage/contest/:id', {
+            templateUrl: 'tpl/manage_contest.tpl',
+            controller: 'ManageContestCtrl'
+        }).when('/manage/competition/:id', {
+            templateUrl: 'tpl/manage_competition.tpl',
+            controller: 'ManageCompetitionCtrl'
         }).when('/manager/:id', {
             templateUrl: 'tpl/manager.tpl',
             controller: 'ManagerCtrl'

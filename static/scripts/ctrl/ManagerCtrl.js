@@ -130,7 +130,7 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 			});
 		};
 		$scope.create_article = function() {
-			Manager.create_article($scope.new_article, function(res) {
+			Manager.create_article(function(res) {
 				$location.path('/manage/article/' + res.data._id);
 			}, function(res) {
 				console.error(res.data);
@@ -146,6 +146,13 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 				console.error(res.data);
 			})
 		};
+		$scope.create_contest = function() {
+			Manager.create_contest(function(res) {
+				$location.path('/manage/contest/' + res.data._id);
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
 		$scope.get_contests = function() {
 			Manager.get_contests($scope.creDate.contests, function(res) {
 				$scope.contests = res.data;
@@ -160,6 +167,13 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 			}, function(res) {
 				console.error(res.data);
 			})
+		};
+		$scope.create_competition = function() {
+			Manager.create_competition(function(res) {
+				$location.path('/manage/competition/' + res.data._id);
+			}, function(res) {
+				console.error(res.data);
+			});
 		};
 		$scope.get_competitions = function() {
 			Manager.get_competitions($scope.creDate.competitions, function(res) {
