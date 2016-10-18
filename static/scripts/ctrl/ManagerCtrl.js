@@ -50,7 +50,7 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 		$scope.get_photos = function() {
 			Manager.get_photos($scope.creDate.photos, function(res) {
 				$scope.photos = res.data;
-				$scope.creDate = $scope.photos[0].creDate;
+				$scope.creDate.photos = $scope.photos[0].creDate;
 			}, function(res) {
 				console.error(res.data);
 			});
@@ -65,7 +65,7 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 		$scope.get_videos = function() {
 			Manager.get_videos($scope.creDate.videos, function(res) {
 				$scope.videos = res.data;
-				$scope.creDate = $scope.videos[0].creDate;
+				$scope.creDate.videos = $scope.videos[0].creDate;
 			}, function(res) {
 				console.error(res.data);
 			});
@@ -80,7 +80,7 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 		$scope.get_topics = function() {
 			Manager.get_topics($scope.creDate.topics, function(res) {
 				$scope.topics = res.data;
-				$scope.creDate = $scope.topics[0].creDate;
+				$scope.creDate.topics = $scope.topics[0].creDate;
 			}, function(res) {
 				console.error(res.data);
 			});
@@ -95,6 +95,7 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 		$scope.get_users = function() {
 			Manager.get_users($scope.creDate.users, function(res) {
 				$scope.users = res.data;
+				$scope.creDate.users = $scope.users[0].creDate;
 			}, function(res) {
 				console.error(res.data);
 			});
@@ -123,6 +124,7 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 		$scope.get_articles = function() {
 			Manager.get_articles($scope.creDate.articles, function(res) {
 				$scope.articles = res.data;
+				$scope.creDate.articles = $scope.users[0].creDate;
 			}, function(res) {
 				console.error(res.data);
 			});
@@ -147,6 +149,7 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 		$scope.get_contests = function() {
 			Manager.get_contests($scope.creDate.contests, function(res) {
 				$scope.contests = res.data;
+				$scope.creDate.contests = $scope.users[0].creDate;
 			}, function(res) {
 				console.error(res.data);
 			});
@@ -161,6 +164,7 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 		$scope.get_competitions = function() {
 			Manager.get_competitions($scope.creDate.competitions, function(res) {
 				$scope.competitions = res.data;
+				$scope.creDate.competitions = $scope.users[0].creDate;
 			}, function(res) {
 				console.error(res.data);
 			});
