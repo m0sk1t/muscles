@@ -72,8 +72,8 @@ angular.module('Services', []).factory('User', ['$http',
 			set_permission: function(id, opt, s, e) {
 				return $http.put('/manager/' + id, opt).then(s, e);
 			},
-			get_users: function(s, e) {
-				return $http.get('/manage/users').then(s, e);
+			get_users: function(credate, s, e) {
+				return $http.get('/manage/users/' + credate).then(s, e);
 			},
 			get_hobbies: function(s, e) {
 				return $http.get('/manage/hobbies').then(s, e);
@@ -81,20 +81,20 @@ angular.module('Services', []).factory('User', ['$http',
 			get_photos: function(credate, s, e) {
 				return $http.get('/manage/photos/' + credate).then(s, e);
 			},
-			get_videos: function(s, e) {
-				return $http.get('/manage/videos').then(s, e);
+			get_videos: function(credate, s, e) {
+				return $http.get('/manage/videos/' + credate).then(s, e);
 			},
-			get_topics: function(s, e) {
-				return $http.get('/manage/topics').then(s, e);
+			get_topics: function(credate, s, e) {
+				return $http.get('/manage/topics/' + credate).then(s, e);
 			},
-			get_articles: function(s, e) {
-				return $http.get('/manage/articles').then(s, e);
+			get_articles: function(credate, s, e) {
+				return $http.get('/manage/articles/' + credate).then(s, e);
 			},
-			get_contests: function(s, e) {
-				return $http.get('/manage/contests').then(s, e);
+			get_contests: function(credate, s, e) {
+				return $http.get('/manage/contests/' + credate).then(s, e);
 			},
-			get_competitions: function(s, e) {
-				return $http.get('/manage/competitions').then(s, e);
+			get_competitions: function(credate, s, e) {
+				return $http.get('/manage/competitions/' + credate).then(s, e);
 			},
 			delete_user: function(id, s, e) {
 				return $http.delete('/manage/user/' + id).then(s, e);
