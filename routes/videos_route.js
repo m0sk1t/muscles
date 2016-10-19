@@ -1,30 +1,20 @@
 module.exports = (app) => {
-	var mongoose = require('mongoose'),
-		Videos = mongoose.model('Videos', {
-			link: String,
-			type: String,
-			title: String,
-			owner: String,
-			creDate: Date,
-			likes: Array,
-			comments: Array,
-			thumbnail: String,
-		}),
-		Users = mongoose.model('Users');
+	var tools = require('./tools'),
+		User = require('../models/User'),
+		Video = require('../models/Video');
+
 	app.route('/video/:id')
-		.get((req, res) => {
-			Videos.find({
+		.get(tools.ensureAuthenticated, (req, res) => {
+			Video.find({
 				owner: req.params.id
 			}, (err, videos) => {
 				if (err) return console.error(err);
 				res.json(videos);
 			});
 		})
-		.put((req, res) => {
-			Users.findOne({
-				userid: req.cookies.userid
-			}, (err, user) => {
-				Videos.findOneAndUpdate({
+		.put(tools.ensureAuthenticated, (req, res) => {
+			req.user ? User.findById(req.user._id, (err, user) => {
+				Video.findOneAndUpdate({
 					_id: req.params.id,
 					owner: user._id
 				}, {
@@ -35,13 +25,11 @@ module.exports = (app) => {
 					if (err) return console.error(err);
 					res.json(video);
 				});
-			});
+			}) : res.status(403).send('Please, login first');
 		})
-		.post((req, res) => {
-			Users.findOne({
-				userid: req.cookies.userid
-			}, (err, user) => {
-				Videos.create({
+		.post(tools.ensureAuthenticated, (req, res) => {
+			req.user ? User.findById(req.user._id, (err, user) => {
+				Video.create({
 					owner: user._id,
 					creDate: Date.now(),
 					link: req.body.link,
@@ -52,28 +40,24 @@ module.exports = (app) => {
 					if (err) return console.error(err);
 					res.json(video);
 				});
-			});
+			}) : res.status(403).send('Please, login first');
 		})
-		.delete((req, res) => {
-			Users.findOne({
-				userid: req.cookies.userid
-			}, (err, user) => {
-				Videos.findOneAndRemove({
+		.delete(tools.ensureAuthenticated, (req, res) => {
+			req.user ? User.findById(req.user._id, (err, user) => {
+				Video.findOneAndRemove({
 					_id: req.params.id,
 					owner: user._id,
 				}, (err, video) => {
 					if (err) return console.error(err);
 					res.json(video);
 				});
-			});
+			}) : res.status(403).send('Please, login first');
 		});
 
-	app.put('/video/:id/add_like', (req, res) => {
-		Users.findOne({
-			userid: req.cookies.userid
-		}, (err, user) => {
+	app.put('/video/:id/add_like', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, (err, user) => {
 			if (!err && user) {
-				Videos.findOneAndUpdate({
+				Video.findOneAndUpdate({
 					_id: req.params.id,
 				}, {
 					$addToSet: {
@@ -85,14 +69,12 @@ module.exports = (app) => {
 			} else {
 				res.status(500).send(err);
 			}
-		});
+		}) : res.status(403).send('Please, login first');
 	});
-	app.put('/video/:id/remove_like', (req, res) => {
-		Users.findOne({
-			userid: req.cookies.userid
-		}, (err, user) => {
+	app.put('/video/:id/remove_like', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, (err, user) => {
 			if (!err && user) {
-				Videos.findOneAndUpdate({
+				Video.findOneAndUpdate({
 					_id: req.params.id,
 				}, {
 					$pull: {
@@ -104,14 +86,12 @@ module.exports = (app) => {
 			} else {
 				res.status(500).send(err);
 			}
-		});
+		}) : res.status(403).send('Please, login first');
 	});
-	app.put('/video/:id/add_comment', (req, res) => {
-		Users.findOne({
-			userid: req.cookies.userid
-		}, (err, user) => {
+	app.put('/video/:id/add_comment', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, (err, user) => {
 			if (!err && user) {
-				Videos.findOneAndUpdate({
+				Video.findOneAndUpdate({
 					_id: req.params.id,
 				}, {
 					$addToSet: {
@@ -130,14 +110,12 @@ module.exports = (app) => {
 			} else {
 				res.status(500).send(err);
 			}
-		});
+		}) : res.status(403).send('Please, login first');
 	});
-	app.put('/video/:id/remove_comment', (req, res) => {
-		Users.findOne({
-			userid: req.cookies.userid
-		}, (err, user) => {
+	app.put('/video/:id/remove_comment', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, (err, user) => {
 			if (!err && user) {
-				Videos.findOneAndUpdate({
+				Video.findOneAndUpdate({
 					_id: req.params.id,
 				}, {
 					$pull: {
@@ -152,6 +130,6 @@ module.exports = (app) => {
 			} else {
 				res.status(500).send(err);
 			}
-		});
+		}) : res.status(403).send('Please, login first');
 	});
 };

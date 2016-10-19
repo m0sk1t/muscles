@@ -57,7 +57,7 @@ module.exports = (app) => {
 				User.findById(req.user._id, (err, existingUser) => {
 					if (err) return done(err, false);
 					if (existingUser) {
-						existingUser.social.fb = fb_user;
+						existingUser.social.fb = profile;
 						existingUser.tokens.fb = accessToken;
 						existingUser.mail = existingUser.mail || fb_user.email;
 						existingUser.name = existingUser.name || fb_user.first_name;
@@ -69,7 +69,7 @@ module.exports = (app) => {
 						User.findOne({ mail: fb_user.email }, (err, existingUser) => {
 							if (err) return done(err, false);
 							if (existingUser) {
-								existingUser.social.fb = fb_user;
+								existingUser.social.fb = profile;
 								existingUser.tokens.fb = accessToken;
 								existingUser.mail = existingUser.mail || fb_user.email;
 								existingUser.name = existingUser.name || fb_user.first_name;
@@ -80,7 +80,7 @@ module.exports = (app) => {
 							} else {
 								const newUser = new User();
 								newUser.mail = fb_user.email;
-								newUser.social.fb = fb_user;
+								newUser.social.fb = profile;
 								newUser.tokens.fb = accessToken;
 								newUser.name = fb_user.first_name;
 								newUser.surname = fb_user.last_name;
@@ -95,7 +95,7 @@ module.exports = (app) => {
 				User.findOne({ mail: fb_user.email }, (err, existingUser) => {
 					if (err) return done(err, false);
 					if (existingUser) {
-						existingUser.social.fb = fb_user;
+						existingUser.social.fb = profile;
 						existingUser.tokens.fb = accessToken;
 						existingUser.mail = existingUser.mail || fb_user.email;
 						existingUser.name = existingUser.name || fb_user.first_name;
@@ -106,10 +106,299 @@ module.exports = (app) => {
 					} else {
 						const newUser = new User();
 						newUser.mail = fb_user.email;
-						newUser.social.fb = fb_user;
+						newUser.social.fb = profile;
 						newUser.tokens.fb = accessToken;
 						newUser.name = fb_user.first_name;
 						newUser.surname = fb_user.last_name;
+						newUser.save((err) => {
+							done(err, newUser);
+						});
+					}
+				});
+			}
+		}
+	));
+
+	passport.use(new TwitterStrategy({
+			passReqToCallback: true,
+			callbackURL: '/auth/tw/callback',
+			consumerKey: 'C3nDiK9uZyQUYSGKy9b8rolvM',
+			consumerSecret: '4Bq5CYp2VfQZYHWmc4ryXjOuEAiGk549GzyXDtLmjCdGZtDx7A',
+		},
+		(req, accessToken, refreshToken, profile, done) => {
+			var tw_mail = `${profile.username}@twitter.com`;
+			if (req.user) {
+				User.findById(req.user._id, (err, existingUser) => {
+					if (err) return done(err, false);
+					if (existingUser) {
+						existingUser.social.tw = profile;
+						existingUser.tokens.tw = accessToken;
+						existingUser.mail = existingUser.mail || tw_mail;
+						existingUser.name = existingUser.name || profile.displayName;
+						existingUser.save((err) => {
+							done(null, existingUser);
+						});
+					} else {
+						User.findOne({ mail: tw_mail }, (err, existingUser) => {
+							if (err) return done(err, false);
+							if (existingUser) {
+								existingUser.social.tw = profile;
+								existingUser.tokens.tw = accessToken;
+								existingUser.mail = existingUser.mail || tw_mail;
+								existingUser.name = existingUser.name || profile.displayName;
+								existingUser.save((err) => {
+									done(null, existingUser);
+								});
+							} else {
+								const newUser = new User();
+								newUser.mail = tw_mail;
+								newUser.social.tw = profile;
+								newUser.tokens.tw = accessToken;
+								newUser.name = profile.displayName;
+								newUser.save((err) => {
+									done(err, newUser);
+								});
+							}
+						});
+					}
+				});
+			} else {
+				User.findOne({ mail: tw_mail }, (err, existingUser) => {
+					if (err) return done(err, false);
+					if (existingUser) {
+						existingUser.social.tw = profile;
+						existingUser.tokens.tw = accessToken;
+						existingUser.mail = existingUser.mail || tw_mail;
+						existingUser.name = existingUser.name || profile.displayName;
+						existingUser.save((err) => {
+							done(null, existingUser);
+						});
+					} else {
+						const newUser = new User();
+						newUser.mail = tw_mail;
+						newUser.social.tw = profile;
+						newUser.tokens.tw = accessToken;
+						newUser.name = profile.displayName;
+						newUser.save((err) => {
+							done(err, newUser);
+						});
+					}
+				});
+			}
+		}
+	));
+
+	passport.use(new InstagramStrategy({
+			passReqToCallback: true,
+			callbackURL: '/auth/im/callback',
+			clientID: 'a8670feee3604961ab948ed2c97097a2',
+			clientSecret: 'a399672808064e179ee76d807229256d',
+		},
+		(req, accessToken, refreshToken, profile, done) => {
+			var im_mail = `${profile.username}@instagram.com`;
+			if (req.user) {
+				User.findById(req.user._id, (err, existingUser) => {
+					if (err) return done(err, false);
+					if (existingUser) {
+						existingUser.social.im = profile;
+						existingUser.tokens.im = accessToken;
+						existingUser.mail = existingUser.mail || im_mail;
+						existingUser.name = existingUser.name || profile.displayName;
+						existingUser.save((err) => {
+							done(null, existingUser);
+						});
+					} else {
+						User.findOne({ mail: im_mail }, (err, existingUser) => {
+							if (err) return done(err, false);
+							if (existingUser) {
+								existingUser.social.im = profile;
+								existingUser.tokens.im = accessToken;
+								existingUser.mail = existingUser.mail || im_mail;
+								existingUser.name = existingUser.name || profile.displayName;
+								existingUser.save((err) => {
+									done(null, existingUser);
+								});
+							} else {
+								const newUser = new User();
+								newUser.mail = im_mail;
+								newUser.social.im = profile;
+								newUser.tokens.im = accessToken;
+								newUser.name = profile.displayName;
+								newUser.save((err) => {
+									done(err, newUser);
+								});
+							}
+						});
+					}
+				});
+			} else {
+				User.findOne({ mail: im_mail }, (err, existingUser) => {
+					if (err) return done(err, false);
+					if (existingUser) {
+						existingUser.social.im = profile;
+						existingUser.tokens.im = accessToken;
+						existingUser.mail = existingUser.mail || im_mail;
+						existingUser.name = existingUser.name || profile.displayName;
+						existingUser.save((err) => {
+							done(null, existingUser);
+						});
+					} else {
+						const newUser = new User();
+						newUser.mail = im_mail;
+						newUser.social.im = profile;
+						newUser.tokens.im = accessToken;
+						newUser.name = profile.displayName;
+						newUser.save((err) => {
+							done(err, newUser);
+						});
+					}
+				});
+			}
+		}
+	));
+
+	passport.use(new VKStrategy({
+			clientID: '5644041 ',
+			passReqToCallback: true,
+			scope: ['email', 'friends'],
+			callbackURL: '/auth/vk/callback',
+			clientSecret: '8ZaUaUiSD385gvoR7Kbo',
+			profileFields: ['email', 'first_name', 'last_name', 'friends']
+		},
+		(req, accessToken, refreshToken, params, profile, done) => {
+			var vk_user = profile._json;
+			if (req.user) {
+				User.findById(req.user._id, (err, existingUser) => {
+					if (err) return done(err, false);
+					if (existingUser) {
+						existingUser.social.vk = profile;
+						existingUser.tokens.vk = accessToken;
+						existingUser.mail = existingUser.mail || params.email;
+						existingUser.name = existingUser.name || vk_user.first_name;
+						existingUser.surname = existingUser.surname || vk_user.last_name;
+						existingUser.save((err) => {
+							done(null, existingUser);
+						});
+					} else {
+						User.findOne({ mail: params.email }, (err, existingUser) => {
+							if (err) return done(err, false);
+							if (existingUser) {
+								existingUser.social.vk = profile;
+								existingUser.tokens.vk = accessToken;
+								existingUser.mail = existingUser.mail || params.email;
+								existingUser.name = existingUser.name || vk_user.first_name;
+								existingUser.surname = existingUser.surname || vk_user.last_name;
+								existingUser.save((err) => {
+									done(null, existingUser);
+								});
+							} else {
+								const newUser = new User();
+								newUser.mail = params.email;
+								newUser.social.vk = profile;
+								newUser.tokens.vk = accessToken;
+								newUser.name = vk_user.first_name;
+								newUser.surname = vk_user.last_name;
+								newUser.save((err) => {
+									done(err, newUser);
+								});
+							}
+						});
+					}
+				});
+			} else {
+				User.findOne({ mail: params.email }, (err, existingUser) => {
+					if (err) return done(err, false);
+					if (existingUser) {
+						existingUser.social.vk = profile;
+						existingUser.tokens.vk = accessToken;
+						existingUser.mail = existingUser.mail || params.email;
+						existingUser.name = existingUser.name || vk_user.first_name;
+						existingUser.surname = existingUser.surname || vk_user.last_name;
+						existingUser.save((err) => {
+							done(null, existingUser);
+						});
+					} else {
+						const newUser = new User();
+						newUser.mail = params.email;
+						newUser.social.vk = profile;
+						newUser.tokens.vk = accessToken;
+						newUser.name = vk_user.first_name;
+						newUser.surname = vk_user.last_name;
+						newUser.save((err) => {
+							done(err, newUser);
+						});
+					}
+				});
+			}
+		}
+	));
+
+	passport.use(new OKStrategy({
+			passReqToCallback: true,
+			callbackURL: '/auth/ok/callback',
+			clientID: '123',
+			clientPublic: '456',
+			clientSecret: '789',
+		},
+		(req, accessToken, refreshToken, profile, done) => {
+			var ok_user = profile._json;
+			if (req.user) {
+				User.findById(req.user._id, (err, existingUser) => {
+					if (err) return done(err, false);
+					if (existingUser) {
+						existingUser.social.ok = profile;
+						existingUser.tokens.ok = accessToken;
+						existingUser.mail = existingUser.mail || profile.email;
+						existingUser.name = existingUser.name || ok_user.first_name;
+						existingUser.surname = existingUser.surname || ok_user.last_name;
+						existingUser.save((err) => {
+							done(null, existingUser);
+						});
+					} else {
+						User.findOne({ mail: profile.email }, (err, existingUser) => {
+							if (err) return done(err, false);
+							if (existingUser) {
+								existingUser.social.ok = profile;
+								existingUser.tokens.ok = accessToken;
+								existingUser.mail = existingUser.mail || profile.email;
+								existingUser.name = existingUser.name || ok_user.first_name;
+								existingUser.surname = existingUser.surname || ok_user.last_name;
+								existingUser.save((err) => {
+									done(null, existingUser);
+								});
+							} else {
+								const newUser = new User();
+								newUser.mail = profile.email;
+								newUser.social.ok = profile;
+								newUser.tokens.ok = accessToken;
+								newUser.name = ok_user.first_name;
+								newUser.surname = ok_user.last_name;
+								newUser.save((err) => {
+									done(err, newUser);
+								});
+							}
+						});
+					}
+				});
+			} else {
+				User.findOne({ mail: profile.email }, (err, existingUser) => {
+					if (err) return done(err, false);
+					if (existingUser) {
+						existingUser.social.ok = profile;
+						existingUser.tokens.ok = accessToken;
+						existingUser.mail = existingUser.mail || profile.email;
+						existingUser.name = existingUser.name || ok_user.first_name;
+						existingUser.surname = existingUser.surname || ok_user.last_name;
+						existingUser.save((err) => {
+							done(null, existingUser);
+						});
+					} else {
+						const newUser = new User();
+						newUser.mail = profile.email;
+						newUser.social.ok = profile;
+						newUser.tokens.ok = accessToken;
+						newUser.name = ok_user.first_name;
+						newUser.surname = ok_user.last_name;
 						newUser.save((err) => {
 							done(err, newUser);
 						});
@@ -145,9 +434,7 @@ module.exports = (app) => {
 				return next(err);
 			}
 			if (existingUser) {
-				res.status(302).json({
-					msg: 'Пользователь с такой почтой уже зарегистрирован! Если это вы, попробуйте войти на сайт со своим логином и паролем'
-				});
+				res.redirect('/#/signin');
 				return;
 			}
 			user.save((err) => {

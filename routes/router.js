@@ -12,4 +12,5 @@ module.exports = (app, io) => {
 	require('./hobbies_route.js')(app);
 	require('./socket_route.js')(app, io);
 	require('./competition_route.js')(app);
+	require('./management_route.js')(app);
 };

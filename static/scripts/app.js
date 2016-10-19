@@ -1,9 +1,24 @@
-angular.module('MuscleMan', ['ngLocale', 'ngFileUpload', 'ngRoute', '720kb.datepicker', 'Services']).config(['$routeProvider', /*'$facebookProvider',*/
+angular.module('MuscleMan', ['ngLocale', 'ngFileUpload', 'ngRoute', '720kb.datepicker', 'froala', 'Services']).config(['$routeProvider',
 
     function($routeProvider) {
         $routeProvider.when('/', {
             templateUrl: 'tpl/main.tpl',
             controller: 'MainCtrl'
+        }).when('/manager/signin', {
+            templateUrl: 'tpl/manager_signin.tpl',
+            controller: 'ManagerSignInCtrl'
+        }).when('/manage/article/:id', {
+            templateUrl: 'tpl/manage_article.tpl',
+            controller: 'ManageArticleCtrl'
+        }).when('/manage/contest/:id', {
+            templateUrl: 'tpl/manage_contest.tpl',
+            controller: 'ManageContestCtrl'
+        }).when('/manage/competition/:id', {
+            templateUrl: 'tpl/manage_competition.tpl',
+            controller: 'ManageCompetitionCtrl'
+        }).when('/manager/:id', {
+            templateUrl: 'tpl/manager.tpl',
+            controller: 'ManagerCtrl'
         }).when('/signup', {
             templateUrl: 'tpl/signup.tpl',
             controller: 'SignUpCtrl'

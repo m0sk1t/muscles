@@ -63,16 +63,12 @@
 					</div>
 				</div>
 				<div class="ya-user__awards ya-sidebar-info ya-relative">
-					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_awards" ng-click="add_achievement();"></div>
+					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_awards"></div>
 					<div class="ya-page__block ya-page__block_rounded">
 						<h2 class="ya-sidebar-info__title">
 							Достижения
 						</h2>
 						<div class="ya-sidebar-info__content-wrapper" ng-repeat="a in user.achievements track by $index">
-							<div
-								ng-click="rm_achievement(a, $index)"
-								ng-if="options.user._id === user._id"
-							>x</div>
 							<div class="ya-sidebar-info__content">
 								<div class="ya-sidebar-info__item">
 									<span class="ya-sidebar-info__label">Страна</span> {{a.country}}
@@ -95,34 +91,14 @@
 							</div>
 						</div>
 					</div>
-					<div class="add-achievement" ng-show="achievement">
-						<div ng-click="achievement = null;">x</div>
-						<form ng-submit="save_achievement();">
-							<select ng-model="achievement.country_id" ng-change="load_cities();">
-								<option value="{{c.cid}}" ng-repeat="c in countries" ng-click="achievement.country = c.title">{{c.title}}</option>
-							</select><br />
-							<select ng-model="achievement.city_id">
-								<option value="{{ci.cid}}" ng-repeat="ci in cities" ng-click="achievement.city = ci.title">{{ci.title}}</option>
-							</select><br />
-							<input type="number" ng-model="achievement.year" /><br />
-							<input type="text" ng-model="achievement.title" placeholder="Наименование конкурса" /><br />
-							<input type="text" ng-model="achievement.place" placeholder="Место" /><br/ >
-							<input type="text" ng-model="achievement.comment" placeholder="Комментарий" /><br/>
-							<input type="submit" value="save" />
-						</form>
-					</div>
 				</div>
 				<div class="ya-user__work ya-sidebar-info ya-relative">
-					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_work" ng-click="options.user._id === user._id && add_workplace();"></div>
+					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_work"></div>
 					<div class="ya-page__block ya-page__block_rounded">
 						<h2 class="ya-sidebar-info__title">
 							Работа
 						</h2>
 						<div class="ya-sidebar-info__content-wrapper" ng-repeat="w in user.workplaces track by $index">
-							<div
-								ng-click="rm_workplace(w, $index)"
-								ng-if="options.user._id === user._id"
-							>x</div>
 							<div class="ya-sidebar-info__content">
 								<div class="ya-sidebar-info__item">
 									<span class="ya-sidebar-info__label">Страна</span> {{w.country}}
@@ -142,34 +118,14 @@
 							</div>
 						</div>
 					</div>
-					<div class="add-work" ng-show="workplace">
-						<div ng-click="workplace = null;">x</div>
-						<form ng-submit="save_workplace();">
-							<select ng-model="workplace.country_id" ng-change="load_cities();">
-								<option value="{{c.cid}}" ng-repeat="c in countries" ng-click="workplace.country = c.title">{{c.title}}</option>
-							</select><br />
-							<select ng-model="workplace.city_id">
-								<option value="{{ci.cid}}" ng-repeat="ci in cities" ng-click="workplace.city = ci.title">{{ci.title}}</option>
-							</select><br />
-							с: <input type="number" ng-model="workplace.year_start" /><br />
-							по:<input type="number" ng-model="workplace.year_end" /><br />
-							<input type="text" ng-model="workplace.company" placeholder="Компания" />
-							<input type="text" ng-model="workplace.speciality" placeholder="Специальность" />
-							<input type="submit" value="save" />
-						</form>
-					</div>
 				</div>
 				<div class="ya-user__edu ya-sidebar-info ya-relative">
-					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_edu" ng-click="options.user._id === user._id && add_university();"></div>
+					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_edu"></div>
 					<div class="ya-page__block ya-page__block_rounded">
 						<h2 class="ya-sidebar-info__title">
 							Образование
 						</h2>
 						<div class="ya-sidebar-info__content-wrapper" ng-repeat="u in user.universities track by $index">
-							<div
-								ng-click="rm_university(u, $index)"
-								ng-if="options.user._id === user._id"
-								>x</div>
 							<div class="ya-sidebar-info__content">
 								<div class="ya-sidebar-info__item">
 									<span class="ya-sidebar-info__label">Страна</span> {{u.country}}
@@ -194,30 +150,6 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="add-university" ng-show="university">
-						<div ng-click="university = null;">x</div>
-						<form ng-submit="save_university();">
-							<select ng-model="university.country_id" ng-change="load_cities();">
-								<option value="{{c.cid}}" ng-repeat="c in countries" ng-click="university.country = c.title">{{c.title}}</option>
-							</select><br />
-							<select ng-model="university.city_id" ng-change="load_universities();">
-								<option value="{{ci.cid}}" ng-repeat="ci in cities" ng-click="university.city = ci.title">{{ci.title}}</option>
-							</select><br />
-							<select ng-model="university.university_id" ng-change="load_faculties()">
-								<option value="{{u.id}}" ng-repeat="u in universities" ng-click="university.university = u.title">{{u.title}}</option>
-							</select><br />
-							<select ng-model="university.faculty_id" ng-change="load_chairs()">
-								<option value="{{f.id}}" ng-repeat="f in faculties" ng-click="university.faculty = f.title">{{f.title}}</option>
-							</select><br />
-							<select ng-model="university.chair_id">
-								<option value="{{ch.id}}" ng-repeat="ch in chairs" ng-click="university.chair = ch.title">{{ch.title}}</option>
-							</select><br />
-							с: <input type="number" ng-model="university.year_start" /><br />
-							по:<input type="number" ng-model="university.year_end" /><br />
-							<input type="text" ng-model="university.speciality" placeholder="специальность"><br />
-							<input type="submit" value="save" />
-						</form>
 					</div>
 				</div>
 			</div>
@@ -317,41 +249,40 @@
 								<div class="ya-socials ya-socials_inline ya-socials_theme_white">
 									<div class="ya-socials__list">
 										<div class="ya-socials__item ya-clearfix">
-											<span class="ya-socials__link ya-socials__link_profile ya-socials__link_vk">
-												<span class="ya-socials__logo ya-socials__logo_vk" ng-click="my_vk_friends();"></span>
-											</span>
-											<span class="ya-socials__link ya-socials__link_friends">{{options.user.social.vk_subscribers}}</span>
+											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_vk">
+												<span class="ya-socials__logo ya-socials__logo_vk"></span>
+											</a>
+											<span class="ya-socials__link ya-socials__link_friends">{{options.user.social.fb.friends.summary.total_count}}</span>
 										</div>
 										<div class="ya-socials__item ya-clearfix">
-											<span href="" class="ya-socials__link ya-socials__link_profile ya-socials__link_fb">
-												<span class="ya-socials__logo ya-socials__logo_fb" ng-click="my_facebook_friends();"></span>
-											</span>
-											<span class="ya-socials__link ya-socials__link_friends">{{options.user.social.fb_subscribers}}</span>
+											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_fb">
+												<span class="ya-socials__logo ya-socials__logo_fb"></span>
+											</a>
+											<span class="ya-socials__link ya-socials__link_friends">{{options.user.social.fb.friends.summary.total_count}}</span>
 										</div>
 										<div class="ya-socials__item ya-clearfix">
-											<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_tw">
+											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_tw">
 												<span class="ya-socials__logo ya-socials__logo_tw"></span>
 											</a>
-											<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_friends">124</a>
+											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_friends">{{options.user.social.tw._json.friends_count}}</a>
 										</div>
 										<div class="ya-socials__item ya-clearfix">
-											<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_ok">
+											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_ok">
 												<span class="ya-socials__logo ya-socials__logo_ok"></span>
 											</a>
-											<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_friends">2321</a>
+											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_friends">2321</a>
 										</div>
 										<div class="ya-socials__item ya-clearfix">
-											<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_ig">
+											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_ig">
 												<span class="ya-socials__logo ya-socials__logo_ig"></span>
 											</a>
-											<a href="https://vk.com" target="_blank" class="ya-socials__link ya-socials__link_friends">459</a>
+											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_friends">459</a>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-
 				</div>
 				<div class="ya-page__block ya-user__photos">
 					<div class="ya-photos ya-photos_profile">

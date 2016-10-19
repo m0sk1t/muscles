@@ -1,29 +1,20 @@
 module.exports = (app) => {
-	var mongoose = require('mongoose'),
-		Topics = mongoose.model('Topics', {
-			owner: String,
-			text: String,
-			creDate: Date,
-			likes: Array,
-			images: Array,
-			videos: Array,
-			comments: Array
-		}),
-		Users = mongoose.model('Users');
+	var tools = require('./tools'),
+		User = require('../models/User'),
+		Topic = require('../models/Topic');
+
 	app.route('/topic/:id')
-		.get((req, res) => {
-			Topics.find({
+		.get(tools.ensureAuthenticated, (req, res) => {
+			Topic.find({
 				owner: req.params.id
 			}, (err, topics) => {
 				if (err) return console.error(err);
 				res.json(topics);
 			});
 		})
-		.put((req, res) => {
-			Users.findOne({
-				userid: req.cookies.userid
-			}, (err, user) => {
-				Topics.findOneAndUpdate({
+		.put(tools.ensureAuthenticated, (req, res) => {
+			req.user ? User.findById(req.user._id, (err, user) => {
+				Topic.findOneAndUpdate({
 					_id: req.params.id,
 					owner: user._id.toString()
 				}, {
@@ -32,13 +23,11 @@ module.exports = (app) => {
 					if (err) return console.error(err);
 					res.json(topic);
 				});
-			});
+			}) : res.status(403).send('Please, login first');
 		})
-		.post((req, res) => {
-			Users.findOne({
-				userid: req.cookies.userid
-			}, (err, user) => {
-				Topics.create({
+		.post(tools.ensureAuthenticated, (req, res) => {
+			req.user ? User.findById(req.user._id, (err, user) => {
+				Topic.create({
 					likes: [],
 					comments: [],
 					creDate: Date.now(),
@@ -49,30 +38,24 @@ module.exports = (app) => {
 					if (err) return console.error(err);
 					res.json(topic);
 				});
-			});
+			}) : res.status(403).send('Please, login first');
 		})
-		.delete((req, res) => {
-			Users.findOne({
-				userid: req.cookies.userid
-			}, (err, user) => {
-				Topics.findOneAndRemove({
+		.delete(tools.ensureAuthenticated, (req, res) => {
+			req.user ? User.findById(req.user._id, (err, user) => {
+				Topic.findOneAndRemove({
 					_id: req.params.id,
 					owner: user._id.toString()
 				}, (err, topic) => {
 					if (err) return console.error(err);
 					res.json(topic);
 				});
-			});
+			}) : res.status(403).send('Please, login first');
 		});
 
-	app.put('/topic/:id/add_like', (req, res) => {
-		Users.findOne({
-			userid: req.cookies.userid
-		}, (err, user) => {
+	app.put('/topic/:id/add_like', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, (err, user) => {
 			if (!err && user) {
-				Topics.findOneAndUpdate({
-					_id: req.params.id
-				}, {
+				Topic.findByIdAndUpdate(req.params.id, {
 					$addToSet: {
 						likes: user._id.toString()
 					}
@@ -82,16 +65,12 @@ module.exports = (app) => {
 			} else {
 				res.status(500).send(err);
 			}
-		});
+		}) : res.status(403).send('Please, login first');
 	});
-	app.put('/topic/:id/remove_like', (req, res) => {
-		Users.findOne({
-			userid: req.cookies.userid
-		}, (err, user) => {
+	app.put('/topic/:id/remove_like', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, (err, user) => {
 			if (!err && user) {
-				Topics.findOneAndUpdate({
-					_id: req.params.id
-				}, {
+				Topic.findByIdAndUpdate(req.params.id, {
 					$pull: {
 						likes: user._id.toString()
 					}
@@ -101,16 +80,12 @@ module.exports = (app) => {
 			} else {
 				res.status(500).send(err);
 			}
-		});
+		}) : res.status(403).send('Please, login first');
 	});
-	app.put('/topic/:id/add_comment', (req, res) => {
-		Users.findOne({
-			userid: req.cookies.userid
-		}, (err, user) => {
+	app.put('/topic/:id/add_comment', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, (err, user) => {
 			if (!err && user) {
-				Topics.findOneAndUpdate({
-					_id: req.params.id
-				}, {
+				Topic.findByIdAndUpdate(req.params.id, {
 					$addToSet: {
 						comments: {
 							name: user.name,
@@ -127,16 +102,12 @@ module.exports = (app) => {
 			} else {
 				res.status(500).send(err);
 			}
-		});
+		}) : res.status(403).send('Please, login first');
 	});
-	app.put('/topic/:id/remove_comment', (req, res) => {
-		Users.findOne({
-			userid: req.cookies.userid
-		}, (err, user) => {
+	app.put('/topic/:id/remove_comment', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, (err, user) => {
 			if (!err && user) {
-				Topics.findOneAndUpdate({
-					_id: req.params.id
-				}, {
+				Topic.findByIdAndUpdate(req.params.id, {
 					$pull: {
 						comments: {
 							userid: user._id.toString(),
@@ -149,6 +120,6 @@ module.exports = (app) => {
 			} else {
 				res.status(500).send(err);
 			}
-		});
+		}) : res.status(403).send('Please, login first');
 	});
 };
