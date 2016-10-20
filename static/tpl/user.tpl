@@ -414,9 +414,9 @@
 			</div>
 			<div class="ya-grid-1-5">
 				<div class="ya-page__block">
-					<div class="ya-btn ya-btn_search">
+					<!--div class="ya-btn ya-btn_search"-->
 						<a href="#/search" class="ya-btn__link ya-btn__link_search">Поиск</a>
-					</div>
+					<!--/div-->
 				</div>
 				<div class="ya-page__block ya-page__block_colored">
 					<div class="ya-profile-links ya-clearfix">
