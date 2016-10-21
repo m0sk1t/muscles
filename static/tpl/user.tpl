@@ -68,7 +68,14 @@
 						<h2 class="ya-sidebar-info__title">
 							Достижения
 						</h2>
-						<div class="ya-sidebar-info__content-wrapper" ng-repeat="a in user.achievements track by $index">
+						<div class="ya-sidebar-info__content-wrapper" ng-show="!user.achievements || !user.achievements.length">
+							<div class="ya-sidebar-info__content">
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Достижения не добавлены.</span>
+								</div>
+							</div>
+						</div>
+						<div class="ya-sidebar-info__content-wrapper" ng-show="user.achievements && user.achievements.length" ng-repeat="a in user.achievements track by $index">
 							<div class="ya-sidebar-info__content">
 								<div class="ya-sidebar-info__item">
 									<span class="ya-sidebar-info__label">Страна</span> {{a.country}}
@@ -344,7 +351,14 @@
 						<h2 class="ya-wall__title">Мои объявления</h2>
 						<div class="ya-wall__news">
 							<div class="ya-wall__news-list">
-								<div class="ya-wall__news-item" ng-repeat="t in topics track by $index">
+								<div class="ya-wall__news-item" ng-show="!topics || !topics.length">
+									<div class="ya-wall__news-content">
+										<div class="ya-wall__news-text">
+											Пока не добавлено ни одного объявления.
+										</div>
+									</div>
+								</div>
+								<div class="ya-wall__news-item" ng-show="topics && topics.length" ng-repeat="t in topics track by $index">
 									<div class="ya-wall__news-content">
 										<div class="ya-wall__news-author ya-clearfix">
 											<div ng-click="del_topic($index)">x</div>
