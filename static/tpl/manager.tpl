@@ -55,7 +55,9 @@
 		style="display: inline-block; width: 90%; overflow-y: auto; max-height: 80%; height: 80%;"
 		ng-show="page === 'users'">
 		<div ng-repeat="user in users track by $index">
-			<span style="background-color: #666" ng-click="delete_user(user._id, $index)">DEL</span>{{user.name + ' ' + user.surname}}
+			<span style="background-color: #666" ng-click="delete_user(user._id, $index)">DEL</span>
+			<a href="#/manage/user/{{user._id}}">EDIT</a>
+			{{user.name + ' ' + user.surname}}
 		</div>
 	</section>
 	<section 
@@ -71,7 +73,7 @@
 		<button ng-click="create_article();">Add</button>
 		<div ng-repeat="article in articles track by $index">
 			<span style="background-color: #666" ng-click="delete_article(article._id, $index)">DEL</span>
-			<span style="background-color: #666" ng-click="edit_article(article._id)">EDIT</span><br />
+			<a href="#/manage/article/{{article._id}}">EDIT</a><br />
 			<h3>{{article.title}}</h3>
 			<div ng-bind-html="article_html(article.text)"><div>
 		</div>
@@ -81,7 +83,9 @@
 		ng-show="page === 'contests'">
 		<button ng-click="create_contest()">Add</button>
 		<div ng-repeat="contest in contests track by $index">
-			<span style="background-color: #666" ng-click="delete_contest(contest._id, $index)">DEL</span>{{contest.title}}
+			<span style="background-color: #666" ng-click="delete_contest(contest._id, $index)">DEL</span>
+			<a href="#/manage/contest/{{contest._id}}">EDIT</a><br />
+			{{contest.title}}
 		</div>
 	</section>
 	<section 
@@ -96,7 +100,9 @@
 		ng-show="page === 'competitions'">
 		<button ng-click="create_competition()">Add</button>
 		<div ng-repeat="competition in competitions track by $index">
-			<span style="background-color: #666" ng-click="delete_competition(competition._id, $index)">DEL</span>{{competition.title}}
+			<span style="background-color: #666" ng-click="delete_competition(competition._id, $index)">DEL</span>
+			<a href="#/manage/competition/{{competition._id}}">EDIT</a>
+			{{competition.title}}
 		</div>
 	</section>
 </article>

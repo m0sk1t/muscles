@@ -7,6 +7,9 @@ angular.module('MuscleMan', ['ngLocale', 'ngFileUpload', 'ngRoute', '720kb.datep
         }).when('/manager/signin', {
             templateUrl: 'tpl/manager_signin.tpl',
             controller: 'ManagerSignInCtrl'
+        }).when('/manage/user/:id', {
+            templateUrl: 'tpl/manage_user.tpl',
+            controller: 'ManageUserCtrl'
         }).when('/manage/article/:id', {
             templateUrl: 'tpl/manage_article.tpl',
             controller: 'ManageArticleCtrl'

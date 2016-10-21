@@ -54,7 +54,8 @@ module.exports = (app) => {
 				if (err) return console.error(err);
 				res.json(manager);
 			}) : res.status(403).send('Permission denied');
-		}).post(management_check, (req, res) => {
+		})
+		.post(management_check, (req, res) => {
 			if (req.manager.permission.managers) {
 				var manager = new Manager(),
 					manager_uid = crypto.createHash('sha256').update(req.body.login + salt + req.body.password).digest('hex');
@@ -82,17 +83,30 @@ module.exports = (app) => {
 			creDate: {
 				$lt: req.params.credate
 			}
-		}).limit(3).sort({ creDate: -1 }).exec((err, users) => {
+		}) /*.limit(3)*/ .sort({ creDate: -1 }).exec((err, users) => {
 			if (err) return console.error(err);
 			res.json(users);
 		});
 	});
-	app.delete('/manage/user/:id', management_check, (req, res) => {
-		req.manager.permission.users ? User.findByIdAndRemove(req.params.id, (err, user) => {
-			if (err) return console.error(err);
-			res.json(user);
-		}) : res.status(403).send('Permission denied');
-	});
+	app.route('/manage/user/:id')
+		.delete(management_check, (req, res) => {
+			req.manager.permission.users ? User.findByIdAndRemove(req.params.id, (err, user) => {
+				if (err) return console.error(err);
+				res.json(user);
+			}) : res.status(403).send('Permission denied');
+		})
+		.put(management_check, (req, res) => {
+			req.manager.permission.users ? User.findByIdAndUpdate(req.params.id, {
+				$set: {
+					workplaces: req.body.workplaces,
+					achievements: req.body.achievements,
+					universities: req.body.universities,
+				}
+			}, (err, user) => {
+				if (err) return console.error(err);
+				res.json(user);
+			}) : res.status(403).send('Permission denied');
+		});
 
 	/*
 		Photo routes
@@ -102,7 +116,7 @@ module.exports = (app) => {
 			creDate: {
 				$lt: req.params.credate
 			}
-		}).limit(3).sort({ creDate: -1 }).exec((err, photos) => {
+		}) /*.limit(3)*/ .sort({ creDate: -1 }).exec((err, photos) => {
 			if (err) return console.error(err);
 			res.json(photos);
 		});
@@ -124,7 +138,7 @@ module.exports = (app) => {
 			creDate: {
 				$lt: req.params.credate
 			}
-		}).limit(3).sort({ creDate: -1 }).exec((err, videos) => {
+		}) /*.limit(3)*/ .sort({ creDate: -1 }).exec((err, videos) => {
 			if (err) return console.error(err);
 			res.json(videos);
 		});
@@ -144,7 +158,7 @@ module.exports = (app) => {
 			creDate: {
 				$lt: req.params.credate
 			}
-		}).limit(3).sort({ creDate: -1 }).exec((err, topics) => {
+		}) /*.limit(3)*/ .sort({ creDate: -1 }).exec((err, topics) => {
 			if (err) return console.error(err);
 			res.json(topics);
 		});
@@ -180,7 +194,7 @@ module.exports = (app) => {
 			creDate: {
 				$lt: req.params.credate
 			}
-		}).limit(3).sort({ creDate: -1 }).exec((err, articles) => {
+		}) /*.limit(3)*/ .sort({ creDate: -1 }).exec((err, articles) => {
 			if (err) return console.error(err);
 			res.json(articles);
 		});
@@ -226,7 +240,7 @@ module.exports = (app) => {
 			creDate: {
 				$lt: req.params.credate
 			}
-		}).limit(3).sort({ creDate: -1 }).exec((err, contests) => {
+		}) /*.limit(3)*/ .sort({ creDate: -1 }).exec((err, contests) => {
 			if (err) return console.error(err);
 			res.json(contests);
 		});
@@ -289,7 +303,7 @@ module.exports = (app) => {
 			creDate: {
 				$lt: req.params.credate
 			}
-		}).limit(3).sort({ creDate: -1 }).exec((err, competitions) => {
+		}) /*.limit(3)*/ .sort({ creDate: -1 }).exec((err, competitions) => {
 			if (err) return console.error(err);
 			res.json(competitions);
 		});

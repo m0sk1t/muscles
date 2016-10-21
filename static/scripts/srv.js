@@ -111,6 +111,12 @@ angular.module('Services', []).factory('User', ['$http',
 			get_users: function(credate, s, e) {
 				return $http.get('/manage/users/' + credate).then(s, e);
 			},
+			delete_user: function(id, s, e) {
+				return $http.delete('/manage/user/' + id).then(s, e);
+			},
+			update_user: function(opt, s, e) {
+				return $http.put('/manage/user/' + opt._id, opt).then(s, e);
+			},
 			get_hobbies: function(s, e) {
 				return $http.get('/manage/hobbies').then(s, e);
 			},
@@ -122,9 +128,6 @@ angular.module('Services', []).factory('User', ['$http',
 			},
 			get_topics: function(credate, s, e) {
 				return $http.get('/manage/topics/' + credate).then(s, e);
-			},
-			delete_user: function(id, s, e) {
-				return $http.delete('/manage/user/' + id).then(s, e);
 			},
 			delete_hobbie: function(id, s, e) {
 				return $http.delete('/manage/hobbie/' + id).then(s, e);

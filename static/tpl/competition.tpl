@@ -1,3 +1,10 @@
 <article>
-	<section></section>
+	<section>
+		<div>{{competition.date}}</div>
+		<div>{{competition.city}}</div>
+		<div>{{competition.place}}</div>
+		<div>{{competition.title}}</div>
+		<div>{{competition.nomination}}</div>
+		<div>{{competition.description}}</div>
+	</section>
 </article>
