@@ -287,8 +287,8 @@
 									<div class="ya-form__input ya-input ya-input_inline">
 										<div class="ya-clearfix">
 											<div class="ya-grid-1-1">
-												<label>
-													<input type="checkbox" ng-model="options.user.comments_enabled">
+												<input type="checkbox" id="ya-comments_enabled" class="ya-input__field ya-input__field_checkbox" ng-model="options.user.comments_enabled">
+												<label for="ya-comments_enabled" class="ya-input__label ya-input__label_checkbox">
 													Включить комментарии к записям
 												</label>
 											</div>
@@ -565,12 +565,9 @@
 									<div class="ya-form__input ya-input ya-input_inline">
 										<div class="ya-clearfix">
 											<div class="ya-grid-1-1">
-												<label>
-													<input
-														type="checkbox"
-														ng-model="options.user.settings.show_notifications"
-														ng-click="options.user.settings.show_notifications && request_permissions();"
-													>
+												<input id="ya-show_notifications" class="ya-input__field ya-input__field_checkbox" type="checkbox"
+														ng-model="options.user.settings.show_notifications">
+												<label for="ya-show_notifications" class="ya-input__label ya-input__label_checkbox" ng-click="options.user.settings.show_notifications && request_permissions();">
 													Включить уведомления
 												</label>
 											</div>
@@ -861,27 +858,17 @@
 								</div>
 								<div class="ya-form" ng-show="workplace">
 									<form ng-submit="save_workplace();">
-										<select ng-model="workplace.country_id" ng-change="load_cities();">
-											<option value="{{c.cid}}" ng-repeat="c in countries" ng-click="workplace.country = c.title">{{c.title}}</option>
-										</select><br />
-										<select ng-model="workplace.city_id">
-											<option value="{{ci.cid}}" ng-repeat="ci in cities" ng-click="workplace.city = ci.title">{{ci.title}}</option>
-										</select><br />
-										с: <input type="number" ng-model="workplace.year_start" /><br />
-										по:<input type="number" ng-model="workplace.year_end" /><br />
-										<input type="text" ng-model="workplace.company" placeholder="Компания" />
-										<input type="text" ng-model="workplace.speciality" placeholder="Специальность" />
 										<div class="ya-form__input ya-input ya-input_inline">
 											<div class="ya-clearfix">
 												<div class="ya-grid-1-3 ya-right">
-													<label for="ya-ach-country" class="ya-input__label">
+													<label for="ya-wp-country" class="ya-input__label">
 														Страна
 													</label>
 												</div>
 												<div class="ya-grid-2-3">
 													<div class="ya-input__field-wrapper">
-														<select id="ya-ach-country" ng-model="achievement.country_id" ng-change="load_cities();" class="ya-input__field ya-input__field_select ya-input__select" >
-															<option value="{{c.cid}}" ng-repeat="c in countries" ng-click="achievement.country = c.title">{{c.title}}</option>
+														<select id="ya-wp-country" ng-model="workplace.country_id" ng-change="load_cities();" class="ya-input__field ya-input__field_select ya-input__select" >
+															<option value="{{c.cid}}" ng-repeat="c in countries" ng-click="workplace.country = c.title">{{c.title}}</option>
 														</select>
 													</div>
 												</div>
@@ -890,14 +877,14 @@
 										<div class="ya-form__input ya-input ya-input_inline">
 											<div class="ya-clearfix">
 												<div class="ya-grid-1-3 ya-right">
-													<label for="ya-ach-city" class="ya-input__label">
+													<label for="ya-wp-city" class="ya-input__label">
 														Город
 													</label>
 												</div>
 												<div class="ya-grid-2-3">
 													<div class="ya-input__field-wrapper">
-														<select id="ya-ach-city" ng-model="achievement.city_id" class="ya-input__field ya-input__field_select ya-input__select" >
-															<option value="{{ci.cid}}" ng-repeat="ci in cities" ng-click="achievement.city = ci.title">{{ci.title}}</option>
+														<select id="ya-wp-city" ng-model="workplace.city_id" class="ya-input__field ya-input__field_select ya-input__select" >
+															<option value="{{ci.cid}}" ng-repeat="ci in cities" ng-click="workplace.city = ci.title">{{ci.title}}</option>
 														</select>
 													</div>
 												</div>
@@ -906,13 +893,13 @@
 										<div class="ya-form__input ya-input ya-input_inline">
 											<div class="ya-clearfix">
 												<div class="ya-grid-1-3 ya-right">
-													<label for="ya-ach-year" class="ya-input__label">
-														Год
+													<label for="ya-wp-year-start" class="ya-input__label">
+														С
 													</label>
 												</div>
 												<div class="ya-grid-2-3">
 													<div class="ya-input__field-wrapper">
-														<input id="ya-ach-year" class="ya-input__field" type="number" ng-model="achievement.year" />
+														<input id="ya-wp-year-start" class="ya-input__field" type="number" ng-model="workplace.year_start" />
 													</div>
 												</div>
 											</div>
@@ -920,13 +907,13 @@
 										<div class="ya-form__input ya-input ya-input_inline">
 											<div class="ya-clearfix">
 												<div class="ya-grid-1-3 ya-right">
-													<label for="ya-ach-title" class="ya-input__label">
-														Наименование конкурса
+													<label for="ya-wp-year-finish" class="ya-input__label">
+														По
 													</label>
 												</div>
 												<div class="ya-grid-2-3">
 													<div class="ya-input__field-wrapper">
-														<input id="ya-ach-title" class="ya-input__field" type="text" ng-model="achievement.title" />
+														<input id="ya-wp-year-finish" class="ya-input__field" type="number" ng-model="workplace.year_end" />
 													</div>
 												</div>
 											</div>
@@ -934,13 +921,13 @@
 										<div class="ya-form__input ya-input ya-input_inline">
 											<div class="ya-clearfix">
 												<div class="ya-grid-1-3 ya-right">
-													<label for="ya-ach-place" class="ya-input__label">
-														Место
+													<label for="ya-wp-company" class="ya-input__label">
+														Компания
 													</label>
 												</div>
 												<div class="ya-grid-2-3">
 													<div class="ya-input__field-wrapper">
-														<input id="ya-ach-place" class="ya-input__field" type="text" ng-model="achievement.place" />
+														<input id="ya-wp-company" class="ya-input__field" type="text" ng-model="workplace.company" />
 													</div>
 												</div>
 											</div>
@@ -948,13 +935,13 @@
 										<div class="ya-form__input ya-input ya-input_inline">
 											<div class="ya-clearfix">
 												<div class="ya-grid-1-3 ya-right">
-													<label for="ya-ach-comment" class="ya-input__label">
-														Комментарий
+													<label for="ya-wp-spec" class="ya-input__label">
+														Специальность
 													</label>
 												</div>
 												<div class="ya-grid-2-3">
 													<div class="ya-input__field-wrapper">
-														<input id="ya-ach-comment" class="ya-input__field" type="text" ng-model="achievement.comment" />
+														<input id="ya-wp-spec" class="ya-input__field" type="text" ng-model="workplace.speciality" />
 													</div>
 												</div>
 											</div>
@@ -971,60 +958,182 @@
 								</div>
 							</div>
 						</div>
-						<div class="study">
-							<h2 class="ya-sidebar-info__title">
+						<div class="ya-info-block">
+							<div class="ya-info-block__title">
 								Образование
-							</h2>
-							<div class="ya-sidebar-info__content-wrapper" ng-repeat="u in options.user.universities track by $index">
-								<div ng-click="rm_university(u, $index)">x</div>
-								<div class="ya-sidebar-info__content">
-									<div class="ya-sidebar-info__item">
-										<span class="ya-sidebar-info__label">Страна</span> {{u.country}}
-									</div>
-									<div class="ya-sidebar-info__item">
-										<span class="ya-sidebar-info__label">Город</span> {{u.city}}
-									</div>
-									<div class="ya-sidebar-info__item">
-										<span class="ya-sidebar-info__label">Годы</span> {{u.year_start}} - {{u.year_end}}
-									</div>
-									<div class="ya-sidebar-info__item">
-										<span class="ya-sidebar-info__label">Учреждение</span> {{u.university}}
-									</div>
-									<div class="ya-sidebar-info__item">
-										<span class="ya-sidebar-info__label">Факультет</span> {{u.faculty}}
-									</div>
-									<div class="ya-sidebar-info__item">
-										<span class="ya-sidebar-info__label">Кафедра</span> {{u.chair}}
-									</div>
-									<div class="ya-sidebar-info__item">
-										<span class="ya-sidebar-info__label">Специальность</span> {{u.speciality}}
+							</div>
+							<div class="ya-info-block__content">
+								<div class="ya-sidebar-info__content-wrapper" ng-repeat="u in options.user.universities track by $index">
+									<div class="ya-page__block ya-relative">
+										<span class="ya-close-btn" ng-click="rm_university(u, $index)">X</span>
+										<div class="ya-sidebar-info__content">
+											<div class="ya-sidebar-info__item">
+												<span class="ya-sidebar-info__label">Страна</span> {{u.country}}
+											</div>
+											<div class="ya-sidebar-info__item">
+												<span class="ya-sidebar-info__label">Город</span> {{u.city}}
+											</div>
+											<div class="ya-sidebar-info__item">
+												<span class="ya-sidebar-info__label">Годы</span> {{u.year_start}} - {{u.year_end}}
+											</div>
+											<div class="ya-sidebar-info__item">
+												<span class="ya-sidebar-info__label">Учреждение</span> {{u.university}}
+											</div>
+											<div class="ya-sidebar-info__item">
+												<span class="ya-sidebar-info__label">Факультет</span> {{u.faculty}}
+											</div>
+											<div class="ya-sidebar-info__item">
+												<span class="ya-sidebar-info__label">Кафедра</span> {{u.chair}}
+											</div>
+											<div class="ya-sidebar-info__item">
+												<span class="ya-sidebar-info__label">Специальность</span> {{u.speciality}}
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div ng-click="add_university();">Добавить</div>
-							<div class="add-university" ng-show="university">
-								<div ng-click="university = null;">x</div>
-								<form ng-submit="save_university();">
-									<select ng-model="university.country_id" ng-change="load_cities();">
-										<option value="{{c.cid}}" ng-repeat="c in countries" ng-click="university.country = c.title">{{c.title}}</option>
-									</select><br />
-									<select ng-model="university.city_id" ng-change="load_universities();">
-										<option value="{{ci.cid}}" ng-repeat="ci in cities" ng-click="university.city = ci.title">{{ci.title}}</option>
-									</select><br />
-									<select ng-model="university.university_id" ng-change="load_faculties()">
-										<option value="{{u.id}}" ng-repeat="u in universities" ng-click="university.university = u.title">{{u.title}}</option>
-									</select><br />
-									<select ng-model="university.faculty_id" ng-change="load_chairs()">
-										<option value="{{f.id}}" ng-repeat="f in faculties" ng-click="university.faculty = f.title">{{f.title}}</option>
-									</select><br />
-									<select ng-model="university.chair_id">
-										<option value="{{ch.id}}" ng-repeat="ch in chairs" ng-click="university.chair = ch.title">{{ch.title}}</option>
-									</select><br />
-									с: <input type="number" ng-model="university.year_start" /><br />
-									по:<input type="number" ng-model="university.year_end" /><br />
-									<input type="text" ng-model="university.speciality" placeholder="специальность"><br />
-									<input type="submit" value="save" />
-								</form>
+								<div class="ya-form" ng-show="!workplace">
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-1 ya-center">
+												<button ng-click="add_university();" class="ya-btn ya-btn_primary ya-btn_inline">Добавить</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="ya-form" ng-show="university">
+									<form ng-submit="save_university();">
+										<div class="ya-form__input ya-input ya-input_inline">
+											<div class="ya-clearfix">
+												<div class="ya-grid-1-3 ya-right">
+													<label for="ya-university-country" class="ya-input__label">
+														Страна
+													</label>
+												</div>
+												<div class="ya-grid-2-3">
+													<div class="ya-input__field-wrapper">
+														<select id="ya-university-country" ng-model="university.country_id" ng-change="load_cities();" class="ya-input__field ya-input__field_select ya-input__select" >
+															<option value="{{c.cid}}" ng-repeat="c in countries" ng-click="university.country = c.title">{{c.title}}</option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="ya-form__input ya-input ya-input_inline">
+											<div class="ya-clearfix">
+												<div class="ya-grid-1-3 ya-right">
+													<label for="ya-university-city" class="ya-input__label">
+														Город
+													</label>
+												</div>
+												<div class="ya-grid-2-3">
+													<div class="ya-input__field-wrapper">
+														<select id="ya-university-city" ng-model="university.city_id" ng-change="load_universities();" class="ya-input__field ya-input__field_select ya-input__select" >
+															<option value="{{ci.cid}}" ng-repeat="ci in cities" ng-click="university.city = ci.title">{{ci.title}}</option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="ya-form__input ya-input ya-input_inline">
+											<div class="ya-clearfix">
+												<div class="ya-grid-1-3 ya-right">
+													<label for="ya-university-university" class="ya-input__label">
+														ВУЗ
+													</label>
+												</div>
+												<div class="ya-grid-2-3">
+													<div class="ya-input__field-wrapper">
+														<select id="ya-university-university" ng-model="university.university_id" ng-change="load_faculties()" class="ya-input__field ya-input__field_select ya-input__select" >
+															<option value="{{u.id}}" ng-repeat="u in universities" ng-click="university.university = u.title">{{u.title}}</option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="ya-form__input ya-input ya-input_inline">
+											<div class="ya-clearfix">
+												<div class="ya-grid-1-3 ya-right">
+													<label for="ya-university-faculty" class="ya-input__label">
+														Факультет
+													</label>
+												</div>
+												<div class="ya-grid-2-3">
+													<div class="ya-input__field-wrapper">
+														<select id="ya-university-faculty" ng-model="university.faculty_id" ng-change="load_chairs()" class="ya-input__field ya-input__field_select ya-input__select" >
+															<option value="{{f.id}}" ng-repeat="f in faculties" ng-click="university.faculty = f.title">{{f.title}}</option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="ya-form__input ya-input ya-input_inline">
+											<div class="ya-clearfix">
+												<div class="ya-grid-1-3 ya-right">
+													<label for="ya-university-chair" class="ya-input__label">
+														Кафедра
+													</label>
+												</div>
+												<div class="ya-grid-2-3">
+													<div class="ya-input__field-wrapper">
+														<select id="ya-university-chair" ng-model="university.chair_id" class="ya-input__field ya-input__field_select ya-input__select" >
+															<option value="{{ch.id}}" ng-repeat="ch in chairs" ng-click="university.chair = ch.title">{{ch.title}}</option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="ya-form__input ya-input ya-input_inline">
+											<div class="ya-clearfix">
+												<div class="ya-grid-1-3 ya-right">
+													<label for="ya-university-year-start" class="ya-input__label">
+														С
+													</label>
+												</div>
+												<div class="ya-grid-2-3">
+													<div class="ya-input__field-wrapper">
+														<input id="ya-university-year-start" class="ya-input__field" type="number" ng-model="university.year_start" />
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="ya-form__input ya-input ya-input_inline">
+											<div class="ya-clearfix">
+												<div class="ya-grid-1-3 ya-right">
+													<label for="ya-university-year-finish" class="ya-input__label">
+														По
+													</label>
+												</div>
+												<div class="ya-grid-2-3">
+													<div class="ya-input__field-wrapper">
+														<input id="ya-university-year-finish" class="ya-input__field" type="number" ng-model="university.year_end" />
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="ya-form__input ya-input ya-input_inline">
+											<div class="ya-clearfix">
+												<div class="ya-grid-1-3 ya-right">
+													<label for="ya-university-spec" class="ya-input__label">
+														Специальность
+													</label>
+												</div>
+												<div class="ya-grid-2-3">
+													<div class="ya-input__field-wrapper">
+														<input id="ya-university-spec" class="ya-input__field" type="text" ng-model="university.speciality" />
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="ya-form__input ya-input ya-input_inline">
+											<div class="ya-clearfix">
+												<div class="ya-grid-1-1 ya-center">
+													<input type="submit" value="Сохранить" class="ya-btn ya-btn_secondary ya-btn_inline" />
+													<span ng-click="university = null;" class="ya-btn ya-btn_primary ya-btn_inline">Отменить</span>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
 							</div>
 						</div>
 					</div>
