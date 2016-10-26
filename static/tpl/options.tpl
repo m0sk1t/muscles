@@ -576,12 +576,10 @@
 									<div class="ya-form__input ya-input ya-input_inline">
 										<div class="ya-clearfix">
 											<div class="ya-grid-1-1">
-												<label>
-													<input
-														type="checkbox"
-														ng-model="options.user.settings.show_notifications_text"
-													>
-														Показывать текст сообщений
+												<input id="ya-show_notifications_text" class="ya-input__field ya-input__field_checkbox" type="checkbox"
+													ng-model="options.user.settings.show_notifications_text">
+												<label for="ya-show_notifications_text" class="ya-input__label ya-input__label_checkbox">
+													Показывать текст сообщений
 												</label>
 											</div>
 										</div>
@@ -599,8 +597,9 @@
 									<div class="ya-form__input ya-input ya-input_inline">
 										<div class="ya-clearfix">
 											<div class="ya-grid-1-1">
-												<label>
-													<input type="checkbox" ng-model="options.user.settings.notify_private">
+												<input id="ya-notify_private" class="ya-input__field ya-input__field_checkbox" type="checkbox"
+													ng-model="options.user.settings.notify_private">
+												<label for="ya-notify_private" class="ya-input__label ya-input__label_checkbox">
 													Личные сообщения
 												</label>
 											</div>
@@ -609,8 +608,9 @@
 									<div class="ya-form__input ya-input ya-input_inline">
 										<div class="ya-clearfix">
 											<div class="ya-grid-1-1">
-												<label>
-													<input type="checkbox" ng-model="options.user.settings.notify_topic_comments">
+												<input id="ya-notify_topic_comments" class="ya-input__field ya-input__field_checkbox" type="checkbox"
+													ng-model="options.user.settings.notify_topic_comments">
+												<label for="ya-notify_topic_comments" class="ya-input__label ya-input__label_checkbox">
 													Комментарии на стене
 												</label>
 											</div>
@@ -619,8 +619,9 @@
 									<div class="ya-form__input ya-input ya-input_inline">
 										<div class="ya-clearfix">
 											<div class="ya-grid-1-1">
-												<label>
-													<input type="checkbox" ng-model="options.user.settings.notify_photo_comments">
+												<input id="ya-notify_photo_comments" class="ya-input__field ya-input__field_checkbox" type="checkbox"
+													ng-model="options.user.settings.notify_photo_comments">
+												<label for="ya-notify_photo_comments" class="ya-input__label ya-input__label_checkbox">
 													Комментарии к фотографиям
 												</label>
 											</div>
@@ -629,8 +630,9 @@
 									<div class="ya-form__input ya-input ya-input_inline">
 										<div class="ya-clearfix">
 											<div class="ya-grid-1-1">
-												<label>
-													<input type="checkbox" ng-model="options.user.settings.notify_video_comments">
+												<input id="ya-notify_video_comments" class="ya-input__field ya-input__field_checkbox" type="checkbox"
+													ng-model="options.user.settings.notify_video_comments">
+												<label for="ya-notify_video_comments" class="ya-input__label ya-input__label_checkbox">
 													Комментарии к видео
 												</label>
 											</div>
@@ -639,8 +641,9 @@
 									<div class="ya-form__input ya-input ya-input_inline">
 										<div class="ya-clearfix">
 											<div class="ya-grid-1-1">
-												<label>
-													<input type="checkbox" ng-model="options.user.settings.notify_competitions">
+												<input id="ya-notify_competitions" class="ya-input__field ya-input__field_checkbox" type="checkbox"
+													ng-model="options.user.settings.notify_competitions">
+												<label for="ya-notify_competitions" class="ya-input__label ya-input__label_checkbox">
 													Оповещения о мероприятиях
 												</label>
 											</div>
@@ -649,8 +652,9 @@
 									<div class="ya-form__input ya-input ya-input_inline">
 										<div class="ya-clearfix">
 											<div class="ya-grid-1-1">
-												<label>
-													<input type="checkbox" ng-model="options.user.settings.notify_contests">
+												<input id="ya-notify_contests" class="ya-input__field ya-input__field_checkbox" type="checkbox"
+													ng-model="options.user.settings.notify_contests">
+												<label for="ya-notify_contests" class="ya-input__label ya-input__label_checkbox">
 													Оповещения о конкурсах
 												</label>
 											</div>
@@ -659,8 +663,9 @@
 									<div class="ya-form__input ya-input ya-input_inline">
 										<div class="ya-clearfix">
 											<div class="ya-grid-1-1">
-												<label>
-													<input type="checkbox" ng-model="options.user.settings.notify_birthdays">
+												<input id="ya-notify_birthdays" class="ya-input__field ya-input__field_checkbox" type="checkbox"
+													ng-model="options.user.settings.notify_birthdays">
+												<label for="ya-notify_birthdays" class="ya-input__label ya-input__label_checkbox">
 													Дни рождения
 												</label>
 											</div>
