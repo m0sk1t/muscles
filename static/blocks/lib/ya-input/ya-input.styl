@@ -1,5 +1,7 @@
 .ya-input
     margin-bottom: 15px
+    &_small-pad
+        margin-bottom: 5px
     &__field
         width: 100%
         display: inline-block
@@ -28,6 +30,14 @@
             display: none
             &:checked + ^[0]__label:before
                 background: mainLinksColor
+        &_textarea
+            width: 100%
+            font-family: font-family
+            color: mainTextColor
+            height: 81px
+            padding: 10px
+        &_unbordered
+            border: 1px solid transparent
     &__label
         color: #757575
         font-size: 13px
@@ -55,6 +65,8 @@
                 background: #eeeeee
     &__field-wrapper
         max-width: 240px
+        &_textarea
+            max-width: 100%
     &__file-wrapper
         padding: 4px 7px
         display: block

@@ -47,7 +47,14 @@
 						<h2 class="ya-sidebar-info__title">
 							Виды спорта
 						</h2>
-						<div class="ya-sidebar-info__content-wrapper">
+						<div class="ya-sidebar-info__content-wrapper" ng-show="false">
+							<div class="ya-sidebar-info__content">
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Виды спорта не добавлены.</span>
+								</div>
+							</div>
+						</div>
+						<div class="ya-sidebar-info__content-wrapper" ng-show="true">
 							<div class="ya-sidebar-info__content">
 								<div class="ya-sidebar-info__item">
 									Классический бодибилдинг
@@ -105,7 +112,14 @@
 						<h2 class="ya-sidebar-info__title">
 							Работа
 						</h2>
-						<div class="ya-sidebar-info__content-wrapper" ng-repeat="w in user.workplaces track by $index">
+						<div class="ya-sidebar-info__content-wrapper" ng-show="!user.workplaces || !user.workplaces.length">
+							<div class="ya-sidebar-info__content">
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Работа не добавлена.</span>
+								</div>
+							</div>
+						</div>
+						<div class="ya-sidebar-info__content-wrapper" ng-show="user.workplaces && user.workplaces.length" ng-repeat="w in user.workplaces track by $index">
 							<div class="ya-sidebar-info__content">
 								<div class="ya-sidebar-info__item">
 									<span class="ya-sidebar-info__label">Страна</span> {{w.country}}
@@ -132,7 +146,14 @@
 						<h2 class="ya-sidebar-info__title">
 							Образование
 						</h2>
-						<div class="ya-sidebar-info__content-wrapper" ng-repeat="u in user.universities track by $index">
+						<div class="ya-sidebar-info__content-wrapper" ng-show="!user.universities || !user.universities.length">
+							<div class="ya-sidebar-info__content">
+								<div class="ya-sidebar-info__item">
+									<span class="ya-sidebar-info__label">Учебные заведения не добавлены.</span>
+								</div>
+							</div>
+						</div>
+						<div class="ya-sidebar-info__content-wrapper" ng-show="user.universities && user.universities.length" ng-repeat="u in user.universities track by $index">
 							<div class="ya-sidebar-info__content">
 								<div class="ya-sidebar-info__item">
 									<span class="ya-sidebar-info__label">Страна</span> {{u.country}}
@@ -165,7 +186,7 @@
 					<div class="ya-user__info-block ya-info-block ya-info-block_border_no">
 						<div class="ya-clearfix ya-user__status-line">
 							<div class="ya-user__status ya-grid-1-2">{{user.status}}</div>
-							<div class="ya-user__status ya-grid-1-2">Заходил {{last_seen()}}</div>
+							<div class="ya-user__status ya-grid-1-2 ya-right">Заходил {{last_seen()}}</div>
 						</div>
 					</div>
 					<div class="ya-user__info-block">
@@ -175,37 +196,37 @@
 								<div class="ya-inner-grid-1-2">
 									<div class="ya-info-block__record ya-clearfix">
 										<div class="ya-info-block__label ya-span-1-2">Возраст:</div>
-										<div class="ya-info-block__value ya-span-1-2">{{get_age(user.birthDate)}}</div>
+										<div class="ya-info-block__value ya-span-1-2">{{get_age(user.birthDate) || "Не указано"}}</div>
 									</div>
 									<div class="ya-info-block__record ya-clearfix">
 										<div class="ya-info-block__label ya-span-1-2">Рост:</div>
-										<div class="ya-info-block__value ya-span-1-2">{{user.height}}</div>
+										<div class="ya-info-block__value ya-span-1-2">{{user.height || "Не указано"}}</div>
 									</div>
 									<div class="ya-info-block__record ya-clearfix">
 										<div class="ya-info-block__label ya-span-1-2">Вес:</div>
-										<div class="ya-info-block__value ya-span-1-2">{{user.weight}}</div>
+										<div class="ya-info-block__value ya-span-1-2">{{user.weight || "Не указано"}}</div>
 									</div>
 									<div class="ya-info-block__record ya-clearfix">
 										<div class="ya-info-block__label ya-span-1-2">Цвет волос:</div>
-										<div class="ya-info-block__value ya-span-1-2">{{user.hairs}}</div>
+										<div class="ya-info-block__value ya-span-1-2">{{user.hairs || "Не указано"}}</div>
 									</div>
 								</div>
 								<div class="ya-inner-grid-1-2">
 									<div class="ya-info-block__record ya-clearfix">
 										<div class="ya-info-block__label ya-span-1-2">Грудь:</div>
-										<div class="ya-info-block__value ya-span-1-2">{{user.chest}}</div>
+										<div class="ya-info-block__value ya-span-1-2">{{user.chest || "Не указано"}}</div>
 									</div>
 									<div class="ya-info-block__record ya-clearfix">
 										<div class="ya-info-block__label ya-span-1-2">Талия:</div>
-										<div class="ya-info-block__value ya-span-1-2">{{user.waist}}</div>
+										<div class="ya-info-block__value ya-span-1-2">{{user.waist || "Не указано"}}</div>
 									</div>
 									<div class="ya-info-block__record ya-clearfix">
 										<div class="ya-info-block__label ya-span-1-2">Бедра:</div>
-										<div class="ya-info-block__value ya-span-1-2">{{user.huckle}}</div>
+										<div class="ya-info-block__value ya-span-1-2">{{user.huckle || "Не указано"}}</div>
 									</div>
 									<div class="ya-info-block__record ya-clearfix">
 										<div class="ya-info-block__label ya-span-1-2">Телосложение:</div>
-										<div class="ya-info-block__value ya-span-1-2">{{user.type}}</div>
+										<div class="ya-info-block__value ya-span-1-2">{{user.type || "Не указано"}}</div>
 									</div>
 								</div>
 							</div>
@@ -294,23 +315,26 @@
 				<div class="ya-page__block ya-user__photos">
 					<div class="ya-photos ya-photos_profile">
 						<h2 class="ya-photos__title"><a href="#/user/{{user._id}}/photos/all" class="ya-photos__link">Фото</a></h2>
-						<div class="ya-photos__list ya-clearfix">
-							<div class="ya-photos__item ya-grid-1-4">
+						<div class="ya-photos__list ya-photos__list_empty" ng-show="!photos || !photos.length">
+							Пока не добавлено ни одной фотографии
+						</div>
+						<div class="ya-photos__list ya-clearfix" ng-show="photos && photos.length">
+							<div class="ya-photos__item ya-grid-1-4" ng-show="photos && photos[0]">
 								<div class="ya-photos__wrapper">
 									<div class="ya-photos__img" ng-click="set_current(0);" ng-style="{'background-image':'url(' + photos[0].image + ')'}"></div>
 								</div>
 							</div>
-							<div class="ya-photos__item ya-grid-1-4">
+							<div class="ya-photos__item ya-grid-1-4" ng-show="photos && photos[1]">
 								<div class="ya-photos__wrapper">
 									<div class="ya-photos__img" ng-click="set_current(1);" ng-style="{'background-image':'url(' + photos[1].image + ')'}"></div>
 								</div>
 							</div>
-							<div class="ya-photos__item ya-grid-1-4">
+							<div class="ya-photos__item ya-grid-1-4" ng-show="photos && photos[2]">
 								<div class="ya-photos__wrapper">
 									<div class="ya-photos__img" ng-click="set_current(2);" ng-style="{'background-image':'url(' + photos[2].image + ')'}"></div>
 								</div>
 							</div>
-							<div class="ya-photos__item ya-grid-1-4">
+							<div class="ya-photos__item ya-grid-1-4" ng-show="photos && photos[3]">
 								<div class="ya-photos__wrapper">
 									<div class="ya-photos__img" ng-click="set_current(3);" ng-style="{'background-image':'url(' + photos[3].image + ')'}"></div>
 								</div>
@@ -318,34 +342,63 @@
 						</div>
 					</div>
 				</div>
-				<div
-					class="create"
-					ng-click="add_topic()"
-					ng-if="options.user._id === user._id"
-				>
-					Добавить новость
-				</div>
-				<section>
-					<div ng-show="topic">
-						<div class="create" ng-click="topic = null">Отменить</div>
-						<textarea rows="10" ng-model="topic.text" style="width: 100%;"></textarea>
-						<div class="create" ng-click="gallery.add_image = !gallery.add_image;">Добавить картинки</div>
-						<div class="create" ng-click="gallery.add_video = !gallery.add_video;">Добавить видеозаписи</div>
-						<div class="photos">
-							<span ng-repeat="i in topic.images">
-								<img ng-src="{{i}}" alt="">
-								<span ng-click="add_image_to_topic(i);">del</span>
-							</span>
-						</div>
-						<div class="photos">
-							<span ng-repeat="v in topic.videos">
-								<img ng-src="{{v.thumbnail}}" alt="">
-								<span ng-click="add_video_to_topic(v);">del</span>
-							</span>
-						</div>
-						<div class="create" ng-click="new_topic();">Сохранить запись</div>
+				<div class="ya-user_new-post ya-new-post">
+					<div class="ya-new-post__btn-wrapper ya-right" ng-show="!topic">
+						<button
+							class="ya-btn ya-btn_primary ya-btn_small ya-btn_plus ya-btn_inline ya-new-post__btn"
+							ng-click="add_topic()"
+							ng-if="options.user._id === user._id"
+						>
+							Добавить новость
+						</button>
 					</div>
-				</section>
+					<div class="ya-new-post__form" ng-show="topic">
+						<div class="ya-form">
+							<div class="ya-form__input ya-input ya-input_inline ya-input_small-pad">
+								<div class="ya-clearfix">
+									<div class="ya-grid-1-5">
+										<div class="ya-avatar ya-avatar_auto">
+											<img ng-src="{{user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
+										</div>
+									</div>
+									<div class="ya-grid-4-5">
+										<div class="ya-input__field-wrapper ya-input__field-wrapper_textarea">
+											<textarea rows="10" class="ya-input__field ya-input__field_textarea ya-input__field_unbordered ya-shadow" ng-model="topic.text" placeholder="Введите текст"></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!--div class="create" ng-click="gallery.add_image = !gallery.add_image;">Добавить картинки</div>
+							<div class="create" ng-click="gallery.add_video = !gallery.add_video;">Добавить видеозаписи</div-->
+						</div>
+						<div>
+							<div class="photos">
+								<span ng-repeat="i in topic.images">
+									<img ng-src="{{i}}" alt="">
+									<span ng-click="add_image_to_topic(i);">del</span>
+								</span>
+							</div>
+							<div class="photos">
+								<span ng-repeat="v in topic.videos">
+									<img ng-src="{{v.thumbnail}}" alt="">
+									<span ng-click="add_video_to_topic(v);">del</span>
+								</span>
+							</div>
+						</div>
+						<div class="ya-form">
+							<div class="ya-form__input ya-input ya-input_inline">
+								<div class="ya-clearfix">
+									<div class="ya-grid-1-1 ya-right">
+										<span class="ya-btn ya-btn_secondary ya-btn_small ya-btn_inline" ng-click="topic = null">Отменить</span>
+										<span class="ya-btn ya-btn_primary ya-btn_small ya-btn_plus ya-btn_inline" ng-click="new_topic();topic = null;">Сохранить</span>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
 				<div class="ya-page__block ya-page__block_bordered ya-user__wall">
 					<div class="ya-wall">
 						<h2 class="ya-wall__title">Мои объявления</h2>
@@ -375,7 +428,7 @@
 											</div>
 										</div>
 										<div class="ya-wall__news-text">
-											{{t.text}}
+											<pre>{{t.text}}</pre>
 										</div>
 										<div class="ya-wall__news-media">
 											<img ng-src="{{i}}" ng-repeat="i in t.images" class="ya-wall__news-img" />
@@ -401,7 +454,7 @@
 															</div>
 														</div>
 														<div class="ya-wall__news-text">
-															{{c.comment}}
+															<pre>{{c.comment}}</pre>
 														</div>
 													</div>
 												</div>
