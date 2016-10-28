@@ -362,15 +362,27 @@
 										</div>
 									</div>
 									<div class="ya-grid-4-5">
-										<div class="ya-input__field-wrapper ya-input__field-wrapper_textarea">
+										<div class="ya-input__field-wrapper ya-input__field-wrapper_textarea ya-relative">
 											<textarea rows="10" class="ya-input__field ya-input__field_textarea ya-input__field_unbordered ya-shadow" ng-model="topic.text" placeholder="Введите текст"></textarea>
+											<div class="ya-new-post__btns-wrapper">
+												<div class="ya-new-post__btn ya-pop-btn ya-pop-btn_smiles">
+													<div class="ya-smiles ya-pop-btn__pop-up">
+														<ul>
+															<li><span class="create" ng-click="gallery.add_image = !gallery.add_image;">Фото</span></li>
+															<li><span class="create" ng-click="gallery.add_video = !gallery.add_video;">Видео</span></li>
+														</ul>
+													</div>
+												</div>
+												<div class="ya-new-post__btn ya-pop-btn ya-pop-btn_adds">
+													<div class="ya-smiles ya-pop-btn__pop-up">
+														Smiles ))
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-
-							<!--div class="create" ng-click="gallery.add_image = !gallery.add_image;">Добавить картинки</div>
-							<div class="create" ng-click="gallery.add_video = !gallery.add_video;">Добавить видеозаписи</div-->
 						</div>
 						<div>
 							<div class="photos">
@@ -413,8 +425,8 @@
 								</div>
 								<div class="ya-wall__news-item" ng-show="topics && topics.length" ng-repeat="t in topics track by $index">
 									<div class="ya-wall__news-content">
-										<div class="ya-wall__news-author ya-clearfix">
-											<div ng-click="del_topic($index)">x</div>
+										<div class="ya-wall__news-author ya-relative ya-clearfix">
+											<div class="ya-wall__news-remove" ng-click="del_topic($index)">x</div>
 											<div class="ya-avatar ya-avatar_small ya-wall__avatar">
 												<img ng-src="{{user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
 											</div>
@@ -439,8 +451,8 @@
 											<div class="ya-comments">
 												<div class="ya-comments__list">
 													<div class="ya-comments__item" ng-repeat="c in t.comments">
-														<div class="ya-wall__news-author ya-clearfix">
-															<div ng-click="remove_topic_comment($index, c.comment)">x</div>
+														<div class="ya-wall__news-author ya-relative ya-clearfix">
+															<div class="ya-wall__news-remove" ng-click="remove_topic_comment($index, c.comment)">x</div>
 															<div class="ya-avatar ya-avatar_small ya-wall__avatar">
 																<img ng-src="{{c.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
 															</div>
@@ -583,41 +595,40 @@
 				</span>
 			</div>
 			<div ng-hide="gallery.current === null">
-				<div class="ya-pop-up ya-pop-up_active">
+				<div class="ya-pop-up ya-pop-up_active" ng-click="set_current(null)">
 					<div class="ya-pop-up__wrapper">
-						<div class="ya-pop-up__content">
-							<div class="photo-area">
+						<span class="ya-pop-up__close-btn" ng-click="set_current(null)">X</span>
+						<div class="ya-pop-up__content ya-clearfix" ng-click="$event.stopPropagation();">
+							<div class="ya-span-3-4 ya-relative ya-pop-up__main">
+								<div class="ya-pop-up-photo" ng-style="{'background-image':'url(' + photos[gallery.current].image + ')'}" ng-click="turn_right()">
+								</div>
 								<span
-									class="left"
+									class="ya-pop-up-photo__btn ya-pop-up-photo__btn_left"
 									ng-click="turn_left();"
 								>
 									&lt;
 								</span>
-								<span class="photo">
-									<span ng-click="set_current(null)">X</span>
-									<img ng-src="{{photos[gallery.current].image}}" ng-click="turn_right()">
-									<span>
-										<div>
-											<div class="comment" ng-repeat="c in photos[gallery.current].comments">
-												<a href="#/user/{{c.userid}}">{{c.name + ' ' + c.surname}}</a>:
-												{{c.comment}}
-												<i
-													class="fa fa-lg fa-close"
-													ng-if="c.userid === options.user._id"
-													ng-click="remove_comment(gallery.current, c.comment)"
-												></i>
-											</div>
-										</div>
-										<input type="text" ng-model="gallery.comment">
-										<button ng-click="add_comment(gallery.current)">&gt;</button>
-									</span>
-								</span>
 								<span
-									class="right"
+									class="ya-pop-up-photo__btn ya-pop-up-photo__btn_right"
 									ng-click="turn_right()"
 								>
 									&gt;
 								</span>
+							</div>
+							<div class="ya-span-1-4 ya-relative ya-pop-up__additional">
+								<div class="ya-pop-up-comments">
+									<div class="comment" ng-repeat="c in photos[gallery.current].comments">
+										<a href="#/user/{{c.userid}}">{{c.name + ' ' + c.surname}}</a>:
+										{{c.comment}}
+										<i
+											class="fa fa-lg fa-close"
+											ng-if="c.userid === options.user._id"
+											ng-click="remove_comment(gallery.current, c.comment)"
+										></i>
+									</div>
+									<input type="text" ng-model="gallery.comment">
+									<button ng-click="add_comment(gallery.current)">&gt;</button>
+								</div>
 							</div>
 						</div>
 					</div>
