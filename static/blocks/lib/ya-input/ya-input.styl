@@ -1,5 +1,7 @@
 .ya-input
     margin-bottom: 15px
+    &_small-pad
+        margin-bottom: 5px
     &__field
         width: 100%
         display: inline-block
@@ -24,14 +26,47 @@
             background: mainLinksColor
         &_hidden
             display: none
+        &_checkbox
+            display: none
+            &:checked + ^[0]__label:before
+                background: mainLinksColor
+        &_textarea
+            width: 100%
+            font-family: font-family
+            color: mainTextColor
+            height: 81px
+            padding: 10px
+        &_unbordered
+            border: 1px solid transparent
     &__label
         color: #757575
         font-size: 13px
         display: inline-block
         line-height: 1
         padding: 4px 0
+        &_href
+            margin: 0 5px 0 20px
+        &_checkbox
+            line-height: 16px
+            height: 16px
+            vertical-align: middle
+            &:before
+                content: ""
+                display: inline-block
+                width: 14px
+                height: 14px
+                line-height: 16px
+                border: 1px solid mainLinksColor
+                margin: 0 10px 0 20px
+                vertical-align: top
+                cursor: pointer
+                background: white
+            &:hover:before
+                background: #eeeeee
     &__field-wrapper
         max-width: 240px
+        &_textarea
+            max-width: 100%
     &__file-wrapper
         padding: 4px 7px
         display: block
