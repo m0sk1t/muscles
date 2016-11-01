@@ -31,7 +31,7 @@
 				permission.articles: <input type="checkbox" ng-model="m.permission.articles" ng-change="set_permission(m._id, $index);"><br />
 				permission.contests: <input type="checkbox" ng-model="m.permission.contests" ng-change="set_permission(m._id, $index);"><br />
 				permission.hobbies: <input type="checkbox" ng-model="m.permission.hobbies" ng-change="set_permission(m._id, $index);"><br />
-				permission.moderators: <input type="checkbox" ng-model="m.permission.moderators" ng-change="set_permission(m._id, $index);"><br />
+				permission.managers: <input type="checkbox" ng-model="m.permission.managers" ng-change="set_permission(m._id, $index);"><br />
 				permission.competitions: <input type="checkbox" ng-model="m.permission.competitions" ng-change="set_permission(m._id, $index);"><br />
 			</span>
 		</div>
