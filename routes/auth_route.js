@@ -336,9 +336,9 @@ module.exports = (app) => {
 	passport.use(new OKStrategy({
 			passReqToCallback: true,
 			callbackURL: '/auth/ok/callback',
-			clientID: '123',
-			clientPublic: '456',
-			clientSecret: '789',
+			clientID: '1248664832',
+			clientPublic: 'CBAOBOGLEBABABABA',
+			clientSecret: ' 26DF124DB0071899BD55E7B7',
 		},
 		(req, accessToken, refreshToken, profile, done) => {
 			var ok_user = profile._json;
