@@ -30,7 +30,7 @@
 					</div>
 					<p></p>
 					<div class="ya-clearfix">
-						<button class="ya-btn ya-btn_secondary ya-btn_inline" type="submit">Войти</button>
+						<button class="ya-btn ya-btn_secondary ya-btn_inline" type="submit">Зарегистрироваться</button>
 					</div>
 				</div>
 			Или с помощью социальных сетей

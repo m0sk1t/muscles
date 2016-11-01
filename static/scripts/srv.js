@@ -108,20 +108,17 @@ angular.module('Services', []).factory('User', ['$http',
 			delete_competition: function(id, s, e) {
 				return $http.delete('/manage/competition/' + id).then(s, e);
 			},
-			get_users: function(credate, s, e) {
-				return $http.get('/manage/users/' + credate).then(s, e);
-			},
-			delete_user: function(id, s, e) {
-				return $http.delete('/manage/user/' + id).then(s, e);
-			},
-			update_user: function(opt, s, e) {
-				return $http.put('/manage/user/' + opt._id, opt).then(s, e);
+			update_user: function(id, s, e) {
+				return $http.put('/manage/user/' + id, opt).then(s, e);
 			},
 			get_hobbies: function(s, e) {
 				return $http.get('/manage/hobbies').then(s, e);
 			},
 			get_photos: function(credate, s, e) {
 				return $http.get('/manage/photos/' + credate).then(s, e);
+			},
+			get_users: function(credate, s, e) {
+				return $http.get('/manage/users/' + credate).then(s, e);
 			},
 			get_videos: function(credate, s, e) {
 				return $http.get('/manage/videos/' + credate).then(s, e);
@@ -137,6 +134,9 @@ angular.module('Services', []).factory('User', ['$http',
 			},
 			delete_video: function(id, s, e) {
 				return $http.delete('/manage/video/' + id).then(s, e);
+			},
+			delete_user: function(id, s, e) {
+				return $http.delete('/manage/user/' + id).then(s, e);
 			},
 			delete_topic: function(id, s, e) {
 				return $http.delete('/manage/topic/' + id).then(s, e);

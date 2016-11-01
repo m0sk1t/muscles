@@ -1,5 +1,5 @@
-angular.module('MuscleMan').controller('ManageUserCtrl', ['$scope', '$location', 'User', 'Manager', '$routeParams',
-	function($scope, $location, User, Manager, $routeParams) {
+angular.module('MuscleMan').controller('ManageUserCtrl', ['$scope', 'User', 'Manager', '$routeParams',
+	function($scope, User, Manager, $routeParams) {
 		User.load($routeParams.id, function(res) {
 			$scope.user = res.data;
 		}, function(res) {
