@@ -108,8 +108,8 @@ angular.module('Services', []).factory('User', ['$http',
 			delete_competition: function(id, s, e) {
 				return $http.delete('/manage/competition/' + id).then(s, e);
 			},
-			update_user: function(id, s, e) {
-				return $http.put('/manage/user/' + id, opt).then(s, e);
+			update_user: function(id, user, s, e) {
+				return $http.put('/manage/user/' + id, user).then(s, e);
 			},
 			get_hobbies: function(s, e) {
 				return $http.get('/manage/hobbies').then(s, e);
