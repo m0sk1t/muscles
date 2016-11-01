@@ -49,8 +49,8 @@
 		<div ng-repeat="photo in photos track by $index">
 			<span style="background-color: #666" ng-click="delete_photo(photo._id, $index)">DEL</span>{{photo.title}}
 		</div>
-		<div ng-click="creDate = photos[photos.length-1].creDate; get_photos();">&lt;</div><div ng-click="get_photos();">&gt;</div>
-	</section>
+<!-- 		<div ng-click="creDate = photos[photos.length-1].creDate; get_photos();">&lt;</div><div ng-click="get_photos();">&gt;</div>
+ -->	</section>
 	<section 
 		style="display: inline-block; width: 90%; overflow-y: auto; max-height: 80%; height: 80%;"
 		ng-show="page === 'users'">
