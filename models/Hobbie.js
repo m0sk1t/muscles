@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
 	HobbieSchema = mongoose.Schema({
-		title: String
+		items: Array,
+		title: String,
 	});
 
 module.exports = mongoose.model('Hobbies', HobbieSchema);

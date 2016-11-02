@@ -121,7 +121,7 @@
 										</div>
 										<div class="ya-grid-2-3">
 											<div class="ya-input__field-wrapper">
-												<input id="ya-status" class="ya-input__field" type="text" ng-model="options.user.status" />
+												<input id="ya-status" class="ya-input__field" type="text" ng-model="options.user.status" maxlength="40" />
 											</div>
 										</div>
 									</div>
@@ -136,7 +136,6 @@
 										<div class="ya-grid-2-3">
 											<div class="ya-input__field-wrapper">
 												<select id="ya-sex" class="ya-input__field ya-input__field_select ya-input__select" ng-model="options.user.sex">
-													<option value="n">Не скажу</option>
 													<option value="m">Мужской</option>
 													<option value="w">Женский</option>
 												</select>
@@ -157,8 +156,7 @@
 													<option>Брюнет</option>
 													<option>Блондин</option>
 													<option>Рыжий</option>
-													<option>Зелёноволосый</option>
-													<option>Фиолетововолосый</option>
+													<option>Русый</option>
 												</select>
 											</div>
 										</div>
@@ -174,10 +172,12 @@
 										<div class="ya-grid-2-3">
 											<div class="ya-input__field-wrapper">
 												<select id="ya-type" class="ya-input__field ya-input__field_select ya-input__select" ng-model="options.user.type">
-													<option>Спортивный</option>
-													<option>Пухлый</option>
 													<option>Атлет</option>
-													<option>Дрищ</option>
+													<option>Толстый</option>
+													<option>Худощавый</option>
+													<option>Упитанный</option>
+													<option>Спортивный</option>
+													<option>Бодибилдер</option>
 												</select>
 											</div>
 										</div>
@@ -192,7 +192,7 @@
 										</div>
 										<div class="ya-grid-2-3">
 											<div class="ya-input__field-wrapper">
-												<datepicker style="width: 11rem; float: none;">
+												<datepicker style="width: 11rem; float: none;" date-format="dd.MM.yyyy">
 													<input id="ya-birth" class="ya-input__field" type="text" ng-model="options.user.birthDate" />
 												</datepicker>
 											</div>
@@ -358,20 +358,8 @@
 							</div>
 						</div>
 						<div class="ya-info-block">
-							<div class="ya-info-block__title">
-							</div>
 							<div class="ya-info-block__content">
 								<div class="ya-form">
-									<!--div class="ya-form__input ya-input ya-input_inline">
-										<div class="ya-clearfix">
-											<div class="ya-grid-1-1">
-												<label>
-													<input type="checkbox" ng-model="options.user.use_large_fonts">
-													Использовать увеличенные шрифты
-												</label>
-											</div>
-										</div>
-									</div-->
 									<div class="ya-form__input ya-input ya-input_inline">
 										<div class="ya-clearfix">
 											<div class="ya-grid-1-1 ya-center">
@@ -401,8 +389,7 @@
 												<div class="ya-input__field-wrapper">
 													<select id="ya-see-profile" class="ya-input__field ya-input__field_select ya-input__select" >
 														<option>Все</option>
-														<option>Друзья и друзья друзей</option>
-														<option>Только друзья</option>
+														<option>Только список избранных</option>
 													</select>
 												</div>
 											</div>
@@ -428,8 +415,7 @@
 												<div class="ya-input__field-wrapper">
 													<select id="ya-see-comments" class="ya-input__field ya-input__field_select ya-input__select" >
 														<option>Все</option>
-														<option>Друзья и друзья друзей</option>
-														<option>Только друзья</option>
+														<option>Только список избранных</option>
 													</select>
 												</div>
 											</div>
@@ -455,8 +441,7 @@
 												<div class="ya-input__field-wrapper">
 													<select id="ya-can-write" class="ya-input__field ya-input__field_select ya-input__select" >
 														<option>Все</option>
-														<option>Друзья и друзья друзей</option>
-														<option>Только друзья</option>
+														<option>Только список избранных</option>
 													</select>
 												</div>
 											</div>

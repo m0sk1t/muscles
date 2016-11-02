@@ -1,5 +1,6 @@
 module.exports = (app) => {
 	var express = require('express'),
+		mailer = require('./mailer'),
 		passport = require('passport'),
 		User = require('../models/User'),
 		LocalStrategy = require('passport-local').Strategy,
@@ -409,17 +410,17 @@ module.exports = (app) => {
 	));
 
 	app.post('/signup', (req, res, next) => {
-		req.assert('mail', 'Email is not valid').isEmail();
+		req.assert('mail', 'Ваш адрес почты некорректен!').isEmail();
 		req.sanitize('mail').normalizeEmail({
 			remove_dots: false
 		});
-		req.assert('pass', 'Password must be at least 4 characters long').len(4);
+		req.assert('pass', 'Для вашей же безопасности пароль должен быть длиной не меньше 7 символов!').len(7);
 
 		const errors = req.validationErrors();
 
 		if (errors) {
 			console.error(errors);
-			return res.redirect('/#/signup');
+			return res.status(500).json(errors);
 		}
 
 		const user = new User({
@@ -434,19 +435,26 @@ module.exports = (app) => {
 				return next(err);
 			}
 			if (existingUser) {
-				res.redirect('/#/signin');
-				return;
+				return res.status(500).json([{ msg: 'Указанный адрес почты уже зарегистрирован, попробуйте войти со своим паролем!' }]);
 			}
 			user.save((err) => {
 				if (err) {
 					return next(err);
 				}
-				req.logIn(user, (err) => {
-					if (err) {
-						return next(err);
-					}
-					delete user.pass;
-					res.json(user);
+				mailer.send_mail({
+					mail: [req.body.mail.toLowerCase()],
+					subj: 'Регистрация в сети СпортПроект',
+					text: 'Поздравляем! Вы успешно зарегистрировались в сети СпортПроект!',
+				}, (err, info) => {
+					console.log(info);
+					if (err) return res.status(500), json([{ msg: err }]);
+					req.logIn(user, (err) => {
+						if (err) {
+							return next(err);
+						}
+						//delete user.pass;
+						res.json(user);
+					});
 				});
 			});
 		});
