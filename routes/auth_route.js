@@ -446,8 +446,9 @@ module.exports = (app) => {
 					subj: 'Регистрация в сети СпортПроект',
 					text: 'Поздравляем! Вы успешно зарегистрировались в сети СпортПроект!',
 				}, (err, info) => {
+					console.error(err);
 					console.log(info);
-					if (err) return res.status(500), json([{ msg: err }]);
+					if (err) return res.status(500).json([{ msg: err }]);
 					req.logIn(user, (err) => {
 						if (err) {
 							return next(err);
