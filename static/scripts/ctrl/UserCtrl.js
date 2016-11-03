@@ -4,7 +4,8 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		$scope.photos = [];
 		$scope.topics = [];
 		$scope.gallery = {
-			current: null,
+			current_photo: null,
+			current_video: null,
 			add_image: null,
 		};
 

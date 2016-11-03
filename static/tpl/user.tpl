@@ -432,7 +432,7 @@
 							<div class="ya-form__input ya-input ya-input_inline">
 								<div class="ya-clearfix">
 									<div class="ya-grid-1-1 ya-right">
-										<span class="ya-btn ya-btn_primary ya-btn_small ya-btn_plus ya-btn_inline" ng-click="topic.text && (new_topic(), (topic = null))">Сохранить</span>
+										<span class="ya-btn ya-btn_primary ya-btn_small ya-btn_plus ya-btn_inline" ng-click="topic.text && new_topic(); (topic = null);">Сохранить</span>
 										<span class="ya-btn ya-btn_secondary ya-btn_small ya-btn_inline" ng-click="topic = null">Отменить</span>
 									</div>
 								</div>
