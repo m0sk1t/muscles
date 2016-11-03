@@ -213,6 +213,7 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 
 		$scope.user_save = function() {
 			$scope.$emit('user_save');
+			MSG.ok('Сохранено успешно!');
 		};
 	}
 ]);

@@ -321,22 +321,52 @@
 						<div class="ya-photos__list ya-clearfix" ng-show="photos && photos.length">
 							<div class="ya-photos__item ya-grid-1-4" ng-show="photos && photos[0]">
 								<div class="ya-photos__wrapper">
-									<div class="ya-photos__img" ng-click="set_current(0);" ng-style="{'background-image':'url(' + photos[0].image + ')'}"></div>
+									<div class="ya-photos__img" ng-click="set_current_photo(0);" ng-style="{'background-image':'url(' + photos[0].image + ')'}"></div>
 								</div>
 							</div>
 							<div class="ya-photos__item ya-grid-1-4" ng-show="photos && photos[1]">
 								<div class="ya-photos__wrapper">
-									<div class="ya-photos__img" ng-click="set_current(1);" ng-style="{'background-image':'url(' + photos[1].image + ')'}"></div>
+									<div class="ya-photos__img" ng-click="set_current_photo(1);" ng-style="{'background-image':'url(' + photos[1].image + ')'}"></div>
 								</div>
 							</div>
 							<div class="ya-photos__item ya-grid-1-4" ng-show="photos && photos[2]">
 								<div class="ya-photos__wrapper">
-									<div class="ya-photos__img" ng-click="set_current(2);" ng-style="{'background-image':'url(' + photos[2].image + ')'}"></div>
+									<div class="ya-photos__img" ng-click="set_current_photo(2);" ng-style="{'background-image':'url(' + photos[2].image + ')'}"></div>
 								</div>
 							</div>
 							<div class="ya-photos__item ya-grid-1-4" ng-show="photos && photos[3]">
 								<div class="ya-photos__wrapper">
-									<div class="ya-photos__img" ng-click="set_current(3);" ng-style="{'background-image':'url(' + photos[3].image + ')'}"></div>
+									<div class="ya-photos__img" ng-click="set_current_photo(3);" ng-style="{'background-image':'url(' + photos[3].image + ')'}"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ya-page__block ya-user__videos">
+					<div class="ya-videos ya-videos_profile">
+						<h2 class="ya-videos__title"><a href="#/user/{{user._id}}/videos/all" class="ya-videos__link">Видео</a></h2>
+						<div class="ya-videos__list ya-videos__list_empty" ng-show="!videos || !videos.length">
+							Пока не добавлено ни одного видео
+						</div>
+						<div class="ya-videos__list ya-clearfix" ng-show="videos && videos.length">
+							<div class="ya-videos__item ya-grid-1-4" ng-show="videos && videos[0]">
+								<div class="ya-videos__wrapper">
+									<div class="ya-videos__img" ng-click="set_current_video(0);" ng-style="{'background-image':'url(' + videos[0].thumbnail + ')'}"></div>
+								</div>
+							</div>
+							<div class="ya-videos__item ya-grid-1-4" ng-show="videos && videos[1]">
+								<div class="ya-videos__wrapper">
+									<div class="ya-videos__img" ng-click="set_current_video(1);" ng-style="{'background-image':'url(' + videos[1].thumbnail + ')'}"></div>
+								</div>
+							</div>
+							<div class="ya-videos__item ya-grid-1-4" ng-show="videos && videos[2]">
+								<div class="ya-videos__wrapper">
+									<div class="ya-videos__img" ng-click="set_current_video(2);" ng-style="{'background-image':'url(' + videos[2].thumbnail + ')'}"></div>
+								</div>
+							</div>
+							<div class="ya-videos__item ya-grid-1-4" ng-show="videos && videos[3]">
+								<div class="ya-videos__wrapper">
+									<div class="ya-videos__img" ng-click="set_current_video(3);" ng-style="{'background-image':'url(' + videos[3].thumbnail + ')'}"></div>
 								</div>
 							</div>
 						</div>
@@ -402,8 +432,8 @@
 							<div class="ya-form__input ya-input ya-input_inline">
 								<div class="ya-clearfix">
 									<div class="ya-grid-1-1 ya-right">
+										<span class="ya-btn ya-btn_primary ya-btn_small ya-btn_plus ya-btn_inline" ng-click="topic.text && (new_topic(), (topic = null))">Сохранить</span>
 										<span class="ya-btn ya-btn_secondary ya-btn_small ya-btn_inline" ng-click="topic = null">Отменить</span>
-										<span class="ya-btn ya-btn_primary ya-btn_small ya-btn_plus ya-btn_inline" ng-click="new_topic();topic = null;">Сохранить</span>
 									</div>
 								</div>
 							</div>
@@ -568,67 +598,77 @@
 			</div>
 		</div>
 		</section>
-		<section tabindex="0" ng-hide="gallery.current === null" ng-keypress="escape_pressed($event) && (gallery.current = null);">
-			<div class="photo-area">
-				<span
-					class="left"
-					ng-click="turn_left();"
-				>
-					&lt;
-				</span>
-				<span class="photo">
-					<span ng-click="set_current(null)">X</span>
-					<img ng-src="{{photos[gallery.current].image}}" ng-click="turn_right()">
-					<span>
-						<div>
-							<div class="comment" ng-repeat="c in photos[gallery.current].comments">
-								<a href="#/user/{{c.userid}}">{{c.name + ' ' + c.surname}}</a>:
-								{{c.comment}}
-								<i
-									class="fa fa-lg fa-close"
-									ng-if="c.userid === options.user._id"
-									ng-click="remove_comment(gallery.current, c.comment)"
-								></i>
+		<section tabindex="0" ng-hide="gallery.current_photo === null" ng-keypress="escape_pressed($event) && (gallery.current_photo = null);">
+			<div class="ya-pop-up ya-pop-up_active" ng-click="set_current_photo(null)">
+				<div class="ya-pop-up__wrapper">
+					<span class="ya-pop-up__close-btn" ng-click="set_current_photo(null)">X</span>
+					<div class="ya-pop-up__content ya-clearfix" ng-click="$event.stopPropagation();">
+						<div class="ya-span-3-4 ya-relative ya-pop-up__main">
+							<div class="ya-pop-up-photo" ng-style="{'background-image':'url(' + photos[gallery.current_photo].image + ')'}" ng-click="turn_right()">
+							</div>
+							<span
+								class="ya-pop-up-photo__btn ya-pop-up-photo__btn_left"
+								ng-click="turn_photo_left();"
+							>
+							</span>
+							<span
+								class="ya-pop-up-photo__btn ya-pop-up-photo__btn_right"
+								ng-click="turn_photo_right()"
+							>
+							</span>
+						</div>
+						<div class="ya-span-1-4 ya-relative ya-pop-up__additional">
+							<div class="ya-pop-up-comments">
+								<div class="comment" ng-repeat="c in photos[gallery.current_photo].comments">
+									<a href="#/user/{{c.userid}}">{{c.name + ' ' + c.surname}}</a>:
+									{{c.comment}}
+									<i
+										class="fa fa-lg fa-close"
+										ng-if="c.userid === options.user._id"
+										ng-click="remove_comment(gallery.current_photo, c.comment)"
+									></i>
+								</div>
+								<input type="text" ng-model="gallery.comment">
+								<button ng-click="add_comment(gallery.current_photo)">&gt;</button>
 							</div>
 						</div>
-					</span>
-				</span>
+					</div>
+				</div>
 			</div>
-			<div ng-hide="gallery.current === null">
-				<div class="ya-pop-up ya-pop-up_active" ng-click="set_current(null)">
-					<div class="ya-pop-up__wrapper">
-						<span class="ya-pop-up__close-btn" ng-click="set_current(null)">X</span>
-						<div class="ya-pop-up__content ya-clearfix" ng-click="$event.stopPropagation();">
-							<div class="ya-span-3-4 ya-relative ya-pop-up__main">
-								<div class="ya-pop-up-photo" ng-style="{'background-image':'url(' + photos[gallery.current].image + ')'}" ng-click="turn_right()">
-								</div>
-								<span
-									class="ya-pop-up-photo__btn ya-pop-up-photo__btn_left"
-									ng-click="turn_left();"
-								>
-									&lt;
-								</span>
-								<span
-									class="ya-pop-up-photo__btn ya-pop-up-photo__btn_right"
-									ng-click="turn_right()"
-								>
-									&gt;
-								</span>
+		</section>
+		<section tabindex="0" ng-hide="gallery.current_video === null" ng-keypress="escape_pressed($event) && (gallery.current_video = null);">
+			<div class="ya-pop-up ya-pop-up_active" ng-click="set_current_video(null)">
+				<div class="ya-pop-up__wrapper">
+					<span class="ya-pop-up__close-btn" ng-click="set_current_video(null)">X</span>
+					<div class="ya-pop-up__content ya-clearfix" ng-click="$event.stopPropagation();">
+						<div class="ya-span-3-4 ya-relative ya-pop-up__main">
+							<iframe ng-if="videos[gallery.current_video].type==='vimeo'" width="640" height="480" ng-src="{{include_video('vimeo', videos[gallery.current_video].link)}}" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen></iframe>
+							<iframe ng-if="videos[gallery.current_video].type==='youtube'" width="640" height="480" ng-src="{{include_video('youtube', videos[gallery.current_video].link)}}" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen></iframe>
 							</div>
-							<div class="ya-span-1-4 ya-relative ya-pop-up__additional">
-								<div class="ya-pop-up-comments">
-									<div class="comment" ng-repeat="c in photos[gallery.current].comments">
-										<a href="#/user/{{c.userid}}">{{c.name + ' ' + c.surname}}</a>:
-										{{c.comment}}
-										<i
-											class="fa fa-lg fa-close"
-											ng-if="c.userid === options.user._id"
-											ng-click="remove_comment(gallery.current, c.comment)"
-										></i>
-									</div>
-									<input type="text" ng-model="gallery.comment">
-									<button ng-click="add_comment(gallery.current)">&gt;</button>
+							<span
+								class="ya-pop-up-video__btn ya-pop-up-video__btn_left"
+								ng-click="turn_video_left();"
+							>
+							</span>
+							<span
+								class="ya-pop-up-video__btn ya-pop-up-video__btn_right"
+								ng-click="turn_video_right()"
+							>
+							</span>
+						</div>
+						<div class="ya-span-1-4 ya-relative ya-pop-up__additional">
+							<div class="ya-pop-up-comments">
+								<div class="comment" ng-repeat="c in videos[gallery.current_video].comments">
+									<a href="#/user/{{c.userid}}">{{c.name + ' ' + c.surname}}</a>:
+									{{c.comment}}
+									<i
+										class="fa fa-lg fa-close"
+										ng-if="c.userid === options.user._id"
+										ng-click="remove_comment(gallery.current_video, c.comment)"
+									></i>
 								</div>
+								<input type="text" ng-model="gallery.comment">
+								<button ng-click="add_comment(gallery.current_video)">&gt;</button>
 							</div>
 						</div>
 					</div>

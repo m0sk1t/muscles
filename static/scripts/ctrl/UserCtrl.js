@@ -36,18 +36,45 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 			return moment(birthDate).format("DD.MM.YYYY");
 		};
 
-		$scope.set_current = function(index) {
-			$scope.gallery.current = index;
+		$scope.set_current_photo = function(index) {
+			$scope.gallery.current_photo = index;
 		};
-		$scope.turn_left = function() {
-			$scope.gallery.current === 0 ? $scope.gallery.current = $scope.photos.length : $scope.gallery.current--;
+		$scope.turn_photo_left = function() {
+			$scope.gallery.current_photo === 0 ? $scope.gallery.current_photo = $scope.photos.length : $scope.gallery.current_photo--;
 		};
-		$scope.turn_right = function() {
-			$scope.gallery.current == $scope.photos.length - 1 ? $scope.gallery.current = 0 : $scope.gallery.current++;
+		$scope.turn_photo_right = function() {
+			$scope.gallery.current_photo == $scope.photos.length - 1 ? $scope.gallery.current_photo = 0 : $scope.gallery.current_photo++;
+		};
+
+		$scope.include_video = function(type, id) {
+			switch (type) {
+				case 'vimeo':
+					return $sce.trustAsResourceUrl('https://player.vimeo.com/video/' + id + '?title=0&byline=0&portrait=0');
+					break;
+				case 'youtube':
+					return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + id + '?wmode=transparent');
+					break;
+			}
+		};
+
+		$scope.set_current_video = function(index) {
+			$scope.gallery.current_video = index;
+		};
+		$scope.turn_video_left = function() {
+			$scope.gallery.current_video === 0 ? $scope.gallery.current_video = $scope.videos.length : $scope.gallery.current_video--;
+		};
+		$scope.turn_video_right = function() {
+			$scope.gallery.current_video == $scope.videos.length - 1 ? $scope.gallery.current_video = 0 : $scope.gallery.current_video++;
 		};
 
 		Photo.get($routeParams.id, function(res) {
 			$scope.photos = res.data;
+		}, function(res) {
+			console.error(res.data);
+		});
+
+		Video.get($routeParams.id, function(res) {
+			$scope.videos = res.data;
 		}, function(res) {
 			console.error(res.data);
 		});
