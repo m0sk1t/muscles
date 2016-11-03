@@ -128,7 +128,7 @@
 									<span class="ya-sidebar-info__label">Город</span> {{w.city}}
 								</div>
 								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Годы</span> {{w.year_start}} - {{w.year_end}}
+									<span class="ya-sidebar-info__label">Годы</span> {{w.year_start}} - {{w.year_end||'по н. вр.'}}
 								</div>
 								<div class="ya-sidebar-info__item">
 									<span class="ya-sidebar-info__label">Компания</span> {{w.company}}
@@ -162,7 +162,7 @@
 									<span class="ya-sidebar-info__label">Город</span> {{u.city}}
 								</div>
 								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Годы</span> {{u.year_start}} - {{u.year_end}}
+									<span class="ya-sidebar-info__label">Годы</span> {{u.year_start}} - {{u.year_end||'по н. вр.'}}
 								</div>
 								<div class="ya-sidebar-info__item">
 									<span class="ya-sidebar-info__label">Учреждение</span> {{u.university}}
@@ -426,7 +426,7 @@
 								<div class="ya-wall__news-item" ng-show="topics && topics.length" ng-repeat="t in topics track by $index">
 									<div class="ya-wall__news-content">
 										<div class="ya-wall__news-author ya-relative ya-clearfix">
-											<div class="ya-wall__news-remove" ng-click="del_topic($index)">x</div>
+											<div class="ya-wall__news-remove" ng-if="options.user._id === user._id" ng-click="del_topic($index)">x</div>
 											<div class="ya-avatar ya-avatar_small ya-wall__avatar">
 												<img ng-src="{{user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
 											</div>
@@ -452,7 +452,7 @@
 												<div class="ya-comments__list">
 													<div class="ya-comments__item" ng-repeat="c in t.comments">
 														<div class="ya-wall__news-author ya-relative ya-clearfix">
-															<div class="ya-wall__news-remove" ng-click="remove_topic_comment($index, c.comment)">x</div>
+															<div class="ya-wall__news-remove" ng-if="options.user._id === c.userid" ng-click="remove_topic_comment($index, c.comment)">x</div>
 															<div class="ya-avatar ya-avatar_small ya-wall__avatar">
 																<img ng-src="{{c.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
 															</div>

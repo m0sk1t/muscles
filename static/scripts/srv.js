@@ -214,6 +214,9 @@ angular.module('Services', []).factory('User', ['$http',
 			new: function(opt, s, e) {
 				return $http.post('/topic/new', opt).then(s, e);
 			},
+			del: function(id, s, e) {
+				return $http.delete('/topic/' + id).then(s, e);
+			},
 			edit: function(opt, s, e) {
 				return $http.put('/topic/' + opt._id, opt).then(s, e);
 			},
