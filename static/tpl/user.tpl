@@ -280,31 +280,31 @@
 											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_vk">
 												<span class="ya-socials__logo ya-socials__logo_vk"></span>
 											</a>
-											<span class="ya-socials__link ya-socials__link_friends">{{options.user.social.fb.friends.summary.total_count || 'н\\д'}}</span>
+											<a class="ya-socials__link ya-socials__link_friends">{{user.social.vk.friends.summary.total_count || 'н\\д'}}</a>
 										</div>
 										<div class="ya-socials__item ya-clearfix">
 											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_fb">
 												<span class="ya-socials__logo ya-socials__logo_fb"></span>
 											</a>
-											<span class="ya-socials__link ya-socials__link_friends">{{options.user.social.fb.friends.summary.total_count || 'н\\д'}}</span>
+											<a class="ya-socials__link ya-socials__link_friends">{{user.social.fb._json.friends.summary.total_count || 'н\\д'}}</a>
 										</div>
 										<div class="ya-socials__item ya-clearfix">
 											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_tw">
 												<span class="ya-socials__logo ya-socials__logo_tw"></span>
 											</a>
-											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_friends">{{options.user.social.tw._json.friends_count || 'н\\д'}}</a>
+											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_friends">{{user.social.tw._json.friends_count || 'н\\д'}}</a>
 										</div>
 										<div class="ya-socials__item ya-clearfix">
 											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_ok">
 												<span class="ya-socials__logo ya-socials__logo_ok"></span>
 											</a>
-											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_friends">{{options.user.social.ok._json.friends_count || 'н\\д'}}</a>
+											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_friends">{{user.social.ok._json.friends_count || 'н\\д'}}</a>
 										</div>
 										<div class="ya-socials__item ya-clearfix">
 											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_ig">
 												<span class="ya-socials__logo ya-socials__logo_ig"></span>
 											</a>
-											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_friends">{{options.user.social.im._json.friends_count || 'н\\д'}}</a>
+											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_friends">{{user.social.im._json.data.counts.follows || 'н\\д'}}</a>
 										</div>
 									</div>
 								</div>
