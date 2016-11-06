@@ -464,7 +464,7 @@
 														Facebook
 													</label>
 													<a ng-show="options.user.tokens.fb" ng-click="unlink('fb')" class="ya-social-linker ya-social-linker_active">Отвязать</a>
-													<a ng-hide="options.user.tokens.fb" href="/auth/fb" class="ya-social-linker">Привязать</a> <br>Количество подписчиков: options.{{user.social.fb._json.friends.summary.total_count || 'н\\д'}}
+													<a ng-hide="options.user.tokens.fb" href="/auth/fb" class="ya-social-linker">Привязать</a> <br>Количество подписчиков: {{options.user.social.fb._json.friends.summary.total_count || 'н\\д'}}
 												</div>
 											</div>
 										</div>
