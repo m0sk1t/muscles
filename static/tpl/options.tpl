@@ -464,7 +464,7 @@
 														Facebook
 													</label>
 													<a ng-show="options.user.tokens.fb" ng-click="unlink('fb')" class="ya-social-linker ya-social-linker_active">Отвязать</a>
-													<a ng-hide="options.user.tokens.fb" href="/auth/fb" class="ya-social-linker">Привязать</a> <br>Количество подписчиков: {{user.social.fb._json.friends.summary.total_count || 'н\\д'}}
+													<a ng-hide="options.user.tokens.fb" href="/auth/fb" class="ya-social-linker">Привязать</a> <br>Количество подписчиков: options.{{user.social.fb._json.friends.summary.total_count || 'н\\д'}}
 												</div>
 											</div>
 										</div>
@@ -477,7 +477,7 @@
 														VKontakte
 													</label>
 													<a ng-show="options.user.tokens.vk" ng-click="unlink('vk')" class="ya-social-linker ya-social-linker_active">Отвязать</a>
-													<a ng-hide="options.user.tokens.vk" href="/auth/vk" class="ya-social-linker">Привязать</a> <br>Количество подписчиков: {{user.social.vk.friends.summary.total_count || 'н\\д'}}
+													<a ng-hide="options.user.tokens.vk" href="/auth/vk" class="ya-social-linker">Привязать</a> <br>Количество подписчиков: {{options.user.social.vk.friends.summary.total_count || 'н\\д'}}
 												</div>
 											</div>
 										</div>
@@ -490,7 +490,7 @@
 														Twitter
 													</label>
 													<a ng-show="options.user.tokens.tw" ng-click="unlink('tw')" class="ya-social-linker ya-social-linker_active">Отвязать</a>
-													<a ng-hide="options.user.tokens.tw" href="/auth/tw" class="ya-social-linker">Привязать</a> <br>Количество подписчиков: {{user.social.tw._json.friends_count || 'н\\д'}}
+													<a ng-hide="options.user.tokens.tw" href="/auth/tw" class="ya-social-linker">Привязать</a> <br>Количество подписчиков: {{options.user.social.tw._json.friends_count || 'н\\д'}}
 												</div>
 											</div>
 										</div>
@@ -503,7 +503,7 @@
 														Instagram
 													</label>
 													<a ng-show="options.user.tokens.im" ng-click="unlink('im')" class="ya-social-linker ya-social-linker_active">Отвязать</a>
-													<a ng-hide="options.user.tokens.im" href="/auth/im" class="ya-social-linker">Привязать</a> <br>Количество подписчиков: {{user.social.im._json.data.counts.follows || 'н\\д'}}
+													<a ng-hide="options.user.tokens.im" href="/auth/im" class="ya-social-linker">Привязать</a> <br>Количество подписчиков: {{options.user.social.im._json.data.counts.follows || 'н\\д'}}
 												</div>
 											</div>
 										</div>
@@ -516,7 +516,7 @@
 														Odnoklassniki
 													</label>
 													<a ng-show="options.user.tokens.ok" ng-click="unlink('ok')" class="ya-social-linker ya-social-linker_active">Отвязать</a>
-													<a ng-hide="options.user.tokens.ok" href="/auth/ok" class="ya-social-linker">Привязать</a> <br>Количество подписчиков: {{user.social.ok._json.friends_count || 'н\\д'}}
+													<a ng-hide="options.user.tokens.ok" href="/auth/ok" class="ya-social-linker">Привязать</a> <br>Количество подписчиков: {{options.user.social.ok._json.friends_count || 'н\\д'}}
 												</div>
 											</div>
 										</div>
