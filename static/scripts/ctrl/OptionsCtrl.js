@@ -133,6 +133,10 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 		};
 
 		$scope.save_university = function() {
+			if ($scope.university.year_end && $scope.university.year_start > $scope.university.year_end) {
+				MSG.err('Год начала не может быть больше года окончания');
+				return;
+			}
 			User.add_university($scope.university, function(res) {
 				$scope.options.user.universities.push($scope.university);
 				$scope.university = null;
@@ -164,6 +168,10 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 		};
 
 		$scope.save_workplace = function() {
+			if ($scope.workplace.year_end && $scope.workplace.year_start > $scope.workplace.year_end) {
+				MSG.err('Год начала не может быть больше года окончания');
+				return;
+			}
 			User.add_workplace($scope.workplace, function(res) {
 				$scope.options.user.workplaces.push($scope.workplace);
 				$scope.workplace = null;
