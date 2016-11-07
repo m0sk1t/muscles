@@ -342,31 +342,31 @@
 						</div>
 					</div>
 				</div>
-				<div class="ya-page__block ya-user__videos">
-					<div class="ya-videos ya-videos_profile">
-						<h2 class="ya-videos__title"><a href="#/user/{{user._id}}/videos/all" class="ya-videos__link">Видео</a></h2>
-						<div class="ya-videos__list ya-videos__list_empty" ng-show="!videos || !videos.length">
+				<div class="ya-page__block ya-user__photos">
+					<div class="ya-photos ya-photos_profile">
+						<h2 class="ya-photos__title"><a href="#/user/{{user._id}}/videos/all" class="ya-photos__link">Видео</a></h2>
+						<div class="ya-photos__list ya-photos__list_empty" ng-show="!videos || !videos.length">
 							Пока не добавлено ни одного видео
 						</div>
-						<div class="ya-videos__list ya-clearfix" ng-show="videos && videos.length">
-							<div class="ya-videos__item ya-grid-1-4" ng-show="videos && videos[0]">
-								<div class="ya-videos__wrapper">
-									<div class="ya-videos__img" ng-click="set_current_video(0);" ng-style="{'background-image':'url(' + videos[0].thumbnail + ')'}"></div>
+						<div class="ya-photos__list ya-clearfix" ng-show="videos && videos.length">
+							<div class="ya-photos__item ya-grid-1-4" ng-show="videos && videos[0]">
+								<div class="ya-photos__wrapper">
+									<div class="ya-photos__img" ng-click="set_current_video(0);" ng-style="{'background-image':'url(' + videos[0].thumbnail + ')'}"></div>
 								</div>
 							</div>
-							<div class="ya-videos__item ya-grid-1-4" ng-show="videos && videos[1]">
-								<div class="ya-videos__wrapper">
-									<div class="ya-videos__img" ng-click="set_current_video(1);" ng-style="{'background-image':'url(' + videos[1].thumbnail + ')'}"></div>
+							<div class="ya-photos__item ya-grid-1-4" ng-show="videos && videos[1]">
+								<div class="ya-photos__wrapper">
+									<div class="ya-photos__img" ng-click="set_current_video(1);" ng-style="{'background-image':'url(' + videos[1].thumbnail + ')'}"></div>
 								</div>
 							</div>
-							<div class="ya-videos__item ya-grid-1-4" ng-show="videos && videos[2]">
-								<div class="ya-videos__wrapper">
-									<div class="ya-videos__img" ng-click="set_current_video(2);" ng-style="{'background-image':'url(' + videos[2].thumbnail + ')'}"></div>
+							<div class="ya-photos__item ya-grid-1-4" ng-show="videos && videos[2]">
+								<div class="ya-photos__wrapper">
+									<div class="ya-photos__img" ng-click="set_current_video(2);" ng-style="{'background-image':'url(' + videos[2].thumbnail + ')'}"></div>
 								</div>
 							</div>
-							<div class="ya-videos__item ya-grid-1-4" ng-show="videos && videos[3]">
-								<div class="ya-videos__wrapper">
-									<div class="ya-videos__img" ng-click="set_current_video(3);" ng-style="{'background-image':'url(' + videos[3].thumbnail + ')'}"></div>
+							<div class="ya-photos__item ya-grid-1-4" ng-show="videos && videos[3]">
+								<div class="ya-photos__wrapper">
+									<div class="ya-photos__img" ng-click="set_current_video(3);" ng-style="{'background-image':'url(' + videos[3].thumbnail + ')'}"></div>
 								</div>
 							</div>
 						</div>
@@ -646,12 +646,12 @@
 							<iframe ng-if="videos[gallery.current_video].type==='youtube'" width="640" height="480" ng-src="{{include_video('youtube', videos[gallery.current_video].link)}}" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen></iframe>
 							</div>
 							<span
-								class="ya-pop-up-video__btn ya-pop-up-video__btn_left"
+								class="ya-pop-up-photo__btn ya-pop-up-photo__btn_left"
 								ng-click="turn_video_left();"
 							>
 							</span>
 							<span
-								class="ya-pop-up-video__btn ya-pop-up-video__btn_right"
+								class="ya-pop-up-photo__btn ya-pop-up-photo__btn_right"
 								ng-click="turn_video_right()"
 							>
 							</span>
