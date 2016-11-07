@@ -644,7 +644,6 @@
 						<div class="ya-span-3-4 ya-relative ya-pop-up__main">
 							<iframe ng-if="videos[gallery.current_video].type==='vimeo'" width="640" height="480" ng-src="{{include_video('vimeo', videos[gallery.current_video].link)}}" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen></iframe>
 							<iframe ng-if="videos[gallery.current_video].type==='youtube'" width="640" height="480" ng-src="{{include_video('youtube', videos[gallery.current_video].link)}}" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen></iframe>
-							</div>
 							<span
 								class="ya-pop-up-photo__btn ya-pop-up-photo__btn_left"
 								ng-click="turn_video_left();"

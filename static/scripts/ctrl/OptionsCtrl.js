@@ -5,6 +5,8 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 			new_password: ''
 		};
 
+		$scope.currentYear = (new Date()).getFullYear();
+
 		User.get(function(res) {
 			$scope.options.user = res.data;
 			LS.set('user', res.data);

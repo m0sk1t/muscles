@@ -889,7 +889,7 @@
 												</div>
 												<div class="ya-grid-2-3">
 													<div class="ya-input__field-wrapper">
-														<input id="ya-wp-year-start" class="ya-input__field" type="number" ng-model="workplace.year_start" />
+														<input id="ya-wp-year-start" class="ya-input__field" type="number" ng-model="workplace.year_start" max="{{currentYear}}" />
 													</div>
 												</div>
 											</div>
@@ -903,7 +903,7 @@
 												</div>
 												<div class="ya-grid-2-3">
 													<div class="ya-input__field-wrapper">
-														<input id="ya-wp-year-finish" class="ya-input__field" type="number" ng-model="workplace.year_end" max="{{workplace.year_end}}" />
+														<input id="ya-wp-year-finish" class="ya-input__field" type="number" ng-model="workplace.year_end" max="{{currentYear}}" />
 													</div>
 												</div>
 											</div>
@@ -1081,7 +1081,7 @@
 												</div>
 												<div class="ya-grid-2-3">
 													<div class="ya-input__field-wrapper">
-														<input id="ya-university-year-start" class="ya-input__field" type="number" ng-model="university.year_start" />
+														<input id="ya-university-year-start" class="ya-input__field" type="number" ng-model="university.year_start" max="{{currentYear}}" />
 													</div>
 												</div>
 											</div>
@@ -1095,7 +1095,7 @@
 												</div>
 												<div class="ya-grid-2-3">
 													<div class="ya-input__field-wrapper">
-														<input id="ya-university-year-finish" class="ya-input__field" type="number" ng-model="university.year_end" max="{{university.year_end}}" />
+														<input id="ya-university-year-finish" class="ya-input__field" type="number" ng-model="university.year_end" max="{{currentYear}}" />
 													</div>
 												</div>
 											</div>
