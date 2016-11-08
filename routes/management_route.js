@@ -1,6 +1,7 @@
 module.exports = (app) => {
 	var salt = 'N&*ud91)(R#@10(!)',
 		crypto = require('crypto'),
+		cloudinary = require('./cloudinary'),
 		User = require('../models/User'),
 		Video = require('../models/Video'),
 		Photo = require('../models/Photo'),

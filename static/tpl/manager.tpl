@@ -1,15 +1,15 @@
 <article style="display: flex;">
 	<ul style="flex: 1; font-size: 1.5rem; list-style-type: none;">
 		<li>Управление</li>
-		<li ng-class="{'active': page = 'articles'}" ng-click="page = 'articles'; get_articles();">Статьями</li>
-		<li ng-class="{'active': page = 'contests'}" ng-click="page = 'contests'; get_contests();">Конкурсами</li>
-		<li ng-class="{'active': page = 'hobbies'}" ng-click="page = 'hobbies'; get_hobbies();">Видами спорта</li>
-		<li ng-class="{'active': page = 'managers'}" ng-click="page = 'managers'; get_managers();">Менеджерами</li>
-		<li ng-class="{'active': page = 'users'}" ng-click="page = 'users'; get_users();">Пользователями</li>
-		<li ng-class="{'active': page = 'competitions'}" ng-click="page = 'competitions'; get_competitions();">Соревнованиями</li>
-		<li ng-class="{'active': page = 'photos'}" ng-click="page = 'photos'; get_photos();">Пользовательскими фото</li>
-		<li ng-class="{'active': page = 'videos'}" ng-click="page = 'videos'; get_videos();">Пользовательскими видео</li>
-		<li ng-class="{'active': page = 'topics'}" ng-click="page = 'topics'; get_topics();">Пользовательскими объявлениями</li>
+		<li ng-show="manager.permission.users" ng-class="{'active': page === 'articles'}" ng-click="page = 'articles'; get_articles();">Статьями</li>
+		<li ng-show="manager.permission.photos" ng-class="{'active': page === 'contests'}" ng-click="page = 'contests'; get_contests();">Конкурсами</li>
+		<li ng-show="manager.permission.videos" ng-class="{'active': page === 'hobbies'}" ng-click="page = 'hobbies'; get_hobbies();">Видами спорта</li>
+		<li ng-show="manager.permission.topics" ng-class="{'active': page === 'managers'}" ng-click="page = 'managers'; get_managers();">Менеджерами</li>
+		<li ng-show="manager.permission.articles" ng-class="{'active': page === 'users'}" ng-click="page = 'users'; get_users();">Пользователями</li>
+		<li ng-show="manager.permission.contests" ng-class="{'active': page === 'competitions'}" ng-click="page = 'competitions'; get_competitions();">Соревнованиями</li>
+		<li ng-show="manager.permission.hobbies" ng-class="{'active': page === 'photos'}" ng-click="page = 'photos'; get_photos();">Пользовательскими фото</li>
+		<li ng-show="manager.permission.managers" ng-class="{'active': page === 'videos'}" ng-click="page = 'videos'; get_videos();">Пользовательскими видео</li>
+		<li ng-show="manager.permission.competitions" ng-class="{'active': page === 'topics'}" ng-click="page = 'topics'; get_topics();">Пользовательскими объявлениями</li>
 	</ul>
 	<section
 		style="flex: 3; overflow-y: auto;"
@@ -38,20 +38,23 @@
 		</div>
 	</section>
 	<section
-		style="flex: 3; overflow-y: auto;"
-		ng-show="page === 'videos'">
-		<div ng-repeat="video in videos track by $index">
+		ng-show="page === 'videos'"
+		style="display: flex; flex-wrap: wrap; flex: 3; overflow-y: auto;"
+	>
+		<div ng-repeat="video in videos track by $index" style="width: 10%">
 			<span style="background-color: #666" ng-click="delete_video(video._id, $index)">DEL</span>{{video.title}}
+			<img ng-src="{{video.thumbnail}}">
 		</div>
 	</section>
 	<section 
-		style="flex: 3; overflow-y: auto;"
-		ng-show="page === 'photos'">
-		<div ng-repeat="photo in photos track by $index">
+		ng-show="page === 'photos'"
+		style="display: flex; flex-wrap: wrap; flex: 3; overflow-y: auto;"
+	>
+		<div ng-repeat="photo in photos track by $index" style="width: 10%">
 			<span style="background-color: #666" ng-click="delete_photo(photo._id, $index)">DEL</span>{{photo.title}}
+			<img ng-src="{{photo.image}}">
 		</div>
-<!-- 		<div ng-click="creDate = photos[photos.length-1].creDate; get_photos();">&lt;</div><div ng-click="get_photos();">&gt;</div>
- -->	</section>
+	</section>
 	<section 
 		style="flex: 3; overflow-y: auto;"
 		ng-show="page === 'users'">
