@@ -40,8 +40,8 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 		};
 		$scope.add_hobbie = function() {
 			$scope.items.hobbie = {
-				login: '',
-				password: '',
+				type: 0,
+				item: '',
 			};
 		};
 		$scope.create_hobbie = function() {
@@ -61,8 +61,8 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 		};
 		$scope.add_sport = function() {
 			$scope.items.sport = {
-				login: '',
-				password: '',
+				sex: 1,
+				sport: '',
 			};
 		};
 		$scope.create_sport = function() {

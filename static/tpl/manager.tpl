@@ -103,17 +103,35 @@
 		ng-show="page === 'hobbies'"
 		style="flex: 3; overflow-y: auto;"
 	>
+		<div ng-show="items.hobbie">
+			Тип информации
+			<select ng-model="items.hobbie.type">
+				<option ng-value="0">Доп. инфо</option>
+				<option ng-value="1">Работа</option>
+			</select>
+			<input ng-model="items.hobbie.item" placeholder="Название">
+			<input type="button" value="Save" ng-click="add_hobbie">
+		</div>
 		<div ng-repeat="hobbie in hobbies track by $index">
-			<span style="background-color: #666" ng-click="delete_hobbie(hobbie._id, $index)">DEL</span>{{hobbie.title}}
+			<span style="background-color: #666" ng-click="delete_hobbie(hobbie._id, $index)">DEL</span>{{hobbie.item}}
 		</div>
 	</section>
 	<section 
 		ng-show="page === 'sports'"
 		style="flex: 3; overflow-y: auto;"
 	>
+		<div ng-show="items.sport">
+			Вид спорта
+			<select ng-model="items.sport.sex">
+				<option ng-value="0">Женский</option>
+				<option ng-value="1">Мужской</option>
+			</select>
+			<input ng-model="items.sport.sport" placeholder="Название">
+			<input type="button" value="Save" ng-click="add_hobbie">
+		</div>
 		<div ng-repeat="sport in sports track by $index">
 			<span style="background-color: #666" ng-click="delete_sport(sport._id, $index)">DEL</span>
-			{{sport.title}}
+			{{sport.sport}}
 		</div>
 	</section>
 	<section 
