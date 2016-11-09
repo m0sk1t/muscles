@@ -431,16 +431,10 @@ module.exports = (app) => {
 		User.findOne({
 			mail: req.body.mail
 		}, (err, existingUser) => {
-			if (err) {
-				return next(err);
-			}
-			if (existingUser) {
-				return res.status(500).json([{ msg: 'Указанный адрес почты уже зарегистрирован, попробуйте войти со своим паролем!' }]);
-			}
+			if (err) return next(err);
+			if (existingUser) return res.status(500).json([{ msg: 'Указанный адрес почты уже зарегистрирован, попробуйте войти со своим паролем!' }]);
 			user.save((err) => {
-				if (err) {
-					return next(err);
-				}
+				if (err) return next(err);
 				mailer.send_mail({
 					mail: [req.body.mail.toLowerCase()],
 					subj: 'Регистрация в сети СпортПроект',
@@ -450,13 +444,31 @@ module.exports = (app) => {
 					console.log(info);
 					if (err) return res.status(500).json([{ msg: err }]);
 					req.logIn(user, (err) => {
-						if (err) {
-							return next(err);
-						}
-						//delete user.pass;
+						if (err) return next(err);
+						delete user.pass;
 						res.json(user);
 					});
 				});
+			});
+		});
+	});
+
+	app.put('/changepwd', (req, res, next) => {
+		req.assert('password', 'Для вашей же безопасности пароль должен быть длиной не меньше 7 символов!').len(7);
+		req.assert('confirmPassword', 'Пароли не совпадают').equals(req.body.password);
+
+		const errors = req.validationErrors();
+
+		if (errors) {
+			return res.status(500).json(errors);
+		}
+
+		User.findById(req.user.id, (err, user) => {
+			if (err) return next(err);
+			user.password = req.body.password;
+			user.save((err) => {
+				if (err) return next(err);
+				res.json({ msg: 'Пароль успешно изменён!' });
 			});
 		});
 	});

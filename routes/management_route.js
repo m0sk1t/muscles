@@ -6,6 +6,7 @@ module.exports = (app) => {
 		Video = require('../models/Video'),
 		Photo = require('../models/Photo'),
 		Topic = require('../models/Topic'),
+		Sport = require('../models/Sport'),
 		Hobbie = require('../models/Hobbie'),
 		Manager = require('../models/Manager'),
 		Article = require('../models/Article'),
@@ -180,12 +181,42 @@ module.exports = (app) => {
 			res.json(hobbies);
 		});
 	});
-	app.delete('/manage/hobbie/:id', management_check, (req, res) => {
-		req.manager.permission.hobbies ? Hobbie.findByIdAndRemove(req.params.id, (err, hobbie) => {
+	app.route('/manage/hobbie/:id')
+		.put(management_check, (req, res) => {
+			req.manager.permission.hobbies ? Hobbie.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, manager) => {
+				if (err) return console.error(err);
+				res.json(manager);
+			}) : res.status(403).send('Permission denied');
+		})
+		.delete(management_check, (req, res) => {
+			req.manager.permission.hobbies ? Hobbie.findByIdAndRemove(req.params.id, (err, hobbie) => {
+				if (err) return console.error(err);
+				res.json(hobbie);
+			}) : res.status(403).send('Permission denied');
+		});
+
+	/*
+		Sport routes
+	*/
+	app.get('/manage/sports', management_check, (req, res) => {
+		Sport.find({}, (err, sports) => {
 			if (err) return console.error(err);
-			res.json(hobbie);
-		}) : res.status(403).send('Permission denied');
+			res.json(sports);
+		});
 	});
+	app.route('/manage/sport/:id')
+		.put(management_check, (req, res) => {
+			req.manager.permission.sports ? Sport.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, manager) => {
+				if (err) return console.error(err);
+				res.json(manager);
+			}) : res.status(403).send('Permission denied');
+		})
+		.delete(management_check, (req, res) => {
+			req.manager.permission.sports ? Hobbie.findByIdAndRemove(req.params.id, (err, sport) => {
+				if (err) return console.error(err);
+				res.json(sport);
+			}) : res.status(403).send('Permission denied');
+		});
 
 	/*
 		Article routes

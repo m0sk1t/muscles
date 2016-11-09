@@ -1,8 +1,10 @@
 angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload', 'User', 'LS', '$vk',
 	function($scope, MSG, Upload, User, LS, $vk) {
+		$scope.active_page = 'profile';
+
 		$scope.cred = {
-			old_password: '',
-			new_password: ''
+			password: '',
+			confirmPassword: '',
 		};
 
 		$scope.currentYear = (new Date()).getFullYear();
@@ -14,8 +16,6 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 			MSG.err(res.data);
 		});
 
-		$scope.active_page = 'profile';
-
 		$scope.unlink = function(provider) {
 			User.unlink(provider, function(res) {
 				$scope.options.user.social[provider] = undefined;
@@ -23,7 +23,7 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 			}, function(res) {
 				MSG.err(res.data);
 			});
-		}
+		};
 
 		$scope.upload_photo = function(photo) {
 			console.log(photo);
@@ -210,6 +210,16 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 				$scope.achievement = null;
 			}, function(res) {
 				MSG.err(res.data);
+			});
+		};
+
+		$scope.changepwd = function() {
+			User.changepwd($scope.cred, function(res) {
+				MSG.ok('Пароль успешно изменён!');
+			}, function(res) {
+				MSG.err(res.data.map(function(el) {
+					return el.msg;
+				}).join('\n\r'));
 			});
 		};
 

@@ -171,7 +171,7 @@
 										</div>
 										<div class="ya-grid-2-3">
 											<div class="ya-input__field-wrapper">
-												<select id="ya-type" class="ya-input__field ya-input__field_select ya-input__select" ng-model="options.user.type">
+												<select id="ya-type" class="ya-input__field ya-input__field_select ya-input__select" ng-model="options.user.typage">
 													<option>Атлет</option>
 													<option>Толстый</option>
 													<option>Худощавый</option>
@@ -287,7 +287,7 @@
 									<div class="ya-form__input ya-input ya-input_inline">
 										<div class="ya-clearfix">
 											<div class="ya-grid-1-1">
-												<input type="checkbox" id="ya-comments_enabled" class="ya-input__field ya-input__field_checkbox" ng-model="options.user.comments_enabled">
+												<input type="checkbox" id="ya-comments_enabled" class="ya-input__field ya-input__field_checkbox" ng-model="options.user.settings.comments_enabled">
 												<label for="ya-comments_enabled" class="ya-input__label ya-input__label_checkbox">
 													Включить комментарии к записям
 												</label>
@@ -307,12 +307,12 @@
 										<div class="ya-clearfix">
 											<div class="ya-grid-1-3 ya-right">
 												<label for="ya-old-pwd" class="ya-input__label">
-													Текущий пароль
+													Новый пароль
 												</label>
 											</div>
 											<div class="ya-grid-2-3">
 												<div class="ya-input__field-wrapper">
-													<input id="ya-old-pwd" class="ya-input__field" type="password" ng-model="cred.old_password" />
+													<input id="ya-old-pwd" class="ya-input__field" type="password" ng-model="cred.password" />
 												</div>
 											</div>
 										</div>
@@ -321,13 +321,26 @@
 										<div class="ya-clearfix">
 											<div class="ya-grid-1-3 ya-right">
 												<label for="ya-new-pwd" class="ya-input__label">
-													Новый пароль
+													Подтвердите новый пароль
 												</label>
 											</div>
 											<div class="ya-grid-2-3">
 												<div class="ya-input__field-wrapper">
-													<input id="ya-new-pwd" class="ya-input__field" type="password" ng-model="cred.new_password" />
+													<input id="ya-new-pwd" class="ya-input__field" type="password" ng-model="cred.confirmPassword" />
 												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ya-info-block">
+							<div class="ya-info-block__content">
+								<div class="ya-form">
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-1 ya-center">
+												<button ng-click="changepwd();" class="ya-btn ya-btn_secondary ya-btn_inline">Изменить пароль</button>
 											</div>
 										</div>
 									</div>

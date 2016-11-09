@@ -34,6 +34,9 @@ angular.module('Services', []).factory('User', ['$http',
 			signin: function(credentials, s, e) {
 				return $http.post('/auth/local', credentials).then(s, e);
 			},
+			changepwd: function(credentials, s, e) {
+				return $http.put('/changepwd', credentials).then(s, e);
+			},
 			unlink: function(provider, s, e) {
 				return $http.put('/unlink/' + provider).then(s, e);
 			},
@@ -63,23 +66,11 @@ angular.module('Services', []).factory('User', ['$http',
 			set_permission: function(id, opt, s, e) {
 				return $http.put('/manager/' + id, opt).then(s, e);
 			},
-			get_article: function(id, s, e) {
-				return $http.get('/manage/article/' + id).then(s, e);
-			},
 			create_article: function(s, e) {
 				return $http.post('/manage/article/new', {}).then(s, e);
 			},
 			update_article: function(id, opt, s, e) {
 				return $http.put('/manage/article/' + id, opt).then(s, e);
-			},
-			get_articles: function(credate, s, e) {
-				return $http.get('/manage/articles/' + credate).then(s, e);
-			},
-			get_contest: function(id, s, e) {
-				return $http.get('/manage/contest/' + id).then(s, e);
-			},
-			delete_article: function(id, s, e) {
-				return $http.delete('/manage/article/' + id).then(s, e);
 			},
 			create_contest: function(s, e) {
 				return $http.post('/manage/contest/new', {}).then(s, e);
@@ -87,32 +78,50 @@ angular.module('Services', []).factory('User', ['$http',
 			update_contest: function(id, opt, s, e) {
 				return $http.put('/manage/contest/' + id, opt).then(s, e);
 			},
-			get_contests: function(credate, s, e) {
-				return $http.get('/manage/contests/' + credate).then(s, e);
-			},
-			delete_contest: function(id, s, e) {
-				return $http.delete('/manage/contest/' + id).then(s, e);
-			},
-			get_competition: function(id, s, e) {
-				return $http.get('/manage/competition/' + id).then(s, e);
-			},
 			create_competition: function(s, e) {
 				return $http.post('/manage/competition/new', {}).then(s, e);
 			},
 			update_competition: function(id, opt, s, e) {
 				return $http.put('/manage/competition/' + id, opt).then(s, e);
 			},
-			get_competitions: function(credate, s, e) {
-				return $http.get('/manage/competitions/' + credate).then(s, e);
+			create_hobbie: function(s, e) {
+				return $http.post('/manage/hobbie/new', {}).then(s, e);
 			},
-			delete_competition: function(id, s, e) {
-				return $http.delete('/manage/competition/' + id).then(s, e);
+			update_hobbie: function(id, opt, s, e) {
+				return $http.put('/manage/hobbie/' + id, opt).then(s, e);
+			},
+			create_sport: function(s, e) {
+				return $http.post('/manage/sport/new', {}).then(s, e);
+			},
+			update_sport: function(id, opt, s, e) {
+				return $http.put('/manage/sport/' + id, opt).then(s, e);
 			},
 			update_user: function(id, user, s, e) {
 				return $http.put('/manage/user/' + id, user).then(s, e);
 			},
+			get_article: function(id, s, e) {
+				return $http.get('/manage/article/' + id).then(s, e);
+			},
+			get_articles: function(credate, s, e) {
+				return $http.get('/manage/articles/' + credate).then(s, e);
+			},
+			get_contest: function(id, s, e) {
+				return $http.get('/manage/contest/' + id).then(s, e);
+			},
+			get_contests: function(credate, s, e) {
+				return $http.get('/manage/contests/' + credate).then(s, e);
+			},
+			get_competition: function(id, s, e) {
+				return $http.get('/manage/competition/' + id).then(s, e);
+			},
+			get_competitions: function(credate, s, e) {
+				return $http.get('/manage/competitions/' + credate).then(s, e);
+			},
 			get_hobbies: function(s, e) {
 				return $http.get('/manage/hobbies').then(s, e);
+			},
+			get_sports: function(s, e) {
+				return $http.get('/manage/sports').then(s, e);
 			},
 			get_photos: function(credate, s, e) {
 				return $http.get('/manage/photos/' + credate).then(s, e);
@@ -126,8 +135,20 @@ angular.module('Services', []).factory('User', ['$http',
 			get_topics: function(credate, s, e) {
 				return $http.get('/manage/topics/' + credate).then(s, e);
 			},
+			delete_article: function(id, s, e) {
+				return $http.delete('/manage/article/' + id).then(s, e);
+			},
+			delete_competition: function(id, s, e) {
+				return $http.delete('/manage/competition/' + id).then(s, e);
+			},
+			delete_contest: function(id, s, e) {
+				return $http.delete('/manage/contest/' + id).then(s, e);
+			},
 			delete_hobbie: function(id, s, e) {
 				return $http.delete('/manage/hobbie/' + id).then(s, e);
+			},
+			delete_sport: function(id, s, e) {
+				return $http.delete('/manage/sport/' + id).then(s, e);
 			},
 			delete_photo: function(id, s, e) {
 				return $http.delete('/manage/photo/' + id).then(s, e);

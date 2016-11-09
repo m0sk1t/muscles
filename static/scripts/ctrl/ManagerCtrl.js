@@ -1,5 +1,10 @@
 angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$location', 'Manager', '$routeParams',
 	function($sce, $scope, $location, Manager, $routeParams) {
+		$scope.items = {
+			cred: null,
+			sport: null,
+			hobbie: null,
+		};
 		$scope.creDate = {
 			users: new Date(),
 			photos: new Date(),
@@ -9,18 +14,18 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 			contests: new Date(),
 			competitions: new Date(),
 		};
+		$scope.article_html = function(html) {
+			return $sce.trustAsHtml(html);
+		};
 		$scope.add_manager = function() {
-			$scope.cred = {
+			$scope.items.cred = {
 				login: '',
 				password: '',
 			};
 		};
-		$scope.article_html = function(html) {
-			return $sce.trustAsHtml(html);
-		};
 		$scope.create_manager = function() {
-			Manager.create($scope.cred, function(res) {
-				$scope.cred = null;
+			Manager.create($scope.items.cred, function(res) {
+				$scope.items.cred = null;
 				$scope.managers.push(res.data);
 			}, function(res) {
 				console.error(res.data);
@@ -29,6 +34,48 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 		$scope.delete_manager = function(id, i) {
 			Manager.delete(id, function(res) {
 				$scope.managers.splice(i, 1);
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+		$scope.add_hobbie = function() {
+			$scope.items.hobbie = {
+				login: '',
+				password: '',
+			};
+		};
+		$scope.create_hobbie = function() {
+			Manager.create_hobbie($scope.items.hobbie, function(res) {
+				$scope.hobbie = null;
+				$scope.hobbies.push(res.data);
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+		$scope.delete_hobbie = function(id, i) {
+			Manager.delete_hobbie(id, function(res) {
+				$scope.hobbies.splice(i, 1);
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+		$scope.add_sport = function() {
+			$scope.items.sport = {
+				login: '',
+				password: '',
+			};
+		};
+		$scope.create_sport = function() {
+			Manager.create_sport($scope.items.sport, function(res) {
+				$scope.sport = null;
+				$scope.sports.push(res.data);
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+		$scope.delete_sport = function(id, i) {
+			Manager.delete_sport(id, function(res) {
+				$scope.sports.splice(i, 1);
 			}, function(res) {
 				console.error(res.data);
 			});
@@ -114,8 +161,22 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 				console.error(res.data);
 			});
 		};
+		$scope.get_sports = function() {
+			Manager.get_sports(function(res) {
+				$scope.sports = res.data;
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
 		$scope.delete_hobbie = function(id, i) {
 			Manager.delete_hobbie(id, function(res) {
+				$scope.hobbies.splice(i, 1);
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
+		$scope.delete_sport = function(id, i) {
+			Manager.delete_sport(id, function(res) {
 				$scope.hobbies.splice(i, 1);
 			}, function(res) {
 				console.error(res.data);
@@ -217,6 +278,10 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 				case $scope.manager.permission.hobbies:
 					$scope.page = 'hobbies';
 					$scope.get_hobbies();
+					break;
+				case $scope.manager.permission.sports:
+					$scope.page = 'sports';
+					$scope.get_sports();
 					break;
 				case $scope.manager.permission.managers:
 					$scope.page = 'managers';

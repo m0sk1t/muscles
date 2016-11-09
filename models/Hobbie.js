@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'),
 	HobbieSchema = mongoose.Schema({
-		items: Array,
-		title: String,
+		item: String,
+		type: Boolean,
 	});
 
 module.exports = mongoose.model('Hobbies', HobbieSchema);

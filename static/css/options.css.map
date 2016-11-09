@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAEA,YAAY;EACX,KAAK,ECDE,IAAI;EDEX,MAAM,EAAE,OAAO;;AAEhB,YAAY;EACX,KAAK,ECMI,IAAI",
-"sources": ["../sass/options.sass","../sass/_colors.sass"],
-"names": [],
-"file": "options.css"
-}

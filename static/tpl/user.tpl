@@ -226,7 +226,7 @@
 									</div>
 									<div class="ya-info-block__record ya-clearfix">
 										<div class="ya-info-block__label ya-span-1-2">Телосложение:</div>
-										<div class="ya-info-block__value ya-span-1-2">{{user.type || "Не указано"}}</div>
+										<div class="ya-info-block__value ya-span-1-2">{{user.typage || "Не указано"}}</div>
 									</div>
 								</div>
 							</div>
