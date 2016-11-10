@@ -38,6 +38,13 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 				console.error(res.data);
 			});
 		};
+		$scope.get_hobbies = function() {
+			Manager.get_hobbies(function(res) {
+				$scope.hobbies = res.data;
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
 		$scope.add_hobbie = function() {
 			$scope.items.hobbie = {
 				type: 0,
@@ -46,7 +53,7 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 		};
 		$scope.create_hobbie = function() {
 			Manager.create_hobbie($scope.items.hobbie, function(res) {
-				$scope.hobbie = null;
+				$scope.items.hobbie = null;
 				$scope.hobbies.push(res.data);
 			}, function(res) {
 				console.error(res.data);
@@ -59,6 +66,13 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 				console.error(res.data);
 			});
 		};
+		$scope.get_sports = function() {
+			Manager.get_sports(function(res) {
+				$scope.sports = res.data;
+			}, function(res) {
+				console.error(res.data);
+			});
+		};
 		$scope.add_sport = function() {
 			$scope.items.sport = {
 				sex: 1,
@@ -67,7 +81,7 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 		};
 		$scope.create_sport = function() {
 			Manager.create_sport($scope.items.sport, function(res) {
-				$scope.sport = null;
+				$scope.items.sport = null;
 				$scope.sports.push(res.data);
 			}, function(res) {
 				console.error(res.data);
@@ -150,34 +164,6 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
 		$scope.delete_user = function(id, i) {
 			Manager.delete_user(id, function(res) {
 				$scope.users.splice(i, 1);
-			}, function(res) {
-				console.error(res.data);
-			});
-		};
-		$scope.get_hobbies = function() {
-			Manager.get_hobbies(function(res) {
-				$scope.hobbies = res.data;
-			}, function(res) {
-				console.error(res.data);
-			});
-		};
-		$scope.get_sports = function() {
-			Manager.get_sports(function(res) {
-				$scope.sports = res.data;
-			}, function(res) {
-				console.error(res.data);
-			});
-		};
-		$scope.delete_hobbie = function(id, i) {
-			Manager.delete_hobbie(id, function(res) {
-				$scope.hobbies.splice(i, 1);
-			}, function(res) {
-				console.error(res.data);
-			});
-		};
-		$scope.delete_sport = function(id, i) {
-			Manager.delete_sport(id, function(res) {
-				$scope.hobbies.splice(i, 1);
 			}, function(res) {
 				console.error(res.data);
 			});

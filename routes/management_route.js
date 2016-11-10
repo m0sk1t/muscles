@@ -224,7 +224,7 @@ module.exports = (app) => {
 			}
 		})
 		.delete(management_check, (req, res) => {
-			req.manager.permission.sports ? Hobbie.findByIdAndRemove(req.params.id, (err, sport) => {
+			req.manager.permission.sports ? Sport.findByIdAndRemove(req.params.id, (err, sport) => {
 				if (err) return console.error(err);
 				res.json(sport);
 			}) : res.status(403).send('Permission denied');

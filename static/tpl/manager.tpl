@@ -16,12 +16,12 @@
 		ng-show="page === 'managers'"
 		style="flex: 3; overflow-y: auto;"
 	>
-		<span ng-click="add_manager()">Add</span>
+		<button ng-click="add_manager()">Add</button>
 		<div ng-show="cred">
 			<input type="text" ng-model="cred.login"><br />
 			<input type="password" ng-model="cred.password"><br />
 			<input type="button" value="Save" ng-click="create_manager()"><br />
-			<input type="button" value="Cancel" ng-click="cred = null;"><br />
+			<input type="button" value="Cancel" ng-click="items.cred = null;"><br />
 		</div>
 		<div ng-repeat="m in managers track by $index">
 			<span ng-click="delete_manager(m._id, $index);" style="background-color: #666;">DEL</span>
@@ -92,7 +92,7 @@
 		ng-show="page === 'contests'"
 		style="flex: 3; overflow-y: auto;"
 	>
-		<button ng-click="create_contest()">Add</button>
+		<button ng-click="create_contest();">Add</button>
 		<div ng-repeat="contest in contests track by $index">
 			<span style="background-color: #666" ng-click="delete_contest(contest._id, $index)">DEL</span>
 			<a href="#/manage/contest/{{contest._id}}">EDIT</a><br />
@@ -103,31 +103,36 @@
 		ng-show="page === 'hobbies'"
 		style="flex: 3; overflow-y: auto;"
 	>
+		<button ng-click="add_hobbie()">Add</button>
 		<div ng-show="items.hobbie">
 			Тип информации
 			<select ng-model="items.hobbie.type">
 				<option ng-value="0">Доп. инфо</option>
 				<option ng-value="1">Работа</option>
-			</select>
-			<input ng-model="items.hobbie.item" placeholder="Название">
-			<input type="button" value="Save" ng-click="add_hobbie">
+			</select><br>
+			<input ng-model="items.hobbie.item" placeholder="Название"><br>
+			<input type="button" value="Save" ng-click="create_hobbie();"><br>
+			<input type="button" value="Cancel" ng-click="items.hobbie = null;"><br />
 		</div>
 		<div ng-repeat="hobbie in hobbies track by $index">
-			<span style="background-color: #666" ng-click="delete_hobbie(hobbie._id, $index)">DEL</span>{{hobbie.item}}
+			<span style="background-color: #666" ng-click="delete_hobbie(hobbie._id, $index)">DEL</span>
+			{{hobbie.item}}
 		</div>
 	</section>
 	<section 
 		ng-show="page === 'sports'"
 		style="flex: 3; overflow-y: auto;"
 	>
+		<button ng-click="add_sport()">Add</button>
 		<div ng-show="items.sport">
 			Вид спорта
 			<select ng-model="items.sport.sex">
 				<option ng-value="0">Женский</option>
 				<option ng-value="1">Мужской</option>
-			</select>
-			<input ng-model="items.sport.sport" placeholder="Название">
-			<input type="button" value="Save" ng-click="add_hobbie">
+			</select><br>
+			<input ng-model="items.sport.sport" placeholder="Название"><br>
+			<input type="button" value="Save" ng-click="create_sport();"><br>
+			<input type="button" value="Cancel" ng-click="items.sport = null;"><br />
 		</div>
 		<div ng-repeat="sport in sports track by $index">
 			<span style="background-color: #666" ng-click="delete_sport(sport._id, $index)">DEL</span>

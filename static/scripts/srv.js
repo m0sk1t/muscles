@@ -75,11 +75,11 @@ angular.module('Services', []).factory('User', ['$http',
 			create_competition: function(s, e) {
 				return $http.post('/manage/competition/new', {}).then(s, e);
 			},
-			create_hobbie: function(s, e) {
-				return $http.post('/manage/hobbie/new', {}).then(s, e);
+			create_hobbie: function(opt, s, e) {
+				return $http.post('/manage/hobbie/new', opt).then(s, e);
 			},
-			create_sport: function(s, e) {
-				return $http.post('/manage/sport/new', {}).then(s, e);
+			create_sport: function(opt, s, e) {
+				return $http.post('/manage/sport/new', opt).then(s, e);
 			},
 			update_article: function(id, opt, s, e) {
 				return $http.put('/manage/article/' + id, opt).then(s, e);
