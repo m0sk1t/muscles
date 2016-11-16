@@ -4,6 +4,12 @@ angular.module('Services', []).factory('User', ['$http',
 			get: function(s, e) {
 				return $http.get('/user').then(s, e);
 			},
+			get_hobbies: function(s, e) {
+				return $http.get('/hobbies').then(s, e);
+			},
+			get_sports: function(s, e) {
+				return $http.get('/sports').then(s, e);
+			},
 			add_university: function(opt, s, e) {
 				return $http.put('/user/add_university', opt).then(s, e);
 			},
@@ -21,6 +27,18 @@ angular.module('Services', []).factory('User', ['$http',
 			},
 			rm_achievement: function(opt, s, e) {
 				return $http.put('/user/rm_achievement', opt).then(s, e);
+			},
+			add_hobbie: function(opt, s, e) {
+				return $http.put('/user/add_hobbie', opt).then(s, e);
+			},
+			rm_hobbie: function(opt, s, e) {
+				return $http.put('/user/rm_hobbie', opt).then(s, e);
+			},
+			add_sport: function(opt, s, e) {
+				return $http.put('/user/add_sport', opt).then(s, e);
+			},
+			rm_sport: function(opt, s, e) {
+				return $http.put('/user/rm_sport', opt).then(s, e);
 			},
 			load: function(id, s, e) {
 				return $http.get('/user/' + id).then(s, e);

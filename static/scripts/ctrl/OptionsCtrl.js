@@ -47,7 +47,6 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 				$scope.options.loading = false;
 				return;
 			}
-
 		};
 
 		$scope.request_permissions = function() {
@@ -213,6 +212,40 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 			});
 		};
 
+		$scope.rm_achievement = function(w, i) {
+			User.rm_achievement(w, function(res) {
+				$scope.options.user.achievements.splice(i, 1);
+			}, function(res) {
+				MSG.err(res.data);
+			});
+		};
+
+		$scope.add_hobbie = function() {
+			User.get_hobbies(function(res) {
+				$scope.hobbies = res.data;
+				$scope.hobbie = {};
+			}, function(res) {
+				MSG.err(res.data);
+			});
+		};
+
+		$scope.save_hobbie = function() {
+			User.add_hobbie($scope.hobbie, function(res) {
+				$scope.options.user.hobbies.push($scope.hobbie);
+				$scope.hobbie = null;
+			}, function(res) {
+				MSG.err(res.data);
+			});
+		};
+
+		$scope.rm_hobbie = function(w, i) {
+			User.rm_hobbie(w, function(res) {
+				$scope.options.user.hobbies.splice(i, 1);
+			}, function(res) {
+				MSG.err(res.data);
+			});
+		};
+
 		$scope.changepwd = function() {
 			User.changepwd($scope.cred, function(res) {
 				MSG.ok('Пароль успешно изменён!');
@@ -220,14 +253,6 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 				MSG.err(res.data.map(function(el) {
 					return el.msg;
 				}).join('\n\r'));
-			});
-		};
-
-		$scope.rm_achievement = function(w, i) {
-			User.rm_achievement(w, function(res) {
-				$scope.options.user.achievements.splice(i, 1);
-			}, function(res) {
-				MSG.err(res.data);
 			});
 		};
 
