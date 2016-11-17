@@ -56,6 +56,9 @@
 						</div>
 						<div class="ya-sidebar-info__content-wrapper" ng-show="true">
 							<div class="ya-sidebar-info__content">
+								<div class="ya-sidebar-info__item" ng-repeat="s in user.sports">
+									{{s}}
+								</div>
 								<div class="ya-sidebar-info__item">
 									Классический бодибилдинг
 								</div>
@@ -236,21 +239,9 @@
 						<div class="ya-info-block">
 							<h2 class="ya-info-block__title ya-info-block__title_add">Доп.информация</h2>
 							<div class="ya-info-block__content">
-								<div class="ya-info-block__record ya-clearfix">
-									<div class="ya-info-block__label ya-inner-grid-1-4">Предлагаю</div>
-									<div class="ya-info-block__value ya-inner-grid-3-4">Услуги фотографа</div>
-								</div>
-								<div class="ya-info-block__record ya-clearfix">
-									<div class="ya-info-block__label ya-inner-grid-1-4">Продаю</div>
-									<div class="ya-info-block__value ya-inner-grid-3-4">Спортпит+</div>
-								</div>
-								<div class="ya-info-block__record ya-clearfix">
-									<div class="ya-info-block__label ya-inner-grid-1-4">Предлагаю</div>
-									<div class="ya-info-block__value ya-inner-grid-3-4">Одежду для фитнесса</div>
-								</div>
-								<div class="ya-info-block__record ya-clearfix">
-									<div class="ya-info-block__label ya-inner-grid-1-4">Спонсор</div>
-									<div class="ya-info-block__value ya-inner-grid-3-4">Ищу спонсора</div>
+								<div class="ya-info-block__record ya-clearfix" ng-repeat="h in user.hobbies" ng-if="h.type =='false'">
+									<div class="ya-info-block__label ya-inner-grid-1-4">{{h.item}}</div>
+									<div class="ya-info-block__value ya-inner-grid-3-4">{{h.title}}</div>
 								</div>
 							</div>
 						</div>
@@ -259,13 +250,9 @@
 						<div class="ya-info-block">
 							<h2 class="ya-info-block__title ya-info-block__title_work">Работа</h2>
 							<div class="ya-info-block__content">
-								<div class="ya-info-block__record ya-clearfix">
-									<div class="ya-info-block__label ya-inner-grid-1-4">Требуется</div>
-									<div class="ya-info-block__value ya-inner-grid-3-4">Фитнесс Тренер</div>
-								</div>
-								<div class="ya-info-block__record ya-clearfix">
-									<div class="ya-info-block__label ya-inner-grid-1-4">Куда</div>
-									<div class="ya-info-block__value ya-inner-grid-3-4">Боксерский клуб "Rocky"</div>
+								<div class="ya-info-block__record ya-clearfix" ng-repeat="h in user.hobbies" ng-if="h.type =='true'">
+									<div class="ya-info-block__label ya-inner-grid-1-4">{{h.item}}</div>
+									<div class="ya-info-block__value ya-inner-grid-3-4">{{h.title}}</div>
 								</div>
 							</div>
 						</div>

@@ -246,6 +246,32 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 			});
 		};
 
+		$scope.add_sport = function() {
+			User.get_sports(function(res) {
+				$scope.sports = res.data;
+				$scope.sport = {};
+			}, function(res) {
+				MSG.err(res.data);
+			});
+		};
+
+		$scope.save_sport = function() {
+			User.add_sport({ sport: $scope.sport }, function(res) {
+				$scope.options.user.sports.push($scope.sport);
+				$scope.sport = null;
+			}, function(res) {
+				MSG.err(res.data);
+			});
+		};
+
+		$scope.rm_sport = function(w, i) {
+			User.rm_sport({ sport: w }, function(res) {
+				$scope.options.user.sports.splice(i, 1);
+			}, function(res) {
+				MSG.err(res.data);
+			});
+		};
+
 		$scope.changepwd = function() {
 			User.changepwd($scope.cred, function(res) {
 				MSG.ok('Пароль успешно изменён!');

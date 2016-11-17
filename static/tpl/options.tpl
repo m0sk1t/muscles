@@ -136,8 +136,8 @@
 										<div class="ya-grid-2-3">
 											<div class="ya-input__field-wrapper">
 												<select id="ya-sex" class="ya-input__field ya-input__field_select ya-input__select" ng-model="options.user.sex">
-													<option value="m">Мужской</option>
-													<option value="w">Женский</option>
+													<option value="1">Мужской</option>
+													<option value="0">Женский</option>
 												</select>
 											</div>
 										</div>
@@ -697,7 +697,7 @@
 									</div>
 								</div>
 							</div>
-								<div class="ya-form" ng-show="!achievement">
+								<div class="ya-form" ng-show="!hobbie">
 									<div class="ya-form__input ya-input ya-input_inline">
 										<div class="ya-clearfix">
 											<div class="ya-grid-1-1 ya-center">
@@ -743,6 +743,62 @@
 												<div class="ya-grid-1-1 ya-center">
 													<input type="submit" value="Сохранить" class="ya-btn ya-btn_secondary ya-btn_inline" />
 													<span ng-click="hobbie = null;" class="ya-btn ya-btn_primary ya-btn_inline">Отменить</span>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+
+						<div class="ya-info-block">
+							<div class="ya-info-block__title">
+								Мои виды спорта
+							</div>
+							<div class="ya-info-block__content">
+
+							<div class="ya-sidebar-info__content-wrapper" ng-repeat="s in options.user.sports track by $index">
+								<div class="ya-page__block ya-page__block_full-shadow ya-relative">
+									<span class="ya-close-btn" ng-click="rm_sport(s, $index)">X</span>
+									<div class="ya-sidebar-info__content">
+										<div class="ya-sidebar-info__item">
+											<span class="ya-sidebar-info__label">Вид спорта</span> {{s}}
+										</div>
+									</div>
+								</div>
+							</div>
+								<div class="ya-form" ng-show="!sport">
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-1 ya-center">
+												<button ng-click="add_sport();" class="ya-btn ya-btn_primary ya-btn_inline">Добавить</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="ya-form" ng-show="sport">
+									<form ng-submit="save_sport();">
+										<div class="ya-form__input ya-input ya-input_inline">
+											<div class="ya-clearfix">
+												<div class="ya-grid-1-3 ya-right">
+													<label for="ya-ach-country" class="ya-input__label">
+														Вид спорта
+													</label>
+												</div>
+												<div class="ya-grid-2-3">
+													<div class="ya-input__field-wrapper">
+														<select id="ya-ach-country" ng-model="sport" class="ya-input__field ya-input__field_select ya-input__select" >
+															<option ng-value="s.sport" ng-repeat="s in sports" ng-show="options.user.sex == s.sex">{{s.sport}}</option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="ya-form__input ya-input ya-input_inline">
+											<div class="ya-clearfix">
+												<div class="ya-grid-1-1 ya-center">
+													<input type="submit" value="Сохранить" class="ya-btn ya-btn_secondary ya-btn_inline" />
+													<span ng-click="sport = null;" class="ya-btn ya-btn_primary ya-btn_inline">Отменить</span>
 												</div>
 											</div>
 										</div>

@@ -139,7 +139,7 @@ module.exports = (app) => {
 	app.put('/user/add_sport', tools.ensureAuthenticated, (req, res) => {
 		req.user ? User.findByIdAndUpdate(req.user._id, {
 			$addToSet: {
-				sports: req.body
+				sports: req.body.sport
 			}
 		}, (err, user) => {
 			if (err) return console.error(err);
@@ -150,7 +150,7 @@ module.exports = (app) => {
 	app.put('/user/rm_sport', tools.ensureAuthenticated, (req, res) => {
 		req.user ? User.findByIdAndUpdate(req.user._id, {
 			$pull: {
-				sports: req.body
+				sports: req.body.sport
 			}
 		}, (err, user) => {
 			if (err) return console.error(err);
