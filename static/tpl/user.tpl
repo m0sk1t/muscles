@@ -59,15 +59,6 @@
 								<div class="ya-sidebar-info__item" ng-repeat="s in user.sports">
 									{{s}}
 								</div>
-								<div class="ya-sidebar-info__item">
-									Классический бодибилдинг
-								</div>
-								<div class="ya-sidebar-info__item">
-									Кроссфит
-								</div>
-								<div class="ya-sidebar-info__item">
-									Фитнесс
-								</div>
 							</div>
 						</div>
 					</div>
