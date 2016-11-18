@@ -3,7 +3,7 @@ module.exports = (app, io) => {
 		User = require('../models/User');
 
 	io.on('connection', (socket) => {
-		var id = socket.request.session.passport.user;
+		var id = socket.request.session.passport ? socket.request.session.passport.user : null;
 
 		((s) => {
 			id && User.findByIdAndUpdate(id, {
@@ -19,6 +19,7 @@ module.exports = (app, io) => {
 		})(socket);
 
 		socket.on('user:online', (data) => {
+			id = socket.request.session.passport ? socket.request.session.passport.user : null;
 			id && User.findByIdAndUpdate(id, {
 				'$set': {
 					'ioid': socket.id,

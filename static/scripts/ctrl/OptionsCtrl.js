@@ -1,27 +1,29 @@
 angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload', 'User', 'LS', '$vk',
 	function($scope, MSG, Upload, User, LS, $vk) {
+		$scope.active_page = 'profile';
+
 		$scope.cred = {
-			old_password: '',
-			new_password: ''
+			password: '',
+			confirmPassword: '',
 		};
+
+		$scope.currentYear = (new Date()).getFullYear();
 
 		User.get(function(res) {
 			$scope.options.user = res.data;
 			LS.set('user', res.data);
 		}, function(res) {
-			console.error(res.data);
+			MSG.err(res.data);
 		});
-
-		$scope.active_page = 'profile';
 
 		$scope.unlink = function(provider) {
 			User.unlink(provider, function(res) {
 				$scope.options.user.social[provider] = undefined;
 				$scope.options.user.tokens[provider] = undefined;
 			}, function(res) {
-				console.error(res.data);
+				MSG.err(res.data);
 			});
-		}
+		};
 
 		$scope.upload_photo = function(photo) {
 			console.log(photo);
@@ -45,7 +47,6 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 				$scope.options.loading = false;
 				return;
 			}
-
 		};
 
 		$scope.request_permissions = function() {
@@ -68,7 +69,7 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 			$vk.get_countries(function(res) {
 				$scope.countries = res.data;
 			}, function(res) {
-				console.error(res.data);
+				MSG.err(res.data);
 			});
 		};
 
@@ -78,7 +79,7 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 			}, function(res) {
 				$scope.cities = res.data;
 			}, function(res) {
-				console.error(res.data);
+				MSG.err(res.data);
 			});
 		};
 
@@ -89,7 +90,7 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 			}, function(res) {
 				$scope.universities = res.data;
 			}, function(res) {
-				console.error(res.data);
+				MSG.err(res.data);
 			});
 		};
 
@@ -99,7 +100,7 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 			}, function(res) {
 				$scope.faculties = res.data;
 			}, function(res) {
-				console.error(res.data);
+				MSG.err(res.data);
 			});
 		};
 
@@ -109,7 +110,7 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 			}, function(res) {
 				$scope.chairs = res.data;
 			}, function(res) {
-				console.error(res.data);
+				MSG.err(res.data);
 			});
 		};
 
@@ -133,11 +134,15 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 		};
 
 		$scope.save_university = function() {
+			if ($scope.university.year_end && $scope.university.year_start > $scope.university.year_end) {
+				MSG.err('Год начала не может быть больше года окончания');
+				return;
+			}
 			User.add_university($scope.university, function(res) {
 				$scope.options.user.universities.push($scope.university);
 				$scope.university = null;
 			}, function(res) {
-				console.error(res.data);
+				MSG.err(res.data);
 			});
 		};
 
@@ -145,7 +150,7 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 			User.rm_university(u, function(res) {
 				$scope.options.user.universities.splice(i, 1);
 			}, function(res) {
-				console.error(res.data);
+				MSG.err(res.data);
 			});
 		};
 
@@ -164,11 +169,15 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 		};
 
 		$scope.save_workplace = function() {
+			if ($scope.workplace.year_end && $scope.workplace.year_start > $scope.workplace.year_end) {
+				MSG.err('Год начала не может быть больше года окончания');
+				return;
+			}
 			User.add_workplace($scope.workplace, function(res) {
 				$scope.options.user.workplaces.push($scope.workplace);
 				$scope.workplace = null;
 			}, function(res) {
-				console.error(res.data);
+				MSG.err(res.data);
 			});
 		};
 
@@ -176,7 +185,7 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 			User.rm_workplace(w, function(res) {
 				$scope.options.user.workplaces.splice(i, 1);
 			}, function(res) {
-				console.error(res.data);
+				MSG.err(res.data);
 			});
 		};
 
@@ -199,7 +208,7 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 				$scope.options.user.achievements.push($scope.achievement);
 				$scope.achievement = null;
 			}, function(res) {
-				console.error(res.data);
+				MSG.err(res.data);
 			});
 		};
 
@@ -207,12 +216,75 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 			User.rm_achievement(w, function(res) {
 				$scope.options.user.achievements.splice(i, 1);
 			}, function(res) {
-				console.error(res.data);
+				MSG.err(res.data);
+			});
+		};
+
+		$scope.add_hobbie = function() {
+			User.get_hobbies(function(res) {
+				$scope.hobbies = res.data;
+				$scope.hobbie = {};
+			}, function(res) {
+				MSG.err(res.data);
+			});
+		};
+
+		$scope.save_hobbie = function() {
+			User.add_hobbie($scope.hobbie, function(res) {
+				$scope.options.user.hobbies.push($scope.hobbie);
+				$scope.hobbie = null;
+			}, function(res) {
+				MSG.err(res.data);
+			});
+		};
+
+		$scope.rm_hobbie = function(w, i) {
+			User.rm_hobbie(w, function(res) {
+				$scope.options.user.hobbies.splice(i, 1);
+			}, function(res) {
+				MSG.err(res.data);
+			});
+		};
+
+		$scope.add_sport = function() {
+			User.get_sports(function(res) {
+				$scope.sports = res.data;
+				$scope.sport = {};
+			}, function(res) {
+				MSG.err(res.data);
+			});
+		};
+
+		$scope.save_sport = function() {
+			User.add_sport({ sport: $scope.sport }, function(res) {
+				$scope.options.user.sports.push($scope.sport);
+				$scope.sport = null;
+			}, function(res) {
+				MSG.err(res.data);
+			});
+		};
+
+		$scope.rm_sport = function(w, i) {
+			User.rm_sport({ sport: w }, function(res) {
+				$scope.options.user.sports.splice(i, 1);
+			}, function(res) {
+				MSG.err(res.data);
+			});
+		};
+
+		$scope.changepwd = function() {
+			User.changepwd($scope.cred, function(res) {
+				MSG.ok('Пароль успешно изменён!');
+			}, function(res) {
+				MSG.err(res.data.map(function(el) {
+					return el.msg;
+				}).join('\n\r'));
 			});
 		};
 
 		$scope.user_save = function() {
 			$scope.$emit('user_save');
+			MSG.ok('Сохранено успешно!');
 		};
 	}
 ]);

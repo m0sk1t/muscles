@@ -1,5 +1,5 @@
-angular.module('MuscleMan').controller('SignUpCtrl', ['$scope', '$location', 'socket', 'User', 'LS',
-	function($scope, $location, socket, User, LS) {
+angular.module('MuscleMan').controller('SignUpCtrl', ['$scope', '$location', 'socket', 'User', 'MSG', 'LS',
+	function($scope, $location, socket, User, MSG, LS) {
 		$scope.cred = {
 			mail: '',
 			pass: ''
@@ -11,10 +11,12 @@ angular.module('MuscleMan').controller('SignUpCtrl', ['$scope', '$location', 'so
 				LS.set('user', res.data);
 				$scope.options.loading = false;
 				$scope.options.user = res.data;
-				$location.path('/user/' + $scope.options.user._id);
+				$location.path('/options');
 				socket.emit('user:online', { id: $scope.options.user._id });
 			}, function(res) {
-				console.error(res.data);
+				MSG.err(res.data.map(function(el) {
+					return el.msg;
+				}).join('\n\r'));
 			});
 		};
 	}

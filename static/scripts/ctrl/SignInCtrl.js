@@ -14,10 +14,9 @@ angular.module('MuscleMan').controller('SignInCtrl', ['$scope', '$location', 'so
 				$scope.options.user = res.data;
 				$location.path('/user/' + $scope.options.user._id);
 				socket.emit('user:online', { id: $scope.options.user._id });
-
 			}, function(res) {
 				$scope.options.loading = false;
-				console.error(res.data);
+				MSG.err(res.data);
 			});
 		};
 	}

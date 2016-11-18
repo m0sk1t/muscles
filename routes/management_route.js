@@ -1,10 +1,12 @@
 module.exports = (app) => {
 	var salt = 'N&*ud91)(R#@10(!)',
 		crypto = require('crypto'),
+		cloudinary = require('./cloudinary'),
 		User = require('../models/User'),
 		Video = require('../models/Video'),
 		Photo = require('../models/Photo'),
 		Topic = require('../models/Topic'),
+		Sport = require('../models/Sport'),
 		Hobbie = require('../models/Hobbie'),
 		Manager = require('../models/Manager'),
 		Article = require('../models/Article'),
@@ -173,18 +175,60 @@ module.exports = (app) => {
 	/*
 		Hobbie routes
 	*/
-	app.get('/manage/hobbies', management_check, (req, res) => {
-		Hobbie.find({}, (err, hobbies) => {
-			if (err) return console.error(err);
-			res.json(hobbies);
+	app.route('/manage/hobbie/:id')
+		.put(management_check, (req, res) => {
+			req.manager.permission.hobbies ? Hobbie.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, manager) => {
+				if (err) return console.error(err);
+				res.json(manager);
+			}) : res.status(403).send('Permission denied');
+		})
+		.post(management_check, (req, res) => {
+			if (req.manager.permission.hobbies) {
+				var hobbie = new Hobbie();
+				hobbie.item = req.body.item;
+				hobbie.type = req.body.type;
+				hobbie.save((err) => {
+					res.json(hobbie);
+				});
+			} else {
+				res.status(403).send('Permission denied');
+			}
+		})
+		.delete(management_check, (req, res) => {
+			req.manager.permission.hobbies ? Hobbie.findByIdAndRemove(req.params.id, (err, hobbie) => {
+				if (err) return console.error(err);
+				res.json(hobbie);
+			}) : res.status(403).send('Permission denied');
 		});
-	});
-	app.delete('/manage/hobbie/:id', management_check, (req, res) => {
-		req.manager.permission.hobbies ? Hobbie.findByIdAndRemove(req.params.id, (err, hobbie) => {
-			if (err) return console.error(err);
-			res.json(hobbie);
-		}) : res.status(403).send('Permission denied');
-	});
+
+	/*
+		Sport routes
+	*/
+	app.route('/manage/sport/:id')
+		.put(management_check, (req, res) => {
+			req.manager.permission.sports ? Sport.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, manager) => {
+				if (err) return console.error(err);
+				res.json(manager);
+			}) : res.status(403).send('Permission denied');
+		})
+		.post(management_check, (req, res) => {
+			if (req.manager.permission.sports) {
+				var sport = new Sport();
+				sport.sex = req.body.sex;
+				sport.sport = req.body.sport;
+				sport.save((err) => {
+					res.json(sport);
+				});
+			} else {
+				res.status(403).send('Permission denied');
+			}
+		})
+		.delete(management_check, (req, res) => {
+			req.manager.permission.sports ? Sport.findByIdAndRemove(req.params.id, (err, sport) => {
+				if (err) return console.error(err);
+				res.json(sport);
+			}) : res.status(403).send('Permission denied');
+		});
 
 	/*
 		Article routes
@@ -225,7 +269,8 @@ module.exports = (app) => {
 			} else {
 				res.status(403).send('Permission denied');
 			}
-		}).delete(management_check, (req, res) => {
+		})
+		.delete(management_check, (req, res) => {
 			req.manager.permission.articles ? Article.findByIdAndRemove(req.params.id, (err, article) => {
 				if (err) return console.error(err);
 				res.json(article);
@@ -288,7 +333,8 @@ module.exports = (app) => {
 			} else {
 				res.status(403).send('Permission denied');
 			}
-		}).delete(management_check, (req, res) => {
+		})
+		.delete(management_check, (req, res) => {
 			req.manager.permission.contests ? Contest.findByIdAndRemove(req.params.id, (err, contest) => {
 				if (err) return console.error(err);
 				res.json(contest);
@@ -345,7 +391,8 @@ module.exports = (app) => {
 			} else {
 				res.status(403).send('Permission denied');
 			}
-		}).delete(management_check, (req, res) => {
+		})
+		.delete(management_check, (req, res) => {
 			req.manager.permission.competitions ? Competition.findByIdAndRemove(req.params.id, (err, competition) => {
 				if (err) return console.error(err);
 				res.json(competition);

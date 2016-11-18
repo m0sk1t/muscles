@@ -114,6 +114,50 @@ module.exports = (app) => {
 		}) : res.status(403).send('Please, login first');
 	});
 
+	app.put('/user/add_hobbie', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findByIdAndUpdate(req.user._id, {
+			$addToSet: {
+				hobbies: req.body
+			}
+		}, (err, user) => {
+			if (err) return console.error(err);
+			res.json(user);
+		}) : res.status(403).send('Please, login first');
+	});
+
+	app.put('/user/rm_hobbie', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findByIdAndUpdate(req.user._id, {
+			$pull: {
+				hobbies: req.body
+			}
+		}, (err, user) => {
+			if (err) return console.error(err);
+			res.json(user);
+		}) : res.status(403).send('Please, login first');
+	});
+
+	app.put('/user/add_sport', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findByIdAndUpdate(req.user._id, {
+			$addToSet: {
+				sports: req.body.sport
+			}
+		}, (err, user) => {
+			if (err) return console.error(err);
+			res.json(user);
+		}) : res.status(403).send('Please, login first');
+	});
+
+	app.put('/user/rm_sport', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findByIdAndUpdate(req.user._id, {
+			$pull: {
+				sports: req.body.sport
+			}
+		}, (err, user) => {
+			if (err) return console.error(err);
+			res.json(user);
+		}) : res.status(403).send('Please, login first');
+	});
+
 	app.post('/user/search', (req, res) => {
 		var search = {},
 			info = {

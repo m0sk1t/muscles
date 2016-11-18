@@ -62,6 +62,10 @@ var mongoose = require('mongoose'),
 			type: Array,
 			default: []
 		},
+		hobbies: {
+			type: Array,
+			default: []
+		},
 		workplaces: {
 			type: Array,
 			default: []
@@ -100,7 +104,7 @@ var mongoose = require('mongoose'),
 			type: String,
 			default: ''
 		},
-		type: {
+		typage: {
 			type: String,
 			default: ''
 		},

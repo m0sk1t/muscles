@@ -60,19 +60,18 @@ angular.module('MuscleMan').controller('MainCtrl', ['$scope', 'socket', 'User', 
 			}
 		});
 
-		$scope.options = {
-			user: LS.get('user') || 0
-		};
-
 		$scope.getloc = function() {
 			return location.hash === '#/';
 		};
 
+		//		$scope.options.user._id && (location.hash = '#/user/' + $scope.options.user._id);
+
 		!!$scope.options.user && User.get(function(res) {
 			$scope.options.user = res.data;
 			LS.set('user', res.data);
+			//			location.hash = '#/user/' + $scope.options.user._id;
 		}, function(res) {
-			location.hash = '#/auth'
+			location.hash = '#/auth';
 		});
 
 		$scope.$on('new_message', function(ev, data) {

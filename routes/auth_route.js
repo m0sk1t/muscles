@@ -1,5 +1,6 @@
 module.exports = (app) => {
 	var express = require('express'),
+		mailer = require('./mailer'),
 		passport = require('passport'),
 		User = require('../models/User'),
 		LocalStrategy = require('passport-local').Strategy,
@@ -336,9 +337,9 @@ module.exports = (app) => {
 	passport.use(new OKStrategy({
 			passReqToCallback: true,
 			callbackURL: '/auth/ok/callback',
-			clientID: '123',
-			clientPublic: '456',
-			clientSecret: '789',
+			clientID: '1248664832',
+			clientPublic: 'CBAOBOGLEBABABABA',
+			clientSecret: ' 26DF124DB0071899BD55E7B7',
 		},
 		(req, accessToken, refreshToken, profile, done) => {
 			var ok_user = profile._json;
@@ -409,17 +410,17 @@ module.exports = (app) => {
 	));
 
 	app.post('/signup', (req, res, next) => {
-		req.assert('mail', 'Email is not valid').isEmail();
+		req.assert('mail', 'Ваш адрес почты некорректен!').isEmail();
 		req.sanitize('mail').normalizeEmail({
 			remove_dots: false
 		});
-		req.assert('pass', 'Password must be at least 4 characters long').len(4);
+		req.assert('pass', 'Для вашей же безопасности пароль должен быть длиной не меньше 7 символов!').len(7);
 
 		const errors = req.validationErrors();
 
 		if (errors) {
 			console.error(errors);
-			return res.redirect('/#/signup');
+			return res.status(500).json(errors);
 		}
 
 		const user = new User({
@@ -430,24 +431,44 @@ module.exports = (app) => {
 		User.findOne({
 			mail: req.body.mail
 		}, (err, existingUser) => {
-			if (err) {
-				return next(err);
-			}
-			if (existingUser) {
-				res.redirect('/#/signin');
-				return;
-			}
+			if (err) return next(err);
+			if (existingUser) return res.status(500).json([{ msg: 'Указанный адрес почты уже зарегистрирован, попробуйте войти со своим паролем!' }]);
 			user.save((err) => {
-				if (err) {
-					return next(err);
-				}
-				req.logIn(user, (err) => {
-					if (err) {
-						return next(err);
-					}
-					delete user.pass;
-					res.json(user);
+				if (err) return next(err);
+				mailer.send_mail({
+					mail: [req.body.mail.toLowerCase()],
+					subj: 'Регистрация в сети СпортПроект',
+					text: 'Поздравляем! Вы успешно зарегистрировались в сети СпортПроект!',
+				}, (err, info) => {
+					console.error(err);
+					console.log(info);
+					if (err) return res.status(500).json([{ msg: err }]);
+					req.logIn(user, (err) => {
+						if (err) return next(err);
+						delete user.pass;
+						res.json(user);
+					});
 				});
+			});
+		});
+	});
+
+	app.put('/changepwd', (req, res, next) => {
+		req.assert('password', 'Для вашей же безопасности пароль должен быть длиной не меньше 7 символов!').len(7);
+		req.assert('confirmPassword', 'Пароли не совпадают').equals(req.body.password);
+
+		const errors = req.validationErrors();
+
+		if (errors) {
+			return res.status(500).json(errors);
+		}
+
+		User.findById(req.user.id, (err, user) => {
+			if (err) return next(err);
+			user.password = req.body.password;
+			user.save((err) => {
+				if (err) return next(err);
+				res.json({ msg: 'Пароль успешно изменён!' });
 			});
 		});
 	});

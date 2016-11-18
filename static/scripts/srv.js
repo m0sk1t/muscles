@@ -4,6 +4,12 @@ angular.module('Services', []).factory('User', ['$http',
 			get: function(s, e) {
 				return $http.get('/user').then(s, e);
 			},
+			get_hobbies: function(s, e) {
+				return $http.get('/hobbies').then(s, e);
+			},
+			get_sports: function(s, e) {
+				return $http.get('/sports').then(s, e);
+			},
 			add_university: function(opt, s, e) {
 				return $http.put('/user/add_university', opt).then(s, e);
 			},
@@ -22,6 +28,18 @@ angular.module('Services', []).factory('User', ['$http',
 			rm_achievement: function(opt, s, e) {
 				return $http.put('/user/rm_achievement', opt).then(s, e);
 			},
+			add_hobbie: function(opt, s, e) {
+				return $http.put('/user/add_hobbie', opt).then(s, e);
+			},
+			rm_hobbie: function(opt, s, e) {
+				return $http.put('/user/rm_hobbie', opt).then(s, e);
+			},
+			add_sport: function(opt, s, e) {
+				return $http.put('/user/add_sport', opt).then(s, e);
+			},
+			rm_sport: function(opt, s, e) {
+				return $http.put('/user/rm_sport', opt).then(s, e);
+			},
 			load: function(id, s, e) {
 				return $http.get('/user/' + id).then(s, e);
 			},
@@ -34,10 +52,13 @@ angular.module('Services', []).factory('User', ['$http',
 			signin: function(credentials, s, e) {
 				return $http.post('/auth/local', credentials).then(s, e);
 			},
+			changepwd: function(credentials, s, e) {
+				return $http.put('/changepwd', credentials).then(s, e);
+			},
 			unlink: function(provider, s, e) {
 				return $http.put('/unlink/' + provider).then(s, e);
 			},
-			find_users: function(search, s, e) {
+			search: function(search, s, e) {
 				return $http.post('/user/search', search).then(s, e);
 			}
 		};
@@ -63,65 +84,68 @@ angular.module('Services', []).factory('User', ['$http',
 			set_permission: function(id, opt, s, e) {
 				return $http.put('/manager/' + id, opt).then(s, e);
 			},
-			get_article: function(id, s, e) {
-				return $http.get('/manage/article/' + id).then(s, e);
-			},
 			create_article: function(s, e) {
 				return $http.post('/manage/article/new', {}).then(s, e);
-			},
-			update_article: function(id, opt, s, e) {
-				return $http.put('/manage/article/' + id, opt).then(s, e);
-			},
-			get_articles: function(credate, s, e) {
-				return $http.get('/manage/articles/' + credate).then(s, e);
-			},
-			get_contest: function(id, s, e) {
-				return $http.get('/manage/contest/' + id).then(s, e);
-			},
-			delete_article: function(id, s, e) {
-				return $http.delete('/manage/article/' + id).then(s, e);
 			},
 			create_contest: function(s, e) {
 				return $http.post('/manage/contest/new', {}).then(s, e);
 			},
-			update_contest: function(id, opt, s, e) {
-				return $http.put('/manage/contest/' + id, opt).then(s, e);
-			},
-			get_contests: function(credate, s, e) {
-				return $http.get('/manage/contests/' + credate).then(s, e);
-			},
-			delete_contest: function(id, s, e) {
-				return $http.delete('/manage/contest/' + id).then(s, e);
-			},
-			get_competition: function(id, s, e) {
-				return $http.get('/manage/competition/' + id).then(s, e);
-			},
 			create_competition: function(s, e) {
 				return $http.post('/manage/competition/new', {}).then(s, e);
+			},
+			create_hobbie: function(opt, s, e) {
+				return $http.post('/manage/hobbie/new', opt).then(s, e);
+			},
+			create_sport: function(opt, s, e) {
+				return $http.post('/manage/sport/new', opt).then(s, e);
+			},
+			update_article: function(id, opt, s, e) {
+				return $http.put('/manage/article/' + id, opt).then(s, e);
+			},
+			update_contest: function(id, opt, s, e) {
+				return $http.put('/manage/contest/' + id, opt).then(s, e);
 			},
 			update_competition: function(id, opt, s, e) {
 				return $http.put('/manage/competition/' + id, opt).then(s, e);
 			},
+			update_hobbie: function(id, opt, s, e) {
+				return $http.put('/manage/hobbie/' + id, opt).then(s, e);
+			},
+			update_sport: function(id, opt, s, e) {
+				return $http.put('/manage/sport/' + id, opt).then(s, e);
+			},
+			update_user: function(id, user, s, e) {
+				return $http.put('/manage/user/' + id, user).then(s, e);
+			},
+			get_article: function(id, s, e) {
+				return $http.get('/manage/article/' + id).then(s, e);
+			},
+			get_contest: function(id, s, e) {
+				return $http.get('/manage/contest/' + id).then(s, e);
+			},
+			get_competition: function(id, s, e) {
+				return $http.get('/manage/competition/' + id).then(s, e);
+			},
+			get_articles: function(credate, s, e) {
+				return $http.get('/manage/articles/' + credate).then(s, e);
+			},
+			get_contests: function(credate, s, e) {
+				return $http.get('/manage/contests/' + credate).then(s, e);
+			},
 			get_competitions: function(credate, s, e) {
 				return $http.get('/manage/competitions/' + credate).then(s, e);
 			},
-			delete_competition: function(id, s, e) {
-				return $http.delete('/manage/competition/' + id).then(s, e);
-			},
-			get_users: function(credate, s, e) {
-				return $http.get('/manage/users/' + credate).then(s, e);
-			},
-			delete_user: function(id, s, e) {
-				return $http.delete('/manage/user/' + id).then(s, e);
-			},
-			update_user: function(opt, s, e) {
-				return $http.put('/manage/user/' + opt._id, opt).then(s, e);
-			},
 			get_hobbies: function(s, e) {
-				return $http.get('/manage/hobbies').then(s, e);
+				return $http.get('/hobbies').then(s, e);
+			},
+			get_sports: function(s, e) {
+				return $http.get('/sports').then(s, e);
 			},
 			get_photos: function(credate, s, e) {
 				return $http.get('/manage/photos/' + credate).then(s, e);
+			},
+			get_users: function(credate, s, e) {
+				return $http.get('/manage/users/' + credate).then(s, e);
 			},
 			get_videos: function(credate, s, e) {
 				return $http.get('/manage/videos/' + credate).then(s, e);
@@ -129,14 +153,29 @@ angular.module('Services', []).factory('User', ['$http',
 			get_topics: function(credate, s, e) {
 				return $http.get('/manage/topics/' + credate).then(s, e);
 			},
+			delete_article: function(id, s, e) {
+				return $http.delete('/manage/article/' + id).then(s, e);
+			},
+			delete_competition: function(id, s, e) {
+				return $http.delete('/manage/competition/' + id).then(s, e);
+			},
+			delete_contest: function(id, s, e) {
+				return $http.delete('/manage/contest/' + id).then(s, e);
+			},
 			delete_hobbie: function(id, s, e) {
 				return $http.delete('/manage/hobbie/' + id).then(s, e);
+			},
+			delete_sport: function(id, s, e) {
+				return $http.delete('/manage/sport/' + id).then(s, e);
 			},
 			delete_photo: function(id, s, e) {
 				return $http.delete('/manage/photo/' + id).then(s, e);
 			},
 			delete_video: function(id, s, e) {
 				return $http.delete('/manage/video/' + id).then(s, e);
+			},
+			delete_user: function(id, s, e) {
+				return $http.delete('/manage/user/' + id).then(s, e);
 			},
 			delete_topic: function(id, s, e) {
 				return $http.delete('/manage/topic/' + id).then(s, e);
@@ -213,6 +252,9 @@ angular.module('Services', []).factory('User', ['$http',
 			},
 			new: function(opt, s, e) {
 				return $http.post('/topic/new', opt).then(s, e);
+			},
+			del: function(id, s, e) {
+				return $http.delete('/topic/' + id).then(s, e);
 			},
 			edit: function(opt, s, e) {
 				return $http.put('/topic/' + opt._id, opt).then(s, e);

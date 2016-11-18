@@ -121,7 +121,7 @@
 										</div>
 										<div class="ya-grid-2-3">
 											<div class="ya-input__field-wrapper">
-												<input id="ya-status" class="ya-input__field" type="text" ng-model="options.user.status" />
+												<input id="ya-status" class="ya-input__field" type="text" ng-model="options.user.status" maxlength="40" />
 											</div>
 										</div>
 									</div>
@@ -136,9 +136,8 @@
 										<div class="ya-grid-2-3">
 											<div class="ya-input__field-wrapper">
 												<select id="ya-sex" class="ya-input__field ya-input__field_select ya-input__select" ng-model="options.user.sex">
-													<option value="n">Не скажу</option>
-													<option value="m">Мужской</option>
-													<option value="w">Женский</option>
+													<option value="1">Мужской</option>
+													<option value="0">Женский</option>
 												</select>
 											</div>
 										</div>
@@ -157,8 +156,7 @@
 													<option>Брюнет</option>
 													<option>Блондин</option>
 													<option>Рыжий</option>
-													<option>Зелёноволосый</option>
-													<option>Фиолетововолосый</option>
+													<option>Русый</option>
 												</select>
 											</div>
 										</div>
@@ -173,11 +171,13 @@
 										</div>
 										<div class="ya-grid-2-3">
 											<div class="ya-input__field-wrapper">
-												<select id="ya-type" class="ya-input__field ya-input__field_select ya-input__select" ng-model="options.user.type">
-													<option>Спортивный</option>
-													<option>Пухлый</option>
+												<select id="ya-type" class="ya-input__field ya-input__field_select ya-input__select" ng-model="options.user.typage">
 													<option>Атлет</option>
-													<option>Дрищ</option>
+													<option>Толстый</option>
+													<option>Худощавый</option>
+													<option>Упитанный</option>
+													<option>Спортивный</option>
+													<option>Бодибилдер</option>
 												</select>
 											</div>
 										</div>
@@ -192,7 +192,7 @@
 										</div>
 										<div class="ya-grid-2-3">
 											<div class="ya-input__field-wrapper">
-												<datepicker style="width: 11rem; float: none;">
+												<datepicker style="width: 11rem; float: none;" date-format="dd.MM.yyyy">
 													<input id="ya-birth" class="ya-input__field" type="text" ng-model="options.user.birthDate" />
 												</datepicker>
 											</div>
@@ -287,7 +287,7 @@
 									<div class="ya-form__input ya-input ya-input_inline">
 										<div class="ya-clearfix">
 											<div class="ya-grid-1-1">
-												<input type="checkbox" id="ya-comments_enabled" class="ya-input__field ya-input__field_checkbox" ng-model="options.user.comments_enabled">
+												<input type="checkbox" id="ya-comments_enabled" class="ya-input__field ya-input__field_checkbox" ng-model="options.user.settings.comments_enabled">
 												<label for="ya-comments_enabled" class="ya-input__label ya-input__label_checkbox">
 													Включить комментарии к записям
 												</label>
@@ -307,12 +307,12 @@
 										<div class="ya-clearfix">
 											<div class="ya-grid-1-3 ya-right">
 												<label for="ya-old-pwd" class="ya-input__label">
-													Текущий пароль
+													Новый пароль
 												</label>
 											</div>
 											<div class="ya-grid-2-3">
 												<div class="ya-input__field-wrapper">
-													<input id="ya-old-pwd" class="ya-input__field" type="password" ng-model="cred.old_password" />
+													<input id="ya-old-pwd" class="ya-input__field" type="password" ng-model="cred.password" />
 												</div>
 											</div>
 										</div>
@@ -321,13 +321,26 @@
 										<div class="ya-clearfix">
 											<div class="ya-grid-1-3 ya-right">
 												<label for="ya-new-pwd" class="ya-input__label">
-													Новый пароль
+													Подтвердите новый пароль
 												</label>
 											</div>
 											<div class="ya-grid-2-3">
 												<div class="ya-input__field-wrapper">
-													<input id="ya-new-pwd" class="ya-input__field" type="password" ng-model="cred.new_password" />
+													<input id="ya-new-pwd" class="ya-input__field" type="password" ng-model="cred.confirmPassword" />
 												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ya-info-block">
+							<div class="ya-info-block__content">
+								<div class="ya-form">
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-1 ya-center">
+												<button ng-click="changepwd();" class="ya-btn ya-btn_secondary ya-btn_inline">Изменить пароль</button>
 											</div>
 										</div>
 									</div>
@@ -358,20 +371,8 @@
 							</div>
 						</div>
 						<div class="ya-info-block">
-							<div class="ya-info-block__title">
-							</div>
 							<div class="ya-info-block__content">
 								<div class="ya-form">
-									<!--div class="ya-form__input ya-input ya-input_inline">
-										<div class="ya-clearfix">
-											<div class="ya-grid-1-1">
-												<label>
-													<input type="checkbox" ng-model="options.user.use_large_fonts">
-													Использовать увеличенные шрифты
-												</label>
-											</div>
-										</div>
-									</div-->
 									<div class="ya-form__input ya-input ya-input_inline">
 										<div class="ya-clearfix">
 											<div class="ya-grid-1-1 ya-center">
@@ -401,8 +402,7 @@
 												<div class="ya-input__field-wrapper">
 													<select id="ya-see-profile" class="ya-input__field ya-input__field_select ya-input__select" >
 														<option>Все</option>
-														<option>Друзья и друзья друзей</option>
-														<option>Только друзья</option>
+														<option>Только список избранных</option>
 													</select>
 												</div>
 											</div>
@@ -428,8 +428,7 @@
 												<div class="ya-input__field-wrapper">
 													<select id="ya-see-comments" class="ya-input__field ya-input__field_select ya-input__select" >
 														<option>Все</option>
-														<option>Друзья и друзья друзей</option>
-														<option>Только друзья</option>
+														<option>Только список избранных</option>
 													</select>
 												</div>
 											</div>
@@ -455,8 +454,7 @@
 												<div class="ya-input__field-wrapper">
 													<select id="ya-can-write" class="ya-input__field ya-input__field_select ya-input__select" >
 														<option>Все</option>
-														<option>Друзья и друзья друзей</option>
-														<option>Только друзья</option>
+														<option>Только список избранных</option>
 													</select>
 												</div>
 											</div>
@@ -479,7 +477,7 @@
 														Facebook
 													</label>
 													<a ng-show="options.user.tokens.fb" ng-click="unlink('fb')" class="ya-social-linker ya-social-linker_active">Отвязать</a>
-													<a ng-hide="options.user.tokens.fb" href="/auth/fb" class="ya-social-linker">Привязать</a>
+													<a ng-hide="options.user.tokens.fb" href="/auth/fb" class="ya-social-linker">Привязать</a> <br>Количество подписчиков: {{options.user.social.fb._json.friends.summary.total_count || 'н\\д'}}
 												</div>
 											</div>
 										</div>
@@ -492,7 +490,7 @@
 														VKontakte
 													</label>
 													<a ng-show="options.user.tokens.vk" ng-click="unlink('vk')" class="ya-social-linker ya-social-linker_active">Отвязать</a>
-													<a ng-hide="options.user.tokens.vk" href="/auth/vk" class="ya-social-linker">Привязать</a>
+													<a ng-hide="options.user.tokens.vk" href="/auth/vk" class="ya-social-linker">Привязать</a> <br>Количество подписчиков: {{options.user.social.vk.friends.summary.total_count || 'н\\д'}}
 												</div>
 											</div>
 										</div>
@@ -505,7 +503,7 @@
 														Twitter
 													</label>
 													<a ng-show="options.user.tokens.tw" ng-click="unlink('tw')" class="ya-social-linker ya-social-linker_active">Отвязать</a>
-													<a ng-hide="options.user.tokens.tw" href="/auth/tw" class="ya-social-linker">Привязать</a>
+													<a ng-hide="options.user.tokens.tw" href="/auth/tw" class="ya-social-linker">Привязать</a> <br>Количество подписчиков: {{options.user.social.tw._json.friends_count || 'н\\д'}}
 												</div>
 											</div>
 										</div>
@@ -518,7 +516,7 @@
 														Instagram
 													</label>
 													<a ng-show="options.user.tokens.im" ng-click="unlink('im')" class="ya-social-linker ya-social-linker_active">Отвязать</a>
-													<a ng-hide="options.user.tokens.im" href="/auth/im" class="ya-social-linker">Привязать</a>
+													<a ng-hide="options.user.tokens.im" href="/auth/im" class="ya-social-linker">Привязать</a> <br>Количество подписчиков: {{options.user.social.im._json.data.counts.follows || 'н\\д'}}
 												</div>
 											</div>
 										</div>
@@ -531,7 +529,7 @@
 														Odnoklassniki
 													</label>
 													<a ng-show="options.user.tokens.ok" ng-click="unlink('ok')" class="ya-social-linker ya-social-linker_active">Отвязать</a>
-													<a ng-hide="options.user.tokens.ok" href="/auth/ok" class="ya-social-linker">Привязать</a>
+													<a ng-hide="options.user.tokens.ok" href="/auth/ok" class="ya-social-linker">Привязать</a> <br>Количество подписчиков: {{options.user.social.ok._json.friends_count || 'н\\д'}}
 												</div>
 											</div>
 										</div>
@@ -685,6 +683,132 @@
 					<div class="ya-options__info-block" ng-show="active_page === 'work_n_study'">
 						<div class="ya-info-block">
 							<div class="ya-info-block__title">
+								Доп. инфо и предложения
+							</div>
+							<div class="ya-info-block__content">
+
+							<div class="ya-sidebar-info__content-wrapper" ng-repeat="h in options.user.hobbies track by $index">
+								<div class="ya-page__block ya-page__block_full-shadow ya-relative">
+									<span class="ya-close-btn" ng-click="rm_hobbie(h, $index)">X</span>
+									<div class="ya-sidebar-info__content">
+										<div class="ya-sidebar-info__item">
+											<span class="ya-sidebar-info__label">{{h.item}}</span> {{h.title}}
+										</div>
+									</div>
+								</div>
+							</div>
+								<div class="ya-form" ng-show="!hobbie">
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-1 ya-center">
+												<button ng-click="add_hobbie();" class="ya-btn ya-btn_primary ya-btn_inline">Добавить</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="ya-form" ng-show="hobbie">
+									<form ng-submit="save_hobbie();">
+										<div class="ya-form__input ya-input ya-input_inline">
+											<div class="ya-clearfix">
+												<div class="ya-grid-1-3 ya-right">
+													<label for="ya-ach-country" class="ya-input__label">
+														Тип
+													</label>
+												</div>
+												<div class="ya-grid-2-3">
+													<div class="ya-input__field-wrapper">
+														<select id="ya-ach-country" ng-model="hobbie.type" class="ya-input__field ya-input__field_select ya-input__select" >
+															<option ng-value="{{h.type}}" ng-repeat="h in hobbies" ng-click="hobbie.item = h.item">{{h.item}}</option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="ya-form__input ya-input ya-input_inline">
+											<div class="ya-clearfix">
+												<div class="ya-grid-1-3 ya-right">
+													<label for="ya-ach-comment" class="ya-input__label">
+														Что именно?
+													</label>
+												</div>
+												<div class="ya-grid-2-3">
+													<div class="ya-input__field-wrapper">
+														<input id="ya-ach-comment" class="ya-input__field" type="text" ng-model="hobbie.title" />
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="ya-form__input ya-input ya-input_inline">
+											<div class="ya-clearfix">
+												<div class="ya-grid-1-1 ya-center">
+													<input type="submit" value="Сохранить" class="ya-btn ya-btn_secondary ya-btn_inline" />
+													<span ng-click="hobbie = null;" class="ya-btn ya-btn_primary ya-btn_inline">Отменить</span>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+
+						<div class="ya-info-block">
+							<div class="ya-info-block__title">
+								Мои виды спорта
+							</div>
+							<div class="ya-info-block__content">
+
+							<div class="ya-sidebar-info__content-wrapper" ng-repeat="s in options.user.sports track by $index">
+								<div class="ya-page__block ya-page__block_full-shadow ya-relative">
+									<span class="ya-close-btn" ng-click="rm_sport(s, $index)">X</span>
+									<div class="ya-sidebar-info__content">
+										<div class="ya-sidebar-info__item">
+											<span class="ya-sidebar-info__label">Вид спорта</span> {{s}}
+										</div>
+									</div>
+								</div>
+							</div>
+								<div class="ya-form" ng-show="!sport">
+									<div class="ya-form__input ya-input ya-input_inline">
+										<div class="ya-clearfix">
+											<div class="ya-grid-1-1 ya-center">
+												<button ng-click="add_sport();" class="ya-btn ya-btn_primary ya-btn_inline">Добавить</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="ya-form" ng-show="sport">
+									<form ng-submit="save_sport();">
+										<div class="ya-form__input ya-input ya-input_inline">
+											<div class="ya-clearfix">
+												<div class="ya-grid-1-3 ya-right">
+													<label for="ya-ach-country" class="ya-input__label">
+														Вид спорта
+													</label>
+												</div>
+												<div class="ya-grid-2-3">
+													<div class="ya-input__field-wrapper">
+														<select id="ya-ach-country" ng-model="sport" class="ya-input__field ya-input__field_select ya-input__select" >
+															<option ng-value="s.sport" ng-repeat="s in sports" ng-show="options.user.sex == s.sex">{{s.sport}}</option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="ya-form__input ya-input ya-input_inline">
+											<div class="ya-clearfix">
+												<div class="ya-grid-1-1 ya-center">
+													<input type="submit" value="Сохранить" class="ya-btn ya-btn_secondary ya-btn_inline" />
+													<span ng-click="sport = null;" class="ya-btn ya-btn_primary ya-btn_inline">Отменить</span>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+
+						<div class="ya-info-block">
+							<div class="ya-info-block__title">
 								Достижения
 							</div>
 							<div class="ya-info-block__content">
@@ -766,7 +890,7 @@
 												</div>
 												<div class="ya-grid-2-3">
 													<div class="ya-input__field-wrapper">
-														<input id="ya-ach-year" class="ya-input__field" type="number" ng-model="achievement.year" />
+														<input id="ya-ach-year" class="ya-input__field" type="number" ng-model="achievement.year" max="{{achievement.year}}" />
 													</div>
 												</div>
 											</div>
@@ -841,7 +965,7 @@
 												<span class="ya-sidebar-info__label">Город</span> {{w.city}}
 											</div>
 											<div class="ya-sidebar-info__item">
-												<span class="ya-sidebar-info__label">Годы</span> {{w.year_start}} - {{w.year_end}}
+												<span class="ya-sidebar-info__label">Годы</span> {{w.year_start}} - {{w.year_end||'по н. вр.'}}
 											</div>
 											<div class="ya-sidebar-info__item">
 												<span class="ya-sidebar-info__label">Компания</span> {{w.company}}
@@ -904,7 +1028,7 @@
 												</div>
 												<div class="ya-grid-2-3">
 													<div class="ya-input__field-wrapper">
-														<input id="ya-wp-year-start" class="ya-input__field" type="number" ng-model="workplace.year_start" />
+														<input id="ya-wp-year-start" class="ya-input__field" type="number" ng-model="workplace.year_start" max="{{currentYear}}" />
 													</div>
 												</div>
 											</div>
@@ -918,7 +1042,7 @@
 												</div>
 												<div class="ya-grid-2-3">
 													<div class="ya-input__field-wrapper">
-														<input id="ya-wp-year-finish" class="ya-input__field" type="number" ng-model="workplace.year_end" />
+														<input id="ya-wp-year-finish" class="ya-input__field" type="number" ng-model="workplace.year_end" max="{{currentYear}}" />
 													</div>
 												</div>
 											</div>
@@ -979,7 +1103,7 @@
 												<span class="ya-sidebar-info__label">Город</span> {{u.city}}
 											</div>
 											<div class="ya-sidebar-info__item">
-												<span class="ya-sidebar-info__label">Годы</span> {{u.year_start}} - {{u.year_end}}
+												<span class="ya-sidebar-info__label">Годы</span> {{u.year_start}} - {{u.year_end||'по н. вр.'}}
 											</div>
 											<div class="ya-sidebar-info__item">
 												<span class="ya-sidebar-info__label">Учреждение</span> {{u.university}}
@@ -1096,7 +1220,7 @@
 												</div>
 												<div class="ya-grid-2-3">
 													<div class="ya-input__field-wrapper">
-														<input id="ya-university-year-start" class="ya-input__field" type="number" ng-model="university.year_start" />
+														<input id="ya-university-year-start" class="ya-input__field" type="number" ng-model="university.year_start" max="{{currentYear}}" />
 													</div>
 												</div>
 											</div>
@@ -1110,7 +1234,7 @@
 												</div>
 												<div class="ya-grid-2-3">
 													<div class="ya-input__field-wrapper">
-														<input id="ya-university-year-finish" class="ya-input__field" type="number" ng-model="university.year_end" />
+														<input id="ya-university-year-finish" class="ya-input__field" type="number" ng-model="university.year_end" max="{{currentYear}}" />
 													</div>
 												</div>
 											</div>
