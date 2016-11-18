@@ -327,24 +327,19 @@
 							Пока не добавлено ни одного видео
 						</div>
 						<div class="ya-photos__list ya-clearfix" ng-show="videos && videos.length">
-							<div class="ya-photos__item ya-grid-1-4" ng-show="videos && videos[0]">
+							<div class="ya-photos__item ya-grid-1-3" ng-show="videos && videos[0]">
 								<div class="ya-photos__wrapper">
 									<div class="ya-photos__img" ng-click="set_current_video(0);" ng-style="{'background-image':'url(' + videos[0].thumbnail + ')'}"></div>
 								</div>
 							</div>
-							<div class="ya-photos__item ya-grid-1-4" ng-show="videos && videos[1]">
+							<div class="ya-photos__item ya-grid-1-3" ng-show="videos && videos[1]">
 								<div class="ya-photos__wrapper">
 									<div class="ya-photos__img" ng-click="set_current_video(1);" ng-style="{'background-image':'url(' + videos[1].thumbnail + ')'}"></div>
 								</div>
 							</div>
-							<div class="ya-photos__item ya-grid-1-4" ng-show="videos && videos[2]">
+							<div class="ya-photos__item ya-grid-1-3" ng-show="videos && videos[2]">
 								<div class="ya-photos__wrapper">
 									<div class="ya-photos__img" ng-click="set_current_video(2);" ng-style="{'background-image':'url(' + videos[2].thumbnail + ')'}"></div>
-								</div>
-							</div>
-							<div class="ya-photos__item ya-grid-1-4" ng-show="videos && videos[3]">
-								<div class="ya-photos__wrapper">
-									<div class="ya-photos__img" ng-click="set_current_video(3);" ng-style="{'background-image':'url(' + videos[3].thumbnail + ')'}"></div>
 								</div>
 							</div>
 						</div>
