@@ -1,5 +1,5 @@
-angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$routeParams', 'socket', 'User', 'MSG', 'Topic', 'Photo', 'Video', 'Dialog', 'Upload',
-	function($scope, $location, $routeParams, socket, User, MSG, Topic, Photo, Video, Dialog, Upload) {
+angular.module('MuscleMan').controller('UserCtrl', ['$sce','$scope', '$location', '$routeParams', 'socket', 'User', 'MSG', 'Topic', 'Photo', 'Video', 'Dialog', 'Upload',
+	function($sce, $scope, $location, $routeParams, socket, User, MSG, Topic, Photo, Video, Dialog, Upload) {
 		$scope.user = {};
 		$scope.photos = [];
 		$scope.topics = [];
