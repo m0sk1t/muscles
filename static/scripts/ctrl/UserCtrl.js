@@ -28,7 +28,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 				$scope.user.marks.map(function(el) {
 					$scope.rating += el.mark;
 				});
-				$scope.rating = Math.round($scope.rating / $scope.user.marks.length);
+				$scope.rating = Math.round(($scope.rating / $scope.user.marks.length) * 100) / 100;
 			}
 		}, function(res) {
 			console.error(res.data);
@@ -79,7 +79,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 				$scope.user.marks.map(function(el) {
 					$scope.rating += el.mark;
 				});
-				$scope.rating = Math.round($scope.rating / $scope.user.marks.length);
+				$scope.rating = Math.round(($scope.rating / $scope.user.marks.length) * 100) / 100;
 			};
 			if ($scope.is_marked()) {
 				User.rm_mark({ id: $routeParams.id }, function(res) {
