@@ -53,6 +53,14 @@ var mongoose = require('mongoose'),
 			type: Array,
 			default: []
 		},
+		favs: {
+			type: Array,
+			default: []
+		},
+		marks: {
+			type: Array,
+			default: []
+		},
 		subscribers: {
 			type: Array,
 			default: []

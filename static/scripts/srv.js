@@ -10,6 +10,18 @@ angular.module('Services', []).factory('User', ['$http',
 			get_sports: function(s, e) {
 				return $http.get('/sports').then(s, e);
 			},
+			get_contest: function(id, s, e) {
+				return $http.get('/contest/' + id).then(s, e);
+			},
+			get_competition: function(id, s, e) {
+				return $http.get('/competition/' + id).then(s, e);
+			},
+			add_mark: function(opt, s, e) {
+				return $http.put('/user/add_mark/' + opt.id, opt).then(s, e);
+			},
+			rm_mark: function(opt, s, e) {
+				return $http.put('/user/rm_mark/' + opt.id, opt).then(s, e);
+			},
 			add_university: function(opt, s, e) {
 				return $http.put('/user/add_university', opt).then(s, e);
 			},

@@ -48,6 +48,28 @@ module.exports = (app) => {
 		}) : res.status(403).send('Please, login first');
 	})
 
+	app.put('/user/add_mark/:id', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findByIdAndUpdate(req.params.id, {
+			$addToSet: {
+				marks: { userid: req.user._id, mark: req.body.mark }
+			}
+		}, (err, user) => {
+			if (err) return console.error(err);
+			res.json(user);
+		}) : res.status(403).send('Please, login first');
+	});
+
+	app.put('/user/rm_mark/:id', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findByIdAndUpdate(req.params.id, {
+			$pull: {
+				'marks.userid': req.user._id
+			}
+		}, (err, user) => {
+			if (err) return console.error(err);
+			res.json(user);
+		}) : res.status(403).send('Please, login first');
+	});
+
 	app.put('/user/add_university', tools.ensureAuthenticated, (req, res) => {
 		req.user ? User.findByIdAndUpdate(req.user._id, {
 			$addToSet: {
