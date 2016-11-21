@@ -62,7 +62,7 @@ module.exports = (app) => {
 	app.put('/user/rm_mark/:id', tools.ensureAuthenticated, (req, res) => {
 		req.user ? User.findByIdAndUpdate(req.params.id, {
 			$pull: {
-				'marks.userid': req.user._id
+				marks: { userid: req.user._id }
 			}
 		}, (err, user) => {
 			if (err) return console.error(err);

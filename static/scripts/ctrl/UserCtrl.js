@@ -24,10 +24,12 @@ angular.module('MuscleMan').controller('UserCtrl', ['$scope', '$location', '$rou
 		User.load($routeParams.id, function(res) {
 			$scope.user = res.data;
 			$scope.rating = 0;
-			$scope.user.marks.map(function(el) {
-				$scope.rating += el.mark;
-			});
-			$scope.rating = Math.round($scope.rating / $scope.user.marks.length);
+			if ($scope.user.marks) {
+				$scope.user.marks.map(function(el) {
+					$scope.rating += el.mark;
+				});
+				$scope.rating = Math.round($scope.rating / $scope.user.marks.length);
+			}
 		}, function(res) {
 			console.error(res.data);
 		});
