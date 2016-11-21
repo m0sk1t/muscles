@@ -12,6 +12,36 @@ module.exports = (app) => {
 		});
 	});
 
+	app.get('/favs', tools.ensureAuthenticated, (req, res) => {
+		req.user ? User.findById(req.user._id, (err, user) => {
+			if (err) return console.error(err);
+			User.find({
+				_id: { $in: user.favs }
+			}, {
+				name: 1,
+				avatar: 1,
+				surname: 1,
+				creDate: 1,
+				birthDate: 1,
+				sex: 1,
+				weight: 1,
+				height: 1,
+				hairs: 1,
+				type: 1,
+				chest: 1,
+				waist: 1,
+				huckle: 1,
+				online: 1,
+				lastOnline: 1,
+				location_city: 1,
+				location_country: 1
+			}, (err, users) => {
+				if (err) return console.error(err);
+				res.json(users);
+			});
+		}) : res.status(403).send('Please, login first');
+	});
+
 	app.route('/user')
 		.get(tools.ensureAuthenticated, (req, res) => {
 			req.user ? User.findById(req.user._id, (err, user) => {

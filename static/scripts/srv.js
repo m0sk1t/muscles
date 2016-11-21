@@ -4,6 +4,9 @@ angular.module('Services', []).factory('User', ['$http',
 			get: function(s, e) {
 				return $http.get('/user').then(s, e);
 			},
+			get_favs: function(s, e) {
+				return $http.get('/favs').then(s, e);
+			},
 			get_hobbies: function(s, e) {
 				return $http.get('/hobbies').then(s, e);
 			},
