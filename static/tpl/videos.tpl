@@ -1,16 +1,17 @@
-<article class="ya-videos-page ya-container">
+<article class="ya-videos-page ya-media-page ya-container">
 	<div class="ya-narrower">
 		<div class="ya-row">
 			<div class="ya-grid-4-5">
-				<section>
-					<div>{{options.user._id === options.userid?'Мои видео':'Видео пользователя'}}
+				<div class="ya-media-page__gallery">
+					<h2 class="ya-media-page__title ya-relative">
+						{{options.user._id === options.userid?'Мои видео':'Видео пользователя'}}
 						<span
-							class="add-video"
+							class="ya-albums__create-btn"
 							ng-if="options.user._id === options.userid"
 							ng-click="layer.addVideo = {link:'',title:''}"
-						>
-							Добавить видео
-						</span>
+						></span>
+					</h2>
+
 					<div class="ya-photos ya-photos_profile">
 						<div class="ya-photos__list ya-photos__list_empty" ng-show="!videos || !videos.length">
 							Пока не добавлено ни одного видео
@@ -33,30 +34,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="videos">
-						<div
-							ng-repeat="v in videos track by $index"
-						>
-
-							<div>
-
-								<span ng-if="options.user">
-									<i
-										class="fa fa-lg"
-										ng-click="like(v, $index)"
-										ng-class="{'fa-heart-o':!i_like_it(v.likes),'fa-heart':i_like_it(v.likes)}"
-									></i>{{v.likes.length}}
-								</span>
-								<span ng-if="options.user">
-									<i
-										class="fa fa-lg fa-comment"
-									></i>{{v.comments.length}}
-								</span>
-								{{::v.title}}
-							</div>
-						</div>
-					</div>
-				</section>
+				</div>
 				<section class="adding-video" ng-show="layer.addVideo">
 					<div>
 						<input type="text" placeholder="Название видео" ng-model="layer.addVideo.title">
@@ -99,6 +77,22 @@
 								<input type="text" ng-model="gallery.comment">
 								<button ng-click="add_comment(gallery.current)">&gt;</button>
 							</span>
+							<div>
+
+								<span ng-if="options.user">
+									<i
+										class="fa fa-lg"
+										ng-click="like(v, $index)"
+										ng-class="{'fa-heart-o':!i_like_it(v.likes),'fa-heart':i_like_it(v.likes)}"
+									></i>{{v.likes.length}}
+								</span>
+								<span ng-if="options.user">
+									<i
+										class="fa fa-lg fa-comment"
+									></i>{{v.comments.length}}
+								</span>
+								{{::v.title}}
+							</div>
 							</span>
 						<span
 							class="right"

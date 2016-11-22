@@ -1,51 +1,52 @@
-<article class="ya-photos-page ya-container">
+<article class="ya-photos-page ya-media-page ya-container">
 	<div class="ya-narrower">
 		<div class="ya-row">
 			<div class="ya-grid-4-5">
-				<section>
-					<div>
-						{{options.user._id === options.userid?'Мои альбомы':'Альбомы пользователя'}}
-						<span class="create" ng-click="create_album()" ng-if="options.user._id === options.userid">
-							Создать альбом
+				<div class="ya-albums">
+					<h2 class="ya-media-page__title ya-relative">
+						{{options.user._id === options.userid?'Мои фотоальбомы':'Фотоальбомы пользователя'}}
+						<span class="ya-albums__create-btn" ng-click="create_album()" ng-if="options.user._id === options.userid">
 						</span>
-					</div>
-					<div class="albums">
-						<div
-							class="album"
-							ng-repeat="a in albums"
-						>
-							<a href="#/user/{{options.userid}}/album/{{a._id}}">
-								<img ng-src="{{a.cover.image}}">
-								{{::a.title}}
-							</a>
-							<span>
-								<i
-									class="fa fa-lg fa-trash"
-									ng-click="delete_album(a._id)"
-									ng-if="options.user._id === a.owner"
-								></i>
-								<i
-									class="fa fa-lg fa-edit"
-									ng-click="layer.editedAlbum = a"
-									ng-if="options.user._id === a.owner"
-								></i>
-							</span>
+					</h2>
+					<div class="ya-photos ya-photos_profile">
+						<div class="ya-photos__list ya-photos__list_empty" ng-show="!albums || !albums.length">
+							Пока не добавлено ни одной фотографии
+						</div>
+						<div class="ya-photos__list ya-clearfix" ng-show="albums && albums.length">
+							<div class="ya-photos__item ya-photos__item_large ya-inner-grid-1-4" ng-repeat="a in albums">
+								<div class="ya-photos__wrapper">
+									<a href="#/user/{{options.userid}}/album/{{a._id}}" class="ya-photos__img ya-photos__img_large" ng-style="{'background-image':'url(' + (a.cover.image || '/images/avatar.jpg') + ')'}"></a>
+									<a href="#/user/{{options.userid}}/album/{{a._id}}" class="ya-photos__img-title" >{{::a.title}}</a>
+									<span>
+										<i
+											class="fa fa-lg fa-trash"
+											ng-click="delete_album(a._id)"
+											ng-if="options.user._id === a.owner"
+										></i>
+										<i
+											class="fa fa-lg fa-edit"
+											ng-click="layer.editedAlbum = a"
+											ng-if="options.user._id === a.owner"
+										></i>
+									</span>
+								</div>
+							</div>
 						</div>
 					</div>
-				</section>
-				<section>
-					<div>{{options.user._id === options.userid?'Мои фотографии':'Фотографии пользователя'}}</div>
-					<div
-						class="drop-box"
-						ngf-multiple="true"
-						ngf-pattern="'image/*'"
-						ngf-drop="upload_files($files)"
-						ngf-drag-over-class="'dragover'"
-						ngf-select="upload_files($files)"
-						ng-if="options.user._id === options.userid"
-					>
-						Бросьте сюда картинки либо кликните
-					</div>
+				</div>
+				<div class="ya-media-page__gallery">
+					<h2 class="ya-media-page__title ya-relative">
+						{{options.user._id === options.userid?'Мои фотографии':'Фотографии пользователя'}}
+						<span
+							class="ya-albums__create-btn"
+							ngf-multiple="true"
+							ngf-pattern="'image/*'"
+							ngf-drop="upload_files($files)"
+							ngf-drag-over-class="'dragover'"
+							ngf-select="upload_files($files)"
+							ng-if="options.user._id === options.userid"
+						>						</span>
+					</h2>
 					<div class="ya-photos ya-photos_profile">
 						<div class="ya-photos__list ya-photos__list_empty" ng-show="!photos || !photos.length">
 							Пока не добавлено ни одной фотографии
@@ -68,7 +69,7 @@
 							</div>
 						</div>
 					</div>
-				</section>
+				</div>
 				<section class="edit-photo" ng-class="{hide: layer.editedPhoto == null, show: layer.editedPhoto != null}">
 					<div>
 						<input type="text" placeholder="Название фото" ng-model="layer.editedPhoto.title">
