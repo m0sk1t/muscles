@@ -16,6 +16,15 @@ angular.module('Services', []).factory('User', ['$http',
 			get_contest: function(id, s, e) {
 				return $http.get('/contest/' + id).then(s, e);
 			},
+			get_contest_participants: function(id, s, e) {
+				return $http.get('/contest_participants/' + id).then(s, e);
+			},
+			add_contest_participant: function(id, s, e) {
+				return $http.put('/contest/' + id + '/add_participant').then(s, e);
+			},
+			rm_contest_participant: function(id, s, e) {
+				return $http.put('/contest/' + id + '/rm_participant').then(s, e);
+			},
 			get_competition: function(id, s, e) {
 				return $http.get('/competition/' + id).then(s, e);
 			},

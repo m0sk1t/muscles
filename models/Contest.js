@@ -2,6 +2,7 @@ var mongoose = require('mongoose'),
 	ContestSchema = mongoose.Schema({
 		type: String,
 		owner: String,
+		views: Number,
 		title: String,
 		creDate: Date,
 		dateEnd: Date,

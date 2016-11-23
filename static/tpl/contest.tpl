@@ -9,6 +9,12 @@
 		<div>{{contest.freeVoices}}</div>
 		<div>{{contest.paidVoices}}</div>
 		<div>{{contest.description}}</div>
-		<button>Принять участие</button>
+		<div>
+			<span ng-repeat="p in participants">
+				<img ng-src="{{p.avatar}}" style="width: 200px">
+				{{p.name}}
+			</span>
+		</div>
+		<button ng-click="participate()">{{contest.participants.indexOf(options.user._id) === -1? 'Принять участие': 'Отказаться от участия'}}</button>
 	</section>
 </article>

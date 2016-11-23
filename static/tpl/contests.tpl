@@ -1,6 +1,7 @@
 <article>
 	<section>
-		<div ng-repeat="c in contest">
+		<div ng-repeat="c in contests">
+			<a ng-href="#/contest/{{c._id}}">more...</a>
 			<h3>{{c.title}}</h3>
 			<div>{{c.type}}</div>
 			<div>{{c.title}}</div>
