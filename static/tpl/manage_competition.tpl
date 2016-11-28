@@ -2,7 +2,8 @@
 	<section>
 		<h3>{{competition.title}}</h3>
 
-		<input type="date" placeholder="date" ng-model="competition.date"><br />
+		<input type="date" placeholder="end" ng-model="competition.end"><br />
+		<input type="date" placeholder="start" ng-model="competition.start"><br />
 		<input type="text" placeholder="city" ng-model="competition.city"><br />
 		<input type="text" placeholder="place" ng-model="competition.place"><br />
 		<input type="text" placeholder="title" ng-model="competition.title"><br />
