@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
 	CompetitionSchema = mongoose.Schema({
-		date: Date,
+		end: Date,
+		start: Date,
 		city: String,
 		place: String,
 		creDate: Date,
