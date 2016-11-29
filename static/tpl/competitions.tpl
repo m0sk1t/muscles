@@ -1,15 +1,15 @@
 <article>
 	<section>
 		<div>
-			<a href="#">За год</a>
-			<a href="#">По месяцам</a>
-			По категориям
+			<a href="" ng-click="change_view('month', 'competitions')">Календарь На Месяц</a>
+			<a href="" ng-click="change_view('agendaWeek', 'competitions')">Календарь На Неделю</a>
+			<a href="" ng-click="change_view('agendaDay', 'competitions')">Календарь На День</a>
 			<select name="" id="">
 				<option value="">По категориям</option>
 			</select>
 			<input type="text">
 		</div>
-		<div ui-calendar ng-model="eventSources"></div>
+		<div ui-calendar="calendarOptions" ng-model="eventSources" calendar="competitions"></div>
 		<div>
 			<div ng-repeat="c in competitions">
 				<h3>{{c.title}}</h3>
