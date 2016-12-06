@@ -6,7 +6,15 @@
         background: url(images/sprite.png) -95px-93px no-repeat
         cursor: pointer
         margin: 0 3px
+        float: right
         &_full
             background-position: -121px -93px
         &_half
             background-position: -147px -93px
+    &:hover
+        & ^[0]__star
+            background: url(images/sprite.png) -95px-93px no-repeat
+        & ^[0]__star:hover
+            background: url(images/sprite.png) -121px -93px no-repeat
+            & ~ ^[0]__star
+                background: url(images/sprite.png) -121px -93px no-repeat

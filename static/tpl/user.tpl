@@ -23,17 +23,19 @@
 					</div>
 					<div class="ya-user__config-block ya-clearfix">
 						<div class="ya-span-2-3">
-							<div class="ya-user__raiting ya-raiting">
-								<span class="ya-raiting__star ya-raiting__star_full"></span>
-								<span class="ya-raiting__star ya-raiting__star_full"></span>
-								<span class="ya-raiting__star ya-raiting__star_full"></span>
-								<span class="ya-raiting__star ya-raiting__star_half"></span>
+							<div class="ya-user__raiting ya-raiting ya-clearfix">
 								<span class="ya-raiting__star ya-raiting__star_empty"></span>
+								<span class="ya-raiting__star ya-raiting__star_half"></span>
+								<span class="ya-raiting__star ya-raiting__star_full"></span>
+								<span class="ya-raiting__star ya-raiting__star_full"></span>
+								<span class="ya-raiting__star ya-raiting__star_full"></span>
 							</div>
 						</div>
 						<div class="ya-user__options ya ya-span-1-3">
-							<a href="#/options" class="ya-user__options-btn" ng-if="options.user._id === user._id"></a>
-							<a href="/logout" class="ya-user__logout-btn ya-logout-btn"></a>
+							<div class="ya-user__possible-actions">
+								<a href="#/options" class="ya-user__options-btn" ng-if="options.user._id === user._id"></a>
+								<a href="/logout" class="ya-user__logout-btn ya-logout-btn"></a>
+							</div>
 						</div>
 					</div>
 				</div>
