@@ -371,10 +371,14 @@
 											<textarea rows="10" class="ya-input__field ya-input__field_textarea ya-input__field_unbordered ya-shadow" ng-model="topic.text" placeholder="Введите текст"></textarea>
 											<div class="ya-new-post__btns-wrapper">
 												<div class="ya-new-post__btn ya-pop-btn ya-pop-btn_smiles">
-													<div class="ya-smiles ya-pop-btn__pop-up">
-														<ul>
-															<li><span class="create" ng-click="gallery.add_image = !gallery.add_image;">Фото</span></li>
-															<li><span class="create" ng-click="gallery.add_video = !gallery.add_video;">Видео</span></li>
+													<div class="ya-pop-btn__pop-up">
+														<ul class="ya-pop-btn__list">
+															<li class="ya-pop-btn__item">
+																<span class="ya-pop-btn__link" ng-click="gallery.add_image = !gallery.add_image;">Фото</span>
+															</li>
+															<li class="ya-pop-btn__item">
+																<span class="ya-pop-btn__link" ng-click="gallery.add_video = !gallery.add_video;">Видео</span>
+															</li>
 														</ul>
 													</div>
 												</div>
@@ -407,7 +411,7 @@
 							<div class="ya-form__input ya-input ya-input_inline">
 								<div class="ya-clearfix">
 									<div class="ya-grid-1-1 ya-right">
-										<span class="ya-btn ya-btn_primary ya-btn_small ya-btn_plus ya-btn_inline" ng-click="topic.text && new_topic(); (topic = null);">Сохранить</span>
+										<span class="ya-btn ya-btn_primary ya-btn_small ya-btn_plus ya-btn_plusless ya-btn_inline" ng-click="topic.text && new_topic(); (topic = null);">Сохранить</span>
 										<span class="ya-btn ya-btn_secondary ya-btn_small ya-btn_inline" ng-click="topic = null">Отменить</span>
 									</div>
 								</div>

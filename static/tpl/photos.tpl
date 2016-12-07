@@ -3,7 +3,7 @@
 		<div class="ya-row">
 			<div class="ya-grid-4-5">
 				<div class="ya-albums">
-					<h2 class="ya-media-page__title ya-relative">
+					<h2 class="ya-media-page__title ya-title ya-relative">
 						{{options.user._id === options.userid?'Мои фотоальбомы':'Фотоальбомы пользователя'}}
 						<span class="ya-albums__create-btn" ng-click="create_album()" ng-if="options.user._id === options.userid">
 						</span>

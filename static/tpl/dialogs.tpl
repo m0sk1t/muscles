@@ -1,4 +1,11 @@
-<article>
+<article class="ya-dialoges ya-container">
+	<div class="ya-narrower">
+		<div class="ya-row">
+			<div class="ya-grid-4-5">
+
+			</div>
+		</div>
+	</div>
 	<section>
 		<span>
 			<span>
