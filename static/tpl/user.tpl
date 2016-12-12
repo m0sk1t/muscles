@@ -370,7 +370,7 @@
 										<div class="ya-input__field-wrapper ya-input__field-wrapper_textarea ya-relative">
 											<textarea rows="10" class="ya-input__field ya-input__field_textarea ya-input__field_unbordered ya-shadow" ng-model="topic.text" placeholder="Введите текст"></textarea>
 											<div class="ya-new-post__btns-wrapper">
-												<div class="ya-new-post__btn ya-pop-btn ya-pop-btn_smiles">
+												<div class="ya-new-post__btn ya-pop-btn ya-pop-btn_adds">
 													<div class="ya-pop-btn__pop-up">
 														<ul class="ya-pop-btn__list">
 															<li class="ya-pop-btn__item">
@@ -382,7 +382,7 @@
 														</ul>
 													</div>
 												</div>
-												<div class="ya-new-post__btn ya-pop-btn ya-pop-btn_adds">
+												<div class="ya-new-post__btn ya-pop-btn ya-pop-btn_smiles">
 													<div class="ya-smiles ya-pop-btn__pop-up">
 														Smiles ))
 													</div>
