@@ -553,10 +553,10 @@
 			</div>
 		</div>
 		<div ng-show="gallery.add_image">
-			<div class="ya-pop-up ya-pop-up_active">
+			<div class="ya-pop-up ya-pop-up_active" ng-click="gallery.add_image = null;">
 				<div class="ya-pop-up__wrapper">
-					<div class="ya-pop-up__content">
-						<div ng-click="gallery.add_image = null;">close</div>
+					<span class="ya-pop-up__close-btn" ng-click="gallery.add_image = null;">X</span>
+					<div class="ya-pop-up__content" ng-click="$event.stopPropagation();">
 						<div
 							class="drop-box"
 							ngf-multiple="true"
@@ -566,11 +566,21 @@
 							ngf-select="upload_files($files)"
 							ng-if="options.user._id === user._id"
 						>
-							Бросьте сюда картинки либо кликните
+							Загрузить фотографию
 						</div>
-						Или выбрать существующие
-						<div class="photos">
-							<img ng-src="{{p.image}}" alt="" ng-repeat="p in photos" ng-click="add_to_topic(p.image);">
+						<div class="ya-pick-photo">
+							<div class="ya-photos ya-photos_profile">
+								<div class="ya-photos__list ya-photos__list_empty" ng-show="!photos || !photos.length">
+									Пока не добавлено ни одной фотографии
+								</div>
+								<div class="ya-photos__list ya-clearfix" ng-show="photos && photos.length">
+									<div class="ya-photos__item ya-photos__item_large ya-inner-grid-1-4" ng-repeat="p in photos">
+										<div class="ya-photos__wrapper">
+											<div class="ya-photos__img ya-photos__img_large" ng-click="add_to_topic(p.image);" ng-style="{'background-image':'url(' + p.image + ')'}"></div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
