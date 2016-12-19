@@ -85,10 +85,8 @@
 										</div>
 										<div class="ya-grid-2-3">
 											<div class="ya-input__field-wrapper">
-												<select id="ya-country" class="ya-input__field ya-input__field_select ya-input__select">
-													<option></option>
-													<option selected>Россия</option>
-													<option>Белорусия</option>
+												<select ng-click="load_countries();" ng-model="options.user.location_country.id" id="ya-country" class="ya-input__field ya-input__field_select ya-input__select">
+													<option value="{{c.cid}}" ng-repeat="c in countries" ng-click="options.user.location_country.title = c.title">{{c.title}}</option>
 												</select>
 											</div>
 										</div>
@@ -103,10 +101,8 @@
 										</div>
 										<div class="ya-grid-2-3">
 											<div class="ya-input__field-wrapper">
-												<select id="ya-city" class="ya-input__field ya-input__field_select ya-input__select">
-													<option></option>
-													<option>Москва</option>
-													<option selected>Иваново</option>
+												<select ng-click="load_cities();" ng-model="options.user.location_city.id" id="ya-city" class="ya-input__field ya-input__field_select ya-input__select">
+													<option value="{{ct.cid}}" ng-repeat="ct in cities" ng-click="options.user.location_city.title = ct.title">{{ct.title}}</option>
 												</select>
 											</div>
 										</div>

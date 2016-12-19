@@ -127,14 +127,8 @@ var mongoose = require('mongoose'),
 		waist: Number, // талия
 		huckle: Number, // бёдра
 
-		location_city: {
-			type: String,
-			default: ''
-		},
-		location_country: {
-			type: String,
-			default: ''
-		},
+		location_city: {},
+		location_country: {},
 
 		settings: {
 			comments_enabled: {

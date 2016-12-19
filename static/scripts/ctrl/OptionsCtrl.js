@@ -75,7 +75,7 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 
 		$scope.load_cities = function() {
 			$vk.get_cities({
-				country_id: ($scope.university ? $scope.university.country_id : ($scope.workplace ? $scope.workplace.country_id : $scope.achievement.country_id))
+				country_id: ($scope.university ? $scope.university.country_id : ($scope.workplace ? $scope.workplace.country_id : $scope.achievement ? $scope.achievement.country_id : $scope.options.user.location_country.id))
 			}, function(res) {
 				$scope.cities = res.data;
 			}, function(res) {
@@ -256,7 +256,9 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 		};
 
 		$scope.save_sport = function() {
-			User.add_sport({ sport: $scope.sport }, function(res) {
+			User.add_sport({
+				sport: $scope.sport
+			}, function(res) {
 				$scope.options.user.sports.push($scope.sport);
 				$scope.sport = null;
 			}, function(res) {
@@ -265,7 +267,9 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', 'MSG', 'Upload'
 		};
 
 		$scope.rm_sport = function(w, i) {
-			User.rm_sport({ sport: w }, function(res) {
+			User.rm_sport({
+				sport: w
+			}, function(res) {
 				$scope.options.user.sports.splice(i, 1);
 			}, function(res) {
 				MSG.err(res.data);
