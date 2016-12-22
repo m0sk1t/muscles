@@ -108,6 +108,11 @@ var mongoose = require('mongoose'),
 			default: ''
 		},
 
+		likes: {
+			free: Number,
+			paid: Number,
+		},
+
 		sex: {
 			type: String,
 			default: ''

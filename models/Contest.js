@@ -8,10 +8,9 @@ var mongoose = require('mongoose'),
 		dateEnd: Date,
 		prize: Number,
 		dateStart: Date,
-		freeVoices: Number,
-		paidVoices: Number,
 		description: String,
 		participants: Array,
+		dateParticipate: Date,
 	});
 
 module.exports = mongoose.model('Contests', ContestSchema);

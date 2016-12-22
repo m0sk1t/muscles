@@ -7,6 +7,10 @@ var mongoose = require('mongoose'),
 		creDate: Date,
 		owner: String,
 		title: String,
+		// TODO: thumbnail upload
+		thumbnail: String,
+		// TODO: category upload
+		category: String,
 		nomination: String,
 		description: String,
 	});

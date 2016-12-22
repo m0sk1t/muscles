@@ -333,10 +333,9 @@ module.exports = (app) => {
 					prize: req.body.prize,
 					dateEnd: req.body.dateEnd,
 					dateStart: req.body.dateStart,
-					freeVoices: req.body.freeVoices,
-					paidVoices: req.body.paidVoices,
 					description: req.body.description,
-					participants: req.body.participants
+					participants: req.body.participants,
+					dateParticipate: req.body.dateParticipate,
 				}
 			}, (err, contest) => {
 				res.json(contest);
@@ -352,10 +351,9 @@ module.exports = (app) => {
 				contest.owner = req.manager._id;
 				contest.dateEnd = req.body.dateEnd;
 				contest.dateStart = req.body.dateStart;
-				contest.freeVoices = req.body.freeVoices;
-				contest.paidVoices = req.body.paidVoices;
 				contest.description = req.body.description;
 				contest.participants = req.body.participants;
+				contest.dateParticipate = req.body.dateParticipate;
 				contest.save((err) => {
 					res.json(contest);
 				});

@@ -16,11 +16,14 @@ angular.module('Services', []).factory('User', ['$http',
 			get_contest: function(id, s, e) {
 				return $http.get('/contest/' + id).then(s, e);
 			},
-			get_contest_participants: function(id, s, e) {
-				return $http.get('/contest_participants/' + id).then(s, e);
-			},
 			add_contest_participant: function(id, s, e) {
 				return $http.put('/contest/' + id + '/add_participant').then(s, e);
+			},
+			add_paid_like: function(id, pid, s, e) {
+				return $http.put('/contest/' + id + '/add_paid_like/' + pid).then(s, e);
+			},
+			add_free_like: function(id, pid, s, e) {
+				return $http.put('/contest/' + id + '/add_free_like/' + pid).then(s, e);
 			},
 			rm_contest_participant: function(id, s, e) {
 				return $http.put('/contest/' + id + '/rm_participant').then(s, e);
