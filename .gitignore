@@ -4,6 +4,8 @@ logs
 npm-debug.log*
 artillery*
 
+.vscode
+
 #salt
 routes/salt.js
 routes/cloudinary_config.js
