@@ -9,7 +9,6 @@ gulp.task('build_libs', function() {
 	gulp.src([
 			'static/libs/jquery/dist/jquery.min.js',
 			'static/libs/angular/angular.min.js',
-			'static/libs/ng-facebook/ngFacebook.js',
 			'static/libs/angular/locale/ngLocale.js',
 			'static/libs/moment/min/moment.min.js',
 			'static/libs/moment/locale/ru.js',
@@ -29,6 +28,8 @@ gulp.task('build_libs', function() {
 			'static/libs/froala-wysiwyg-editor/js/plugins/paragraph_format.min.js',
 			'static/libs/angular-froala/src/angular-froala.js',
 			'static/libs/angular-froala/src/froala-sanitize.js',
+			'static/libs/angular-ui-calendar/src/calendar.js',
+			'static/libs/fullcalendar/dist/fullcalendar.min.js',
 			'static/libs/angularjs-datepicker/dist/angular-datepicker.min.js',
 		])
 		.pipe(concat('libs.js'))

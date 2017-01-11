@@ -4,11 +4,38 @@ angular.module('Services', []).factory('User', ['$http',
 			get: function(s, e) {
 				return $http.get('/user').then(s, e);
 			},
+			get_favs: function(s, e) {
+				return $http.get('/favs').then(s, e);
+			},
 			get_hobbies: function(s, e) {
 				return $http.get('/hobbies').then(s, e);
 			},
 			get_sports: function(s, e) {
 				return $http.get('/sports').then(s, e);
+			},
+			get_contest: function(id, s, e) {
+				return $http.get('/contest/' + id).then(s, e);
+			},
+			add_contest_participant: function(id, s, e) {
+				return $http.put('/contest/' + id + '/add_participant').then(s, e);
+			},
+			add_paid_like: function(id, pid, s, e) {
+				return $http.put('/contest/' + id + '/add_paid_like/' + pid).then(s, e);
+			},
+			add_free_like: function(id, pid, s, e) {
+				return $http.put('/contest/' + id + '/add_free_like/' + pid).then(s, e);
+			},
+			rm_contest_participant: function(id, s, e) {
+				return $http.put('/contest/' + id + '/rm_participant').then(s, e);
+			},
+			get_competition: function(id, s, e) {
+				return $http.get('/competition/' + id).then(s, e);
+			},
+			add_mark: function(opt, s, e) {
+				return $http.put('/user/add_mark/' + opt.id, opt).then(s, e);
+			},
+			rm_mark: function(opt, s, e) {
+				return $http.put('/user/rm_mark/' + opt.id, opt).then(s, e);
 			},
 			add_university: function(opt, s, e) {
 				return $http.put('/user/add_university', opt).then(s, e);

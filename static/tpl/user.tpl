@@ -23,12 +23,13 @@
 					</div>
 					<div class="ya-user__config-block ya-clearfix">
 						<div class="ya-span-2-3">
-							<div class="ya-user__raiting ya-raiting ya-clearfix">
-								<span class="ya-raiting__star ya-raiting__star_empty"></span>
-								<span class="ya-raiting__star ya-raiting__star_half"></span>
-								<span class="ya-raiting__star ya-raiting__star_full"></span>
-								<span class="ya-raiting__star ya-raiting__star_full"></span>
-								<span class="ya-raiting__star ya-raiting__star_full"></span>
+							<div class="ya-user__raiting ya-raiting">
+								<span>{{rating}}</span>
+								<span ng-click="mark(1);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 1, 'ya-raiting__star_empty': !rating, 'ya-raiting__star_half': (rating>0)&&(rating<1)}"></span>
+								<span ng-click="mark(2);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 2, 'ya-raiting__star_empty': rating === 1, 'ya-raiting__star_half': (rating>1)&&(rating<2)}"></span>
+								<span ng-click="mark(3);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 3, 'ya-raiting__star_empty': rating === 2, 'ya-raiting__star_half': (rating>2)&&(rating<3)}"></span>
+								<span ng-click="mark(4);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 4, 'ya-raiting__star_empty': rating === 3, 'ya-raiting__star_half': (rating>3)&&(rating<4)}"></span>
+								<span ng-click="mark(5);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 5, 'ya-raiting__star_empty': rating === 4, 'ya-raiting__star_half': (rating>4)&&(rating<5)}"></span>
 							</div>
 						</div>
 						<div class="ya-user__options ya ya-span-1-3">
@@ -40,7 +41,7 @@
 					</div>
 				</div>
 				<div ng-if="options.user._id !== user._id" class="actions">
-					<span ng-class="{fav: in_fav()}" ng-click="fav();">&#9825;</span>
+					<span ng-class="{fav: in_fav(user._id)}" ng-click="fav();">&#9825;</span>
 					<button ng-click="write_message();">Написать сообщение</button>
 				</div>
 				<div class="ya-user__sports ya-sidebar-info ya-relative">

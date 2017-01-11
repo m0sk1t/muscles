@@ -2,7 +2,9 @@ module.exports = (app) => {
 	var Competition = require('../models/Competition');
 	app.get('/competition/:id', (req, res) => {
 		if (req.params.id === 'all') {
-			Competition.find({}, (err, competitions) => {
+			Competition.find({
+				end: { $gt: Date.now() }
+			}, (err, competitions) => {
 				res.json(competitions);
 			});
 		} else {

@@ -46,6 +46,7 @@
 	>
 		<div ng-repeat="video in videos track by $index" style="width: 10%">
 			<span style="background-color: #666" ng-click="delete_video(video._id, $index)">DEL</span>{{video.title}}
+			<a href="#/manage/user/{{video.owner}}" target="_blank">Посмотреть профиль пользователя</a>
 			<img ng-src="{{video.thumbnail}}">
 		</div>
 	</section>
@@ -55,6 +56,7 @@
 	>
 		<div ng-repeat="photo in photos track by $index" style="width: 10%">
 			<span style="background-color: #666" ng-click="delete_photo(photo._id, $index)">DEL</span>{{photo.title}}
+			<a href="#/manage/user/{{photo.owner}}" target="_blank">Посмотреть профиль пользователя</a>
 			<img ng-src="{{photo.image}}">
 		</div>
 	</section>
@@ -64,7 +66,7 @@
 	>
 		<div ng-repeat="user in users track by $index" style="width: 10%">
 			<span style="background-color: #666" ng-click="delete_user(user._id, $index)">DEL</span>
-			<a href="#/manage/user/{{user._id}}">EDIT</a>{{user.name + ' ' + user.surname}}
+			<a href="#/manage/user/{{user._id}}" target="_blank">EDIT</a>{{user.name + ' ' + user.surname}}
 			<img ng-src="{{user.avatar || '/images/avatar.jpg'}}">
 		</div>
 	</section>

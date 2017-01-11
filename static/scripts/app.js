@@ -1,4 +1,4 @@
-angular.module('MuscleMan', ['ngLocale', 'ngFileUpload', 'ngRoute', '720kb.datepicker', 'froala', 'Services']).config(['$routeProvider',
+angular.module('MuscleMan', ['ngLocale', 'ui.calendar', 'ngFileUpload', 'ngRoute', '720kb.datepicker', 'froala', 'Services']).config(['$routeProvider',
 	function($routeProvider) {
 		$routeProvider.when('/', {
 			templateUrl: 'tpl/main.tpl',

@@ -23,9 +23,82 @@ angular.module('MuscleMan').controller('UserCtrl', ['$sce','$scope', '$location'
 
 		User.load($routeParams.id, function(res) {
 			$scope.user = res.data;
+			$scope.rating = 0;
+			if ($scope.user.marks) {
+				$scope.user.marks.map(function(el) {
+					$scope.rating += el.mark;
+				});
+				$scope.rating = Math.round(($scope.rating / $scope.user.marks.length) * 100) / 100;
+			}
 		}, function(res) {
 			console.error(res.data);
 		});
+
+		Photo.get($routeParams.id, function(res) {
+			$scope.photos = res.data;
+		}, function(res) {
+			console.error(res.data);
+		});
+
+		Video.get($routeParams.id, function(res) {
+			$scope.videos = res.data;
+		}, function(res) {
+			console.error(res.data);
+		});
+
+		Topic.get($routeParams.id, function(res) {
+			$scope.topics = res.data;
+		}, function(res) {
+			console.error(res.data);
+		});
+
+		$scope.in_fav = function() {
+			return $scope.options.user.favs.indexOf($scope.user._id) >= 0;
+		};
+
+		$scope.fav = function() {
+			if ($scope.in_fav($scope.user._id)) {
+				$scope.options.user.favs = $scope.options.user.favs.filter(function(el) {
+					return el !== $scope.user._id;
+				});
+			} else {
+				$scope.options.user.favs.push($scope.user._id);
+			}
+			$scope.user_save();
+		};
+
+		$scope.is_marked = function() {
+			return $scope.user.marks.filter(function(el) {
+				return el.userid === $scope.options.user._id;
+			}).length;
+		};
+
+		$scope.mark = function(mark) {
+			var rate = function() {
+				$scope.rating = 0;
+				$scope.user.marks.map(function(el) {
+					$scope.rating += el.mark;
+				});
+				$scope.rating = Math.round(($scope.rating / $scope.user.marks.length) * 100) / 100;
+			};
+			if ($scope.is_marked()) {
+				User.rm_mark({ id: $routeParams.id }, function(res) {
+					$scope.user.marks = $scope.user.marks.filter(function(el) {
+						return el.userid !== $scope.options.user._id;
+					});
+					rate();
+				}, function(res) {
+					MSG.err(res.data);
+				});
+			} else {
+				User.add_mark({ id: $routeParams.id, mark: mark }, function(res) {
+					$scope.user.marks.push({ userid: $scope.options.user._id, mark: mark });
+					rate();
+				}, function(res) {
+					MSG.err(res.data);
+				});
+			}
+		};
 
 		$scope.get_age = function(birthDate) {
 			var now = moment(),
@@ -67,24 +140,6 @@ angular.module('MuscleMan').controller('UserCtrl', ['$sce','$scope', '$location'
 		$scope.turn_video_right = function() {
 			$scope.gallery.current_video == $scope.videos.length - 1 ? $scope.gallery.current_video = 0 : $scope.gallery.current_video++;
 		};
-
-		Photo.get($routeParams.id, function(res) {
-			$scope.photos = res.data;
-		}, function(res) {
-			console.error(res.data);
-		});
-
-		Video.get($routeParams.id, function(res) {
-			$scope.videos = res.data;
-		}, function(res) {
-			console.error(res.data);
-		});
-
-		Topic.get($routeParams.id, function(res) {
-			$scope.topics = res.data;
-		}, function(res) {
-			console.error(res.data);
-		});
 
 		$scope.user_save = function() {
 			$scope.$emit('user_save');

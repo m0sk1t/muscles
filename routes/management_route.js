@@ -21,7 +21,9 @@ module.exports = (app) => {
 			res.status(403).send('You shall not pass!');
 			return console.error('You shall not pass!');
 		}
-		Manager.findOne({ manager_uid: req.cookies.manager_uid }, (err, manager) => {
+		Manager.findOne({
+			manager_uid: req.cookies.manager_uid
+		}, (err, manager) => {
 			if (err || !manager) return console.error(err || 'There is no manager');
 			req.manager = manager;
 			next();
@@ -29,8 +31,13 @@ module.exports = (app) => {
 	};
 	app.post('/manager/signin', (req, res) => {
 		var manager_uid = crypto.createHash('sha256').update(req.body.login + salt + req.body.password).digest('hex');
-		Manager.findOne({ manager_uid: manager_uid }, (err, manager) => {
-			if (err || !manager) return console.error(err || 'Wrong credentials');
+		console.log(manager_uid)
+		Manager.findOne({
+			manager_uid: manager_uid
+		}, (err, manager) => {
+			if (err || !manager) return res.status(500).json(err || {
+				error: 'Wrong credentials'
+			});
 			res.cookie('manager_uid', manager_uid, {
 				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365 * 10),
 				httpOnly: true,
@@ -51,7 +58,9 @@ module.exports = (app) => {
 		})
 		.put(management_check, (req, res) => {
 			req.manager.permission.managers ? Manager.findByIdAndUpdate(req.params.id, {
-				$set: { permission: req.body }
+				$set: {
+					permission: req.body
+				}
 			}, (err, manager) => {
 				if (err) return console.error(err);
 				res.json(manager);
@@ -64,6 +73,7 @@ module.exports = (app) => {
 				manager.login = req.body.login;
 				manager.manager_uid = manager_uid;
 				manager.save((err) => {
+					if (err) return console.error(err);
 					res.json(manager);
 				});
 			} else {
@@ -85,7 +95,9 @@ module.exports = (app) => {
 			creDate: {
 				$lt: req.params.credate
 			}
-		}) /*.limit(3)*/ .sort({ creDate: -1 }).exec((err, users) => {
+		}) /*.limit(3)*/ .sort({
+			creDate: -1
+		}).exec((err, users) => {
 			if (err) return console.error(err);
 			res.json(users);
 		});
@@ -118,7 +130,9 @@ module.exports = (app) => {
 			creDate: {
 				$lt: req.params.credate
 			}
-		}) /*.limit(3)*/ .sort({ creDate: -1 }).exec((err, photos) => {
+		}) /*.limit(3)*/ .sort({
+			creDate: -1
+		}).exec((err, photos) => {
 			if (err) return console.error(err);
 			res.json(photos);
 		});
@@ -140,7 +154,9 @@ module.exports = (app) => {
 			creDate: {
 				$lt: req.params.credate
 			}
-		}) /*.limit(3)*/ .sort({ creDate: -1 }).exec((err, videos) => {
+		}) /*.limit(3)*/ .sort({
+			creDate: -1
+		}).exec((err, videos) => {
 			if (err) return console.error(err);
 			res.json(videos);
 		});
@@ -160,7 +176,9 @@ module.exports = (app) => {
 			creDate: {
 				$lt: req.params.credate
 			}
-		}) /*.limit(3)*/ .sort({ creDate: -1 }).exec((err, topics) => {
+		}) /*.limit(3)*/ .sort({
+			creDate: -1
+		}).exec((err, topics) => {
 			if (err) return console.error(err);
 			res.json(topics);
 		});
@@ -177,7 +195,9 @@ module.exports = (app) => {
 	*/
 	app.route('/manage/hobbie/:id')
 		.put(management_check, (req, res) => {
-			req.manager.permission.hobbies ? Hobbie.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, manager) => {
+			req.manager.permission.hobbies ? Hobbie.findByIdAndUpdate(req.params.id, {
+				$set: req.body
+			}, (err, manager) => {
 				if (err) return console.error(err);
 				res.json(manager);
 			}) : res.status(403).send('Permission denied');
@@ -206,7 +226,9 @@ module.exports = (app) => {
 	*/
 	app.route('/manage/sport/:id')
 		.put(management_check, (req, res) => {
-			req.manager.permission.sports ? Sport.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, manager) => {
+			req.manager.permission.sports ? Sport.findByIdAndUpdate(req.params.id, {
+				$set: req.body
+			}, (err, manager) => {
 				if (err) return console.error(err);
 				res.json(manager);
 			}) : res.status(403).send('Permission denied');
@@ -238,7 +260,9 @@ module.exports = (app) => {
 			creDate: {
 				$lt: req.params.credate
 			}
-		}) /*.limit(3)*/ .sort({ creDate: -1 }).exec((err, articles) => {
+		}) /*.limit(3)*/ .sort({
+			creDate: -1
+		}).exec((err, articles) => {
 			if (err) return console.error(err);
 			res.json(articles);
 		});
@@ -251,7 +275,10 @@ module.exports = (app) => {
 		})
 		.put(management_check, (req, res) => {
 			req.manager.permission.articles ? Article.findByIdAndUpdate(req.params.id, {
-				$set: { title: req.body.title, text: req.body.text }
+				$set: {
+					title: req.body.title,
+					text: req.body.text
+				}
 			}, (err, article) => {
 				res.json(article);
 			}) : res.status(403).send('Permission denied');
@@ -285,7 +312,9 @@ module.exports = (app) => {
 			creDate: {
 				$lt: req.params.credate
 			}
-		}) /*.limit(3)*/ .sort({ creDate: -1 }).exec((err, contests) => {
+		}) /*.limit(3)*/ .sort({
+			creDate: -1
+		}).exec((err, contests) => {
 			if (err) return console.error(err);
 			res.json(contests);
 		});
@@ -304,10 +333,9 @@ module.exports = (app) => {
 					prize: req.body.prize,
 					dateEnd: req.body.dateEnd,
 					dateStart: req.body.dateStart,
-					freeVoices: req.body.freeVoices,
-					paidVoices: req.body.paidVoices,
 					description: req.body.description,
-					participants: req.body.participants
+					participants: req.body.participants,
+					dateParticipate: req.body.dateParticipate,
 				}
 			}, (err, contest) => {
 				res.json(contest);
@@ -323,10 +351,9 @@ module.exports = (app) => {
 				contest.owner = req.manager._id;
 				contest.dateEnd = req.body.dateEnd;
 				contest.dateStart = req.body.dateStart;
-				contest.freeVoices = req.body.freeVoices;
-				contest.paidVoices = req.body.paidVoices;
 				contest.description = req.body.description;
 				contest.participants = req.body.participants;
+				contest.dateParticipate = req.body.dateParticipate;
 				contest.save((err) => {
 					res.json(contest);
 				});
@@ -349,7 +376,9 @@ module.exports = (app) => {
 			creDate: {
 				$lt: req.params.credate
 			}
-		}) /*.limit(3)*/ .sort({ creDate: -1 }).exec((err, competitions) => {
+		}) /*.limit(3)*/ .sort({
+			creDate: -1
+		}).exec((err, competitions) => {
 			if (err) return console.error(err);
 			res.json(competitions);
 		});

@@ -53,6 +53,14 @@ var mongoose = require('mongoose'),
 			type: Array,
 			default: []
 		},
+		favs: {
+			type: Array,
+			default: []
+		},
+		marks: {
+			type: Array,
+			default: []
+		},
 		subscribers: {
 			type: Array,
 			default: []
@@ -100,6 +108,11 @@ var mongoose = require('mongoose'),
 			default: ''
 		},
 
+		likes: {
+			free: Number,
+			paid: Number,
+		},
+
 		sex: {
 			type: String,
 			default: ''
@@ -119,14 +132,8 @@ var mongoose = require('mongoose'),
 		waist: Number, // талия
 		huckle: Number, // бёдра
 
-		location_city: {
-			type: String,
-			default: ''
-		},
-		location_country: {
-			type: String,
-			default: ''
-		},
+		location_city: {},
+		location_country: {},
 
 		settings: {
 			comments_enabled: {

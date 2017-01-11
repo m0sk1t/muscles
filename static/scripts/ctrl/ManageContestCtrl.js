@@ -1,6 +1,7 @@
 angular.module('MuscleMan').controller('ManageContestCtrl', ['$scope', '$location', 'Manager', '$routeParams',
 	function($scope, $location, Manager, $routeParams) {
-		Manager.get_contest($routeParams.id, function(res) {
+		var id = $routeParams.id;
+		Manager.get_contest(id, function(res) {
 			$scope.contest = res.data;
 		}, function(res) {
 			console.error(res.data);
@@ -10,10 +11,10 @@ angular.module('MuscleMan').controller('ManageContestCtrl', ['$scope', '$locatio
 			$scope.update_contest();
 		}
 		$scope.update_contest = function() {
-			Manager.update_contest($routeParams.id, $scope.contest, function(res) {
-				window.history.back();
+			Manager.update_contest(id, $scope.contest, function(res) {
+				alert('Saved!');
 			}, function(res) {
-				console.error(res.data);
+				alert('Error! ' + res.data);
 			});
 		};
 	}
