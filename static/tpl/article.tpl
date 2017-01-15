@@ -6,18 +6,55 @@
 					<h2 class="ya-media-page__title ya-title ya-relative">
 						Новости в мире спорта
 					</h2>
-					<div class="ya-articles__filter">
-
+					<div class="ya-articles__filter ya-hr ya-clearfix">
+						<div class="ya-grid-1-2">
+							<div class="ya-clearfix">
+								<div class="ya-grid-1-3 ya-right">
+									<label for="ya-sport" class="ya-input__label ya-input__label_big">
+										Вид спорта
+									</label>
+								</div>
+								<div class="ya-grid-2-3">
+									<div class="ya-input__field-wrapper">
+										<select id="ya-sport" class="ya-input__field ya-input__field_select ya-input__select">
+											<option value=""></option>
+											<option value="Спорт 1">Спорт 1</option>
+											<option value="Спорт 2">Спорт 2</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ya-grid-1-2">
+							<div class="ya-clearfix">
+								<div class="ya-grid-1-3 ya-right">
+									<label for="ya-theme" class="ya-input__label ya-input__label_big">
+										Тематика
+									</label>
+								</div>
+								<div class="ya-grid-2-3">
+									<div class="ya-input__field-wrapper">
+										<select id="ya-theme" class="ya-input__field ya-input__field_select ya-input__select">
+											<option value=""></option>
+											<option value="Тема 1">Тема 1</option>
+											<option value="Тема 2">Тема 2</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ya-articles__subtitle">
+						Последние добавленные
 					</div>
 					<div class="ya-article__item">
 						<div class="ya-bordered-box">
 							<div class="ya-articles__content ya-article__content">
-								<h3 class="ya-articles__title ya-article__title">Соревнования по бодибилдингу в г. Пенза {{article.title}}</h3>
+								<h3 class="ya-articles__title ya-article__title">{{article.title}}</h3>
 								<div class="ya-articles__date ya-article__date">
 									07.07.2016
 								</div>
 								<div class="ya-articles__desc">
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod sem eget bibendum dapibus. Quisque imperdiet pulvinar libero, sed lacinia tortor lacinia non.
 									{{article_html(article.text)}}
 								</div>
 								<div class="ya-article__social-share ya-share-box">
