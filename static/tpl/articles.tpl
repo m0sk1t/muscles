@@ -6,8 +6,46 @@
 					<h2 class="ya-media-page__title ya-title ya-relative">
 						Новости в мире спорта
 					</h2>
-					<div class="ya-articles__filter">
-
+					<div class="ya-articles__filter ya-hr ya-clearfix">
+						<div class="ya-grid-1-2">
+							<div class="ya-clearfix">
+								<div class="ya-grid-1-3 ya-right">
+									<label for="ya-sport" class="ya-input__label ya-input__label_big">
+										Вид спорта
+									</label>
+								</div>
+								<div class="ya-grid-2-3">
+									<div class="ya-input__field-wrapper">
+										<select id="ya-sport" class="ya-input__field ya-input__field_select ya-input__select">
+											<option value=""></option>
+											<option value="Спорт 1">Спорт 1</option>
+											<option value="Спорт 2">Спорт 2</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ya-grid-1-2">
+							<div class="ya-clearfix">
+								<div class="ya-grid-1-3 ya-right">
+									<label for="ya-theme" class="ya-input__label ya-input__label_big">
+										Тематика
+									</label>
+								</div>
+								<div class="ya-grid-2-3">
+									<div class="ya-input__field-wrapper">
+										<select id="ya-theme" class="ya-input__field ya-input__field_select ya-input__select">
+											<option value=""></option>
+											<option value="Тема 1">Тема 1</option>
+											<option value="Тема 2">Тема 2</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ya-articles__subtitle">
+						Последние добавленные
 					</div>
 					<div class="ya-articles__list">
 						<div class="ya-articles__item">
