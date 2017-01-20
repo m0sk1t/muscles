@@ -558,26 +558,32 @@
 				<div class="ya-pop-up__wrapper">
 					<span class="ya-pop-up__close-btn" ng-click="gallery.add_image = null;">X</span>
 					<div class="ya-pop-up__content" ng-click="$event.stopPropagation();">
-						<div
-							class="drop-box"
-							ngf-multiple="true"
-							ngf-pattern="'image/*'"
-							ngf-drop="upload_files($files)"
-							ngf-drag-over-class="'dragover'"
-							ngf-select="upload_files($files)"
-							ng-if="options.user._id === user._id"
-						>
-							Загрузить фотографию
-						</div>
 						<div class="ya-pick-photo">
-							<div class="ya-photos ya-photos_profile">
-								<div class="ya-photos__list ya-photos__list_empty" ng-show="!photos || !photos.length">
-									Пока не добавлено ни одной фотографии
+							<div class="ya-pick-photo__wrapper">
+								<div class="ya-center ya-pick-photo__top">
+									<div
+										class="ya-pick-photo__btn ya-btn ya-btn_primary ya-btn_inline"
+										ngf-multiple="true"
+										ngf-pattern="'image/*'"
+										ngf-drop="upload_files($files)"
+										ngf-drag-over-class="'dragover'"
+										ngf-select="upload_files($files)"
+										ng-if="options.user._id === user._id"
+									>
+										Загрузить фотографию
+									</div>
 								</div>
-								<div class="ya-photos__list ya-clearfix" ng-show="photos && photos.length">
-									<div class="ya-photos__item ya-photos__item_large ya-inner-grid-1-4" ng-repeat="p in photos">
-										<div class="ya-photos__wrapper">
-											<div class="ya-photos__img ya-photos__img_large" ng-click="add_to_topic(p.image);" ng-style="{'background-image':'url(' + p.image + ')'}"></div>
+								<div class="ya-pick-photo__list">
+									<div class="ya-photos ya-photos_profile">
+										<div class="ya-photos__list ya-photos__list_empty" ng-show="!photos || !photos.length">
+											Пока не добавлено ни одной фотографии
+										</div>
+										<div class="ya-photos__list ya-clearfix" ng-show="photos && photos.length">
+											<div class="ya-photos__item ya-photos__item_large ya-inner-grid-1-4" ng-repeat="p in photos">
+												<div class="ya-photos__wrapper">
+													<div class="ya-photos__img ya-photos__img_large" ng-click="add_to_topic(p.image);" ng-style="{'background-image':'url(' + p.image + ')'}"></div>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
