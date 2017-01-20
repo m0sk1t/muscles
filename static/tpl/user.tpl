@@ -24,12 +24,12 @@
 					<div class="ya-user__config-block ya-clearfix">
 						<div class="ya-span-2-3">
 							<div class="ya-user__raiting ya-raiting">
-								<span>{{rating}}</span>
-								<span ng-click="mark(1);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 1, 'ya-raiting__star_empty': !rating, 'ya-raiting__star_half': (rating>0)&&(rating<1)}"></span>
-								<span ng-click="mark(2);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 2, 'ya-raiting__star_empty': rating === 1, 'ya-raiting__star_half': (rating>1)&&(rating<2)}"></span>
-								<span ng-click="mark(3);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 3, 'ya-raiting__star_empty': rating === 2, 'ya-raiting__star_half': (rating>2)&&(rating<3)}"></span>
-								<span ng-click="mark(4);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 4, 'ya-raiting__star_empty': rating === 3, 'ya-raiting__star_half': (rating>3)&&(rating<4)}"></span>
+								<!--span>{{rating}}</span-->
 								<span ng-click="mark(5);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 5, 'ya-raiting__star_empty': rating === 4, 'ya-raiting__star_half': (rating>4)&&(rating<5)}"></span>
+								<span ng-click="mark(4);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 4, 'ya-raiting__star_empty': rating === 3, 'ya-raiting__star_half': (rating>3)&&(rating<4)}"></span>
+								<span ng-click="mark(3);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 3, 'ya-raiting__star_empty': rating === 2, 'ya-raiting__star_half': (rating>2)&&(rating<3)}"></span>
+								<span ng-click="mark(2);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 2, 'ya-raiting__star_empty': rating === 1, 'ya-raiting__star_half': (rating>1)&&(rating<2)}"></span>
+								<span ng-click="mark(1);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 1, 'ya-raiting__star_empty': !rating, 'ya-raiting__star_half': (rating>0)&&(rating<1)}"></span>
 							</div>
 						</div>
 						<div class="ya-user__options ya ya-span-1-3">
@@ -325,7 +325,7 @@
 				</div>
 				<div class="ya-page__block ya-user__photos">
 					<div class="ya-photos ya-photos_profile">
-						<h2 class="ya-photos__title"><a href="#/user/{{user._id}}/videos/all" class="ya-photos__link">Видео</a></h2>
+						<h2 class="ya-photos__title ya-photos__title_video"><a href="#/user/{{user._id}}/videos/all" class="ya-photos__link">Видео</a></h2>
 						<div class="ya-photos__list ya-photos__list_empty" ng-show="!videos || !videos.length">
 							Пока не добавлено ни одного видео
 						</div>
@@ -375,10 +375,10 @@
 													<div class="ya-pop-btn__pop-up">
 														<ul class="ya-pop-btn__list">
 															<li class="ya-pop-btn__item">
-																<span class="ya-pop-btn__link" ng-click="gallery.add_image = !gallery.add_image;">Фото</span>
+																<span class="ya-pop-btn__link ya-pop-btn__link_photo" ng-click="gallery.add_image = !gallery.add_image;">Фото</span>
 															</li>
 															<li class="ya-pop-btn__item">
-																<span class="ya-pop-btn__link" ng-click="gallery.add_video = !gallery.add_video;">Видео</span>
+																<span class="ya-pop-btn__link ya-pop-btn__link_video" ng-click="gallery.add_video = !gallery.add_video;">Видео</span>
 															</li>
 														</ul>
 													</div>
@@ -609,17 +609,76 @@
 						</div>
 						<div class="ya-span-1-4 ya-relative ya-pop-up__additional">
 							<div class="ya-pop-up-comments">
-								<div class="comment" ng-repeat="c in photos[gallery.current_photo].comments">
-									<a href="#/user/{{c.userid}}">{{c.name + ' ' + c.surname}}</a>:
-									{{c.comment}}
-									<i
-										class="fa fa-lg fa-close"
-										ng-if="c.userid === options.user._id"
-										ng-click="remove_comment(gallery.current_photo, c.comment)"
-									></i>
+							<div class="ya-pop-up-comments__wrapper">
+								<div class="ya-wall__news-author ya-relative ya-clearfix">
+									<div class="ya-avatar ya-avatar_small ya-wall__avatar">
+										<img ng-src="{{c.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
+									</div>
+									<div class="ya-wall__news-info">
+										<div class="ya-wall__author-name">
+											Ивавнов Иван
+										</div>
+										<div class="ya-wall__news-date">
+											01.01.2017
+										</div>
+									</div>
 								</div>
-								<input type="text" ng-model="gallery.comment">
-								<button ng-click="add_comment(gallery.current_photo)">&gt;</button>
+								<div class="ya-pop-up-comments__title">
+									{{photos[gallery.current_photo].title}}
+								</div>
+								<div class="ya-pop-up-comments__likes-wrapper">
+									<span class="ya-pop-up-comments__likes-link" ng-if="options.user">
+										<span
+											class="ya-pop-up-comments__likes"
+											ng-click="like(photos[gallery.current_photo], gallery.current_photo)"
+										></span>
+									</span>
+									<span class="ya-pop-up-comments__likes-count" ng-if="options.user">
+										{{photos[gallery.current_photo].likes.length}} Нравится
+									</span>
+								</div>
+								<div class="ya-walls__comments">
+									<div class="ya-comments ya-comments_small">
+										<div class="ya-comments__list">
+											<div class="ya-comments__item" ng-repeat="c in photos[gallery.current_photo].comments">
+												<div class="ya-wall__news-author ya-relative ya-clearfix">
+													<div class="ya-wall__news-remove" ng-if="c.userid === options.user._id" ng-click="remove_comment(gallery.current_photo, c.comment)">x</div>
+													<div class="ya-avatar ya-avatar_small ya-wall__avatar">
+														<img ng-src="{{c.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
+													</div>
+													<div class="ya-wall__news-info">
+														<div class="ya-wall__author-name">
+															{{c.name}} {{c.surname}}
+														</div>
+														<div class="ya-wall__news-date">
+															{{birth_date(c.date)}}
+														</div>
+													</div>
+												</div>
+												<div class="ya-wall__news-text">
+													<pre>{{c.comment}}</pre>
+												</div>
+											</div>
+										</div>
+									</div>
+									<form
+										ng-submit="add_comment(gallery.current_photo)"
+										class="ya-comments__add-form ya-input"
+									>
+										<div class="ya-form__input ya-input ya-input_inline">
+											<input
+											type="text"
+											ng-model="gallery.comment"
+											placeholder="Комментировать"
+											class="ya-comments__add-field ya-input__field"
+										>
+										</div>
+										<div class="ya-form__input ya-input ya-input_inline">
+											<!--button class="ya-btn ya-btn_primary ya-btn_small ya-btn_plus ya-btn_inline ya-new-post__btn" ng-click="add_comment(gallery.current_photo)">Комментировать</button-->
+										</div>
+									</form>
+								</div>
+							</div>
 							</div>
 						</div>
 					</div>
@@ -627,37 +686,96 @@
 			</div>
 		</section>
 		<section tabindex="0" ng-hide="gallery.current_video === null" ng-keypress="escape_pressed($event) && (gallery.current_video = null);">
-			<div class="ya-pop-up ya-pop-up_active" ng-click="set_current_video(null)">
+			<div class="ya-pop-up ya-pop-up_table ya-pop-up_active" ng-click="set_current_video(null)">
 				<div class="ya-pop-up__wrapper">
 					<span class="ya-pop-up__close-btn" ng-click="set_current_video(null)">X</span>
 					<div class="ya-pop-up__content ya-clearfix" ng-click="$event.stopPropagation();">
 						<div class="ya-span-3-4 ya-relative ya-pop-up__main">
-							<iframe ng-if="videos[gallery.current_video].type==='vimeo'" width="640" height="480" ng-src="{{include_video('vimeo', videos[gallery.current_video].link)}}" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen></iframe>
-							<iframe ng-if="videos[gallery.current_video].type==='youtube'" width="640" height="480" ng-src="{{include_video('youtube', videos[gallery.current_video].link)}}" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen></iframe>
-							<span
-								class="ya-pop-up-photo__btn ya-pop-up-photo__btn_left"
-								ng-click="turn_video_left();"
-							>
-							</span>
-							<span
-								class="ya-pop-up-photo__btn ya-pop-up-photo__btn_right"
-								ng-click="turn_video_right()"
-							>
-							</span>
+							<div class="ya-pop-up__table">
+								<div class="ya-pop-up__cell">
+									<iframe ng-if="videos[gallery.current_video].type==='vimeo'" width="640" height="480" ng-src="{{include_video('vimeo', videos[gallery.current_video].link)}}" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen></iframe>
+									<iframe ng-if="videos[gallery.current_video].type==='youtube'" width="640" height="480" ng-src="{{include_video('youtube', videos[gallery.current_video].link)}}" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen></iframe>
+									<span
+										class="ya-pop-up-photo__btn ya-pop-up-photo__btn_left"
+										ng-click="turn_video_left();"
+									>
+									</span>
+									<span
+										class="ya-pop-up-photo__btn ya-pop-up-photo__btn_right"
+										ng-click="turn_video_right()"
+									>
+									</span>
+								</div>
+							</div>
 						</div>
 						<div class="ya-span-1-4 ya-relative ya-pop-up__additional">
 							<div class="ya-pop-up-comments">
-								<div class="comment" ng-repeat="c in videos[gallery.current_video].comments">
-									<a href="#/user/{{c.userid}}">{{c.name + ' ' + c.surname}}</a>:
-									{{c.comment}}
-									<i
-										class="fa fa-lg fa-close"
-										ng-if="c.userid === options.user._id"
-										ng-click="remove_comment(gallery.current_video, c.comment)"
-									></i>
+							<div class="ya-pop-up-comments__wrapper">
+								<div class="ya-wall__news-author ya-relative ya-clearfix">
+									<div class="ya-avatar ya-avatar_small ya-wall__avatar">
+										<img ng-src="{{c.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
+									</div>
+									<div class="ya-wall__news-info">
+										<div class="ya-wall__author-name">
+											Ивавнов Иван
+										</div>
+										<div class="ya-wall__news-date">
+											01.01.2017
+										</div>
+									</div>
 								</div>
-								<input type="text" ng-model="gallery.comment">
-								<button ng-click="add_comment(gallery.current_video)">&gt;</button>
+								<div class="ya-pop-up-comments__title">
+									{{videos[gallery.current_video].title}}
+								</div>
+								<div>
+									<span>
+										<span ng-if="options.user">
+											{{videos[gallery.current_video].likes.length}} Нравится
+										</span>
+									</span>
+								</div>
+								<div class="ya-walls__comments">
+									<div class="ya-comments ya-comments_small">
+										<div class="ya-comments__list">
+											<div class="ya-comments__item" ng-repeat="c in videos[gallery.current_video].comments">
+												<div class="ya-wall__news-author ya-relative ya-clearfix">
+													<div class="ya-wall__news-remove" ng-if="c.userid === options.user._id" ng-click="remove_comment(gallery.current_video, c.comment)">x</div>
+													<div class="ya-avatar ya-avatar_small ya-wall__avatar">
+														<img ng-src="{{c.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
+													</div>
+													<div class="ya-wall__news-info">
+														<div class="ya-wall__author-name">
+															{{c.name}} {{c.surname}}
+														</div>
+														<div class="ya-wall__news-date">
+															{{birth_date(c.date)}}
+														</div>
+													</div>
+												</div>
+												<div class="ya-wall__news-text">
+													<pre>{{c.comment}}</pre>
+												</div>
+											</div>
+										</div>
+									</div>
+									<form
+										ng-submit="add_comment(gallery.current_video)"
+										class="ya-comments__add-form ya-input"
+									>
+										<div class="ya-form__input ya-input ya-input_inline">
+											<input
+											type="text"
+											ng-model="gallery.comment"
+											placeholder="Комментировать"
+											class="ya-comments__add-field ya-input__field"
+										>
+										</div>
+										<div class="ya-form__input ya-input ya-input_inline">
+											<!--button class="ya-btn ya-btn_primary ya-btn_small ya-btn_plus ya-btn_inline ya-new-post__btn" ng-click="add_comment(gallery.current_photo)">Комментировать</button-->
+										</div>
+									</form>
+								</div>
+							</div>
 							</div>
 						</div>
 					</div>
