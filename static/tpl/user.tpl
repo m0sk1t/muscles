@@ -733,11 +733,15 @@
 								<div class="ya-pop-up-comments__title">
 									{{videos[gallery.current_video].title}}
 								</div>
-								<div>
-									<span>
-										<span ng-if="options.user">
-											{{videos[gallery.current_video].likes.length}} Нравится
-										</span>
+								<div class="ya-pop-up-comments__likes-wrapper">
+									<span class="ya-pop-up-comments__likes-link" ng-if="options.user">
+										<span
+											class="ya-pop-up-comments__likes"
+											ng-click="like(videos[gallery.current_video], gallery.current_video)"
+										></span>
+									</span>
+									<span class="ya-pop-up-comments__likes-count" ng-if="options.user">
+										{{videos[gallery.current_video].likes.length}} Нравится
 									</span>
 								</div>
 								<div class="ya-walls__comments">
