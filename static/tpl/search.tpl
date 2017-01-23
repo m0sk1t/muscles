@@ -8,13 +8,6 @@
 				<div class="ya-form ya-form_wide">
 					<div class="ya-form__input ya-input ya-input_inline">
 						<div class="ya-clearfix">
-							<div class="ya-grid-1-1 ya-center">
-								<button ng-click="find_users()" class="ya-btn ya-btn_secondary ya-btn_inline">Искать!</button>
-							</div>
-						</div>
-					</div>
-					<div class="ya-form__input ya-input ya-input_inline">
-						<div class="ya-clearfix">
 							<div class="ya-input__label ya-input__label_block">
 								<label for="ya-name" class="ya-input__label">
 									Спортсмен
@@ -222,6 +215,13 @@
 								<div class="ya-input__field-wrapper">
 									<textarea id="ya-adv" placeholder="окно ввода ключевых слов объявления" class="ya-input__field ya-input__field_textarea" type="text" ng-model="search.fio"><textarea/>
 								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ya-form__input ya-input ya-input_inline">
+						<div class="ya-clearfix">
+							<div class="ya-grid-1-1 ya-center">
+								<button ng-click="find_users()" class="ya-btn ya-btn_secondary ya-btn_inline">Искать!</button>
 							</div>
 						</div>
 					</div>

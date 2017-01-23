@@ -3,7 +3,7 @@
 		<div class="ya-row">
 			<div class="grid-1-1">
 				<div class="ya-sign-form">
-					<h2 class="ya-sign-form__title ya-center">Регистрация</h2>
+					<h2 class="ya-sign-form__title ya-center">Вход</h2>
 					<form ng-submit="signin()" class="ya-form ya-form_wide ya-sign-form__form">
 						<div class="ya-form__input ya-input ya-input_inline">
 							<div class="ya-clearfix">
@@ -35,7 +35,7 @@
 							<a href="/auth/tw" class="ya-sign-form__social-link ya-sign-form__social-link_tw"></a>
 						</div>
 						<div class="ya-center ya-sign-form__login-link">
-							Еще нет аккаунта? <a href="/#/signin">Зарегистрироваться</a>
+							Еще нет аккаунта? <a href="/#/signup">Зарегистрироваться</a>
 						</div>
 					</form>
 				</div>
