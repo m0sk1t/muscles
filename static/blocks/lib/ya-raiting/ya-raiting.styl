@@ -1,3 +1,4 @@
+smallSizeVal = 0.60
 .ya-raiting
     &__star
         display: inline-block
@@ -18,3 +19,11 @@
             background: url(images/sprite.png) -121px -93px no-repeat
             & ~ ^[0]__star
                 background: url(images/sprite.png) -121px -93px no-repeat
+    &_small
+        transform: scale(smallSizeVal)
+        margin: 0 0 5px 0 !important
+        max-width: 180px
+        float: left
+        position: relative
+        left: -35px
+

@@ -1,0 +1,24 @@
+.ya-add-to-friend
+    display: block
+    text-align: center
+    text-decoration: none
+    &:hover
+        & ^[0]__title
+            text-decoration: underline
+    &__title
+        display: block
+        text-align: center
+        margin-bottom: 8px
+        &_remove
+            color: #f09400
+    &__icon
+        display: block
+        width: 28px
+        height: 25px
+        border-radius: 3px
+        background: url(images/sprite.png) -26px -181px no-repeat
+        margin: 0 auto
+        &:hover
+            box-shadow: 0 0 3px rgba(0,0,0,.5)
+        &_remove
+            background: url(images/sprite.png) -55px -181px no-repeat
