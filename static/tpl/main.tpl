@@ -1,17 +1,73 @@
-<article class="main-page">
-	<a href="#/" class="logo">ЛОГОТИП</a>
-	<a href="#/signin" class="auth"><i class="fa fa-2x fa-sign-in"></i>ВОЙТИ</a>
-	или
-	<a href="#/signup" class="auth"><i class="fa fa-2x fa-sign-in"></i>Зарегистрироваться</a>
-	<section>
-		<div class="main-page__buttons">
-			<a href="#/user/{{options.user._id}}">МОЙ ПРОФИЛЬ</a>
-			<a href="#/competitions">Расписание <br>соревнований</a>
-		</div>
-		<p></p>
-		<div class="main-page__buttons">
-			<a href="#/contests">Конкурсы</a>
-			<a href="#/articles">Статьи и<br> Новости</a>
-		</div>
-	</section>
+<article class="ya-main-page">
+    <div class="ya-main-slider">
+        <div class="ya-container ya-relative">
+            <div class="ya-slide ya-slide_3"><img src="/images/slide-3.jpg" /></div>
+            <div class="ya-slide ya-slide_2"><img src="/images/slide-2.jpg" /></div>
+            <div class="ya-slide ya-slide_1"><img src="/images/slide-1.jpg" /></div>
+            <div class="ya-overlay ya-relative">
+                <h1 class="ya-main-page__title">
+                    <span class="ya-main-page__subtitle">Социальная сеть с сфере</span>
+                    <span class="ya-main-page__subtitle">фитнеса и бодибилдинга</span>
+                </h1>
+                <div class="ya-sign-form ya-sign-form_main">
+                    <h2 class="ya-sign-form__title ya-center">Вход</h2>
+                    <form ng-submit="signin()" class="ya-form ya-form_wide ya-sign-form__form">
+                        <div class="ya-form__input ya-input ya-input_inline">
+                            <div class="ya-clearfix">
+                                <div class="ya-input__field-wrapper ya-sign-form__field ya-center">
+                                    <input id="ya-mail" class="ya-input__field" placeholder="Почта" type="text" ng-model="cred.mail" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ya-form__input ya-input ya-input_inline">
+                            <div class="ya-clearfix">
+                                <div class="ya-input__field-wrapper ya-sign-form__field ya-center">
+                                    <input id="ya-pass" class="ya-input__field" placeholder="Пароль" type="password" ng-model="cred.pass" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ya-form__input ya-input ya-input_inline">
+                            <div class="ya-clearfix ya-center">
+                                <button class="ya-btn ya-btn_secondary ya-btn_inline ya-sign-form__submit" type="submit">Войти</button>
+                            </div>
+                        </div>
+                        <div class="ya-center">
+                            Или
+                        </div>
+                        <div class="ya-center ya-sign-form__socials">
+                            <a href="/auth/vk" class="ya-sign-form__social-link ya-sign-form__social-link_vk"></a>
+                            <a href="/auth/ok" class="ya-sign-form__social-link ya-sign-form__social-link_ok"></a>
+                            <a href="/auth/fb" class="ya-sign-form__social-link ya-sign-form__social-link_fb"></a>
+                            <a href="/auth/im" class="ya-sign-form__social-link ya-sign-form__social-link_im"></a>
+                            <a href="/auth/tw" class="ya-sign-form__social-link ya-sign-form__social-link_tw"></a>
+                        </div>
+                        <div class="ya-center ya-sign-form__login-link">
+                            Еще нет аккаунта? <a href="/#/signin">Зарегистрироваться</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ya-bottom-line">
+        <div class="ya-container">
+            <div class="ya-fast-links ya-row">
+                <div class="ya-span-1-3">
+                    <a href="#/competitions" class="ya-fast-link">
+                        <img src="/images/fast-1.jpg" />
+                    </a>
+                </div>
+                <div class="ya-span-1-3">
+                    <a href="#/contests" class="ya-fast-link">
+                        <img src="/images/fast-2.jpg" />
+                    </a>
+                </div>
+                <div class="ya-span-1-3">
+                    <a href="#/articles" class="ya-fast-link">
+                        <img src="/images/fast-3.jpg" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </article>
