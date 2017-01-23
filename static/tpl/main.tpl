@@ -47,6 +47,25 @@
                     </form>
                 </div>
             </div>
+            <div class="ya-slogans ya-relative">
+                <div class="ya-row">
+                    <div class="ya-span-1-3">
+                        <div class="ya-slogans__item ya-center">
+                            Находи спосоров
+                        </div>
+                    </div>
+                    <div class="ya-span-1-3">
+                        <div class="ya-slogans__item ya-center">
+                            Тренируйся
+                        </div>
+                    </div>
+                    <div class="ya-span-1-3">
+                        <div class="ya-slogans__item ya-center">
+                            Побеждай
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="ya-bottom-line">
@@ -66,6 +85,48 @@
                     <a href="#/articles" class="ya-fast-link">
                         <img src="/images/fast-3.jpg" />
                     </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ya-nav-line">
+        <div class="ya-container">
+            <div class="ya-row">
+                <div class="ya-grid-1-1">
+                    <div class="ya-narrower">
+                        <nav class="ya-nav-menu ya-nav-menu_bottom">
+                            <ul class="ya-nav-menu__list">
+                                <li class="ya-nav-menu__item">
+                                    <a href="#" class="ya-nav-menu__link">О проекте</a>
+                                </li>
+                                <li class="ya-nav-menu__item">
+                                    <a href="#" class="ya-nav-menu__link">Реклама на сайте</a>
+                                </li>
+                                <li class="ya-nav-menu__item">
+                                    <a href="#" class="ya-nav-menu__link">Жалобы и предложения</a>
+                                </li>
+                                <li class="ya-nav-menu__item">
+                                    <a href="#" class="ya-nav-menu__link">Пользовательское соглашение</a>
+                                </li>
+                                <li class="ya-nav-menu__item">
+                                    <a href="#" class="ya-nav-menu__link">Контакты</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ya-copyright-line">
+        <div class="ya-container">
+            <div class="ya-row">
+                <div class="ya-grid-1-1">
+                    <div class="ya-narrower">
+                        <div class="ya-copyright">
+                            Все права защищены. Копирование всех материалов только с разрешения правообладателя.
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
