@@ -230,67 +230,22 @@
 			<div class="ya-grid-11-20">
 				<div class="ya-search-result">
 					<div class="ya-search-result__head ya-media-page__title ya-media-page__title_small ya-clearfix">
-						<div class="ya-grid-2-5">
-							<div class="ya-form__input ya-input ya-input_small ya-input_inline">
-								<div class="ya-clearfix">
-									<div class="ya-grid-1-3 ya-right">
-										<label for="ya-sort" class="ya-input__label">
-											Сорт. по
-										</label>
-									</div>
-									<div class="ya-grid-2-3">
-										<div class="ya-input__field-wrapper">
-											<select id="ya-sort" class="ya-input__field ya-input__field_select ya-input__select">
-												<option>По рейтингу</option>
-												<option>По возрасту</option>
-											</select>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="ya-grid-3-5">
-							<div class="ya-grid-1-2">
-								<div class="ya-form__input ya-input ya-input_small ya-input_inline">
-									<div class="ya-clearfix">
-										<div class="ya-grid-1-3 ya-right">
-											<label for="ya-sport" class="ya-input__label">
-												Спорт
-											</label>
-										</div>
-										<div class="ya-grid-2-3">
-											<div class="ya-input__field-wrapper">
-												<select id="ya-sport" class="ya-input__field ya-input__field_select ya-input__select">
-													<option></option>
-													<option>Спорт 1</option>
-													<option>Спорт 2</option>
-												</select>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="ya-grid-1-2">
-								<div class="ya-form__input ya-input ya-input_small ya-input_inline">
-									<div class="ya-clearfix">
-										<div class="ya-grid-1-3 ya-right">
-											<label for="ya-status" class="ya-input__label">
-												Статус
-											</label>
-										</div>
-										<div class="ya-grid-2-3">
-											<div class="ya-input__field-wrapper">
-												<select id="ya-status" class="ya-input__field ya-input__field_select ya-input__select">
-													<option></option>
-													<option>Статус 1</option>
-													<option>Статус 2</option>
-												</select>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						<nav class="ya-nav-menu ya-nav-menu_small ya-clearfix">
+                            <ul class="ya-nav-menu__list">
+                                <li class="ya-nav-menu__item ya-nav-menu__item_active">
+                                    <a href="#" class="ya-nav-menu__link ya-nav-menu__link_active">Показать всех</a>
+                                </li>
+                                <li class="ya-nav-menu__item">
+                                    <a href="#" class="ya-nav-menu__link">Друзья</a>
+                                </li>
+                                <li class="ya-nav-menu__item">
+                                    <a href="#" class="ya-nav-menu__link">Коллеги</a>
+                                </li>
+                                <li class="ya-nav-menu__item">
+                                    <a href="#" class="ya-nav-menu__link">Интересные страницы</a>
+                                </li>
+                            </ul>
+                        </nav>
 					</div>
 					<div class="ya-search-result__list ya-search-result__list_empty" ng-show="!favs || !favs.length">
 						По Вашим параметрам ничего не найдено.
