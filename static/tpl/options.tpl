@@ -1,4 +1,4 @@
-<article class="ya-options ya-container">
+<article class="ya-options ya-container ya-relative" ng-class="{'ya-container_pad':!!showTopMenu, 'ya-container_pad_menu':!showTopMenu}">
 	<div class="ya-narrower">
 		<div class="ya-row">
 			<div class="ya-grid-4-5">
@@ -1270,20 +1270,30 @@
 						<a href="#/search" class="ya-btn__link ya-btn__link_search">Поиск</a>
 					<!--/div-->
 				</div>
-				<div class="ya-page__block ya-page__block_colored">
-					<div class="ya-profile-links ya-clearfix">
-							<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
-								<a href="#/dialogs" class="ya-profile-links__link ya-profile-links__link_chat"><span class="ya-profile-links__link-img ya-profile-links__link-img_chat"></span></a>
+				<div class="ya-profile-links_head">
+					<a href="#" ng-click="$event.preventDefault();showTopMenu = true;" class="ya-sidebar-info__mobile-link ya-center ya-btn ya-btn_primary" ng-show="!showTopMenu">
+							Меню
+					</a>
+					<a href="#" ng-click="$event.preventDefault();showTopMenu = null;" class="ya-sidebar-info__mobile-link ya-sidebar-info__mobile-link_active ya-center ya-btn ya-btn_primary" ng-show="!!showTopMenu">
+						Меню
+					</a>
+					<div class="ya-page__block ya-profile-links ya-page__block_colored" ng-class="{'ya-profile-links_active': !!showTopMenu}">
+						<div class="ya-clearfix">
+							<div class="ya-clearfix ">
+								<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
+									<a href="#/dialogs" class="ya-profile-links__link ya-profile-links__link_chat"><span class="ya-profile-links__link-img ya-profile-links__link-img_chat"></span></a>
+								</div>
+								<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
+									<a href="#/user/{{user._id}}/photos/all" class="ya-profile-links__link ya-profile-links__link_photos"><span class="ya-profile-links__link-img ya-profile-links__link-img_photos"></span></a>
+								</div>
+								<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
+									<a href="#/user/{{user._id}}/videos/all" class="ya-profile-links__link ya-profile-links__link_videos"><span class="ya-profile-links__link-img ya-profile-links__link-img_videos"></span></a>
+								</div>
+								<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
+									<a href="#/favs" class="ya-profile-links__link ya-profile-links__link_favs"><span class="ya-profile-links__link-img ya-profile-links__link-img_favs"></span></a>
+								</div>
 							</div>
-							<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
-								<a href="#/user/{{user._id}}/photos/all" class="ya-profile-links__link ya-profile-links__link_photos"><span class="ya-profile-links__link-img ya-profile-links__link-img_photos"></span></a>
-							</div>
-							<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
-								<a href="#/user/{{user._id}}/videos/all" class="ya-profile-links__link ya-profile-links__link_videos"><span class="ya-profile-links__link-img ya-profile-links__link-img_videos"></span></a>
-							</div>
-							<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
-								<a href="#/favs" class="ya-profile-links__link ya-profile-links__link_favs"><span class="ya-profile-links__link-img ya-profile-links__link-img_favs"></span></a>
-							</div>
+						</div>
 					</div>
 				</div>
 				<div class="ya-page__block ya-page__block_colored">
