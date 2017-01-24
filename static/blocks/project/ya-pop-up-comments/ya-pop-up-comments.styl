@@ -2,3 +2,31 @@
     height: 100%
     width: 100%
     background: white
+    overflow-y: auto
+    &__wrapper
+        padding: 10px 15px
+    &__title
+        padding-bottom: 10px
+        border-bottom: 1px solid #afafaf
+        margin-bottom: 15px
+    &__likes-wrapper
+        line-height: 25px
+        height: 25px
+        vertical-align: middle
+        margin-bottom: 10px
+    &__likes
+        display: inline-block
+        width: 25px
+        height: 25px
+        margin-right: 10px
+        background: url(images/sprite.png) 0 -181px no-repeat
+        cursor: pointer
+        vertical-align: middle
+        &:hover
+            box-shadow: 0 0 2px rgba(0,0,0,.3)
+    &__likes-count
+    &__likes-link
+        height: 25px
+        line-height: 25px
+        display: inline-block
+        vertical-align: middle

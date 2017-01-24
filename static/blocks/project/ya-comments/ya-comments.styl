@@ -1,5 +1,9 @@
 .ya-comments
     margin-left: 45px
+    &_article
+        margin-left: 0
+        & ^[0]__item:first-child
+            border-top: none
     &__item
         margin-top: 15px
         padding-top: 15px
@@ -16,3 +20,10 @@
         padding: 4px 10px
         &:focus
             border: 1px solid #233d58
+    &_small
+        margin-left: 0
+        font-size: 12px
+        /*& ^[0]__item:first-child
+            border-top: none*/
+        & ^[0]__add-form
+            margin-top: 10px

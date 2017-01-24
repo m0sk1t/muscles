@@ -1,9 +1,73 @@
 .ya-pop-btn
-    width: 20px
-    height: 20px
+    width: 24px
+    height: 24px
     border-radius: 50%
     cursor: pointer
     margin-bottom: 10px
     background: #f09401
+    position: relative
+    &_smiles
+         display: none // temporary hide
+    &_smiles:after
+        content: ""
+        display: block
+        width: 15px
+        height: 16px
+        position: absolute
+        top: 4px
+        left: 3px
+        background: url(images/sprite.png) -133px -159px no-repeat
+    &_adds:after
+        content: ""
+        display: block
+        width: 15px
+        height: 16px
+        position: absolute
+        top: 4px
+        left: 3px
+        background: url(images/sprite.png) -116px -159px no-repeat
     &__pop-up
         display: none
+        background: white
+        padding: 12px
+        box-shadow: 1px 2px 2px rgba(0,0,0,.5)
+        width: 90px
+        position: absolute
+        top: 10px
+        right: 10px
+        z-index: 10000
+        color: #223d57
+    &:hover
+        & ^[0]__pop-up
+            display: block
+    &__list
+        padding: 0
+        margin: 0
+    &__item
+        list-style-type: none
+    &__link
+        padding-left: 15px
+        color: #223d57
+        &:hover
+            color: black
+        &_photo:before
+            content: ""
+            width: 12px
+            height: 9px
+            line-height: 14px
+            vertical-align: middle
+            display: inline-block
+            background: url(images/sprite.png) -268px -123px no-repeat
+            margin-right: 7px
+            position: relative
+            top: -2px
+        &_video:before
+            content: ""
+            width: 12px
+            height: 12px
+            line-height: 14px
+            vertical-align: middle
+            display: inline-block
+            background: url(images/sprite.png) -268px -161px no-repeat
+            margin-right: 7px
+            position: relative
