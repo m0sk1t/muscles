@@ -1,6 +1,8 @@
 .ya-ads-block
     padding: 4px
     font-size: 12px
+    //+below(959px)
+      //  display: none
     &__item
         margin-bottom: 25px
     &__link
@@ -10,5 +12,18 @@
             text-decoration: underline
     &__title
         font-weight: bold
+        +below(959px)
+            display: block
+            float : none
+            text-align: center
     &__text
         line-height: 1.8
+        +below(959px)
+            display: block
+            float : none
+            text-align: center
+    &__media
+        +below(959px)
+            display: block
+            float : none
+            text-align: center

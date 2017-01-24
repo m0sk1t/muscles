@@ -1,6 +1,10 @@
 .ya-profile-links
     background: #0e1e2d
     padding: 5px 0 10px 0
+    +below(959px)
+        display: none
+        &_active
+            display: block
     &__link
         display: block
         background: url(images/sprite.png) 0 -29px #f09401 no-repeat
@@ -16,3 +20,9 @@
             background-position: -128px -29px
         &:hover
             box-shadow: 0 0 3px rgba(0,0,0,.7)
+    &_head
+        +below(959px)
+            position: absolute
+            top: -10px
+            left: 0
+            width: 100%
