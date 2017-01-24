@@ -1,9 +1,9 @@
 <article class="ya-main-page">
     <div class="ya-main-slider">
         <div class="ya-container ya-relative">
-            <div class="ya-slide ya-slide_3"><img src="/images/slide-3.jpg" /></div>
-            <div class="ya-slide ya-slide_2"><img src="/images/slide-2.jpg" /></div>
-            <div class="ya-slide ya-slide_1"><img src="/images/slide-1.jpg" /></div>
+            <div class="ya-slide ya-slide_3"><div style="background: url(/images/slide-3.jpg) 50% 50% no-repeat"></div></div>
+            <div class="ya-slide ya-slide_2"><div style="background: url(/images/slide-2.jpg) 50% 50% no-repeat"></div></div>
+            <div class="ya-slide ya-slide_1"><div style="background: url(/images/slide-1.jpg) 50% 50% no-repeat"></div></div>
             <div class="ya-overlay ya-relative">
                 <h1 class="ya-main-page__title">
                     <span class="ya-main-page__subtitle">Социальная сеть с сфере</span>

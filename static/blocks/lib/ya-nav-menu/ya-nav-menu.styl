@@ -109,3 +109,14 @@
             min-width: auto
         & ^[0]__item
             padding: 6px 30px
+    &_bottom
+        & ^[0]__item
+            +below(959px)
+                float: none
+                padding: 0
+                margin-bottom: 7px
+                text-transform: none
+        & ^[0]__list
+            +below(959px)
+                display: block
+                width: 100%
