@@ -302,7 +302,7 @@
 							</div>
 							<div class="ya-info-block__content ya-clearfix">
 								<div class="ya-grid-1-5">
-									<div class="ya-avatar ya-avatar_search">
+									<div class="ya-avatar">
 										<a href="#/user/{{user._id}}">
 											<img ng-src="{{user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
 										</a>
@@ -334,64 +334,15 @@
 										<div class="ya-grid-1-2 ya-relative">
 											<div class="ya-fake-border"></div>
 											<div class="ya-favs-actions">
-												<a href="#" class="ya-favs-action__link ya-favs-action__link_write">Написать сообщение</a>
-												<a href="#" class="ya-favs-action__link ya-favs-action__link_comment">Оставить комментарий</a>
-												<a href="#" class="ya-favs-action__link ya-favs-action__link_delete">Убрать</a>
+												<a href="#" class="ya-favs-action__link ya-fav-action__link_write">Написать сообщение</a>
+												<a href="#" class="ya-favs-action__link ya-fav-action__link_comment">Оставить комментарий</a>
+												<a href="#" class="ya-favs-action__link ya-fav-action__link_delete">Убрать</a>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-
-						<div class="ya-info-block ya-info-block_search ya-users__item">
-							<div class="ya-info-block__title ya-info-block__title_name">
-								<a href="#/user/{{user._id}}">{{user.name}} {{user.surname}}, {{user.city}} Иванов Иван, Иваново</a>
-							</div>
-							<div class="ya-info-block__content ya-clearfix">
-								<div class="ya-grid-1-5">
-									<div class="ya-avatar ya-avatar_search">
-										<a href="#/user/{{user._id}}">
-											<img ng-src="{{user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
-										</a>
-									</div>
-								</div>
-								<div class="ya-grid-4-5">
-									<div class="ya-clearfix ya-date-info">
-										Просмотр анкеты: 17.06.1991 в 15:23
-									</div>
-									<div class="ya-clearfix">
-										<div class="ya-grid-1-2">
-											<div class="ya-info-block__record ya-clearfix">
-												<div class="ya-info-block__label ya-span-1-2">Возраст:</div>
-												<div class="ya-info-block__value ya-span-1-2">{{user.age || "н/д"}}</div>
-											</div>
-											<div class="ya-info-block__record ya-clearfix">
-												<div class="ya-info-block__label ya-span-1-2">Рост:</div>
-												<div class="ya-info-block__value ya-span-1-2">{{user.height || "н/д"}}</div>
-											</div>
-											<div class="ya-info-block__record ya-clearfix">
-												<div class="ya-info-block__label ya-span-1-2">Вес:</div>
-												<div class="ya-info-block__value ya-span-1-2">{{user.weight || "н/д"}}</div>
-											</div>
-											<div class="ya-info-block__record ya-clearfix">
-												<div class="ya-info-block__label ya-span-1-2">Цвет волос:</div>
-												<div class="ya-info-block__value ya-span-1-2">{{user.hairs || "н/д"}}</div>
-											</div>
-										</div>
-										<div class="ya-grid-1-2 ya-relative">
-											<div class="ya-fake-border"></div>
-											<div class="ya-fav-action">
-												<a href="#" class="ya-fav-action__link ya-favs-action__link_write">Написать сообщение</a>
-												<a href="#" class="ya-fav-action__link ya-favs-action__link_comment">Оставить комментарий</a>
-												<a href="#" class="ya-fav-action__link ya-favs-action__link_delete">Убрать</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
 					</div>
 				</div>
 			</div>

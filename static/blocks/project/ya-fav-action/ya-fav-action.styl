@@ -1,7 +1,35 @@
 .ya-fav-action
+    max-width: 145px
+    padding: 5px 0 15px 0
+    margin-left: 20px
     &__link
         display: block
         font-size: 11px
         background: mainLinksColor
         text-align: center
         color: white
+        margin-bottom: 5px
+        line-height: 1
+        padding: 3px 0
+        text-decoration: none
+        position: relative
+        &:hover
+            text-decoration: underline
+        &:after
+            content: ""
+            display: block
+            width: 21px
+            height: 17px
+            position: absolute
+            top: 0
+            right: -21px
+            background: #f09500 url(images/sprite.png) 0 -208px no-repeat
+        &_write
+            &:after
+                background: url(images/sprite.png) 0 -208px no-repeat
+        &_comment
+            &:after
+                background: url(images/sprite.png) -22px -208px no-repeat
+        &_delete
+            &:after
+                background: url(images/sprite.png) -44px -208px no-repeat
