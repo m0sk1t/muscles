@@ -84,9 +84,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="ya-pop-up ya-pop-up_small ya-pop-up_active" ng-hide="layer.editedVideo == null" ng-click="layer.layer.editedVideo = null;">
+				<div class="ya-pop-up ya-pop-up_small ya-pop-up_active" ng-hide="layer.editedVideo == null" ng-click="layer.editedVideo = null;">
 					<div class="ya-pop-up__wrapper">
-						<span class="ya-pop-up__close-btn" ng-click="layer.layer.editedVideo = null;">X</span>
+						<span class="ya-pop-up__close-btn" ng-click="layer.editedVideo = null;">X</span>
 						<div class="ya-pop-up__content" ng-click="$event.stopPropagation();">
 
 							<div class="ya-form__input ya-input ya-input_inline">
