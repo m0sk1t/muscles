@@ -2,6 +2,10 @@
     max-width: 145px
     padding: 5px 0 15px 0
     margin-left: 20px
+    +below(959px)
+        max-width: 100%
+        margin-left: 0
+        //box-sizing: border-box
     &__link
         display: block
         font-size: 11px
@@ -24,6 +28,8 @@
             top: 0
             right: -21px
             background: #f09500 url(images/sprite.png) 0 -208px no-repeat
+            +below(959px)
+                right: 0
         &_write
             &:after
                 background: url(images/sprite.png) 0 -208px no-repeat
