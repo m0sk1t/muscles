@@ -2,28 +2,36 @@
 	<div class="ya-narrower">
 		<div class="ya-row">
 			<div class="ya-grid-1-3">
-				<div class="ya-dialoges__penpals ya-penpals">
-					<h2 class="ya-media-page__title ya-media-page__title_dialogs ya-title ya-relative ya-center">
-						Поиск
-					</h2>
-					<div class="ya-penpals__list">
-						<div class="ya-penpals__item ya-clearfix" ng-repeat="d in dialogs track by $index" ng-click="set_messages(d, $index);">
-							<div class="ya-grid-1-5">
-								<div class="ya-avatar ya-avatar_small ya-wall__avatar">
-									<img ng-src="{{user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
-								</div>
-							</div>
-							<div class="ya-grid-4-5">
-								<div class="ya-penpals__title ya-clearfix">
-									<div class="ya-penpals__name ya-grid-2-3 ya-left">
-										Иванов Иван {{with_user(d)}}
-									</div>
-									<div class="ya-penpals__date ya-grid-1-3 ya-right">
-										21.01.2017
+				<a href="#" ng-click="$event.preventDefault();showsidebar = true;" class="ya-sidebar-info__mobile-link ya-center ya-btn ya-btn_primary" ng-show="!showsidebar">
+					Параметры поиска
+				</a>
+				<a href="#" ng-click="$event.preventDefault();showsidebar = null;" class="ya-sidebar-info__mobile-link ya-sidebar-info__mobile-link_active ya-center ya-btn ya-btn_primary" ng-show="!!showsidebar">
+					Параметры поиска
+				</a>
+				<div class="ya-sidebar-info__full-wrap" ng-class="{'ya-sidebar-info__full-wrap_active': !!showsidebar}">
+					<div class="ya-dialoges__penpals ya-penpals">
+						<h2 class="ya-media-page__title ya-media-page__title_dialogs ya-title ya-relative ya-center">
+							Поиск
+						</h2>
+						<div class="ya-penpals__list">
+							<div class="ya-penpals__item ya-clearfix" ng-repeat="d in dialogs track by $index" ng-click="set_messages(d, $index);">
+								<div class="ya-grid-1-5">
+									<div class="ya-avatar ya-avatar_small ya-wall__avatar">
+										<img ng-src="{{user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
 									</div>
 								</div>
-								<div class="ya-penpals__msg">
-									Последнее сообщение от пользователя...
+								<div class="ya-grid-4-5">
+									<div class="ya-penpals__title ya-clearfix">
+										<div class="ya-penpals__name ya-grid-2-3 ya-left">
+											Иванов Иван {{with_user(d)}}
+										</div>
+										<div class="ya-penpals__date ya-grid-1-3 ya-right">
+											21.01.2017
+										</div>
+									</div>
+									<div class="ya-penpals__msg">
+										Последнее сообщение от пользователя...
+									</div>
 								</div>
 							</div>
 						</div>
