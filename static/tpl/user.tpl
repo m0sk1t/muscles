@@ -1,8 +1,8 @@
-<article class="ya-user ya-container">
+<article class="ya-user ya-container ya-relative" ng-class="{'ya-container_pad':!!showTopMenu, 'ya-container_pad_menu':!showTopMenu}">
 	<div class="ya-narrower">
 		<div class="ya-row">
 			<div class="ya-grid-1-3">
-				<div class="ya-page__block ya-page__block_colored">
+				<div class="ya-page__block ya-page__block_info ya-page__block_colored">
 					<div class="ya-user__main-info ya-relative">
 						<span
 							class="ya-online-id ya-online-id_large ya-online-id_main"
@@ -44,134 +44,142 @@
 					<span ng-class="{fav: in_fav(user._id)}" ng-click="fav();">&#9825;</span>
 					<button ng-click="write_message();">Написать сообщение</button>
 				</div>
-				<div class="ya-user__sports ya-sidebar-info ya-relative">
-					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_sports"></div>
-					<div class="ya-page__block ya-page__block_rounded">
-						<h2 class="ya-sidebar-info__title">
-							Виды спорта
-						</h2>
-						<div class="ya-sidebar-info__content-wrapper" ng-show="false">
-							<div class="ya-sidebar-info__content">
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Виды спорта не добавлены.</span>
+				<a href="#" ng-click="$event.preventDefault();showsidebar = true;" class="ya-sidebar-info__mobile-link ya-center ya-btn ya-btn_primary" ng-show="!showsidebar">
+					Дополнительная информация
+				</a>
+				<a href="#" ng-click="$event.preventDefault();showsidebar = null;" class="ya-sidebar-info__mobile-link ya-sidebar-info__mobile-link_active ya-center ya-btn ya-btn_primary" ng-show="!!showsidebar">
+					Дополнительная информация
+				</a>
+				<div class="ya-sidebar-info__full-wrap" ng-class="{'ya-sidebar-info__full-wrap_active': !!showsidebar}">
+					<div class="ya-user__sports ya-sidebar-info ya-relative">
+						<div class="ya-sidebar-info__icon ya-sidebar-info__icon_sports"></div>
+						<div class="ya-page__block ya-page__block_rounded">
+							<h2 class="ya-sidebar-info__title">
+								Виды спорта
+							</h2>
+							<div class="ya-sidebar-info__content-wrapper" ng-show="false">
+								<div class="ya-sidebar-info__content">
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Виды спорта не добавлены.</span>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="ya-sidebar-info__content-wrapper" ng-show="true">
-							<div class="ya-sidebar-info__content">
-								<div class="ya-sidebar-info__item" ng-repeat="s in user.sports">
-									{{s}}
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="ya-user__awards ya-sidebar-info ya-relative">
-					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_awards"></div>
-					<div class="ya-page__block ya-page__block_rounded">
-						<h2 class="ya-sidebar-info__title">
-							Достижения
-						</h2>
-						<div class="ya-sidebar-info__content-wrapper" ng-show="!user.achievements || !user.achievements.length">
-							<div class="ya-sidebar-info__content">
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Достижения не добавлены.</span>
-								</div>
-							</div>
-						</div>
-						<div class="ya-sidebar-info__content-wrapper" ng-show="user.achievements && user.achievements.length" ng-repeat="a in user.achievements track by $index">
-							<div class="ya-sidebar-info__content">
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Страна</span> {{a.country}}
-								</div>
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Город</span> {{a.city}}
-								</div>
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Год</span> {{a.year}}
-								</div>
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Название</span> {{a.title}}
-								</div>
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Место</span> {{a.place}}
-								</div>
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Комментарии</span> {{a.comment}}
+							<div class="ya-sidebar-info__content-wrapper" ng-show="true">
+								<div class="ya-sidebar-info__content">
+									<div class="ya-sidebar-info__item" ng-repeat="s in user.sports">
+										{{s}}
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="ya-user__work ya-sidebar-info ya-relative">
-					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_work"></div>
-					<div class="ya-page__block ya-page__block_rounded">
-						<h2 class="ya-sidebar-info__title">
-							Работа
-						</h2>
-						<div class="ya-sidebar-info__content-wrapper" ng-show="!user.workplaces || !user.workplaces.length">
-							<div class="ya-sidebar-info__content">
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Работа не добавлена.</span>
+					<div class="ya-user__awards ya-sidebar-info ya-relative">
+						<div class="ya-sidebar-info__icon ya-sidebar-info__icon_awards"></div>
+						<div class="ya-page__block ya-page__block_rounded">
+							<h2 class="ya-sidebar-info__title">
+								Достижения
+							</h2>
+							<div class="ya-sidebar-info__content-wrapper" ng-show="!user.achievements || !user.achievements.length">
+								<div class="ya-sidebar-info__content">
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Достижения не добавлены.</span>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="ya-sidebar-info__content-wrapper" ng-show="user.workplaces && user.workplaces.length" ng-repeat="w in user.workplaces track by $index">
-							<div class="ya-sidebar-info__content">
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Страна</span> {{w.country}}
-								</div>
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Город</span> {{w.city}}
-								</div>
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Годы</span> {{w.year_start}} - {{w.year_end||'по н. вр.'}}
-								</div>
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Компания</span> {{w.company}}
-								</div>
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Должность</span> {{w.speciality}}
+							<div class="ya-sidebar-info__content-wrapper" ng-show="user.achievements && user.achievements.length" ng-repeat="a in user.achievements track by $index">
+								<div class="ya-sidebar-info__content">
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Страна</span> {{a.country}}
+									</div>
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Город</span> {{a.city}}
+									</div>
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Год</span> {{a.year}}
+									</div>
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Название</span> {{a.title}}
+									</div>
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Место</span> {{a.place}}
+									</div>
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Комментарии</span> {{a.comment}}
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="ya-user__edu ya-sidebar-info ya-relative">
-					<div class="ya-sidebar-info__icon ya-sidebar-info__icon_edu"></div>
-					<div class="ya-page__block ya-page__block_rounded">
-						<h2 class="ya-sidebar-info__title">
-							Образование
-						</h2>
-						<div class="ya-sidebar-info__content-wrapper" ng-show="!user.universities || !user.universities.length">
-							<div class="ya-sidebar-info__content">
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Учебные заведения не добавлены.</span>
+					<div class="ya-user__work ya-sidebar-info ya-relative">
+						<div class="ya-sidebar-info__icon ya-sidebar-info__icon_work"></div>
+						<div class="ya-page__block ya-page__block_rounded">
+							<h2 class="ya-sidebar-info__title">
+								Работа
+							</h2>
+							<div class="ya-sidebar-info__content-wrapper" ng-show="!user.workplaces || !user.workplaces.length">
+								<div class="ya-sidebar-info__content">
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Работа не добавлена.</span>
+									</div>
+								</div>
+							</div>
+							<div class="ya-sidebar-info__content-wrapper" ng-show="user.workplaces && user.workplaces.length" ng-repeat="w in user.workplaces track by $index">
+								<div class="ya-sidebar-info__content">
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Страна</span> {{w.country}}
+									</div>
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Город</span> {{w.city}}
+									</div>
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Годы</span> {{w.year_start}} - {{w.year_end||'по н. вр.'}}
+									</div>
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Компания</span> {{w.company}}
+									</div>
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Должность</span> {{w.speciality}}
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="ya-sidebar-info__content-wrapper" ng-show="user.universities && user.universities.length" ng-repeat="u in user.universities track by $index">
-							<div class="ya-sidebar-info__content">
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Страна</span> {{u.country}}
+					</div>
+					<div class="ya-user__edu ya-sidebar-info ya-relative">
+						<div class="ya-sidebar-info__icon ya-sidebar-info__icon_edu"></div>
+						<div class="ya-page__block ya-page__block_rounded">
+							<h2 class="ya-sidebar-info__title">
+								Образование
+							</h2>
+							<div class="ya-sidebar-info__content-wrapper" ng-show="!user.universities || !user.universities.length">
+								<div class="ya-sidebar-info__content">
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Учебные заведения не добавлены.</span>
+									</div>
 								</div>
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Город</span> {{u.city}}
-								</div>
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Годы</span> {{u.year_start}} - {{u.year_end||'по н. вр.'}}
-								</div>
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Учреждение</span> {{u.university}}
-								</div>
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Факультет</span> {{u.faculty}}
-								</div>
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Кафедра</span> {{u.chair}}
-								</div>
-								<div class="ya-sidebar-info__item">
-									<span class="ya-sidebar-info__label">Специальность</span> {{u.speciality}}
+							</div>
+							<div class="ya-sidebar-info__content-wrapper" ng-show="user.universities && user.universities.length" ng-repeat="u in user.universities track by $index">
+								<div class="ya-sidebar-info__content">
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Страна</span> {{u.country}}
+									</div>
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Город</span> {{u.city}}
+									</div>
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Годы</span> {{u.year_start}} - {{u.year_end||'по н. вр.'}}
+									</div>
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Учреждение</span> {{u.university}}
+									</div>
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Факультет</span> {{u.faculty}}
+									</div>
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Кафедра</span> {{u.chair}}
+									</div>
+									<div class="ya-sidebar-info__item">
+										<span class="ya-sidebar-info__label">Специальность</span> {{u.speciality}}
+									</div>
 								</div>
 							</div>
 						</div>
@@ -179,113 +187,121 @@
 				</div>
 			</div>
 			<div class="ya-grid-7-15">
-				<div class="ya-page__block ya-page__block_bordered ya-user__text-info">
-					<div class="ya-user__info-block ya-info-block ya-info-block_border_no">
-						<div class="ya-clearfix ya-user__status-line">
-							<div class="ya-user__status ya-grid-1-2">{{user.status}}</div>
-							<div class="ya-user__status ya-grid-1-2 ya-right">Заходил {{last_seen()}}</div>
+				<a href="#" ng-click="$event.preventDefault();showinfo = true;" class="ya-sidebar-info__mobile-link ya-center ya-btn ya-btn_primary" ng-show="!showinfo">
+					Основная информация
+				</a>
+				<a href="#" ng-click="$event.preventDefault();showinfo = null;" class="ya-sidebar-info__mobile-link ya-sidebar-info__mobile-link_active ya-center ya-btn ya-btn_primary" ng-show="!!showinfo">
+					Основная информация
+				</a>
+				<div class="ya-sidebar-info__full-wrap" ng-class="{'ya-sidebar-info__full-wrap_active': !!showinfo}">
+					<div class="ya-page__block ya-page__block_bordered ya-user__text-info">
+						<div class="ya-user__info-block ya-info-block ya-info-block_border_no">
+							<div class="ya-clearfix ya-user__status-line">
+								<div class="ya-user__status ya-grid-1-2">{{user.status}}</div>
+								<div class="ya-user__status ya-grid-1-2 ya-right">Заходил {{last_seen()}}</div>
+							</div>
 						</div>
-					</div>
-					<div class="ya-user__info-block">
-						<div class="ya-info-block">
-							<h2 class="ya-info-block__title ya-info-block__title_data">Данные спортсмена</h2>
-							<div class="ya-info-block__content ya-clearfix">
-								<div class="ya-inner-grid-1-2">
-									<div class="ya-info-block__record ya-clearfix">
-										<div class="ya-info-block__label ya-span-1-2">Возраст:</div>
-										<div class="ya-info-block__value ya-span-1-2">{{get_age(user.birthDate) || "Не указано"}}</div>
+						<div class="ya-user__info-block">
+							<div class="ya-info-block">
+								<h2 class="ya-info-block__title ya-info-block__title_data">Данные спортсмена</h2>
+								<div class="ya-info-block__content ya-clearfix">
+									<div class="ya-inner-grid-1-2">
+										<div class="ya-info-block__record ya-clearfix">
+											<div class="ya-info-block__label ya-span-1-2">Возраст:</div>
+											<div class="ya-info-block__value ya-span-1-2">{{get_age(user.birthDate) || "Не указано"}}</div>
+										</div>
+										<div class="ya-info-block__record ya-clearfix">
+											<div class="ya-info-block__label ya-span-1-2">Рост:</div>
+											<div class="ya-info-block__value ya-span-1-2">{{user.height || "Не указано"}}</div>
+										</div>
+										<div class="ya-info-block__record ya-clearfix">
+											<div class="ya-info-block__label ya-span-1-2">Вес:</div>
+											<div class="ya-info-block__value ya-span-1-2">{{user.weight || "Не указано"}}</div>
+										</div>
+										<div class="ya-info-block__record ya-clearfix">
+											<div class="ya-info-block__label ya-span-1-2">Цвет волос:</div>
+											<div class="ya-info-block__value ya-span-1-2">{{user.hairs || "Не указано"}}</div>
+										</div>
 									</div>
-									<div class="ya-info-block__record ya-clearfix">
-										<div class="ya-info-block__label ya-span-1-2">Рост:</div>
-										<div class="ya-info-block__value ya-span-1-2">{{user.height || "Не указано"}}</div>
-									</div>
-									<div class="ya-info-block__record ya-clearfix">
-										<div class="ya-info-block__label ya-span-1-2">Вес:</div>
-										<div class="ya-info-block__value ya-span-1-2">{{user.weight || "Не указано"}}</div>
-									</div>
-									<div class="ya-info-block__record ya-clearfix">
-										<div class="ya-info-block__label ya-span-1-2">Цвет волос:</div>
-										<div class="ya-info-block__value ya-span-1-2">{{user.hairs || "Не указано"}}</div>
-									</div>
-								</div>
-								<div class="ya-inner-grid-1-2">
-									<div class="ya-info-block__record ya-clearfix">
-										<div class="ya-info-block__label ya-span-1-2">Грудь:</div>
-										<div class="ya-info-block__value ya-span-1-2">{{user.chest || "Не указано"}}</div>
-									</div>
-									<div class="ya-info-block__record ya-clearfix">
-										<div class="ya-info-block__label ya-span-1-2">Талия:</div>
-										<div class="ya-info-block__value ya-span-1-2">{{user.waist || "Не указано"}}</div>
-									</div>
-									<div class="ya-info-block__record ya-clearfix">
-										<div class="ya-info-block__label ya-span-1-2">Бедра:</div>
-										<div class="ya-info-block__value ya-span-1-2">{{user.huckle || "Не указано"}}</div>
-									</div>
-									<div class="ya-info-block__record ya-clearfix">
-										<div class="ya-info-block__label ya-span-1-2">Телосложение:</div>
-										<div class="ya-info-block__value ya-span-1-2">{{user.typage || "Не указано"}}</div>
+									<div class="ya-inner-grid-1-2">
+										<div class="ya-info-block__record ya-clearfix">
+											<div class="ya-info-block__label ya-span-1-2">Грудь:</div>
+											<div class="ya-info-block__value ya-span-1-2">{{user.chest || "Не указано"}}</div>
+										</div>
+										<div class="ya-info-block__record ya-clearfix">
+											<div class="ya-info-block__label ya-span-1-2">Талия:</div>
+											<div class="ya-info-block__value ya-span-1-2">{{user.waist || "Не указано"}}</div>
+										</div>
+										<div class="ya-info-block__record ya-clearfix">
+											<div class="ya-info-block__label ya-span-1-2">Бедра:</div>
+											<div class="ya-info-block__value ya-span-1-2">{{user.huckle || "Не указано"}}</div>
+										</div>
+										<div class="ya-info-block__record ya-clearfix">
+											<div class="ya-info-block__label ya-span-1-2">Телосложение:</div>
+											<div class="ya-info-block__value ya-span-1-2">{{user.typage || "Не указано"}}</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="ya-user__info-block">
-						<div class="ya-info-block">
-							<h2 class="ya-info-block__title ya-info-block__title_add">Доп.информация</h2>
-							<div class="ya-info-block__content">
-								<div class="ya-info-block__record ya-clearfix" ng-repeat="h in user.hobbies" ng-if="h.type =='false'">
-									<div class="ya-info-block__label ya-inner-grid-1-4">{{h.item}}</div>
-									<div class="ya-info-block__value ya-inner-grid-3-4">{{h.title}}</div>
+						<div class="ya-user__info-block">
+							<div class="ya-info-block">
+								<h2 class="ya-info-block__title ya-info-block__title_add">Доп.информация</h2>
+								<div class="ya-info-block__content">
+									<div class="ya-info-block__record ya-clearfix" ng-repeat="h in user.hobbies" ng-if="h.type =='false'">
+										<div class="ya-info-block__label ya-inner-grid-1-4">{{h.item}}</div>
+										<div class="ya-info-block__value ya-inner-grid-3-4">{{h.title}}</div>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="ya-user__info-block">
-						<div class="ya-info-block">
-							<h2 class="ya-info-block__title ya-info-block__title_work">Работа</h2>
-							<div class="ya-info-block__content">
-								<div class="ya-info-block__record ya-clearfix" ng-repeat="h in user.hobbies" ng-if="h.type =='true'">
-									<div class="ya-info-block__label ya-inner-grid-1-4">{{h.item}}</div>
-									<div class="ya-info-block__value ya-inner-grid-3-4">{{h.title}}</div>
+						<div class="ya-user__info-block">
+							<div class="ya-info-block">
+								<h2 class="ya-info-block__title ya-info-block__title_work">Работа</h2>
+								<div class="ya-info-block__content">
+									<div class="ya-info-block__record ya-clearfix" ng-repeat="h in user.hobbies" ng-if="h.type =='true'">
+										<div class="ya-info-block__label ya-inner-grid-1-4">{{h.item}}</div>
+										<div class="ya-info-block__value ya-inner-grid-3-4">{{h.title}}</div>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="ya-user__info-block">
-						<div class="ya-info-block">
-							<h2 class="ya-info-block__title ya-info-block__title_subscribers">Подписчики</h2>
-							<div class="ya-info-block__content">
-								<div class="ya-socials ya-socials_inline ya-socials_theme_white">
-									<div class="ya-socials__list">
-										<div class="ya-socials__item ya-clearfix">
-											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_vk">
-												<span class="ya-socials__logo ya-socials__logo_vk"></span>
-											</a>
-											<a class="ya-socials__link ya-socials__link_friends">{{user.social.vk.friends.summary.total_count || 'н\\д'}}</a>
-										</div>
-										<div class="ya-socials__item ya-clearfix">
-											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_fb">
-												<span class="ya-socials__logo ya-socials__logo_fb"></span>
-											</a>
-											<a class="ya-socials__link ya-socials__link_friends">{{user.social.fb._json.friends.summary.total_count || 'н\\д'}}</a>
-										</div>
-										<div class="ya-socials__item ya-clearfix">
-											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_tw">
-												<span class="ya-socials__logo ya-socials__logo_tw"></span>
-											</a>
-											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_friends">{{user.social.tw._json.friends_count || 'н\\д'}}</a>
-										</div>
-										<div class="ya-socials__item ya-clearfix">
-											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_ok">
-												<span class="ya-socials__logo ya-socials__logo_ok"></span>
-											</a>
-											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_friends">{{user.social.ok._json.friends_count || 'н\\д'}}</a>
-										</div>
-										<div class="ya-socials__item ya-clearfix">
-											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_ig">
-												<span class="ya-socials__logo ya-socials__logo_ig"></span>
-											</a>
-											<a href="#" target="_blank" class="ya-socials__link ya-socials__link_friends">{{user.social.im._json.data.counts.follows || 'н\\д'}}</a>
+						<div class="ya-user__info-block">
+							<div class="ya-info-block">
+								<h2 class="ya-info-block__title ya-info-block__title_subscribers">Подписчики</h2>
+								<div class="ya-info-block__content">
+									<div class="ya-socials ya-socials_inline ya-socials_theme_white">
+										<div class="ya-socials__list">
+											<div class="ya-socials__item ya-clearfix">
+												<a href="#" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_vk">
+													<span class="ya-socials__logo ya-socials__logo_vk"></span>
+												</a>
+												<a class="ya-socials__link ya-socials__link_friends">{{user.social.vk.friends.summary.total_count || 'н\\д'}}</a>
+											</div>
+											<div class="ya-socials__item ya-clearfix">
+												<a href="#" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_fb">
+													<span class="ya-socials__logo ya-socials__logo_fb"></span>
+												</a>
+												<a class="ya-socials__link ya-socials__link_friends">{{user.social.fb._json.friends.summary.total_count || 'н\\д'}}</a>
+											</div>
+											<div class="ya-socials__item ya-clearfix">
+												<a href="#" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_tw">
+													<span class="ya-socials__logo ya-socials__logo_tw"></span>
+												</a>
+												<a href="#" target="_blank" class="ya-socials__link ya-socials__link_friends">{{user.social.tw._json.friends_count || 'н\\д'}}</a>
+											</div>
+											<div class="ya-socials__item ya-clearfix">
+												<a href="#" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_ok">
+													<span class="ya-socials__logo ya-socials__logo_ok"></span>
+												</a>
+												<a href="#" target="_blank" class="ya-socials__link ya-socials__link_friends">{{user.social.ok._json.friends_count || 'н\\д'}}</a>
+											</div>
+											<div class="ya-socials__item ya-clearfix">
+												<a href="#" target="_blank" class="ya-socials__link ya-socials__link_profile ya-socials__link_ig">
+													<span class="ya-socials__logo ya-socials__logo_ig"></span>
+												</a>
+												<a href="#" target="_blank" class="ya-socials__link ya-socials__link_friends">{{user.social.im._json.data.counts.follows || 'н\\д'}}</a>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -507,20 +523,30 @@
 						<a href="#/search" class="ya-btn__link ya-btn__link_search">Поиск</a>
 					<!--/div-->
 				</div>
-				<div class="ya-page__block ya-page__block_colored">
-					<div class="ya-profile-links ya-clearfix">
-							<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
-								<a href="#/dialogs" class="ya-profile-links__link ya-profile-links__link_chat"><span class="ya-profile-links__link-img ya-profile-links__link-img_chat"></span></a>
+				<div class="ya-profile-links_head">
+					<a href="#" ng-click="$event.preventDefault();showTopMenu = true;" class="ya-sidebar-info__mobile-link ya-center ya-btn ya-btn_primary" ng-show="!showTopMenu">
+							Меню
+					</a>
+					<a href="#" ng-click="$event.preventDefault();showTopMenu = null;" class="ya-sidebar-info__mobile-link ya-sidebar-info__mobile-link_active ya-center ya-btn ya-btn_primary" ng-show="!!showTopMenu">
+						Меню
+					</a>
+					<div class="ya-page__block ya-profile-links ya-page__block_colored" ng-class="{'ya-profile-links_active': !!showTopMenu}">
+						<div class="ya-clearfix">
+							<div class="ya-clearfix ">
+								<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
+									<a href="#/dialogs" class="ya-profile-links__link ya-profile-links__link_chat"><span class="ya-profile-links__link-img ya-profile-links__link-img_chat"></span></a>
+								</div>
+								<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
+									<a href="#/user/{{user._id}}/photos/all" class="ya-profile-links__link ya-profile-links__link_photos"><span class="ya-profile-links__link-img ya-profile-links__link-img_photos"></span></a>
+								</div>
+								<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
+									<a href="#/user/{{user._id}}/videos/all" class="ya-profile-links__link ya-profile-links__link_videos"><span class="ya-profile-links__link-img ya-profile-links__link-img_videos"></span></a>
+								</div>
+								<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
+									<a href="#/favs" class="ya-profile-links__link ya-profile-links__link_favs"><span class="ya-profile-links__link-img ya-profile-links__link-img_favs"></span></a>
+								</div>
 							</div>
-							<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
-								<a href="#/user/{{user._id}}/photos/all" class="ya-profile-links__link ya-profile-links__link_photos"><span class="ya-profile-links__link-img ya-profile-links__link-img_photos"></span></a>
-							</div>
-							<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
-								<a href="#/user/{{user._id}}/videos/all" class="ya-profile-links__link ya-profile-links__link_videos"><span class="ya-profile-links__link-img ya-profile-links__link-img_videos"></span></a>
-							</div>
-							<div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
-								<a href="#/favs" class="ya-profile-links__link ya-profile-links__link_favs"><span class="ya-profile-links__link-img ya-profile-links__link-img_favs"></span></a>
-							</div>
+						</div>
 					</div>
 				</div>
 				<div class="ya-page__block ya-page__block_colored">

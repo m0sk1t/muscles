@@ -1,6 +1,10 @@
 .ya-articles
     &__content
         color: #223d5a
+        +below(959px)
+            > *
+                padding-left: 10px
+                padding-right: 10px
     &__desc
     &__readmore
         margin-bottom: 25px
@@ -11,3 +15,12 @@
         color: #727272
     &__subtitle
         padding: 20px 0
+    &__media
+        +below(959px)
+            text-align: center
+    & img
+        +below(959px)
+            max-width: 100%
+            display: block
+            margin: 0 auto
+            float: none
