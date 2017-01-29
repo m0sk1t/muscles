@@ -20,8 +20,10 @@ angular.module('MuscleMan').controller('MainCtrl', ['$scope', '$location', 'sock
                 socket.emit('user:online', { id: $scope.options.user._id });
             }, function(res) {
                 $scope.options.loading = false;
-                $location.path('/signup');
-                MSG.err('Такой почтовый адрес ещё не зарегистрирован!');
+                if (res.status === 401) {
+                    MSG.err('Неверный логин или пароль!');
+                    return;
+                }
             });
         };
 
