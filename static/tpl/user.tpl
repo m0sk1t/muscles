@@ -588,14 +588,14 @@
                                 <div class="ya-pop-up-comments__wrapper">
                                     <div class="ya-wall__news-author ya-relative ya-clearfix">
                                         <div class="ya-avatar ya-avatar_small ya-wall__avatar">
-                                            <img ng-src="{{c.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
+                                            <img ng-src="{{user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
                                         </div>
                                         <div class="ya-wall__news-info">
                                             <div class="ya-wall__author-name">
-                                                Ивавнов Иван
+                                                {{user.name +' '+ user.surname}}
                                             </div>
                                             <div class="ya-wall__news-date">
-                                                01.01.2017
+                                                {{last_seen(photos[gallery.current_photo].creDate)}}
                                             </div>
                                         </div>
                                     </div>
@@ -675,14 +675,14 @@
                                 <div class="ya-pop-up-comments__wrapper">
                                     <div class="ya-wall__news-author ya-relative ya-clearfix">
                                         <div class="ya-avatar ya-avatar_small ya-wall__avatar">
-                                            <img ng-src="{{c.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
+                                            <img ng-src="{{user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
                                         </div>
                                         <div class="ya-wall__news-info">
                                             <div class="ya-wall__author-name">
-                                                Ивавнов Иван
+                                                {{user.name+' '+user.surname}}
                                             </div>
                                             <div class="ya-wall__news-date">
-                                                01.01.2017
+                                                {{last_seen(videos[gallery.current_photo].creDate)}}
                                             </div>
                                         </div>
                                     </div>
