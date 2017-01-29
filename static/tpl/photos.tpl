@@ -146,14 +146,14 @@
                                         <div class="ya-pop-up-comments__wrapper">
                                             <div class="ya-wall__news-author ya-relative ya-clearfix">
                                                 <div class="ya-avatar ya-avatar_small ya-wall__avatar">
-                                                    <img ng-src="{{c.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
+                                                    <img ng-src="{{user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
                                                 </div>
                                                 <div class="ya-wall__news-info">
                                                     <div class="ya-wall__author-name">
-                                                        Ивавнов Иван
+                                                        {{user.name + ' ' + user.surname}}
                                                     </div>
                                                     <div class="ya-wall__news-date">
-                                                        01.01.2017
+                                                        {{getDate(photos[gallery.current].creDate)}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -195,7 +195,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <form ng-submit="add_comment(gallery.current_photo)" class="ya-comments__add-form ya-input">
+                                                <form ng-submit="add_comment(gallery.current)" class="ya-comments__add-form ya-input">
                                                     <div class="ya-form__input ya-input ya-input_inline">
                                                         <input type="text" ng-model="gallery.comment" placeholder="Комментировать" class="ya-comments__add-field ya-input__field">
                                                     </div>

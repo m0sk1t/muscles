@@ -74,6 +74,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$sce', '$scope', '$location
         };
 
         $scope.mark = function(mark) {
+            if ($scope.options.user._id === $scope.user._id) return;
             var rate = function() {
                 $scope.rating = 0;
                 $scope.user.marks.map(function(el) {

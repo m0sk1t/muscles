@@ -1,5 +1,5 @@
-angular.module('MuscleMan').controller('PhotosCtrl', ['$scope', '$routeParams', 'socket', 'Upload', 'Photo', 'Album', 'MSG',
-    function($scope, $routeParams, socket, Upload, Photo, Album, MSG) {
+angular.module('MuscleMan').controller('PhotosCtrl', ['$scope', '$routeParams', 'socket', 'Upload', 'Photo', 'User', 'Album', 'MSG',
+    function($scope, $routeParams, socket, Upload, Photo, User, Album, MSG) {
         $scope.photos = [];
         $scope.options.userid = $routeParams.id;
 
@@ -13,12 +13,22 @@ angular.module('MuscleMan').controller('PhotosCtrl', ['$scope', '$routeParams', 
             current: 0
         };
 
+        $scope.getDate = function(date) {
+            return moment(date).format('DD.MM.YYYY');
+        };
+
         $scope.turn_left = function() {
             $scope.gallery.current === 0 ? $scope.gallery.current = $scope.photos.length : $scope.gallery.current--;
         };
         $scope.turn_right = function() {
             $scope.gallery.current === $scope.photos.length - 1 ? $scope.gallery.current = 0 : $scope.gallery.current++;
         };
+
+        User.load($routeParams.id, function(res) {
+            $scope.user = res.data;
+        }, function(res) {
+            console.error(res.data);
+        });
 
         Album.get($routeParams.id, function(res) {
             $scope.albums = res.data;
@@ -102,7 +112,7 @@ angular.module('MuscleMan').controller('PhotosCtrl', ['$scope', '$routeParams', 
                 comment: $scope.gallery.comment,
                 avatar: $scope.options.user.avatar,
                 surname: $scope.options.user.surname,
-                _id: $scope.photos[$scope.gallery.current]._id,
+                _id: $scope.photos[index]._id,
             };
             Photo.add_comment(comment, function(res) {
                 $scope.gallery.comment = '';

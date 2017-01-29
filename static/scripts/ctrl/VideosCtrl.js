@@ -1,5 +1,5 @@
-angular.module('MuscleMan').controller('VideosCtrl', ['$sce', '$http', '$scope', '$routeParams', 'Video', 'socket', 'MSG',
-    function($sce, $http, $scope, $routeParams, Video, socket, MSG) {
+angular.module('MuscleMan').controller('VideosCtrl', ['$sce', '$http', '$scope', '$routeParams', 'Video', 'User', 'socket', 'MSG',
+    function($sce, $http, $scope, $routeParams, Video, User, socket, MSG) {
         $scope.videos = [];
 
         $scope.layer = {
@@ -12,6 +12,16 @@ angular.module('MuscleMan').controller('VideosCtrl', ['$sce', '$http', '$scope',
         };
 
         $scope.options.userid = $routeParams.id;
+
+        $scope.getDate = function(date) {
+            return moment(date).format('DD.MM.YYYY');
+        };
+
+        User.load($routeParams.id, function(res) {
+            $scope.user = res.data;
+        }, function(res) {
+            console.error(res.data);
+        });
 
         Video.get($routeParams.id, function(res) {
             $scope.videos = res.data;

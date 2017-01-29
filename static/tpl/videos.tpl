@@ -130,10 +130,10 @@
                                                 </div>
                                                 <div class="ya-wall__news-info">
                                                     <div class="ya-wall__author-name">
-                                                        Ивавнов Иван
+                                                        {{user.name + ' ' + user.surname}}
                                                     </div>
                                                     <div class="ya-wall__news-date">
-                                                        01.01.2017
+                                                        {{getDate(videos[gallery.current].creDate)}}
                                                     </div>
                                                 </div>
                                             </div>
