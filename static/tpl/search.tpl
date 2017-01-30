@@ -204,20 +204,21 @@
                             </div>
                         </div>
                     </div>
-                    <!--                    <div class="ya-form__input ya-input ya-input_inline">
-                        <div class="ya-clearfix">
-                            <div class="ya-input__label ya-input__label_block">
-                                <label for="ya-adv" class="ya-input__label">
-									По объявлению
-								</label>
-                            </div>
-                            <div class="ya-input__input">
-                                <div class="ya-input__field-wrapper">
-                                    <textarea id="ya-adv" placeholder="окно ввода ключевых слов объявления" class="ya-input__field ya-input__field_textarea" type="text" ng-model="search.fio"><textarea/>
-								</div>
-							</div>
-						</div>
-					</div>
+                    <!--
+<div class="ya-form__input ya-input ya-input_inline">
+    <div class="ya-clearfix">
+        <div class="ya-input__label ya-input__label_block">
+            <label for="ya-adv" class="ya-input__label">
+                По объявлению
+            </label>
+        </div>
+        <div class="ya-input__input">
+            <div class="ya-input__field-wrapper">
+                <textarea id="ya-adv" placeholder="окно ввода ключевых слов объявления" class="ya-input__field ya-input__field_textarea" type="text" ng-model="search.fio"><textarea/>
+            </div>
+        </div>
+    </div>
+</div>
 -->
                     <div class="ya-form__input ya-input ya-input_inline">
                         <div class="ya-clearfix">
@@ -359,15 +360,15 @@
                                             </div>
                                         </div>
                                         <div class="ya-grid-1-5">
-                                            <a href="#" class="ya-add-to-friend">
-                                                <span class="ya-add-to-friend__title">
-													Добавить в друзья
+                                            <a ng-click="fav(user._id)" class="ya-add-to-friend">
+                                                <span class="ya-add-to-friend__title" ng-show="!in_fav(user._id)">
+													Добавить в избранные
 												</span>
-                                                <span class="ya-add-to-friend__icon"></span>
-                                                <!--span class="ya-add-to-friend__title ya-add-to-friend__title_remove">
-													Добавлен в друзья
+                                                <span class="ya-add-to-friend__icon" ng-show="!in_fav(user._id)"></span>
+                                                <span class="ya-add-to-friend__title ya-add-to-friend__title_remove" ng-show="in_fav(user._id)">
+													Добавлен в избранные
 												</span>
-												<span class="ya-add-to-friend__icon ya-add-to-friend__icon_remove"></span-->
+                                                <span class="ya-add-to-friend__icon ya-add-to-friend__icon_remove" ng-show="in_fav(user._id)"></span>
                                             </a>
                                         </div>
                                     </div>

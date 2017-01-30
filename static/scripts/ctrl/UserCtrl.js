@@ -420,6 +420,6 @@ angular.module('MuscleMan').controller('UserCtrl', ['$sce', '$scope', '$location
                     swal.showInputError('Введите хоть что-нибудь...');
                 }
             });
-        }
+        };
     }
 ]);
