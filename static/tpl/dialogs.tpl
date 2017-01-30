@@ -32,7 +32,7 @@
             </div>
             <div class="ya-grid-7-15">
                 <h2 class="ya-media-page__title ya-media-page__title_msgs ya-title ya-relative">
-                    Иванов Иван
+                    {{with_user(dialogs[dialogIndex])}}
                 </h2>
                 <div class="ya-dialog ya-relative">
                     <div class="ya-dialog__content">
@@ -49,7 +49,7 @@
                                     <div class="ya-wall__news-item" ng-repeat="m in messages">
                                         <div class="ya-wall__news-content">
                                             <div class="ya-wall__news-author ya-relative ya-clearfix">
-                                                <div class="ya-wall__news-remove" ng-if="options.user._id === user._id" ng-click="del_topic($index)">x</div>
+                                                <!--div class="ya-wall__news-remove" ng-if="options.user._id === user._id" ng-click="del_topic($index)">x</div-->
                                                 <div class="ya-avatar ya-avatar_small ya-wall__avatar">
                                                     <img ng-src="{{m.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
                                                 </div>
@@ -67,30 +67,6 @@
                                             </div>
                                             <div class="ya-wall__news-media">
                                                 <img ng-src="{{i}}" ng-repeat="i in m.images" class="ya-wall__news-img" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="ya-wall__news-item">
-                                        <div class="ya-wall__news-content">
-                                            <div class="ya-wall__news-author ya-relative ya-clearfix">
-                                                <div class="ya-wall__news-remove" ng-if="options.user._id === user._id" ng-click="del_topic($index)">x</div>
-                                                <div class="ya-avatar ya-avatar_small ya-wall__avatar">
-                                                    <img ng-src="{{user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
-                                                </div>
-                                                <div class="ya-wall__news-info">
-                                                    <div class="ya-wall__author-name">
-                                                        Иванов Иван
-                                                    </div>
-                                                    <div class="ya-wall__news-date">
-                                                        21.01.2017
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="ya-wall__news-text">
-                                                <pre>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi suscipit porttitor pellentesque. In tellus libero, ultrices ac sapien in, tempor consequat dui. Vivamus sem turpis, laoreet et aliquam et, auctor iaculis ex. Suspendisse tempor semper hendrerit. Morbi id pellentesque purus, a suscipit libero. Nam nec vulputate nisl, nec sodales dui. Praesent porttitor lacinia felis, ac sollicitudin tellus cursus et. Phasellus elementum diam vel eros viverra aliquet. Aliquam finibus vitae mi non faucibus. Nulla eget velit et sapien scelerisque varius. Nam tempus suscipit risus nec sodales. Cras id metus turpis.</pre>
-                                            </div>
-                                            <div class="ya-wall__news-media">
-                                                <img ng-src="{{i}}" ng-repeat="i in t.images" class="ya-wall__news-img" />
                                             </div>
                                         </div>
                                     </div>

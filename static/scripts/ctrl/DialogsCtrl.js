@@ -51,6 +51,7 @@ angular.module('MuscleMan').controller('DialogsCtrl', ['$scope', 'Dialog',
             });
         };
         $scope.with_user = function(d) {
+            if (!d) return '';
             var user = d.users.filter(function(el) {
                 return el.id !== $scope.options.user._id;
             })[0];
