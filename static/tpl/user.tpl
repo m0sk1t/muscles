@@ -7,7 +7,7 @@
                         <span class="ya-online-id ya-online-id_large ya-online-id_main" ng-class="{'ya-online-id_online_yes': user.online,'ya-online-id_online_no': !user.online}">
 						</span>
                         <div class="ya-user__avatar ya-avatar ya-avatar_large">
-                            <a class="ya-avatar__link" href="#/options">
+                            <a class="ya-avatar__link" href="#/options/profile">
                                 <img class="ya-avatar__img" ng-src="{{user.avatar || '/images/avatar.jpg'}}" alt="{{user.name}} {{user.surname}}">
                             </a>
                         </div>
@@ -31,7 +31,7 @@
                         </div>
                         <div class="ya-user__options ya ya-span-1-3">
                             <div class="ya-user__possible-actions">
-                                <a href="#/options" class="ya-user__options-btn" ng-if="options.user._id === user._id"></a>
+                                <a href="#/options/profile" class="ya-user__options-btn" ng-if="options.user._id === user._id"></a>
                                 <a href="/logout" class="ya-user__logout-btn ya-logout-btn"></a>
                             </div>
                         </div>
@@ -42,7 +42,10 @@
                     <button ng-click="write_message();">Написать сообщение</button>
                 </div>
                 <div class="ya-user__sports ya-sidebar-info ya-relative">
-                    <div class="ya-sidebar-info__icon ya-sidebar-info__icon_sports"></div>
+                    <a href="#/options/work_n_study">
+                        <div class="ya-sidebar-info__icon ya-sidebar-info__icon_sports">
+                        </div>
+                    </a>
                     <div class="ya-page__block ya-page__block_rounded">
                         <h2 class="ya-sidebar-info__title">
                             Виды спорта
@@ -64,7 +67,10 @@
                     </div>
                 </div>
                 <div class="ya-user__awards ya-sidebar-info ya-relative">
-                    <div class="ya-sidebar-info__icon ya-sidebar-info__icon_awards"></div>
+                    <a href="#/options/work_n_study">
+                        <div class="ya-sidebar-info__icon ya-sidebar-info__icon_awards">
+                        </div>
+                    </a>
                     <div class="ya-page__block ya-page__block_rounded">
                         <h2 class="ya-sidebar-info__title">
                             Достижения
@@ -101,7 +107,10 @@
                     </div>
                 </div>
                 <div class="ya-user__work ya-sidebar-info ya-relative">
-                    <div class="ya-sidebar-info__icon ya-sidebar-info__icon_work"></div>
+                    <a href="#/options/work_n_study">
+                        <div class="ya-sidebar-info__icon ya-sidebar-info__icon_work">
+                        </div>
+                    </a>
                     <div class="ya-page__block ya-page__block_rounded">
                         <h2 class="ya-sidebar-info__title">
                             Работа
@@ -135,7 +144,10 @@
                     </div>
                 </div>
                 <div class="ya-user__edu ya-sidebar-info ya-relative">
-                    <div class="ya-sidebar-info__icon ya-sidebar-info__icon_edu"></div>
+                    <a href="#/options/work_n_study">
+                        <div class="ya-sidebar-info__icon ya-sidebar-info__icon_edu">
+                        </div>
+                    </a>
                     <div class="ya-page__block ya-page__block_rounded">
                         <h2 class="ya-sidebar-info__title">
                             Образование
@@ -185,7 +197,11 @@
                     </div>
                     <div class="ya-user__info-block">
                         <div class="ya-info-block">
-                            <h2 class="ya-info-block__title ya-info-block__title_data">Данные спортсмена</h2>
+                            <h2 class="ya-info-block__title ya-info-block__title_data">
+                                <a href="#/options/profile">
+                                    Данные спортсмена
+                                </a>
+                            </h2>
                             <div class="ya-info-block__content ya-clearfix">
                                 <div class="ya-inner-grid-1-2">
                                     <div class="ya-info-block__record ya-clearfix">
@@ -228,7 +244,7 @@
                     </div>
                     <div class="ya-user__info-block">
                         <div class="ya-info-block">
-                            <h2 class="ya-info-block__title ya-info-block__title_add">Доп.информация</h2>
+                            <h2 class="ya-info-block__title ya-info-block__title_add"><a href="#/options/work_n_study">Доп.информация</a></h2>
                             <div class="ya-info-block__content">
                                 <div class="ya-info-block__record ya-clearfix" ng-repeat="h in user.hobbies" ng-if="h.type =='false'">
                                     <div class="ya-info-block__label ya-inner-grid-1-4">{{h.item}}</div>
@@ -239,7 +255,7 @@
                     </div>
                     <div class="ya-user__info-block">
                         <div class="ya-info-block">
-                            <h2 class="ya-info-block__title ya-info-block__title_work">Работа</h2>
+                            <h2 class="ya-info-block__title ya-info-block__title_work"><a href="#/options/work_n_study">Работа</a></h2>
                             <div class="ya-info-block__content">
                                 <div class="ya-info-block__record ya-clearfix" ng-repeat="h in user.hobbies" ng-if="h.type =='true'">
                                     <div class="ya-info-block__label ya-inner-grid-1-4">{{h.item}}</div>
