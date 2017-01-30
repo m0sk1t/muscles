@@ -85,10 +85,10 @@
                             <div class="ya-form__input ya-input ya-input_inline">
                                 <div class="ya-clearfix">
                                     <div class="ya-grid-1-2 ya-center">
-                                        <button ng-click="layer.editedPhoto = null;" class="ya-btn ya-btn_secondary ya-btn_inline">Отменить</button>
+                                        <button ng-click="edit_photo(layer.editedPhoto)" class="ya-btn ya-btn_secondary ya-btn_inline">Сохранить</button>
                                     </div>
                                     <div class="ya-grid-1-2 ya-center">
-                                        <button ng-click="edit_photo(layer.editedPhoto)" class="ya-btn ya-btn_primary ya-btn_inline">Сохранить</button>
+                                        <button ng-click="layer.editedPhoto = null;" class="ya-btn ya-btn_primary ya-btn_inline">Отменить</button>
                                     </div>
                                 </div>
                             </div>
@@ -117,10 +117,10 @@
                             <div class="ya-form__input ya-input ya-input_inline">
                                 <div class="ya-clearfix">
                                     <div class="ya-grid-1-2 ya-center">
-                                        <button ng-click="layer.editedAlbum = null;" class="ya-btn ya-btn_secondary ya-btn_inline">Отменить</button>
+                                        <button ng-click="edit_album(layer.editedAlbum)" class="ya-btn ya-btn_secondary ya-btn_inline">Сохранить</button>
                                     </div>
                                     <div class="ya-grid-1-2 ya-center">
-                                        <button ng-click="edit_album(layer.editedAlbum)" class="ya-btn ya-btn_primary ya-btn_inline">Сохранить</button>
+                                        <button ng-click="layer.editedAlbum = null;" class="ya-btn ya-btn_primary ya-btn_inline">Отменить</button>
                                     </div>
                                 </div>
                             </div>
