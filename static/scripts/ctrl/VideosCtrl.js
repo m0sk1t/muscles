@@ -8,10 +8,22 @@ angular.module('MuscleMan').controller('VideosCtrl', ['$sce', '$http', '$scope',
         };
 
         $scope.gallery = {
-            current: null,
+            current_video: null,
         };
 
-        $scope.options.userid = $routeParams.id;
+        $scope.manage_video_keypress = function(ev) {
+            switch (ev.keyCode) {
+                case btn.ESCAPE:
+                    $scope.gallery.current_video = null;
+                    break;
+                case btn.RIGHT:
+                    $scope.turn_video_right();
+                    break;
+                case btn.LEFT:
+                    $scope.turn_video_left();
+                    break;
+            }
+        };
 
         $scope.getDate = function(date) {
             return moment(date).format('DD.MM.YYYY');
@@ -45,12 +57,12 @@ angular.module('MuscleMan').controller('VideosCtrl', ['$sce', '$http', '$scope',
             }
         };
 
-        $scope.turn_left = function() {
-            $scope.gallery.current == 0 ? $scope.gallery.current = $scopvide.length : $scope.gallery.current--;
+        $scope.turn_video_left = function() {
+            $scope.gallery.current_video == 0 ? $scope.gallery.current_video = $scope.videos.length : $scope.gallery.current_video--;
         };
 
-        $scope.turn_right = function() {
-            $scope.gallery.current == $scope.videos.length - 1 ? $scope.gallery.current = 0 : $scope.gallery.current++;
+        $scope.turn_video_right = function() {
+            $scope.gallery.current_video == $scope.videos.length - 1 ? $scope.gallery.current_video = 0 : $scope.gallery.current_video++;
         };
 
         $scope.add_video = function() {
@@ -106,7 +118,7 @@ angular.module('MuscleMan').controller('VideosCtrl', ['$sce', '$http', '$scope',
                     return el;
                 });
                 $scope.layer.editedvideo = null;
-                MSG.ok('Настройки фото успешно изменены!');
+                MSG.ok('Настройки видео успешно изменены!');
             }, function(res) {
                 console.error(res.data);
             });
@@ -120,29 +132,24 @@ angular.module('MuscleMan').controller('VideosCtrl', ['$sce', '$http', '$scope',
             });
         };
 
-        $scope.i_like_it = function(likes) {
-            if (!likes) return false;
-            return $scope.options.user ? likes.indexOf($scope.options.user._id) !== -1 : false;
-        };
-
-        $scope.like = function(p, index) {
-            var likeIndex = p.likes.indexOf($scope.options.user._id);
+        $scope.like_video = function(index) {
+            var likeIndex = $scope.videos[$scope.gallery.current_video].likes.indexOf($scope.options.user._id);
             if (likeIndex === -1) {
-                Video.add_like(p, function(res) {
+                Video.add_like($scope.videos[$scope.gallery.current_video], function(res) {
                     $scope.videos[index].likes.push($scope.options.user._id);
                 }, function(res) {
                     console.error(res.data);
                 });
             } else {
-                Video.remove_like(p, function(res) {
-                    $scope.videos[index].likes.splice(likeIndex, 1);
+                Video.remove_like($scope.videos[$scope.gallery.current_video], function(res) {
+                    $scope.videos[$scope.gallery.current_video].likes.splice(likeIndex, 1);
                 }, function(res) {
                     console.error(res.data);
                 });
             }
         };
 
-        $scope.add_comment = function(index) {
+        $scope.add_video_comment = function() {
             var comment = {
                 date: Date.now(),
                 name: $scope.options.user.name,
@@ -150,23 +157,23 @@ angular.module('MuscleMan').controller('VideosCtrl', ['$sce', '$http', '$scope',
                 comment: $scope.gallery.comment,
                 avatar: $scope.options.user.avatar,
                 surname: $scope.options.user.surname,
-                _id: $scope.videos[$scope.gallery.current]._id,
+                _id: $scope.videos[$scope.gallery.current_video]._id,
             };
             Video.add_comment(comment, function(res) {
                 $scope.gallery.comment = '';
-                $scope.videos[index].comments.push(comment);
+                $scope.videos[$scope.gallery.current_video].comments.push(comment);
                 ($routeParams.id !== $scope.options.user._id) && (comment.target = $routeParams.id, socket.emit('video:comment', comment));
             }, function(res) {
                 console.error(res.data);
             });
         };
 
-        $scope.remove_comment = function(index, comment) {
+        $scope.remove_video_comment = function(comment) {
             Video.remove_comment({
                 comment: comment,
-                _id: $scope.videos[$scope.gallery.current]._id,
+                _id: $scope.videos[$scope.gallery.current_video]._id,
             }, function(res) {
-                $scope.videos[index].comments = $scope.videos[index].comments.filter(function(el) {
+                $scope.videos[$scope.gallery.current_video].comments = $scope.videos[$scope.gallery.current_video].comments.filter(function(el) {
                     return !(el.userid === $scope.options.user._id && el.comment === comment);
                 });
             }, function(res) {

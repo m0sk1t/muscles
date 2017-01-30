@@ -109,50 +109,8 @@
                     <a href="#/search" class="ya-btn__link ya-btn__link_search">Поиск</a>
                     <!--/div-->
                 </div>
-                <div class="ya-page__block ya-page__block_colored">
-                    <div class="ya-profile-links ya-clearfix">
-                        <div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
-                            <a href="#/dialogs" class="ya-profile-links__link ya-profile-links__link_chat"><span class="ya-profile-links__link-img ya-profile-links__link-img_chat"></span></a>
-                        </div>
-                        <div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
-                            <a href="#/user/{{options.user._id}}/photos/all" class="ya-profile-links__link ya-profile-links__link_photos"><span class="ya-profile-links__link-img ya-profile-links__link-img_photos"></span></a>
-                        </div>
-                        <div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
-                            <a href="#/user/{{options.user._id}}/videos/all" class="ya-profile-links__link ya-profile-links__link_videos"><span class="ya-profile-links__link-img ya-profile-links__link-img_videos"></span></a>
-                        </div>
-                        <div class="ya-profile-links__link-wrapper ya-inner-grid-1-2">
-                            <a href="#/favs" class="ya-profile-links__link ya-profile-links__link_favs"><span class="ya-profile-links__link-img ya-profile-links__link-img_favs"></span></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="ya-page__block ya-page__block_colored">
-                    <div class="ya-ads-block">
-                        <div class="ya-ads-block__list">
-                            <div class="ya-ads-block__item ya-ads-block__item_count_1">
-                                <a href="https://yandex.ru" target="_blank" class="ya-ads-block__link">
-                                    <span class="ya-ads-block__media">
-										<img src="/images/banner.jpg" class="ya-ads-block__img" />
-									</span>
-                                    <span class="ya-ads-block__text">
-										<span class="ya-ads-block__title">АтлетикШоп рекомендует!</span>
-                                    <span class="ya-ads-block__content">Современный продукт, очищенный от "вредных" для каждого атлета.</span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="ya-ads-block__item ya-ads-block__item_count_2">
-                                <a href="https://yandex.ru" target="_blank" class="ya-ads-block__link">
-                                    <span class="ya-ads-block__media">
-										<img src="/images/banner.jpg" class="ya-ads-block__img" />
-									</span>
-                                    <span class="ya-ads-block__text">
-										<span class="ya-ads-block__title">АтлетикШоп рекомендует!</span>
-                                    <span class="ya-ads-block__content">Современный продукт, очищенный от "вредных" для каждого атлета.</span>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <user-links-block class="ya-page__block ya-page__block_colored"></user-links-block>
+                <ads-block class="ya-page__block ya-page__block_colored"></ads-block>
             </div>
         </div>
     </div>
