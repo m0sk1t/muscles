@@ -6,7 +6,7 @@
             <div class="ya-slide ya-slide_1"><div style="background: url(/images/slide-1.jpg) 50% 50% no-repeat"></div></div>
             <div class="ya-overlay ya-relative">
                 <h1 class="ya-main-page__title">
-                    <span class="ya-main-page__subtitle">Социальная сеть с сфере</span>
+                    <span class="ya-main-page__subtitle">Социальная сеть в сфере</span>
                     <span class="ya-main-page__subtitle">фитнеса и бодибилдинга</span>
                 </h1>
                 <div class="ya-sign-form ya-sign-form_main">
@@ -42,7 +42,7 @@
                             <a href="/auth/tw" class="ya-sign-form__social-link ya-sign-form__social-link_tw"></a>
                         </div>
                         <div class="ya-center ya-sign-form__login-link">
-                            Еще нет аккаунта? <a href="/#/signin">Зарегистрироваться</a>
+                            Еще нет аккаунта? <a href="/#/signup">Зарегистрироваться</a>
                         </div>
                     </form>
                 </div>
