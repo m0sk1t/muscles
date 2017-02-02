@@ -2,6 +2,12 @@
     margin-bottom: 15px
     &_small-pad
         margin-bottom: 5px
+    &_message
+        border-top: 1px solid #0e1e2d
+        //padding-top: 10px
+        border-bottom: 1px solid #0e1e2d
+        //padding-bottom: 10px
+        margin-bottom: 0
     &__field
         width: 100%
         display: inline-block
@@ -38,6 +44,11 @@
             padding: 10px
         &_unbordered
             border: 1px solid transparent
+        &_message
+            height: 65px
+        &_message:focus
+            border: none
+            box-shadow: none
     &__label
         color: #757575
         font-size: 13px

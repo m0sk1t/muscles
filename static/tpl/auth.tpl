@@ -1,4 +1,4 @@
-<article class="auth-page">
+<article class="auth-page ya-relative">
 	<section>
 		<form action="" ng-submit="auth()">
 			<input type="email" placeholder="Почта" ng-model="cred.mail"><br>

@@ -1,7 +1,11 @@
-<article class="ya-dialoges ya-container">
+<article class="ya-dialoges ya-container ya-relative" ng-class="{'ya-container_pad':!!showTopMenu, 'ya-container_pad_menu':!showTopMenu}">
     <div class="ya-narrower">
         <div class="ya-row">
             <div class="ya-grid-1-3">
+            <a href="#" ng-click="$event.preventDefault();showsidebar = !showsidebar;" class="ya-sidebar-info__mobile-link ya-center ya-btn ya-btn_primary" ng-class="{'ya-sidebar-info__mobile-link_active': showsidebar}">
+              Параметры поиска
+            </a>
+            <div class="ya-sidebar-info__full-wrap" ng-class="{'ya-sidebar-info__full-wrap_active': !!showsidebar}">
                 <div class="ya-dialoges__penpals ya-penpals">
                     <h2 class="ya-media-page__title ya-media-page__title_dialogs ya-title ya-relative ya-center">
                         Список диалогов
@@ -30,6 +34,7 @@
                     </div>
                 </div>
             </div>
+            </div>
             <div class="ya-grid-7-15">
                 <h2 class="ya-media-page__title ya-media-page__title_msgs ya-title ya-relative">
                     {{with_user(dialogs[dialogIndex])}}
@@ -41,7 +46,7 @@
                                 <div class="ya-wall__news-list">
                                     <!--div class="ya-wall__news-item">
 										<div class="ya-wall__news-content">
-											<div class="ya-wall__news-text">
+											<div class="ya-wall__news-text ya-wall__news-text_empty ya-center">
 												Пока не добавлено ни одного сообщения.
 											</div>
 										</div>

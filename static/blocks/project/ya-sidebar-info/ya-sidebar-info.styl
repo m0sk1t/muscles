@@ -1,4 +1,9 @@
 .ya-sidebar-info
+    &__full-wrap
+        +below(959px)
+            display: none
+            &_active
+                display: block
     &__title
         text-transform: none
         color: white
@@ -44,3 +49,10 @@
         &_edu
             background-position: -117px -120px
             background-color: #ea5b0c
+    &__mobile-link
+        display: none
+        +below(959px)
+            display: block
+            margin-bottom: 10px
+        &_active
+            background: #f19601

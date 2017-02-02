@@ -1,4 +1,4 @@
-<article class="ya-user ya-container">
+<article class="ya-user ya-container ya-relative" ng-class="{'ya-container_pad':!!showTopMenu, 'ya-container_pad_menu':!showTopMenu}">
     <div class="ya-narrower">
         <div class="ya-row">
             <div class="ya-grid-1-3">
@@ -426,7 +426,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

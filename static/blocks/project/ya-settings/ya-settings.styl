@@ -1,0 +1,26 @@
+.ya-settings
+    padding-right: 5px
+    +below(959px)
+        display: none !important
+    &:hover
+        & ^[0]__actions
+            display: block
+    &__actions
+        display: none
+        position: absolute
+        top: 100%
+        left: 0
+        width: 100%
+        background: white
+        z-index: 10009
+    &__name
+        float:left
+        height: 42px
+        line-height: 42px
+    &__avatar
+        float: right
+    &__icon
+        position: absolute
+        top: 15px
+        right: -10px
+        color: white

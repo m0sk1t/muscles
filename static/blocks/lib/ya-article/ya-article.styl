@@ -1,6 +1,12 @@
 .ya-article
     &__content
         padding: 10px 15px
+        +below(959px)
+            img
+                max-width: 100% !important
+                display: block !important
+                margin: 0 auto !important
+                float: none !important
     &__title
         text-align: center
     &__date
@@ -14,6 +20,8 @@
     &__nav-btn
         background: mainLinksColor
         color: white
+        +below(959px)
+            margin-bottom: 10px
     &__nav-btn-wrapper
         padding: 10px 15px 15px 50px
         &_next

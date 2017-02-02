@@ -44,6 +44,7 @@
         right: 10px
         cursor: pointer
         font-size: 20px
+        z-index: 100000
         &:hover
             background: mainTextColor
     &__main
@@ -66,3 +67,11 @@
         & ^[0]__cell
             display: table-cell
             vertical-align: middle
+    &__main
+        &.ya-span-3-4
+            +below(959px)
+                span(1/1)
+    &__additional
+        &.ya-span-1-4
+            +below(959px)
+                display: none

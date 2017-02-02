@@ -1,9 +1,9 @@
-<article class="ya-main-page">
+<article class="ya-main-page ya-relative">
     <div class="ya-main-slider">
         <div class="ya-container ya-relative">
-            <div class="ya-slide ya-slide_3"><img src="/images/slide-3.jpg" /></div>
-            <div class="ya-slide ya-slide_2"><img src="/images/slide-2.jpg" /></div>
-            <div class="ya-slide ya-slide_1"><img src="/images/slide-1.jpg" /></div>
+            <div class="ya-slide ya-slide_3"><div style="background: url(/images/slide-3.jpg) 50% 50% no-repeat"></div></div>
+            <div class="ya-slide ya-slide_2"><div style="background: url(/images/slide-2.jpg) 50% 50% no-repeat"></div></div>
+            <div class="ya-slide ya-slide_1"><div style="background: url(/images/slide-1.jpg) 50% 50% no-repeat"></div></div>
             <div class="ya-overlay ya-relative">
                 <h1 class="ya-main-page__title">
                     <span class="ya-main-page__subtitle">Социальная сеть в сфере</span>
@@ -71,17 +71,17 @@
     <div class="ya-bottom-line">
         <div class="ya-container">
             <div class="ya-fast-links ya-row">
-                <div class="ya-span-1-3">
+                <div class="ya-span-1-3 ya-fast-links__item ya-fast-links__item_1">
                     <a href="#/competitions" class="ya-fast-link">
                         <img src="/images/fast-1.jpg" />
                     </a>
                 </div>
-                <div class="ya-span-1-3">
+                <div class="ya-span-1-3 ya-fast-links__item ya-fast-links__item_2">
                     <a href="#/contests" class="ya-fast-link">
                         <img src="/images/fast-2.jpg" />
                     </a>
                 </div>
-                <div class="ya-span-1-3">
+                <div class="ya-span-1-3 ya-fast-links__item ya-fast-links__item_3">
                     <a href="#/articles" class="ya-fast-link">
                         <img src="/images/fast-3.jpg" />
                     </a>
