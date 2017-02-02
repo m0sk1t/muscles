@@ -64,13 +64,61 @@
             margin-bottom: 10px
 .ya-bottom-line
     .ya-span-1-3
+        &.ya-fast-links__item_2
+            .ya-fast-link
+                &:before
+                    width: 21px
+                    background: url(images/sprite.png) -43px -227px no-repeat
+        &.ya-fast-links__item_3
+            .ya-fast-link
+                &:before
+                    width: 42px
+                    background: url(images/sprite.png) 0 -227px no-repeat
         overflow: hidden
         .ya-fast-link
             display:block
             width: 100%
-            height: 100%
+            height: 210px
             position: relative
             overflow: hidden
+            +between(960px, 1259px)
+                height: 159px
+            +between(768px, 959px)
+                height: 126px
+            +between(480px, 767px)
+                height: 77px
+            +below(479px)
+                height: 149px
+            &:before
+                content: ""
+                display: block
+                position: absolute
+                //position: relative
+                transform: scale(1)
+                right: 0
+                bottom: 0
+                margin-right: 15px
+                margin-bottom: 10px
+                width: 37px
+                height: 28px
+                background: url(images/sprite.png) -65px -227px no-repeat
+                z-index: 10
+                transition: all 0.2s ease-out
+                +between(960px, 1259px)
+                    transform: scale(.6)
+                    margin-right: 10px
+                +between(768px, 959px)
+                    transform: scale(.6)
+                    margin-right: 2px
+                    margin-bottom: 2px
+                +between(480px, 767px)
+                    transform: scale(.4)
+                    margin-right: -3px
+                    margin-bottom: -3px
+                +below(479px)
+                    transform: scale(.6)
+                    margin-right: 10px
+                    margin-bottom: 7px
             &:after
                 content: ""
                 background: #ef9300
@@ -83,6 +131,13 @@
                 opacity: 1
                 transition: all 0.2s ease-out
                 position: absolute
+            &:hover
+                &:before
+                    transform: scale(1) translate(50%, 50%)
+                    bottom: 50%
+                    right: 50%
+                    margin-right: 0
+                    margin-bottom: 0
             &:hover
                 &:after
                     opacity: .5

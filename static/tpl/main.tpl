@@ -71,17 +71,17 @@
     <div class="ya-bottom-line">
         <div class="ya-container">
             <div class="ya-fast-links ya-row">
-                <div class="ya-span-1-3">
+                <div class="ya-span-1-3 ya-fast-links__item ya-fast-links__item_1">
                     <a href="#/competitions" class="ya-fast-link">
                         <img src="/images/fast-1.jpg" />
                     </a>
                 </div>
-                <div class="ya-span-1-3">
+                <div class="ya-span-1-3 ya-fast-links__item ya-fast-links__item_2">
                     <a href="#/contests" class="ya-fast-link">
                         <img src="/images/fast-2.jpg" />
                     </a>
                 </div>
-                <div class="ya-span-1-3">
+                <div class="ya-span-1-3 ya-fast-links__item ya-fast-links__item_3">
                     <a href="#/articles" class="ya-fast-link">
                         <img src="/images/fast-3.jpg" />
                     </a>
