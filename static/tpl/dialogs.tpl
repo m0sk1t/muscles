@@ -2,6 +2,10 @@
     <div class="ya-narrower">
         <div class="ya-row">
             <div class="ya-grid-1-3">
+            <a href="#" ng-click="$event.preventDefault();showsidebar = !showsidebar;" class="ya-sidebar-info__mobile-link ya-center ya-btn ya-btn_primary" ng-class="{'ya-sidebar-info__mobile-link_active': showsidebar}">
+              Параметры поиска
+            </a>
+            <div class="ya-sidebar-info__full-wrap" ng-class="{'ya-sidebar-info__full-wrap_active': !!showsidebar}">
                 <div class="ya-dialoges__penpals ya-penpals">
                     <h2 class="ya-media-page__title ya-media-page__title_dialogs ya-title ya-relative ya-center">
                         Список диалогов
@@ -29,6 +33,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
             <div class="ya-grid-7-15">
                 <h2 class="ya-media-page__title ya-media-page__title_msgs ya-title ya-relative">

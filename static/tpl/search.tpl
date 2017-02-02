@@ -2,6 +2,10 @@
     <div class="ya-narrower">
         <div class="ya-row">
             <div class="ya-grid-1-4">
+            <a href="#" ng-click="$event.preventDefault();showsidebar = !showsidebar;" class="ya-sidebar-info__mobile-link ya-center ya-btn ya-btn_primary" ng-class="{'ya-sidebar-info__mobile-link_active': showsidebar}">
+              Параметры поиска
+            </a>
+            <div class="ya-sidebar-info__full-wrap" ng-class="{'ya-sidebar-info__full-wrap_active': !!showsidebar}">
                 <h2 class="ya-media-page__title ya-title ya-relative ya-center">
                     Поиск
                 </h2>
@@ -228,6 +232,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
             <div class="ya-grid-11-20">
                 <div class="ya-search-result">
