@@ -1,4 +1,4 @@
-<article class="ya-search-page ya-container">
+<article class="ya-search-page ya-container ya-relative">
     <div class="ya-narrower">
         <div class="ya-row">
             <div class="ya-grid-1-4">

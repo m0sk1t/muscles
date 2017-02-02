@@ -1,4 +1,4 @@
-<article class="ya-user ya-container">
+<article class="ya-user ya-container ya-relative">
     <div class="ya-narrower">
         <div class="ya-row">
             <div class="ya-grid-1-3">

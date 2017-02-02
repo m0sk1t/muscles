@@ -1,4 +1,4 @@
-<article class="ya-main-page">
+<article class="ya-main-page ya-relative">
     <div class="ya-main-slider">
         <div class="ya-container ya-relative">
             <div class="ya-slide ya-slide_3"><div style="background: url(/images/slide-3.jpg) 50% 50% no-repeat"></div></div>

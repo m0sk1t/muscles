@@ -1,4 +1,4 @@
-<article class="ya-photos-page ya-media-page ya-container">
+<article class="ya-photos-page ya-media-page ya-container ya-relative">
     <div class="ya-narrower">
         <div class="ya-row">
             <div class="ya-grid-4-5">
