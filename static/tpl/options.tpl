@@ -1,4 +1,4 @@
-<article class="ya-options ya-container ya-relative">
+<article class="ya-options ya-container ya-relative" ng-class="{'ya-container_pad':!!showTopMenu, 'ya-container_pad_menu':!showTopMenu}">
     <div class="ya-narrower">
         <div class="ya-row">
             <div class="ya-grid-4-5">
