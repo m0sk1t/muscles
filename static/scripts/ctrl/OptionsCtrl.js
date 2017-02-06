@@ -2,6 +2,16 @@ angular.module('MuscleMan').controller('OptionsCtrl', ['$scope', '$routeParams',
     function($scope, $routeParams, MSG, Upload, User, LS, $vk) {
         $scope.active_page = $routeParams.tab || 'profile';
 
+        $scope.search = {
+            city: null,
+            user: null,
+            chair: null,
+            country: null,
+            faculty: null,
+            speciality: null,
+            university: null,
+        };
+
         $scope.cred = {
             password: '',
             confirmPassword: '',
