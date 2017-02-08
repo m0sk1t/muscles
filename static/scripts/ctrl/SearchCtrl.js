@@ -1,6 +1,8 @@
 angular.module('MuscleMan').controller('SearchCtrl', ['$scope', 'User',
     function($scope, User) {
-        $scope.search = {};
+        $scope.search = {
+            location_country: $scope.options.user.location_country
+        };
         $scope.users = [];
 
         $scope.in_fav = function(id) {

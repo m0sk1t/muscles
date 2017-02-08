@@ -2,213 +2,199 @@
     <div class="ya-narrower">
         <div class="ya-row">
             <div class="ya-grid-1-4">
-            <a href="#" ng-click="$event.preventDefault();showsidebar = !showsidebar;" class="ya-sidebar-info__mobile-link ya-center ya-btn ya-btn_primary" ng-class="{'ya-sidebar-info__mobile-link_active': showsidebar}">
+                <a href="#" ng-click="$event.preventDefault();showsidebar = !showsidebar;" class="ya-sidebar-info__mobile-link ya-center ya-btn ya-btn_primary" ng-class="{'ya-sidebar-info__mobile-link_active': showsidebar}">
               Параметры поиска
             </a>
-            <div class="ya-sidebar-info__full-wrap" ng-class="{'ya-sidebar-info__full-wrap_active': !!showsidebar}">
-                <h2 class="ya-media-page__title ya-title ya-relative ya-center">
-                    Поиск
-                </h2>
-                <div class="ya-form ya-form_wide">
-                    <div class="ya-form__input ya-input ya-input_inline">
-                        <div class="ya-clearfix">
-                            <div class="ya-input__label ya-input__label_block">
-                                <label for="ya-name" class="ya-input__label">
+                <div class="ya-sidebar-info__full-wrap" ng-class="{'ya-sidebar-info__full-wrap_active': !!showsidebar}">
+                    <h2 class="ya-media-page__title ya-title ya-relative ya-center">
+                        Поиск
+                    </h2>
+                    <div class="ya-form ya-form_wide">
+                        <div class="ya-form__input ya-input ya-input_inline">
+                            <div class="ya-clearfix">
+                                <div class="ya-input__label ya-input__label_block">
+                                    <label for="ya-name" class="ya-input__label">
 									Спортсмен
 								</label>
-                            </div>
-                            <div class="ya-input__input">
-                                <div class="ya-input__field-wrapper">
-                                    <input id="ya-name" placeholder="Имя Фамилия" class="ya-input__field" type="text" ng-model="search.fio" />
+                                </div>
+                                <div class="ya-input__input">
+                                    <div class="ya-input__field-wrapper">
+                                        <input id="ya-name" placeholder="Имя Фамилия" class="ya-input__field" type="text" ng-model="search.fio" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="ya-form__input ya-input ya-input_inline">
-                        <div class="ya-clearfix">
-                            <div class="ya-input__label ya-input__label_block">
-                                <label for="ya-mail" class="ya-input__label">
+                        <div class="ya-form__input ya-input ya-input_inline">
+                            <div class="ya-clearfix">
+                                <div class="ya-input__label ya-input__label_block">
+                                    <label for="ya-mail" class="ya-input__label">
 									E-mail
 								</label>
-                            </div>
-                            <div class="ya-input__input">
-                                <div class="ya-input__field-wrapper">
-                                    <input id="ya-mail" placeholder="E-mail" class="ya-input__field" type="text" ng-model="search.mail" />
+                                </div>
+                                <div class="ya-input__input">
+                                    <div class="ya-input__field-wrapper">
+                                        <input id="ya-mail" placeholder="E-mail" class="ya-input__field" type="text" ng-model="search.mail" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="ya-form__input ya-input ya-input_inline">
-                        <div class="ya-clearfix">
-                            <div class="ya-input__label ya-input__label_block">
-                                <label for="ya-city" class="ya-input__label">
+                        <div class="ya-form__input ya-input ya-input_inline">
+                            <div class="ya-clearfix">
+                                <div class="ya-input__label ya-input__label_block">
+                                    <label for="ya-city" class="ya-input__label">
 									Город
 								</label>
-                            </div>
-                            <div class="ya-input__input">
-                                <div class="ya-input__field-wrapper">
-                                    <select id="ya-city" placeholder="Выбор города" class="ya-input__field ya-input__field_select ya-input__select">
-										<option value="">Выбор города</option>
-										<option value="Спорт 1">Город 1</option>
-										<option value="Спорт 2">Город 2</option>
-									</select>
+                                </div>
+                                <div class="ya-input__input">
+                                    <div class="ya-input__field-wrapper">
+                                        <autocomplete-block substr="" area="city" country="search.location_country.cid" on-set="search.location_city = item"></autocomplete-block>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="ya-form__input ya-input ya-input_no-pad ya-input_inline">
-                        <div class="ya-clearfix">
-                            <div class="ya-input__label ya-input__label_block">
-                                <label for="ya-age" class="ya-input__label">
+                        <div class="ya-form__input ya-input ya-input_no-pad ya-input_inline">
+                            <div class="ya-clearfix">
+                                <div class="ya-input__label ya-input__label_block">
+                                    <label for="ya-age" class="ya-input__label">
 									Возраст
 								</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ya-form__input ya-input ya-input_inline">
-                        <div class="ya-clearfix">
-                            <div class="ya-grid-1-2">
-                                <select id="ya-age" ng-model="search.agefrom" class="ya-input__field ya-input__field_select ya-input__select">
-									<option value="">от</option>
-									<option value="25">25</option>
-								</select>
-                            </div>
-                            <div class="ya-grid-1-2">
-                                <div class="ya-input__field-wrapper">
-                                    <select id="ya-age-2" ng-model="search.ageto" class="ya-input__field ya-input__field_select ya-input__select">
-										<option value="">до</option>
-										<option value="26">26</option>
-										<option value="27">27</option>
-										<option value="28">28</option>
-									</select>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="ya-form__input ya-input ya-input_inline">
-                        <div class="ya-clearfix">
-                            <div class="ya-input__label ya-input__label_block">
-                                <label for="ya-sex" class="ya-input__label">
+                        <div class="ya-form__input ya-input ya-input_inline">
+                            <div class="ya-clearfix">
+                                <div class="ya-grid-1-2">
+                                    <input id="ya-age" placeholder="От" class="ya-input__field" type="number" ng-model="search.agefrom" />
+                                </div>
+                                <div class="ya-grid-1-2">
+                                    <input id="ya-age-2" placeholder="До" class="ya-input__field" type="number" ng-model="search.ageto" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ya-form__input ya-input ya-input_inline">
+                            <div class="ya-clearfix">
+                                <div class="ya-input__label ya-input__label_block">
+                                    <label for="ya-sex" class="ya-input__label">
 									Пол
 								</label>
-                            </div>
-                            <div class="ya-input__input">
-                                <div class="ya-input__field-wrapper">
-                                    <select id="ya-sex" placeholder="Пол" ng-model="search.sex" class="ya-input__field">
-										<option value="n">Неважно</option>
-										<option value="m">Мужской</option>
-										<option value="w">Женский</option>
-									</select>
+                                </div>
+                                <div class="ya-input__input">
+                                    <div class="ya-input__field-wrapper">
+                                        <select id="ya-sex" placeholder="Пол" ng-model="search.sex" class="ya-input__field">
+                                            <option value="">Неважно</option>
+                                            <option value="1">Мужской</option>
+                                            <option value="0">Женский</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="ya-form__input ya-input ya-input_no-pad ya-input_inline">
-                        <div class="ya-clearfix">
-                            <div class="ya-input__label ya-input__label_block">
-                                <label for="ya-height" class="ya-input__label">
+                        <div class="ya-form__input ya-input ya-input_no-pad ya-input_inline">
+                            <div class="ya-clearfix">
+                                <div class="ya-input__label ya-input__label_block">
+                                    <label for="ya-height" class="ya-input__label">
 									Рост
 								</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ya-form__input ya-input ya-input_inline">
-                        <div class="ya-clearfix">
-                            <div class="ya-grid-1-2">
-                                <input id="ya-height" placeholder="От" class="ya-input__field" type="number" ng-model="search.heightfrom" />
-                            </div>
-                            <div class="ya-grid-1-2">
-                                <div class="ya-input__field-wrapper">
-                                    <input id="ya-height-2" placeholder="До" class="ya-input__field" type="number" ng-model="search.heightto" />
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="ya-form__input ya-input ya-input_no-pad ya-input_inline">
-                        <div class="ya-clearfix">
-                            <div class="ya-input__label ya-input__label_block">
-                                <label for="ya-weight" class="ya-input__label">
+                        <div class="ya-form__input ya-input ya-input_inline">
+                            <div class="ya-clearfix">
+                                <div class="ya-grid-1-2">
+                                    <input id="ya-height" placeholder="От" class="ya-input__field" type="number" ng-model="search.heightfrom" />
+                                </div>
+                                <div class="ya-grid-1-2">
+                                    <div class="ya-input__field-wrapper">
+                                        <input id="ya-height-2" placeholder="До" class="ya-input__field" type="number" ng-model="search.heightto" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ya-form__input ya-input ya-input_no-pad ya-input_inline">
+                            <div class="ya-clearfix">
+                                <div class="ya-input__label ya-input__label_block">
+                                    <label for="ya-weight" class="ya-input__label">
 									Вес
 								</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ya-form__input ya-input ya-input_inline">
-                        <div class="ya-clearfix">
-                            <div class="ya-grid-1-2">
-                                <input id="ya-weight" placeholder="От" class="ya-input__field" type="number" ng-model="search.weightfrom" />
-                            </div>
-                            <div class="ya-grid-1-2">
-                                <div class="ya-input__field-wrapper">
-                                    <input id="ya-weight-2" placeholder="До" class="ya-input__field" type="number" ng-model="search.weightto" />
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="ya-form__input ya-input ya-input_no-pad ya-input_inline">
-                        <div class="ya-clearfix">
-                            <div class="ya-input__label ya-input__label_block">
-                                <label for="ya-waist" class="ya-input__label">
+                        <div class="ya-form__input ya-input ya-input_inline">
+                            <div class="ya-clearfix">
+                                <div class="ya-grid-1-2">
+                                    <input id="ya-weight" placeholder="От" class="ya-input__field" type="number" ng-model="search.weightfrom" />
+                                </div>
+                                <div class="ya-grid-1-2">
+                                    <div class="ya-input__field-wrapper">
+                                        <input id="ya-weight-2" placeholder="До" class="ya-input__field" type="number" ng-model="search.weightto" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ya-form__input ya-input ya-input_no-pad ya-input_inline">
+                            <div class="ya-clearfix">
+                                <div class="ya-input__label ya-input__label_block">
+                                    <label for="ya-waist" class="ya-input__label">
 									Размер талии
 								</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ya-form__input ya-input ya-input_inline">
-                        <div class="ya-clearfix">
-                            <div class="ya-grid-1-2">
-                                <input id="ya-waist" placeholder="От" class="ya-input__field" type="number" ng-model="search.waistfrom" />
-                            </div>
-                            <div class="ya-grid-1-2">
-                                <div class="ya-input__field-wrapper">
-                                    <input id="ya-waist-2" placeholder="До" class="ya-input__field" type="number" ng-model="search.waistto" />
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="ya-form__input ya-input ya-input_no-pad ya-input_inline">
-                        <div class="ya-clearfix">
-                            <div class="ya-input__label ya-input__label_block">
-                                <label for="ya-chest" class="ya-input__label">
+                        <div class="ya-form__input ya-input ya-input_inline">
+                            <div class="ya-clearfix">
+                                <div class="ya-grid-1-2">
+                                    <input id="ya-waist" placeholder="От" class="ya-input__field" type="number" ng-model="search.waistfrom" />
+                                </div>
+                                <div class="ya-grid-1-2">
+                                    <div class="ya-input__field-wrapper">
+                                        <input id="ya-waist-2" placeholder="До" class="ya-input__field" type="number" ng-model="search.waistto" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ya-form__input ya-input ya-input_no-pad ya-input_inline">
+                            <div class="ya-clearfix">
+                                <div class="ya-input__label ya-input__label_block">
+                                    <label for="ya-chest" class="ya-input__label">
 									Размер груди
 								</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ya-form__input ya-input ya-input_inline">
-                        <div class="ya-clearfix">
-                            <div class="ya-grid-1-2">
-                                <input id="ya-chest" placeholder="От" class="ya-input__field" type="number" ng-model="search.chestfrom" />
-                            </div>
-                            <div class="ya-grid-1-2">
-                                <div class="ya-input__field-wrapper">
-                                    <input id="ya-chest-2" placeholder="До" class="ya-input__field" type="number" ng-model="search.chestto" />
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="ya-form__input ya-input ya-input_no-pad ya-input_inline">
-                        <div class="ya-clearfix">
-                            <div class="ya-input__label ya-input__label_block">
-                                <label for="ya-huckle" class="ya-input__label">
+                        <div class="ya-form__input ya-input ya-input_inline">
+                            <div class="ya-clearfix">
+                                <div class="ya-grid-1-2">
+                                    <input id="ya-chest" placeholder="От" class="ya-input__field" type="number" ng-model="search.chestfrom" />
+                                </div>
+                                <div class="ya-grid-1-2">
+                                    <div class="ya-input__field-wrapper">
+                                        <input id="ya-chest-2" placeholder="До" class="ya-input__field" type="number" ng-model="search.chestto" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ya-form__input ya-input ya-input_no-pad ya-input_inline">
+                            <div class="ya-clearfix">
+                                <div class="ya-input__label ya-input__label_block">
+                                    <label for="ya-huckle" class="ya-input__label">
 									Бедра
 								</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ya-form__input ya-input ya-input_inline">
-                        <div class="ya-clearfix">
-                            <div class="ya-grid-1-2">
-                                <input id="ya-huckle" placeholder="От" class="ya-input__field" type="number" ng-model="search.hucklefrom" />
-                            </div>
-                            <div class="ya-grid-1-2">
-                                <div class="ya-input__field-wrapper">
-                                    <input id="ya-huckle-2" placeholder="До" class="ya-input__field" type="number" ng-model="search.huckleto" />
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!--
+                        <div class="ya-form__input ya-input ya-input_inline">
+                            <div class="ya-clearfix">
+                                <div class="ya-grid-1-2">
+                                    <input id="ya-huckle" placeholder="От" class="ya-input__field" type="number" ng-model="search.hucklefrom" />
+                                </div>
+                                <div class="ya-grid-1-2">
+                                    <div class="ya-input__field-wrapper">
+                                        <input id="ya-huckle-2" placeholder="До" class="ya-input__field" type="number" ng-model="search.huckleto" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--
 <div class="ya-form__input ya-input ya-input_inline">
     <div class="ya-clearfix">
         <div class="ya-input__label ya-input__label_block">
@@ -224,15 +210,15 @@
     </div>
 </div>
 -->
-                    <div class="ya-form__input ya-input ya-input_inline">
-                        <div class="ya-clearfix">
-                            <div class="ya-grid-1-1 ya-center">
-                                <button ng-click="find_users()" class="ya-btn ya-btn_secondary ya-btn_inline">Искать!</button>
+                        <div class="ya-form__input ya-input ya-input_inline">
+                            <div class="ya-clearfix">
+                                <div class="ya-grid-1-1 ya-center">
+                                    <button ng-click="find_users()" class="ya-btn ya-btn_secondary ya-btn_inline">Искать!</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
             <div class="ya-grid-11-20">
                 <div class="ya-search-result">
