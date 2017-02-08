@@ -238,6 +238,8 @@ module.exports = (app) => {
 
         User.find(search, {
             pass: 0,
+        }, {
+            limit: 50,
         }, (err, users) => {
             if (!err) {
                 res.json(users);

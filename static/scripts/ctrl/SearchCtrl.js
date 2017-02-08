@@ -5,6 +5,18 @@ angular.module('MuscleMan').controller('SearchCtrl', ['$scope', 'User',
         };
         $scope.users = [];
 
+        $scope.get_age = function(birthDate) {
+            var now = moment(),
+                birthDate = moment(birthDate);
+            return now.diff(birthDate, 'years');
+        };
+
+        User.get_sports(function(res) {
+            $scope.sports = res.data;
+        }, function(res) {
+            MSG.err(res.data);
+        });
+
         $scope.in_fav = function(id) {
             return ($scope.options.user.favs ? $scope.options.user.favs.indexOf(id) >= 0 : false);
         };
