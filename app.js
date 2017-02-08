@@ -21,10 +21,10 @@ app.use(compression());
 
 app.use(morgan('dev'));
 
-app.use(bodyParser.json({ limit: '50M' }));
+app.use(bodyParser.json({ limit: '50mb' }));
 
 app.use(bodyParser.urlencoded({
-    limit: '50M',
+    limit: '50mb',
     extended: true
 }));
 

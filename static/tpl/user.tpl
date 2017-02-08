@@ -15,13 +15,13 @@
                             {{user.name}} {{user.surname}}, {{get_age(user.birthDate)}}
                         </div>
                         <div class="ya-user__city">
-                            {{user.city}} Иваново
+                            {{user.location_country.title + ', '}} {{user.location_city.title}}
                         </div>
                     </div>
                     <div class="ya-user__config-block ya-clearfix">
                         <div class="ya-span-2-3">
                             <div class="ya-user__raiting ya-raiting">
-                                <!--span>{{rating}}</span-->
+                                <span>{{rating}}</span>
                                 <span ng-click="mark(5);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 5, 'ya-raiting__star_empty': rating === 4, 'ya-raiting__star_half': (rating>4)&&(rating<5)}"></span>
                                 <span ng-click="mark(4);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 4, 'ya-raiting__star_empty': rating === 3, 'ya-raiting__star_half': (rating>3)&&(rating<4)}"></span>
                                 <span ng-click="mark(3);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 3, 'ya-raiting__star_empty': rating === 2, 'ya-raiting__star_half': (rating>2)&&(rating<3)}"></span>
@@ -85,10 +85,10 @@
                         <div class="ya-sidebar-info__content-wrapper" ng-show="user.achievements && user.achievements.length" ng-repeat="a in user.achievements track by $index">
                             <div class="ya-sidebar-info__content">
                                 <div class="ya-sidebar-info__item">
-                                    <span class="ya-sidebar-info__label">Страна</span> {{a.country}}
+                                    <span class="ya-sidebar-info__label">Страна</span> {{a.country.title}}
                                 </div>
                                 <div class="ya-sidebar-info__item">
-                                    <span class="ya-sidebar-info__label">Город</span> {{a.city}}
+                                    <span class="ya-sidebar-info__label">Город</span> {{a.city.title}}
                                 </div>
                                 <div class="ya-sidebar-info__item">
                                     <span class="ya-sidebar-info__label">Год</span> {{a.year}}
@@ -125,10 +125,10 @@
                         <div class="ya-sidebar-info__content-wrapper" ng-show="user.workplaces && user.workplaces.length" ng-repeat="w in user.workplaces track by $index">
                             <div class="ya-sidebar-info__content">
                                 <div class="ya-sidebar-info__item">
-                                    <span class="ya-sidebar-info__label">Страна</span> {{w.country}}
+                                    <span class="ya-sidebar-info__label">Страна</span> {{w.country.title}}
                                 </div>
                                 <div class="ya-sidebar-info__item">
-                                    <span class="ya-sidebar-info__label">Город</span> {{w.city}}
+                                    <span class="ya-sidebar-info__label">Город</span> {{w.city.title}}
                                 </div>
                                 <div class="ya-sidebar-info__item">
                                     <span class="ya-sidebar-info__label">Годы</span> {{w.year_start}} - {{w.year_end||'по н. вр.'}}
@@ -162,22 +162,22 @@
                         <div class="ya-sidebar-info__content-wrapper" ng-show="user.universities && user.universities.length" ng-repeat="u in user.universities track by $index">
                             <div class="ya-sidebar-info__content">
                                 <div class="ya-sidebar-info__item">
-                                    <span class="ya-sidebar-info__label">Страна</span> {{u.country}}
+                                    <span class="ya-sidebar-info__label">Страна</span> {{u.country.title}}
                                 </div>
                                 <div class="ya-sidebar-info__item">
-                                    <span class="ya-sidebar-info__label">Город</span> {{u.city}}
+                                    <span class="ya-sidebar-info__label">Город</span> {{u.city.title}}
                                 </div>
                                 <div class="ya-sidebar-info__item">
                                     <span class="ya-sidebar-info__label">Годы</span> {{u.year_start}} - {{u.year_end||'по н. вр.'}}
                                 </div>
                                 <div class="ya-sidebar-info__item">
-                                    <span class="ya-sidebar-info__label">Учреждение</span> {{u.university}}
+                                    <span class="ya-sidebar-info__label">Учреждение</span> {{u.university.title}}
                                 </div>
                                 <div class="ya-sidebar-info__item">
-                                    <span class="ya-sidebar-info__label">Факультет</span> {{u.faculty}}
+                                    <span class="ya-sidebar-info__label">Факультет</span> {{u.faculty.title}}
                                 </div>
                                 <div class="ya-sidebar-info__item">
-                                    <span class="ya-sidebar-info__label">Кафедра</span> {{u.chair}}
+                                    <span class="ya-sidebar-info__label">Кафедра</span> {{u.chair.title}}
                                 </div>
                                 <div class="ya-sidebar-info__item">
                                     <span class="ya-sidebar-info__label">Специальность</span> {{u.speciality}}
