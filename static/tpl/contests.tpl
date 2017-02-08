@@ -41,16 +41,6 @@
 								<span class="ya-contests__item-title">{{c.title}}</span> (с {{c.dateStart}} по {{c.dateEnd}}. Прием заявок с {{c.dateStart}})
 							</a>
 						</div>
-						<div class="ya-contests__item">
-							<a ng-href="#/contest/{{c._id}}" class="ya-contests__link">
-								<span class="ya-contests__item-title">Мистер бицепс</span> (с 01.01.2017 по 01.02.2017. Прием заявок с 01.01.2017)
-							</a>
-						</div>
-                        <div class="ya-contests__item">
-                            <a ng-href="#/contest/{{c._id}}" class="ya-contests__link">
-                                <span class="ya-contests__item-title">Мистер бицепс</span> (с 01.01.2017 по 01.02.2017. Прием заявок с 01.01.2017)
-                            </a>
-                        </div>
                     </div>
 				</div>
 			</div>
