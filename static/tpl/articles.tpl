@@ -48,22 +48,22 @@
                         Последние добавленные
                     </div>
                     <div class="ya-articles__list">
-                        <div class="ya-articles__item">
+                        <div class="ya-articles__item" ng-repeat="i in articles track by $index">
                             <div class="ya-bordered-box">
                                 <div class="ya-clearfix">
                                     <div class="ya-articles__media ya-grid-2-5">
-                                        <img src="images/article-thumb.jpg" alt="Alternative text" class="ya-articles__thumb">
+                                        <img ng-src="{{get_picture($index) || 'images/article-thumb.jpg'}}" alt="Alternative text" class="ya-articles__thumb">
                                     </div>
                                     <div class="ya-articles__content ya-grid-3-5">
                                         <h3 class="ya-articles__title">Соревнованяи по бодибилдингу в г. Пенза</h3>
                                         <div class="ya-articles__desc">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod sem eget bibendum dapibus. Quisque imperdiet pulvinar libero, sed lacinia tortor lacinia non.
+                                            {{get_text($index)}}
                                         </div>
                                         <div class="ya-articles__readmore">
-                                            <a href="#" class="ya-btn ya-btn_primary ya-btn_inline">Читать дальше</a>
+                                            <a href="#/article/{{i._id}}" class="ya-btn ya-btn_primary ya-btn_inline">Читать дальше</a>
                                         </div>
                                         <div class="ya-articles__date">
-                                            07.07.2016
+                                            {{moment(i.creDate).format('dd.MM.yyy')}}
                                         </div>
                                     </div>
                                 </div>
