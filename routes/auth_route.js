@@ -489,7 +489,7 @@ module.exports = (app) => {
     app.get('/auth/fb/callback',
         passport.authenticate('facebook', failRedirect),
         (req, res) => {
-            res.json(req.user).redirect('/#/options');
+            res.redirect('/#/options');
         }
     );
 
@@ -500,7 +500,7 @@ module.exports = (app) => {
     app.get('/auth/tw/callback',
         passport.authenticate('twitter', failRedirect),
         (req, res) => {
-            res.json(req.user).redirect('/#/options');
+            res.redirect('/#/options');
         }
     );
 
@@ -511,7 +511,7 @@ module.exports = (app) => {
     app.get('/auth/im/callback',
         passport.authenticate('instagram', failRedirect),
         (req, res) => {
-            res.json(req.user).redirect('/#/options');
+            res.redirect('/#/options');
         }
     );
 
@@ -522,7 +522,7 @@ module.exports = (app) => {
     app.get('/auth/vk/callback',
         passport.authenticate('vkontakte', failRedirect),
         (req, res) => {
-            res.json(req.user).redirect('/#/options');
+            res.redirect('/#/options');
         }
     );
 
@@ -533,7 +533,7 @@ module.exports = (app) => {
     app.get('/auth/ok/callback',
         passport.authenticate('odnoklassniki', failRedirect),
         (req, res) => {
-            res.json(req.user).redirect('/#/options');
+            res.redirect('/#/options');
         }
     );
 
