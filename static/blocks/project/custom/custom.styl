@@ -172,3 +172,38 @@ ads-block
     border-right-color: white !important
     tr
         border-color: white
+.fc-today-button
+    display: none
+.ya-competitions__calendar
+    .fc-toolbar
+        margin-bottom: 0
+        .fc-left
+            h2
+                text-align: center
+        .fc-left
+        .fc-right
+            float: none
+        .fc-button-group
+            display: block
+            position: relative
+            .fc-button
+                position: absolute
+                top: -35px
+                left: 20px
+                width: 20px
+                height: 20px
+                border: none
+                outline: none
+                background: url(images/sprite.png) -2px -95px mainLinksColor
+                border-radius: 50%
+                opacity: 0.5
+                &:hover
+                    opacity: 1
+                & > *
+                    display: none !important
+                &.fc-next-button
+                    right: 20px
+                    left: auto
+                    background: url(images/sprite.png) -24px -95px mainLinksColor
+        .fc-button-group > *
+            float: none
