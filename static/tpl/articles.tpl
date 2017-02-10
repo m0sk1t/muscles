@@ -55,7 +55,7 @@
                                         <img ng-src="{{get_picture($index) || 'images/article-thumb.jpg'}}" alt="Alternative text" class="ya-articles__thumb">
                                     </div>
                                     <div class="ya-articles__content ya-grid-3-5">
-                                        <h3 class="ya-articles__title">Соревнованяи по бодибилдингу в г. Пенза</h3>
+                                        <h3 class="ya-articles__title">{{i.title}}</h3>
                                         <div class="ya-articles__desc">
                                             {{get_text($index)}}
                                         </div>
@@ -63,7 +63,7 @@
                                             <a href="#/article/{{i._id}}" class="ya-btn ya-btn_primary ya-btn_inline">Читать дальше</a>
                                         </div>
                                         <div class="ya-articles__date">
-                                            {{moment(i.creDate).format('dd.MM.yyy')}}
+                                            {{format_date(i.creDate)}}
                                         </div>
                                     </div>
                                 </div>

@@ -3,6 +3,7 @@ module.exports = (app) => {
         mailer = require('./mailer'),
         passport = require('passport'),
         User = require('../models/User'),
+        failRedirect = { failureRedirect: '/#/signup' },
         LocalStrategy = require('passport-local').Strategy,
         VKStrategy = require('passport-vkontakte').Strategy,
         TwitterStrategy = require('passport-twitter').Strategy,
@@ -486,11 +487,9 @@ module.exports = (app) => {
     );
 
     app.get('/auth/fb/callback',
-        passport.authenticate('facebook', {
-            failureRedirect: '/#/signup'
-        }),
+        passport.authenticate('facebook', failRedirect),
         (req, res) => {
-            res.redirect('/#/options');
+            res.json(req.user).redirect('/#/options');
         }
     );
 
@@ -499,11 +498,9 @@ module.exports = (app) => {
     );
 
     app.get('/auth/tw/callback',
-        passport.authenticate('twitter', {
-            failureRedirect: '/#/signup'
-        }),
+        passport.authenticate('twitter', failRedirect),
         (req, res) => {
-            res.redirect('/#/options');
+            res.json(req.user).redirect('/#/options');
         }
     );
 
@@ -512,11 +509,9 @@ module.exports = (app) => {
     );
 
     app.get('/auth/im/callback',
-        passport.authenticate('instagram', {
-            failureRedirect: '/#/signup'
-        }),
+        passport.authenticate('instagram', failRedirect),
         (req, res) => {
-            res.redirect('/#/options');
+            res.json(req.user).redirect('/#/options');
         }
     );
 
@@ -525,11 +520,9 @@ module.exports = (app) => {
     );
 
     app.get('/auth/vk/callback',
-        passport.authenticate('vkontakte', {
-            failureRedirect: '/#/signup'
-        }),
+        passport.authenticate('vkontakte', failRedirect),
         (req, res) => {
-            res.redirect('/#/options');
+            res.json(req.user).redirect('/#/options');
         }
     );
 
@@ -538,11 +531,9 @@ module.exports = (app) => {
     );
 
     app.get('/auth/ok/callback',
-        passport.authenticate('odnoklassniki', {
-            failureRedirect: '/#/signup'
-        }),
+        passport.authenticate('odnoklassniki', failRedirect),
         (req, res) => {
-            res.redirect('/#/options');
+            res.json(req.user).redirect('/#/options');
         }
     );
 
