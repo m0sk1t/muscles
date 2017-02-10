@@ -1,0 +1,33 @@
+.ya-informer
+    padding-left: 50px
+    position: relative
+    +below(959px)
+        margin-bottom: 15px
+        width: 160px
+        margin-left: auto
+        margin-right: auto
+    &:before
+        position: absolute
+        content: ""
+        display: block
+        left: 0
+        top: 0
+    &_prize:before
+        width: 28px
+        height: 36px
+        background: url(images/sprite.png) -175px -228px no-repeat
+    &_looks:before
+        width: 43px
+        height: 28px
+        top: 5px
+        background: url(images/sprite.png) -204px -228px no-repeat
+    &_votes:before
+        width: 36px
+        height: 31px
+        top: 5px
+        background: url(images/sprite.png) -177px -265px no-repeat
+    &_votes-payed:before
+        width: 32px
+        height: 34px
+        top: 5px
+        background: url(images/sprite.png) -214px -264px no-repeat

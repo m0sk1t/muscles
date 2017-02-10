@@ -153,5 +153,62 @@ ads-block
     .ya-input__field-wrapper
         max-width: 100%
     .ya-form__input
-        .ya-grid-1-2 + .ya-grid-1-2
-            margin-top: 10px
+        +below(959px)
+            .ya-grid-1-2 + .ya-grid-1-2
+                margin-top: 10px
+.fc-view-container
+    table
+        margin-bottom: 0
+.fc-view-container
+    .fc-day-header
+    .fc-axis.fc-widget-header
+        padding-top: 10px
+        padding-bottom: 10px
+        background: mainLinksColor
+        color: white
+.fc-head-container
+    background: mainLinksColor
+.fc-unthemed .fc-row.fc-widget-header
+    border-right-color: white !important
+    tr
+        border-color: white
+.fc-today-button
+    display: none
+.ya-competitions__calendar
+    .fc-toolbar
+        margin-bottom: 0
+        .fc-left
+            h2
+                text-align: center
+        .fc-left
+        .fc-right
+            float: none
+        .fc-button-group
+            display: block
+            position: relative
+            .fc-button
+                position: absolute
+                top: -35px
+                left: 20px
+                width: 20px
+                height: 20px
+                border: none
+                outline: none
+                background: url(images/sprite.png) -2px -95px mainLinksColor
+                border-radius: 50%
+                opacity: 0.5
+                &:hover
+                    opacity: 1
+                & > *
+                    display: none !important
+                &.fc-next-button
+                    right: 20px
+                    left: auto
+                    background: url(images/sprite.png) -24px -95px mainLinksColor
+        .fc-button-group > *
+            float: none
+.ya-competitions
+    .ya-articles__filter
+        .ya-grid-1-1
+            +below(959px)
+                margin-bottom: 10px
