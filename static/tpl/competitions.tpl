@@ -35,20 +35,66 @@
                             </div>
                         </div>
                     </div>
-                    <div class="ya-competitions__content">
+                    <div class="ya-competitions__content ya-articles ya-articles_competitions">
                         <div class="ya-competitions__calendar">
                             <div ui-calendar="calendarOptions" ng-model="eventSources" calendar="competitions"></div>
                         </div>
-                        <div class="ya-competitons__list">
-                            <div ng-repeat="c in competitions">
-                                <h3>{{c.title}}</h3>
-                                <div>{{c.date}}</div>
-                                <div>{{c.city}}</div>
-                                <div>{{c.place}}</div>
-                                <div>{{c.title}}</div>
-                                <div>{{c.nomination}}</div>
-                                <div>{{c.description}}</div>
-                                <a href="#/competition/{{c._id}}">Подробнее</a>
+                        <div class="ya-articles__subtitle">
+                            Ближайшие соревнования
+                        </div>
+                        <div class="ya-articles__list">
+                            <div class="ya-articles__item" ng-repeat="c in competitions">
+                                 <h3 class="ya-articles__title">{{c.title}}</h3>
+                                <div class="ya-bordered-box ya-bordered-box_left">
+                                    <div class="ya-clearfix">
+                                        <div class="ya-articles__media ya-grid-1-5">
+                                            <img src="images/competition.png" alt="Alternative text" class="ya-articles__thumb">
+                                        </div>
+                                        <div class="ya-articles__content ya-grid-4-5">
+                                            <div class="ya-articles__row ya-clearfix">
+                                                <div class="ya-grid-1-5 ya-articles__row-title">
+                                                    Дата
+                                                </div>
+                                                <div class="ya-grid-4-5 ya-articles__row-text">
+                                                    {{c.date}}
+                                                </div>
+                                            </div>
+                                            <div class="ya-articles__row ya-clearfix">
+                                                <div class="ya-grid-1-5 ya-articles__row-title">
+                                                    Город
+                                                </div>
+                                                <div class="ya-grid-4-5 ya-articles__row-text">
+                                                    {{c.city}}
+                                                </div>
+                                            </div>
+                                            <div class="ya-articles__row ya-clearfix">
+                                                <div class="ya-grid-1-5 ya-articles__row-title">
+                                                    Место
+                                                </div>
+                                                <div class="ya-grid-4-5 ya-articles__row-text">
+                                                    {{c.place}}
+                                                </div>
+                                            </div>
+                                            <div class="ya-articles__row ya-clearfix">
+                                                <div class="ya-grid-1-5 ya-articles__row-title">
+                                                    Номинация
+                                                </div>
+                                                <div class="ya-grid-4-5 ya-articles__row-text">
+                                                    {{c.nomination}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ya-articles__row-title ya-articles__row-title_desc">
+                                        Описание
+                                    </div>
+                                    <div class="ya-articles__desc">
+                                        {{c.description}}
+                                    </div>
+                                    <div class="ya-articles__readmore ya-right">
+                                        <a href="#/competition/{{c._id}}" class="ya-btn ya-btn_primary ya-btn_inline">Читать дальше</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
