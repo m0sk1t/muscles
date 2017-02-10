@@ -28,7 +28,7 @@ module.exports = function (grunt) {
                 options: {
                     separator: '',
                 },
-                src: ['static/tmp/styles.css', 'static/libs/sweetalert/dist/sweetalert.css', 'static/libs/angularjs-datepicker/dist/angular-datepicker.min.css'],
+                src: ['static/tmp/styles.css', 'static/libs/sweetalert/dist/sweetalert.css', 'static/libs/angularjs-datepicker/dist/angular-datepicker.min.css', 'static/blocks/project/calendar/calendar.css'],
                 dest: 'static/tmp/styles-merged.css'
             }
         },

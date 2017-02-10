@@ -47,3 +47,63 @@
             &:hover
                 color: mainLinksColor
                 text-decoration: underline
+    &_view_icons
+        center(412px)
+        & ^[0]__item
+            padding: 0 !important
+            col(1/3)
+            +below(767px)
+                stack()
+        & ^[0]__link
+            &:before
+                display: block
+                content: ""
+                margin-bottom: 10px
+                margin: 0 auto 10px auto
+            &_men:before
+                width: 58px
+                height: 51px
+                background: url(images/sprite.png) 0 -255px no-repeat
+            &_women:before
+                width: 44px
+                height: 51px
+                background: url(images/sprite.png) -59px -255px no-repeat
+            &_both:before
+                width: 70px
+                height: 51px
+                background: url(images/sprite.png) -104px -253px no-repeat
+            &:hover
+                background: #f09401
+            &_active
+                background: #f09401
+    &_view_participants
+        & ^[0]__item
+            col(1/3)
+            +below(767px)
+                stack()
+    &_blocked
+        & ^[0]__item
+            padding: 0 !important
+            col(1/2)
+            +below(479px)
+                stack()
+        & ^[0]__link
+            position: relative
+            &_featured:before
+                width: 20px
+                height: 18px
+                background: url(images/sprite.png) -105px -229px no-repeat
+                content: ""
+                display: block
+                position: absolute
+                top: 12px
+                left: 15px
+            &_archieve:before
+                content: ""
+                display: block
+                width: 17px
+                height: 18px
+                position: absolute
+                top: 13px
+                right: 15px
+                background: url(images/sprite.png) -127px -229px no-repeat
