@@ -8,19 +8,19 @@
                         <span class="ya-contest__info">Об участии в конкурсе</span>
                     </h2>
                     <div class="ya-contest__content">
-                        <div class="ya-contest__subtitle">Такое интересное соревнование. Вы просто обязаны в нем участвовать. {{contest.type}}</div>
+                        <div class="ya-contest__subtitle">{{contest.type}}</div>
                         <div class="ya-contest__timer">
                             <div class="ya-timer">
                                 <div class="ya-timer__title">До окончания конкурса осталось:</div>
                                 <div class="ya-timer__clock ya-clearfix">
                                     <div class="ya-grid-1-3">
                                         <div class="ya-timer__block ya-timer__block_days ya-clearfix">
-                                            <div class="ya-span-1-2">
-                                                <div class="ya-timer__digit">1</div>
+                                            <div class="ya-span-1-2" ng-repeat="d in estimate_days">
+                                                <div class="ya-timer__digit">{{d}}</div>
                                             </div>
-                                            <div class="ya-span-1-2">
+                                            <!--div class="ya-span-1-2">
                                                 <div class="ya-timer__digit">2</div>
-                                            </div>
+                                            </div-->
                                         </div>
                                         <div class="ya-timer__label">
                                             дни
@@ -72,7 +72,7 @@
                                         Просмотров
                                     </div>
                                     <div class="ya-informer__content">
-                                        46 933
+                                        {{contest.views}}
                                     </div>
                                 </div>
                             </div>

@@ -14,6 +14,14 @@ module.exports = (app) => {
             });
         }
     });
+    app.put('/contest/:id/inc_view', tools.ensureAuthenticated, (req, res) => {
+        req.user ? Contest.findByIdAndUpdate(req.params.id, {
+            $inc: { views: 1 }
+        }, (err, contest) => {
+            if (err) return console.error(err);
+            res.json(contest);
+        }) : res.status(403).send('Please, login first');
+    });
     app.put('/contest/:id/add_participant', tools.ensureAuthenticated, (req, res) => {
         req.user ? Contest.findByIdAndUpdate(req.params.id, {
             $addToSet: {
