@@ -62,7 +62,7 @@
                                         Призовой фонд
                                     </div>
                                     <div class="ya-informer__content">
-                                        256 000 {{contest.prize}} руб.
+                                        {{contest.prize}} руб.
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
                                         Всего голосов
                                     </div>
                                     <div class="ya-informer__content">
-                                        {{count_free_likes()}}
+                                        {{count_free_likes() + count_paid_likes()}}
                                     </div>
                                 </div>
                             </div>
@@ -108,14 +108,14 @@
                                             <div class="ya-participant__img" ng-style="{'background-image':'url(' + (p.avatar ? p.avatar : '/images/avatar.jpg') + ')'}"></div>
                                         </div>
                                         <div class="ya-participant__name">
-                                            Иван {{p.name}}
+                                            {{p.name}}
                                         </div>
                                         <a href="#/user/{{p.id}}" class="ya-participant__link"></a>
                                     </div>
                                     <div class="ya-participant__actions ya-clearfix">
                                         <div class="ya-span-2-3">
                                             <div class="ya-participant__votes">
-                                                556 (+9)
+                                                {{p.likes.free.length + p.likes.paid.length}}
                                             </div>
                                         </div>
                                         <div class="ya-span-1-3">
@@ -123,7 +123,7 @@
                                                 <!--span ng-if="p.likes.paid.indexOf(options.user._id) === -1" ng-click="add_paid_like(p.id)">
                                                     PLike
                                                 </span-->
-                                                <span  class="ya-participant__vote" ng-if="p.likes.free.indexOf(options.user._id) === -1" ng-click="add_free_like(p.id)">
+                                                <span class="ya-participant__vote" ng-if="p.likes.free.indexOf(options.user._id) === -1" ng-click="add_free_like(p.id)">
                                                 </span>
                                             </div>
                                         </div>
@@ -144,8 +144,8 @@
 
                                         </div>
                                     </div>
-                                     <div class="ya-participant__actions">
-                                            <span class="ya-participant__btn" ng-if="expired();" ng-click="participate()">{{contest.participants.indexOf(options.user._id) === -1? 'Участвовать в конкурсе': 'Отказаться от участия'}}</span>
+                                    <div class="ya-participant__actions">
+                                        <span class="ya-participant__btn" ng-if="expired();" ng-click="participate()">{{contest.participants.indexOf(options.user._id) === -1? 'Участвовать в конкурсе': 'Отказаться от участия'}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -165,9 +165,6 @@
                         <div class="ya-contest__desc">
                             <h3 class="ya-contest__desc-title">Об участии в конкурсе</h3>
                             <div class="ya-contest__desc-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at dictum ante. Mauris non lacinia est. Phasellus ex est, efficitur ac pretium ut, lacinia ut nisi. Vestibulum sem elit, tincidunt in metus eget, eleifend tempus risus. In consequat scelerisque mi, a sagittis dolor. Praesent vestibulum lorem sapien, et iaculis quam vulputate feugiat. Maecenas tempor dolor at leo varius, lacinia porta magna maximus.</p>
-
-                                <p>Pellentesque et elit vel dui viverra auctor. Phasellus sagittis pellentesque ipsum, ac facilisis magna euismod ut. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla in diam scelerisque, facilisis dolor a, egestas nisl. Nulla faucibus eget tellus eget luctus. Vivamus lorem elit, eleifend ac condimentum quis, interdum sit amet felis. Nulla a faucibus justo, quis iaculis elit.</p>
                                 {{contest.description}}
                             </div>
                         </div>
