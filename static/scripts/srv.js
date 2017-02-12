@@ -126,6 +126,9 @@ angular.module('Services', []).factory('User', ['$http',
             create_sport: function(opt, s, e) {
                 return $http.post('/manage/sport/new', opt).then(s, e);
             },
+            comment_article: function(id, opt, s, e) {
+                return $http.put('/article/' + id + '/add_comment', opt).then(s, e);
+            },
             update_article: function(id, opt, s, e) {
                 return $http.put('/manage/article/' + id, opt).then(s, e);
             },

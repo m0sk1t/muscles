@@ -69,29 +69,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="ya-articles__item">
-                            <div class="ya-bordered-box">
-                                <div class="ya-clearfix">
-                                    <div class="ya-articles__media ya-grid-2-5">
-                                        <img src="images/article-thumb.jpg" alt="Alternative text" class="ya-articles__thumb">
-                                    </div>
-                                    <div class="ya-articles__content ya-grid-3-5">
-                                        <h3 class="ya-articles__title">Соревнованяи по бодибилдингу в г. Пенза</h3>
-                                        <div class="ya-articles__desc">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod sem eget bibendum dapibus. Quisque imperdiet pulvinar libero, sed lacinia tortor lacinia non.
-                                        </div>
-                                        <div class="ya-articles__readmore">
-                                            <a href="#" class="ya-btn ya-btn_primary ya-btn_inline">Читать дальше</a>
-                                        </div>
-                                        <div class="ya-articles__date">
-                                            07.07.2016
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <div class="ya-articles__pagination ya-pagination ya-center">
+                    <!--div class="ya-articles__pagination ya-pagination ya-center">
                         <ul class="ya-pagination__list ya-clearfix">
                             <li class="ya-pagination__item ya-pagination__item_hidden">
                                 <a href="#" class="ya-pagination__link ya-pagination__link_box ya-pagination__link_prev">
@@ -128,7 +107,7 @@
 								</a>
                             </li>
                         </ul>
-                    </div>
+                    </div-->
                 </div>
             </div>
             <div class="ya-grid-1-5">

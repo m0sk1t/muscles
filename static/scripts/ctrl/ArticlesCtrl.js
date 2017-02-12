@@ -11,7 +11,7 @@ angular.module('MuscleMan').controller('ArticlesCtrl', ['$scope', 'Manager',
         };
         $scope.format_date = function(date) {
             return moment(date).format('DD.MM.YYYY');
-        }
+        };
         $scope.get_text = function(id) {
             var text = $scope.articles[id].text.match(/<p>[\w+ \d.]+<\/p>/);
             if (text.length) {

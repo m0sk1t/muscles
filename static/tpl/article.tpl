@@ -52,10 +52,9 @@
                             <div class="ya-articles__content ya-article__content">
                                 <h3 class="ya-articles__title ya-article__title">{{article.title}}</h3>
                                 <div class="ya-articles__date ya-article__date">
-                                    07.07.2016
+                                    {{format_date(article.creDate)}}
                                 </div>
-                                <div class="ya-articles__desc">
-                                    {{article_html(article.text)}}
+                                <div class="ya-articles__desc" ng-bind-html="article_html()">
                                 </div>
                                 <div class="ya-article__social-share ya-share-box">
                                     <span class="ya-share-box__title">Поделиться в </span>
@@ -66,7 +65,7 @@
 										<a href="#" class="ya-share-box__btn ya-share-box__btn_tw"></a>
 									</span>
                                 </div>
-                                <div class="ya-article__nav ya-clearfix">
+                                <!--div class="ya-article__nav ya-clearfix">
                                     <div class="ya-row">
                                         <div class="ya-article__nav-btn ya-grid-1-2 ya-article__nav-btn_prev">
                                             <div class="ya-relative ya-article__nav-btn-wrapper">
@@ -84,37 +83,38 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div-->
                             </div>
                         </div>
                         <div class="ya-bordered-box ya-bordered-box_first_false">
                             <div class="ya-article__comments">
                                 <div class="ya-article__comments-title">
-                                    Ваши комментарии
+                                    Комментарии
                                 </div>
                                 <div class="ya-comments ya-comments_article ya-wall">
                                     <div class="ya-comments__list">
-                                        <div class="ya-comments__item">
+                                        <div class="ya-comments__item" ng-repeat="c in article.comments">
                                             <div class="ya-wall__news-author ya-relative ya-clearfix">
                                                 <div class="ya-avatar ya-avatar_small ya-wall__avatar">
-                                                    <img ng-src="{{'/images/avatar.jpg'}}" class="ya-avatar__img" />
+                                                    <img ng-src="{{c.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
                                                 </div>
                                                 <div class="ya-wall__news-info">
                                                     <div class="ya-wall__author-name">
-                                                        Иван Иванов
+                                                        {{c.name + ' ' + c.surname}}
                                                     </div>
                                                     <div class="ya-wall__news-date">
-                                                        07.07.2016
+                                                        {{format_date(c.date)}}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="ya-wall__news-text">
-                                                <pre>Новый комментарий от какого-то пользователя.</pre>
+                                                <pre>{{c.comment}}</pre>
                                             </div>
                                         </div>
                                     </div>
-                                    <form class="ya-comments__add-form ya-input">
-                                        <input type="text" placeholder="Комментировать" class="ya-comments__add-field ya-input__field">
+                                    <form ng-submit="add_comment()" class="ya-comments__add-form ya-input">
+                                        <input ng-model="comment" type="text" placeholder="Комментировать" class="ya-comments__add-field ya-input__field">
+                                        <input class="ya-btn ya-btn_primary ya-btn_small ya-btn_plus ya-btn_inline ya-new-post__btn ng-scope" type="submit" value="Комментировать" />
                                     </form>
                                 </div>
                             </div>

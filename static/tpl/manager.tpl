@@ -70,8 +70,7 @@
             <a href="#/manage/article/{{article._id}}">EDIT</a><br />
             <h3>{{article.title}}</h3>
             <div ng-bind-html="article_html(article.text)">
-                <div>
-                </div>
+            </div>
     </section>
     <section ng-show="page === 'contests'" style="flex: 3; overflow-y: auto;">
         <button ng-click="create_contest();">Add</button>
