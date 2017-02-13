@@ -516,7 +516,7 @@ module.exports = (app) => {
     );
 
     app.get('/auth/vk',
-        passport.authenticate('vkontakte')
+        passport.authenticate('vkontakte', { scope: ['friends'] })
     );
 
     app.get('/auth/vk/callback',
