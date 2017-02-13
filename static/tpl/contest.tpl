@@ -145,7 +145,7 @@
                                         </div>
                                     </div>
                                     <div class="ya-participant__actions">
-                                        <span class="ya-participant__btn" ng-if="expired();" ng-click="participate()">{{contest.participants.indexOf(options.user._id) === -1? 'Участвовать в конкурсе': 'Отказаться от участия'}}</span>
+                                        <span class="ya-participant__btn" ng-if="expired();" ng-click="participate()">{{may_participate()?'Участвовать в конкурсе': 'Отказаться от участия'}}</span>
                                     </div>
                                 </div>
                             </div>
