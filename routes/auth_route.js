@@ -520,7 +520,7 @@ module.exports = (app) => {
     );
 
     app.get('/auth/vk/callback',
-        passport.authenticate('vkontakte', { scope: ['email', 'friends'] }, failRedirect),
+        passport.authenticate('vkontakte', { scope: ['email', 'friends'] }),
         (req, res) => {
             res.redirect('/#/options/profile');
         }
