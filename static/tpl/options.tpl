@@ -677,7 +677,7 @@
                         <span class="ya-close-btn" ng-click="rm_hobbie(h, $index)">X</span>
                         <div class="ya-sidebar-info__content">
                             <div class="ya-sidebar-info__item">
-                                <span class="ya-sidebar-info__label">{{h.item}}</span> {{h.title}}
+                                <span class="ya-sidebar-info__label">{{h.type == "true"? 'Работа:':'Доп.инфо:'}}</span> {{h.item}}, {{h.experience}}
                             </div>
                         </div>
                     </div>
@@ -703,22 +703,21 @@
                                 <div class="ya-grid-2-3">
                                     <div class="ya-input__field-wrapper">
                                         <select id="ya-ach-country" ng-model="hobbie.type" class="ya-input__field ya-input__field_select ya-input__select">
-                                            <option ng-value="{{h.type}}" ng-repeat="h in hobbies" ng-click="hobbie.item = h.item">{{h.item}}</option>
+                                            <option ng-value="true">Работа</option>
+                                            <option ng-value="false">Доп. инфо</option>
                                         </select>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ya-form__input ya-input ya-input_inline">
-                            <div class="ya-clearfix">
-                                <div class="ya-grid-1-3 ya-right">
-                                    <label for="ya-ach-comment" class="ya-input__label">
-                                        Что именно?
-                                    </label>
-                                </div>
-                                <div class="ya-grid-2-3">
                                     <div class="ya-input__field-wrapper">
-                                        <input id="ya-ach-comment" class="ya-input__field" type="text" ng-model="hobbie.title" />
+                                        <select id="ya-ach-country" ng-model="hobbie.item" class="ya-input__field ya-input__field_select ya-input__select">
+                                            <option ng-repeat="h in hobbies | filter:hobbie.type" ng-value="hobbie.item">{{h.item}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="ya-input__field-wrapper">
+                                        <select id="ya-ach-country" ng-model="hobbie.experience" class="ya-input__field ya-input__field_select ya-input__select">
+                                            <option>Новичок</option>
+                                            <option>Любитель</option>
+                                            <option>Профессионал</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

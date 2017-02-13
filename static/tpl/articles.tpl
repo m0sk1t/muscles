@@ -57,7 +57,7 @@
                                     <div class="ya-articles__content ya-grid-3-5">
                                         <h3 class="ya-articles__title">{{i.title}}</h3>
                                         <div class="ya-articles__desc">
-                                            {{get_text($index)}}
+                                            {{i.description}}
                                         </div>
                                         <div class="ya-articles__readmore">
                                             <a href="#/article/{{i._id}}" class="ya-btn ya-btn_primary ya-btn_inline">Читать дальше</a>

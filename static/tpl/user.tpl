@@ -246,9 +246,9 @@
                         <div class="ya-info-block">
                             <h2 class="ya-info-block__title ya-info-block__title_add"><a href="#/options/work_n_study">Доп.информация</a></h2>
                             <div class="ya-info-block__content">
-                                <div class="ya-info-block__record ya-clearfix" ng-repeat="h in user.hobbies" ng-if="h.type =='false'">
-                                    <div class="ya-info-block__label ya-inner-grid-1-4">{{h.item}}</div>
-                                    <div class="ya-info-block__value ya-inner-grid-3-4">{{h.title}}</div>
+                                <div class="ya-info-block__record ya-clearfix" ng-repeat="h in user.hobbies" ng-if="h.type == 'false'">
+                                    <div class="ya-info-block__label ya-inner-grid-1-4">{{h.experience}}</div>
+                                    <div class="ya-info-block__value ya-inner-grid-3-4">{{h.item}}</div>
                                 </div>
                             </div>
                         </div>
@@ -257,9 +257,9 @@
                         <div class="ya-info-block">
                             <h2 class="ya-info-block__title ya-info-block__title_work"><a href="#/options/work_n_study">Работа</a></h2>
                             <div class="ya-info-block__content">
-                                <div class="ya-info-block__record ya-clearfix" ng-repeat="h in user.hobbies" ng-if="h.type =='true'">
-                                    <div class="ya-info-block__label ya-inner-grid-1-4">{{h.item}}</div>
-                                    <div class="ya-info-block__value ya-inner-grid-3-4">{{h.title}}</div>
+                                <div class="ya-info-block__record ya-clearfix" ng-repeat="h in user.hobbies" ng-if="h.type == 'true'">
+                                    <div class="ya-info-block__label ya-inner-grid-1-4">{{h.experience}}</div>
+                                    <div class="ya-info-block__value ya-inner-grid-3-4">{{h.item}}</div>
                                 </div>
                             </div>
                         </div>
