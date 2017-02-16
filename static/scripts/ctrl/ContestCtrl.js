@@ -1,11 +1,15 @@
-angular.module('MuscleMan').controller('ContestCtrl', ['$scope', '$routeParams', 'User',
-    function($scope, $routeParams, User) {
+angular.module('MuscleMan').controller('ContestCtrl', ['$scope', '$routeParams', 'User', 'MSG',
+    function($scope, $routeParams, User, MSG) {
         var id = $routeParams.id;
+        $scope.type = '';
         $scope.contest = {};
         User.view_contest(id, function(res) {}, function(err) { console.error(err) });
         User.get_contest(id, function(res) {
             $scope.contest = res.data;
-            $scope.estimate_days = String(moment($scope.contest.dateParticipate).diff(Date.now(), 'days')).match(/\d/g);
+            var estimate = moment.utc(moment($scope.contest.dateEnd).diff(moment(Date.now()))).format("DD:HH:mm").split(':');
+            $scope.estimate_days = estimate[0].match(/\d/g);
+            $scope.estimate_hours = estimate[1].match(/\d/g);
+            $scope.estimate_minutes = estimate[2].match(/\d/g);
         }, function(res) {
             console.error(res.data);
         });
@@ -38,6 +42,7 @@ angular.module('MuscleMan').controller('ContestCtrl', ['$scope', '$routeParams',
             User.add_paid_like(id, pid, function(res) {
                 $scope.contest = res.data;
             }, function(res) {
+                MSG.err(res.data);
                 console.error(res.data);
             });
         };
@@ -45,6 +50,7 @@ angular.module('MuscleMan').controller('ContestCtrl', ['$scope', '$routeParams',
             User.add_free_like(id, pid, function(res) {
                 $scope.contest = res.data;
             }, function(res) {
+                MSG.err(res.data);
                 console.error(res.data);
             });
         };

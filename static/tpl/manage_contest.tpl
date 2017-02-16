@@ -6,10 +6,24 @@
 			<option>Man</option>
 			<option>Woman</option>
 		</select>
-        <input type="text" placeholder="title" ng-model="contest.title"><br />
-        <input type="number" placeholder="prize" ng-model="contest.prize">руб.<br /> дата начала<input type="date" placeholder="dateStart" ng-model="contest.dateStart"><br/> дата окончания<input type="date" placeholder="dateEnd" ng-model="contest.dateEnd"><br
-        />
-        <input type="text" placeholder="description" ng-model="contest.description"><br /> дата окончания приёма заявок<input type="date" placeholder="dateParticipate" ng-model="contest.dateParticipate"><br />
+        <p>
+            <input type="text" placeholder="title" ng-model="contest.title"><br />
+        </p>
+        <p>
+            <input type="number" placeholder="prize" ng-model="contest.prize">руб.
+        </p>
+        <p>
+            дата начала<input type="date" placeholder="dateStart" ng-model="contest.dateStart">
+        </p>
+        <p>
+            дата окончания<input type="date" placeholder="dateEnd" ng-model="contest.dateEnd">
+        </p>
+        <p>
+            <input type="text" placeholder="description" ng-model="contest.description">
+        </p>
+        <p>
+            дата окончания приёма заявок<input type="date" placeholder="dateParticipate" ng-model="contest.dateParticipate">
+        </p>
         <div>
             <div ng-repeat="p in contest.participants track by $index" style="width: 25%">
                 <img ng-src="{{p.avatar}}">

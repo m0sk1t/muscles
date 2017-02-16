@@ -18,9 +18,6 @@
                                             <div class="ya-span-1-2" ng-repeat="d in estimate_days">
                                                 <div class="ya-timer__digit">{{d}}</div>
                                             </div>
-                                            <!--div class="ya-span-1-2">
-                                                <div class="ya-timer__digit">2</div>
-                                            </div-->
                                         </div>
                                         <div class="ya-timer__label">
                                             дни
@@ -28,11 +25,8 @@
                                     </div>
                                     <div class="ya-grid-1-3">
                                         <div class="ya-timer__block ya-timer__block_hours ya-clearfix">
-                                            <div class="ya-span-1-2">
-                                                <div class="ya-timer__digit">1</div>
-                                            </div>
-                                            <div class="ya-span-1-2">
-                                                <div class="ya-timer__digit">9</div>
+                                            <div class="ya-span-1-2" ng-repeat="h in estimate_hours">
+                                                <div class="ya-timer__digit">{{h}}</div>
                                             </div>
                                         </div>
                                         <div class="ya-timer__label">
@@ -41,11 +35,8 @@
                                     </div>
                                     <div class="ya-grid-1-3">
                                         <div class="ya-timer__block ya-timer__block_minutes ya-clearfix">
-                                            <div class="ya-span-1-2">
-                                                <div class="ya-timer__digit">5</div>
-                                            </div>
-                                            <div class="ya-span-1-2">
-                                                <div class="ya-timer__digit">3</div>
+                                            <div class="ya-span-1-2" ng-repeat="m in estimate_minutes">
+                                                <div class="ya-timer__digit">{{m}}</div>
                                             </div>
                                         </div>
                                         <div class="ya-timer__label">

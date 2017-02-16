@@ -351,11 +351,11 @@ module.exports = (app) => {
                 contest.title = req.body.title;
                 contest.prize = req.body.prize;
                 contest.owner = req.manager._id;
-                contest.dateEnd = req.body.dateEnd;
-                contest.dateStart = req.body.dateStart;
+                contest.dateEnd = req.body.dateEnd || new Date();
+                contest.dateStart = req.body.dateStart || new Date();
                 contest.description = req.body.description;
                 contest.participants = req.body.participants;
-                contest.dateParticipate = req.body.dateParticipate;
+                contest.dateParticipate = req.body.dateParticipate || new Date();
                 contest.save((err) => {
                     res.json(contest);
                 });
