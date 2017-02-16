@@ -6,14 +6,6 @@
                     <h2 class="ya-media-page__title ya-title ya-relative">
                         Соревнование {{competition.title}}
                     </h2>
-                    <section>
-                        <div>{{competition.date}}</div>
-                        <div>{{competition.city}}</div>
-                        <div>{{competition.place}}</div>
-                        <div>{{competition.title}}</div>
-                        <div>{{competition.nomination}}</div>
-                        <div>{{competition.description}}</div>
-                    </section>
                     <div class="ya-article__item">
                         <div class="ya-bordered-box ya-bordered-box_single">
                             <div class="ya-clearfix">
@@ -23,10 +15,18 @@
                                 <div class="ya-articles__content ya-grid-4-5">
                                     <div class="ya-articles__row ya-clearfix">
                                         <div class="ya-grid-1-5 ya-articles__row-title">
-                                            Дата
+                                            Время проведения
                                         </div>
                                         <div class="ya-grid-4-5 ya-articles__row-text">
-                                            {{c.date}}
+                                            с {{format_date(competition.start)}} по {{format_date(competition.end)}}
+                                        </div>
+                                    </div>
+                                    <div class="ya-articles__row ya-clearfix">
+                                        <div class="ya-grid-1-5 ya-articles__row-title">
+                                            Страна
+                                        </div>
+                                        <div class="ya-grid-4-5 ya-articles__row-text">
+                                            {{competition.country.title}}
                                         </div>
                                     </div>
                                     <div class="ya-articles__row ya-clearfix">
@@ -34,7 +34,7 @@
                                             Город
                                         </div>
                                         <div class="ya-grid-4-5 ya-articles__row-text">
-                                            {{c.city}}
+                                            {{competition.city.title}}
                                         </div>
                                     </div>
                                     <div class="ya-articles__row ya-clearfix">
@@ -42,7 +42,7 @@
                                             Место
                                         </div>
                                         <div class="ya-grid-4-5 ya-articles__row-text">
-                                            {{c.place}}
+                                            {{competition.place}}
                                         </div>
                                     </div>
                                     <div class="ya-articles__row ya-clearfix">
@@ -50,7 +50,7 @@
                                             Номинация
                                         </div>
                                         <div class="ya-grid-4-5 ya-articles__row-text">
-                                            {{c.nomination}}
+                                            {{competition.nomination}}
                                         </div>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                                 Описание
                             </div>
                             <div class="ya-articles__desc">
-                                {{c.description}}
+                                {{competition.description}}
                             </div>
                             <div class="ya-articles__content ya-article__content">
                                 <div class="ya-article__social-share ya-share-box">
@@ -80,27 +80,27 @@
                                 </div>
                                 <div class="ya-comments ya-comments_article ya-wall">
                                     <div class="ya-comments__list">
-                                        <div class="ya-comments__item">
+                                        <div class="ya-comments__item" ng-repeat="c in competition.comments">
                                             <div class="ya-wall__news-author ya-relative ya-clearfix">
                                                 <div class="ya-avatar ya-avatar_small ya-wall__avatar">
-                                                    <img ng-src="{{'/images/avatar.jpg'}}" class="ya-avatar__img" />
+                                                    <img ng-src="{{c.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
                                                 </div>
                                                 <div class="ya-wall__news-info">
                                                     <div class="ya-wall__author-name">
-                                                        Иван Иванов
+                                                        {{c.name}} {{c.surname}}
                                                     </div>
                                                     <div class="ya-wall__news-date">
-                                                        07.07.2016
+                                                        {{c.date}}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="ya-wall__news-text">
-                                                <pre>Новый комментарий от какого-то пользователя.</pre>
+                                                <pre>{{c.comment}}</pre>
                                             </div>
                                         </div>
                                     </div>
-                                    <form class="ya-comments__add-form ya-input">
-                                        <input type="text" placeholder="Комментировать" class="ya-comments__add-field ya-input__field">
+                                    <form class="ya-comments__add-form ya-input" ng-submit="add_comment();">
+                                        <input type="text" ng-model="comment" placeholder="Комментировать" class="ya-comments__add-field ya-input__field">
                                     </form>
                                 </div>
                             </div>

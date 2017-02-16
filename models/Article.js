@@ -5,6 +5,7 @@ var mongoose = require('mongoose'),
             default: []
         },
         description: String,
+        sport: String,
         creDate: Date,
         theme: String,
         title: String,

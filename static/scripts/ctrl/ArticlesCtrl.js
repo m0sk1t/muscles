@@ -9,6 +9,11 @@ angular.module('MuscleMan').controller('ArticlesCtrl', ['$scope', 'Manager',
                 return imgsrc[0];
             }
         };
+        Manager.get_sports(function(res) {
+            $scope.sports = res.data;
+        }, function(err) {
+            console.error(err);
+        });
         $scope.format_date = function(date) {
             return moment(date).format('DD.MM.YYYY');
         };

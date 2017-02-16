@@ -378,9 +378,7 @@ module.exports = (app) => {
             creDate: {
                 $lt: req.params.credate
             }
-        }) /*.limit(3)*/ .sort({
-            creDate: -1
-        }).exec((err, competitions) => {
+        }, (err, competitions) => {
             if (err) return console.error(err);
             res.json(competitions);
         });
@@ -394,10 +392,14 @@ module.exports = (app) => {
         .put(management_check, (req, res) => {
             req.manager.permission.competitions ? Competition.findByIdAndUpdate(req.params.id, {
                 $set: {
-                    date: req.body.date,
-                    city: req.body.city,
                     place: req.body.place,
+                    start: req.body.start,
+                    end: req.body.end,
                     title: req.body.title,
+                    place: req.body.place,
+                    city: req.body.city,
+                    sport: req.body.sport,
+                    country: req.body.country,
                     nomination: req.body.nomination,
                     description: req.body.description,
                 }
@@ -408,11 +410,14 @@ module.exports = (app) => {
         .post(management_check, (req, res) => {
             if (req.manager.permission.competitions) {
                 var competition = new Competition();
-                competition.date = req.body.date;
                 competition.creDate = new Date();
                 competition.city = req.body.city;
+                competition.country = req.body.country;
                 competition.place = req.body.place;
+                competition.sport = req.body.sport;
                 competition.title = req.body.title;
+                competition.start = req.body.start || new Date();
+                competition.end = req.body.end || new Date();
                 competition.nomination = req.body.nomination;
                 competition.description = req.body.description;
                 competition.owner = req.manager._id;
