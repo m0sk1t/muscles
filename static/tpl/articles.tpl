@@ -16,10 +16,9 @@
                                 </div>
                                 <div class="ya-grid-2-3">
                                     <div class="ya-input__field-wrapper">
-                                        <select id="ya-sport" class="ya-input__field ya-input__field_select ya-input__select">
-											<option value=""></option>
-											<option value="Спорт 1">Спорт 1</option>
-											<option value="Спорт 2">Спорт 2</option>
+                                        <select id="ya-sport" class="ya-input__field ya-input__field_select ya-input__select" ng-model="sport">
+                                            <option value=""></option>
+											<option ng-repeat="s in sports">{{s.sport}}</option>
 										</select>
                                     </div>
                                 </div>
@@ -34,10 +33,9 @@
                                 </div>
                                 <div class="ya-grid-2-3">
                                     <div class="ya-input__field-wrapper">
-                                        <select id="ya-theme" class="ya-input__field ya-input__field_select ya-input__select">
-											<option value=""></option>
-											<option value="Тема 1">Тема 1</option>
-											<option value="Тема 2">Тема 2</option>
+                                        <select id="ya-theme" class="ya-input__field ya-input__field_select ya-input__select" ng-model="theme">
+                                            <option value=""></option>
+											<option ng-repeat="t in themes">{{t.title}}</option>
 										</select>
                                     </div>
                                 </div>
@@ -48,7 +46,7 @@
                         Последние добавленные
                     </div>
                     <div class="ya-articles__list">
-                        <div class="ya-articles__item" ng-repeat="i in articles track by $index">
+                        <div class="ya-articles__item" ng-repeat="i in articles | filter:sport track by $index">
                             <div class="ya-bordered-box">
                                 <div class="ya-clearfix">
                                     <div class="ya-articles__media ya-grid-2-5">

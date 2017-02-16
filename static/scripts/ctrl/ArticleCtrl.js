@@ -12,9 +12,6 @@ angular.module('MuscleMan').controller('ArticleCtrl', ['$sce', '$scope', '$route
         $scope.article_html = function() {
             return $sce.trustAsHtml($scope.article.text);
         };
-        $scope.format_date = function(date) {
-            return moment(date).format('DD.MM.YYYY');
-        };
         $scope.add_comment = function() {
             Manager.comment_article($routeParams.id, { comment: $scope.comment }, function(res) {
                 $scope.article.comments.push({

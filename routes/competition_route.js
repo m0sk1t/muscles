@@ -16,7 +16,7 @@ module.exports = (app) => {
         }
     });
     app.put('/competition/:id/add_comment', (req, res) => {
-        req.user && Competition.findByIdAndUpdate(req.params.id, {
+        req.user ? Competition.findByIdAndUpdate(req.params.id, {
             $addToSet: {
                 comments: {
                     date: new Date(),
@@ -29,6 +29,6 @@ module.exports = (app) => {
         }, (err, competition) => {
             if (err) return res.status(500).json(err);
             res.send('OK');
-        });
+        }) : res.status(403).send('Please, login first');
     });
 };

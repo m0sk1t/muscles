@@ -4,6 +4,7 @@
         <li ng-show="manager.permission.managers" ng-class="{'active': page === 'managers'}" ng-click="page = 'managers'; get_managers();">Менеджерами</li>
         <li ng-show="manager.permission.users" ng-class="{'active': page === 'users'}" ng-click="page = 'users'; get_users();">Пользователями</li>
         <li ng-show="manager.permission.articles" ng-class="{'active': page === 'articles'}" ng-click="page = 'articles'; get_articles();">Статьями</li>
+        <li ng-show="manager.permission.articles" ng-class="{'active': page === 'themes'}" ng-click="page = 'themes'; get_themes();">Темами</li>
         <li ng-show="manager.permission.contests" ng-class="{'active': page === 'contests'}" ng-click="page = 'contests'; get_contests();">Конкурсами</li>
         <li ng-show="manager.permission.competitions" ng-class="{'active': page === 'competitions'}" ng-click="page = 'competitions'; get_competitions();">Соревнованиями</li>
         <li ng-show="manager.permission.sports" ng-class="{'active': page === 'sports'}" ng-click="page = 'sports'; get_sports();">Видами спорта</li>
@@ -109,6 +110,17 @@
         </div>
         <div ng-repeat="sport in sports track by $index">
             <span style="background-color: #666" ng-click="delete_sport(sport._id, $index)">DEL</span> {{sport.sport}}
+        </div>
+    </section>
+    <section ng-show="page === 'themes'" style="flex: 3; overflow-y: auto;">
+        <button ng-click="add_theme()">Add</button>
+        <div ng-show="items.theme">
+            <input ng-model="items.theme.title" placeholder="Название"><br>
+            <input type="button" value="Save" ng-click="create_theme();"><br>
+            <input type="button" value="Cancel" ng-click="items.theme = null;"><br />
+        </div>
+        <div ng-repeat="theme in themes track by $index">
+            <span style="background-color: #666" ng-click="delete_theme(theme._id, $index)">DEL</span> {{theme.title}}
         </div>
     </section>
     <section ng-show="page === 'competitions'" style="flex: 3; overflow-y: auto;">

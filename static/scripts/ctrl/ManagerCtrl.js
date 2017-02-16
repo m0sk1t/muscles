@@ -4,6 +4,7 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
             cred: null,
             sport: null,
             hobbie: null,
+            theme: null,
         };
         $scope.creDate = {
             users: new Date(),
@@ -35,6 +36,33 @@ angular.module('MuscleMan').controller('ManagerCtrl', ['$sce', '$scope', '$locat
         $scope.delete_manager = function(id, i) {
             Manager.delete(id, function(res) {
                 $scope.managers.splice(i, 1);
+            }, function(res) {
+                console.error(res.data);
+            });
+        };
+        $scope.get_themes = function() {
+            Manager.get_themes(function(res) {
+                $scope.themes = res.data;
+            }, function(res) {
+                console.error(res.data);
+            });
+        };
+        $scope.add_theme = function() {
+            $scope.items.theme = {
+                title: '',
+            };
+        };
+        $scope.create_theme = function() {
+            Manager.create_theme($scope.items.theme, function(res) {
+                $scope.items.theme = null;
+                $scope.themes.push(res.data);
+            }, function(res) {
+                console.error(res.data);
+            });
+        };
+        $scope.delete_theme = function(id, i) {
+            Manager.delete_theme(id, function(res) {
+                $scope.themes.splice(i, 1);
             }, function(res) {
                 console.error(res.data);
             });

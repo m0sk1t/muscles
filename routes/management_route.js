@@ -2,6 +2,7 @@ module.exports = (app) => {
     var salt = 'N&*ud91)(R#@10(!)',
         crypto = require('crypto'),
         cloudinary = require('./cloudinary'),
+        Theme = require('../models/Theme'),
         User = require('../models/User'),
         Video = require('../models/Video'),
         Photo = require('../models/Photo'),
@@ -252,6 +253,32 @@ module.exports = (app) => {
             }) : res.status(403).send('Permission denied');
         });
 
+    /**
+     * Theme routes
+     */
+
+    app.get('/manage/themes', management_check, (req, res) => {
+        Theme.find({}, (err, themes) => {
+            res.json(themes);
+        });
+    });
+    app.delete('/manage/theme/:id', management_check, (req, res) => {
+        req.manager.permission.articles ? Theme.findByIdAndRemove(req.params.id, (err, theme) => {
+            res.send('OK');
+        }) : res.status(403).send('Permission denied');
+    });
+    app.post('/manage/theme', management_check, (req, res) => {
+        if (req.manager.permission.articles) {
+            var theme = new Theme();
+            theme.title = req.body.title;
+            theme.save((err) => {
+                res.json(theme);
+            });
+        } else {
+            res.status(403).send('Permission denied');
+        }
+    });
+
     /*
     	Article routes
     */
@@ -260,9 +287,7 @@ module.exports = (app) => {
             creDate: {
                 $lt: req.params.credate
             }
-        }) /*.limit(3)*/ .sort({
-            creDate: -1
-        }).exec((err, articles) => {
+        }, (err, articles) => {
             if (err) return console.error(err);
             res.json(articles);
         });
@@ -279,6 +304,7 @@ module.exports = (app) => {
                     description: req.body.description,
                     theme: req.body.theme,
                     title: req.body.title,
+                    sport: req.body.sport,
                     text: req.body.text
                 }
             }, (err, article) => {
