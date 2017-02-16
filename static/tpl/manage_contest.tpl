@@ -2,14 +2,17 @@
     <section>
         <h3>{{contest.title}}</h3>
 
+        Для кого
         <select ng-model="contest.type">
 			<option>Man</option>
 			<option>Woman</option>
 		</select>
         <p>
+            Заголовок
             <input type="text" placeholder="title" ng-model="contest.title"><br />
         </p>
         <p>
+            Призовой фонд
             <input type="number" placeholder="prize" ng-model="contest.prize">руб.
         </p>
         <p>
@@ -24,6 +27,7 @@
         <p>
             дата окончания приёма заявок<input type="date" placeholder="dateParticipate" ng-model="contest.dateParticipate">
         </p>
+        Участники
         <div>
             <div ng-repeat="p in contest.participants track by $index" style="width: 25%">
                 <img ng-src="{{p.avatar}}">
