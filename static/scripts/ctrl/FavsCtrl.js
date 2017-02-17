@@ -36,8 +36,8 @@ angular.module('MuscleMan').controller('FavsCtrl', ['$scope', 'MSG', 'User', 'Di
 		$scope.add_comment = function(id) {
 			var l = $scope.options.user.favs.length;
 			MSG.custom({
-				title: '',
-				text: '',
+				title: 'Ваш комментарий',
+				text: 'введите ниже',
 				type: 'input',
 				showCancelButton: true,
 				closeOnConfirm: true,

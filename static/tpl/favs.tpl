@@ -339,7 +339,7 @@
                                             <div class="ya-fake-border"></div>
                                             <div class="ya-fav-actions">
                                                 <a class="ya-fav-action__link ya-fav-action__link_write" ng-click="write_message(user);">Написать сообщение</a>
-                                                <a href="#" ng-click="add_comment(user._id)" class="ya-fav-action__link ya-fav-action__link_comment">Оставить комментарий</a>
+                                                <a ng-click="add_comment(user._id)" class="ya-fav-action__link ya-fav-action__link_comment">Оставить комментарий</a>
                                                 <a class="ya-fav-action__link ya-fav-action__link_delete" ng-click="remove_from_fav(user._id)">Убрать</a>
                                             </div>
                                         </div>
