@@ -75,9 +75,45 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <form ng-submit="add_message()" ng-show="messages.length">
-                                        <input type="text" ng-model="message">
-                                    </form>
+                                    <div class="ya-new-post__form">
+                                      <form ng-submit="add_message()" class="ya-form" ng-show="messages.length">
+                                          <div class="ya-form__input ya-input ya-input_inline ya-input_small-pad ya-input_message">
+                                              <div class="ya-clearfix">
+                                                  <div class="ya-grid-1-6">
+                                                      <div class="ya-avatar ya-avatar_small ya-avatar_message">
+                                                          <img ng-src="{{options.user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
+                                                      </div>
+                                                  </div>
+                                                  <div class="ya-grid-5-6">
+                                                      <div class="ya-input__field-wrapper ya-input__field-wrapper_textarea ya-relative">
+                                                          <textarea rows="10" class="ya-input__field ya-input__field_textarea ya-input__field_unbordered ya-input__field_message" ng-model="message" placeholder="Введите сообщение"></textarea>
+                                                          <div class="ya-new-post__btns-wrapper">
+                                                              <!--div class="ya-new-post__btn ya-pop-btn ya-pop-btn_adds">
+                                                                  <div class="ya-pop-btn__pop-up">
+                                                                      <ul class="ya-pop-btn__list">
+                                                                          <li class="ya-pop-btn__item">
+                                                                              <span class="ya-pop-btn__link ya-pop-btn__link_photo" ng-click="gallery.add_image = !gallery.add_image;">Фото</span>
+                                                                          </li>
+                                                                          <li class="ya-pop-btn__item">
+                                                                              <span class="ya-pop-btn__link ya-pop-btn__link_video" ng-click="gallery.add_video = !gallery.add_video;">Видео</span>
+                                                                          </li>
+                                                                      </ul>
+                                                                    </div>
+                                                                </div-->
+                                                               <!--div class="ya-wall__news-media">
+                                                                   <img ng-src="{{i}}" ng-repeat="i in t.images" class="ya-wall__news-img" />
+                                                               <div class="ya-new-post__btn ya-pop-btn ya-pop-btn_smiles">
+                                                                  <div class="ya-smiles ya-pop-btn__pop-up">
+                                                                      Smiles ))
+                                                                  </div>
+                                                                </div-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                       </form>
+                                   </div>
                                 </div>
                             </div>
                         </div>
