@@ -14,6 +14,12 @@ angular.module('MuscleMan').controller('FavsCtrl', ['$scope', 'MSG', 'User', 'Di
 			MSG.err(res.data);
 		});
 
+		User.get_hobbies(function(res) {
+			$scope.hobbies = res.data;
+		}, function(res) {
+			MSG.err(res.data);
+		});
+
 		$scope.send_message = function(data) {
 			$scope.$emit('new_message', data);
 		};

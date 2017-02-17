@@ -272,10 +272,9 @@
                                         </div>
                                         <div class="ya-grid-2-3">
                                             <div class="ya-input__field-wrapper">
-                                                <select id="ya-status" class="ya-input__field ya-input__field_select ya-input__select">
+                                                <select id="ya-status" class="ya-input__field ya-input__field_select ya-input__select" ng-model="hobbie">
 													<option></option>
-													<option>Статус 1</option>
-													<option>Статус 2</option>
+													<option ng-repeat="h in hobbies">{{h.item}}</option>
 												</select>
                                             </div>
                                         </div>
@@ -288,7 +287,7 @@
                         По Вашим параметрам ничего не найдено.
                     </div>
                     <div class="ya-search-result__list ya-users">
-                        <div class="ya-info-block ya-info-block_search ya-users__item" ng-repeat="user in users | search_filter:order:sport">
+                        <div class="ya-info-block ya-info-block_search ya-users__item" ng-repeat="user in users | search_filter:order:sport:hobbie">
                             <div class="ya-info-block__title ya-info-block__title_name">
                                 <a href="#/user/{{user._id}}">{{user.name}} {{user.surname}}, {{user.city}}</a>
                             </div>
