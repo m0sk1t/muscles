@@ -266,10 +266,9 @@
                                         </div>
                                         <div class="ya-grid-2-3">
                                             <div class="ya-input__field-wrapper">
-                                                <select id="ya-sport" class="ya-input__field ya-input__field_select ya-input__select">
+                                                <select id="ya-sport" class="ya-input__field ya-input__field_select ya-input__select" ng-model="sport">
 													<option></option>
-													<option>Спорт 1</option>
-													<option>Спорт 2</option>
+													<option ng-repeat="s in sports">{{s.sport}}</option>
 												</select>
                                             </div>
                                         </div>

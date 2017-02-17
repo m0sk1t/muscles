@@ -362,7 +362,7 @@ module.exports = (app) => {
 			passReqToCallback: true,
 			callbackURL: '/auth/ok/callback',
 			clientID: '1249885952',
-			accessToken: 'tkn1AnYQQsiq9n7W9kwvhn935f1xbGGI77UATWGaNV4qEbpfxauQZmqobWsacd4gRyGb0',
+			access_token: 'tkn1AnYQQsiq9n7W9kwvhn935f1xbGGI77UATWGaNV4qEbpfxauQZmqobWsacd4gRyGb0',
 			clientPublic: 'CBAQLQHLEBABABABA',
 			clientSecret: ' AF5F33BC3ACFFFA2627152D3',
 		},
