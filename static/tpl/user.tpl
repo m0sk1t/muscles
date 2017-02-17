@@ -21,7 +21,7 @@
                     <div class="ya-user__config-block ya-clearfix">
                         <div class="ya-span-2-3">
                             <div class="ya-user__raiting ya-raiting">
-                                <span>{{rating}}</span>
+                                <span>{{rating || ''}}</span>
                                 <span ng-click="mark(5);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 5, 'ya-raiting__star_empty': rating === 4, 'ya-raiting__star_half': (rating>4)&&(rating<5)}"></span>
                                 <span ng-click="mark(4);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 4, 'ya-raiting__star_empty': rating === 3, 'ya-raiting__star_half': (rating>3)&&(rating<4)}"></span>
                                 <span ng-click="mark(3);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 3, 'ya-raiting__star_empty': rating === 2, 'ya-raiting__star_half': (rating>2)&&(rating<3)}"></span>
