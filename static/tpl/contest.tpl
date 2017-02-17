@@ -5,10 +5,10 @@
                 <div class="ya-contest">
                     <h2 class="ya-media-page__title ya-relative">
                         Конкурс {{contest.title}}
-                        <span class="ya-contest__info">Об участии в конкурсе</span>
+                        <!--span class="ya-contest__info">Об участии в конкурсе</span-->
                     </h2>
                     <div class="ya-contest__content">
-                        <div class="ya-contest__subtitle">{{contest.type}}</div>
+                        <div class="ya-contest__subtitle">{{contest.type ==='Man'? ('Для мужчин': contest.type === 'Woman'? 'Для женщин':'Для всех')}}</div>
                         <div class="ya-contest__timer">
                             <div class="ya-timer">
                                 <div class="ya-timer__title">До окончания конкурса осталось:</div>

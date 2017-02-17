@@ -6,9 +6,9 @@
               Параметры поиска
             </a>
                 <div class="ya-sidebar-info__full-wrap" ng-class="{'ya-sidebar-info__full-wrap_active': !!showsidebar}">
-                    <!--h2 class="ya-media-page__title ya-title ya-relative ya-center">
+                    <h2 class="ya-media-page__title ya-title ya-relative ya-center">
                     Поиск
-                </h2-->
+                    </h2>
                     <!--div class="ya-form ya-form_wide">
                     <div class="ya-form__input ya-input ya-input_inline">
                         <div class="ya-clearfix">

@@ -12,7 +12,7 @@
                             </a>
                         </div>
                         <div class="ya-user__name">
-                            {{user.name}} {{user.surname}}, {{get_age(user.birthDate)}}
+                            {{user.name}} {{user.surname}}{{get_age(user.birthDate)?', ' + get_age(user.birthDate):''}}
                         </div>
                         <div class="ya-user__city">
                             {{user.location_country.title + ', '}} {{user.location_city.title}}
