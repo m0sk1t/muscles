@@ -14,13 +14,13 @@
                         <div class="ya-penpals__item ya-clearfix" ng-repeat="d in dialogs track by $index" ng-click="set_messages(d, $index);">
                             <div class="ya-grid-1-5">
                                 <div class="ya-avatar ya-avatar_small ya-wall__avatar">
-                                    <img ng-src="{{user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
+                                    <img ng-src="{{with_user(d).avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
                                 </div>
                             </div>
                             <div class="ya-grid-4-5">
                                 <div class="ya-penpals__title ya-clearfix">
                                     <div class="ya-penpals__name ya-grid-2-3 ya-left">
-                                        {{with_user(d)}}
+                                        {{with_user(d).fio}}
                                     </div>
                                     <div class="ya-penpals__date ya-grid-1-3 ya-right">
                                         {{format_date(d.messages[d.messages.length - 1].t)}}
@@ -56,11 +56,11 @@
                                             <div class="ya-wall__news-author ya-relative ya-clearfix">
                                                 <!--div class="ya-wall__news-remove" ng-if="options.user._id === user._id" ng-click="del_topic($index)">x</div-->
                                                 <div class="ya-avatar ya-avatar_small ya-wall__avatar">
-                                                    <img ng-src="{{m.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
+                                                    <img ng-src="{{detect_user(dialogs[dialogIndex], m.uid).avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
                                                 </div>
                                                 <div class="ya-wall__news-info ya-clearfix">
                                                     <div class="ya-wall__author-name">
-                                                        {{detect_user(dialogs[dialogIndex], m.uid)}}
+                                                        {{detect_user(dialogs[dialogIndex], m.uid).fio}}
                                                     </div>
                                                     <div class="ya-wall__news-date">
                                                         {{format_date(m.t)}}

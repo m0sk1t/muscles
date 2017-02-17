@@ -61,14 +61,13 @@ angular.module('MuscleMan').controller('DialogsCtrl', ['$scope', 'Dialog',
 			var user = d.users.filter(function(el) {
 				return el.id === id;
 			})[0];
-			return (user ? user.fio : '');
+			return (user ? user : '');
 		};
 		$scope.with_user = function(d) {
 			if (!d) return '';
-			var user = d.users.filter(function(el) {
+			return d.users.filter(function(el) {
 				return el.id !== $scope.options.user._id;
 			})[0];
-			return (user ? user.fio : '');
 		};
 	}
 ]);
