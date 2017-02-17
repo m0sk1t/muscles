@@ -75,6 +75,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                                     <div class="ya-new-post__form">
                                       <form ng-submit="add_message()" class="ya-form" ng-show="messages.length">
                                           <div class="ya-form__input ya-input ya-input_inline ya-input_small-pad ya-input_message">
@@ -117,11 +122,6 @@
                                             </div>
                                        </form>
                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="ya-grid-1-5">
                 <div class="ya-page__block">
