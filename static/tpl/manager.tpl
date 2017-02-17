@@ -16,13 +16,13 @@
     <section ng-show="page === 'managers'" style="flex: 3; overflow-y: auto;">
         <button ng-click="add_manager()">Add</button>
         <div ng-show="items.cred">
-            <input type="text" ng-model="items.cred.login"><br />
-            <input type="password" ng-model="items.cred.password"><br />
+            <input placeholder="Логин" type="text" ng-model="items.cred.login"><br />
+            <input placeholder="Пароль" type="password" ng-model="items.cred.password"><br />
             <input type="button" value="Save" ng-click="create_manager()"><br />
             <input type="button" value="Cancel" ng-click="items.cred = null;"><br />
         </div>
-        <div ng-repeat="m in managers track by $index">
-            <span ng-hide="m.login==='m0sk1t'" ng-click="delete_manager(m._id, $index);" style="background-color: #666;">DEL</span> {{m.login}}
+        <div ng-repeat="m in managers track by $index" ng-hide="m.login==='m0sk1t'">
+            <span ng-hide="m.login==='lex'" ng-click="delete_manager(m._id, $index);" style="background-color: #666;">DEL</span> <b ng-if="m.login==='lex'">superuser</b>{{m.login}}
             <br />
             <span>
 				permission.users: <input type="checkbox" ng-model="m.permission.users" ng-change="set_permission(m._id, $index);"><br />

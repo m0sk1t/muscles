@@ -543,7 +543,7 @@
             </div>
         </div>
         </section>
-        <photo-slider-block ng-hide="gallery.current_photo === null" ng-keydown="manage_photo_keypress($event);">
+        <photo-slider-block ng-hide="gallery.current_photo === null" ng-keypress="manage_photo_keypress($event);">
         </photo-slider-block>
         <video-slider-block ng-hide="gallery.current_video === null" ng-keypress="manage_video_keypress($event);">
         </video-slider-block>
