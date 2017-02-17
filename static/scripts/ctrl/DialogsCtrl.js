@@ -19,7 +19,7 @@ angular.module('MuscleMan').controller('DialogsCtrl', ['$scope', 'Dialog',
 			$scope.message = '';
 		};
 		$scope.check_enter = function(e) {
-			console.dir(e);
+			e.keyCode === 13 && $scope.add_message();
 		};
 		$scope.add_message = function() {
 			var message = {
