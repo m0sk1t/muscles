@@ -30,8 +30,8 @@
                             </div>
                         </div>
                         <div class="ya-user__options ya ya-span-1-3">
-                            <div class="ya-user__possible-actions">
-                                <a href="#/options/profile" class="ya-user__options-btn" ng-if="options.user._id === user._id"></a>
+                            <div class="ya-user__possible-actions" ng-if="options.user._id === user._id">
+                                <a href="#/options/profile" class="ya-user__options-btn"></a>
                                 <a href="/logout" class="ya-user__logout-btn ya-logout-btn"></a>
                             </div>
                         </div>

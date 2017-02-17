@@ -86,7 +86,7 @@
                                                   </div>
                                                   <div class="ya-grid-5-6">
                                                       <div class="ya-input__field-wrapper ya-input__field-wrapper_textarea ya-relative">
-                                                          <textarea rows="10" class="ya-input__field ya-input__field_textarea ya-input__field_unbordered ya-input__field_message" ng-model="message" placeholder="Введите сообщение"></textarea>
+                                                          <textarea rows="10" ng-keypress="check_enter($event)" class="ya-input__field ya-input__field_textarea ya-input__field_unbordered ya-input__field_message" ng-model="message" placeholder="Введите сообщение"></textarea>
                                                           <div class="ya-new-post__btns-wrapper">
                                                               <div class="ya-avatar ya-avatar_small ya-avatar_message">
                                                                   <img ng-src="{{options.user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" ng-click="add_message()" />

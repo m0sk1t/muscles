@@ -18,6 +18,9 @@ angular.module('MuscleMan').controller('DialogsCtrl', ['$scope', 'Dialog',
 			$scope.dialog = d._id;
 			$scope.message = '';
 		};
+		$scope.check_enter = function(e) {
+			console.dir(e);
+		};
 		$scope.add_message = function() {
 			var message = {
 					t: Date.now(),
