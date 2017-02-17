@@ -1,4 +1,4 @@
-<article class="ya-dialoges ya-container ya-relative" ng-class="{'ya-container_pad':!!showTopMenu, 'ya-container_pad_menu':!showTopMenu}">
+\<article class="ya-dialoges ya-container ya-relative" ng-class="{'ya-container_pad':!!showTopMenu, 'ya-container_pad_menu':!showTopMenu}">
     <div class="ya-narrower">
         <div class="ya-row">
             <div class="ya-grid-1-3">
@@ -60,7 +60,7 @@
                                                 </div>
                                                 <div class="ya-wall__news-info ya-clearfix">
                                                     <div class="ya-wall__author-name">
-                                                        {{detect_user(dialogs[dialogIndex],m.uid)}}
+                                                        {{detect_user(dialogs[dialogIndex], m.uid)}}
                                                     </div>
                                                     <div class="ya-wall__news-date">
                                                         {{format_date(m.t)}}
