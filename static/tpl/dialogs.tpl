@@ -44,13 +44,13 @@
                         <div class="ya-wall">
                             <div class="ya-wall__news">
                                 <div class="ya-wall__news-list">
-                                    <!--div class="ya-wall__news-item">
-										<div class="ya-wall__news-content">
-											<div class="ya-wall__news-text ya-wall__news-text_empty ya-center">
-												Пока не добавлено ни одного сообщения.
-											</div>
-										</div>
-									</div-->
+                                    <div class="ya-wall__news-item" ng-if="!messages || !messages.length">
+                  										<div class="ya-wall__news-content">
+                  											<div class="ya-wall__news-text ya-wall__news-text_empty ya-center">
+                  												Пока не добавлено ни одного сообщения.
+                  											</div>
+                  										</div>
+                  									</div>
                                     <div class="ya-wall__news-item" ng-repeat="m in messages">
                                         <div class="ya-wall__news-content">
                                             <div class="ya-wall__news-author ya-relative ya-clearfix">
