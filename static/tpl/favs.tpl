@@ -302,7 +302,7 @@
                     <div class="ya-search-result__list ya-users">
                         <div class="ya-info-block ya-info-block_search ya-users__item" ng-repeat="user in favs | search_filter:order:sport:hobbie">
                             <div class="ya-info-block__title ya-info-block__title_name">
-                                <a href="#/user/{{user._id}}">{{user.name}} {{user.surname}}, {{user.city}}</a>
+                                <a href="#/user/{{user._id}}">{{user.name}} {{user.surname}}{{user.location_city? ', ' + user.location_city.title: ''}}</a>
                             </div>
                             <div class="ya-info-block__content ya-clearfix">
                                 <div class="ya-grid-1-5">
@@ -314,7 +314,7 @@
                                 </div>
                                 <div class="ya-grid-4-5">
                                     <div class="ya-clearfix ya-date-info">
-                                        {{get_user_comment(user._id)}}
+                                        <b>Ваш комментарий: </b>{{get_user_comment(user._id)}}
                                     </div>
                                     <div class="ya-clearfix">
                                         <div class="ya-grid-1-2">
