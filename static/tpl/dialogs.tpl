@@ -37,7 +37,7 @@
             </div>
             <div class="ya-grid-7-15">
                 <h2 class="ya-media-page__title ya-media-page__title_msgs ya-title ya-relative">
-                    {{with_user(dialogs[dialogIndex])}}
+                    {{with_user(dialogs[dialogIndex]).fio}}
                 </h2>
                 <div class="ya-dialog ya-relative">
                     <div class="ya-dialog__content">
