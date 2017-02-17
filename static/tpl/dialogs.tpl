@@ -23,7 +23,7 @@
                                         {{with_user(d)}}
                                     </div>
                                     <div class="ya-penpals__date ya-grid-1-3 ya-right">
-                                        {{d.messages[d.messages.length - 1].t}}
+                                        {{format_date(d.messages[d.messages.length - 1].t)}}
                                     </div>
                                 </div>
                                 <div class="ya-penpals__msg">
@@ -63,7 +63,7 @@
                                                         {{m.fio}}
                                                     </div>
                                                     <div class="ya-wall__news-date">
-                                                        {{m.t}}
+                                                        {{format_date(m.t)}}
                                                     </div>
                                                 </div>
                                             </div>
