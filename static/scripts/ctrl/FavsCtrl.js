@@ -26,12 +26,36 @@ angular.module('MuscleMan').controller('FavsCtrl', ['$scope', 'MSG', 'User', 'Di
 
 		$scope.remove_from_fav = function(id) {
 			$scope.options.user.favs = $scope.options.user.favs.filter(function(el) {
-				return el !== id;
+				return el.id !== id;
 			});
 			$scope.favs = $scope.favs.filter(function(el) {
 				return el._id !== id;
 			});
 			$scope.$emit('user_save');
+		};
+		$scope.add_comment = function(id) {
+			var l = $scope.options.user.favs.length;
+			MSG.custom({
+				title: '',
+				text: '',
+				type: 'input',
+				showCancelButton: true,
+				closeOnConfirm: true,
+			}, function(comment) {
+				for (; l--;) {
+					if ($scope.options.user.favs[l].id === id) {
+						$scope.options.user.favs[l].comment = comment;
+					}
+				}
+				$scope.$emit('user_save');
+			});
+		};
+
+		$scope.get_user_comment = function(id) {
+			if (!$scope.options.user.favs.length) return;
+			return $scope.options.user.favs.filter(function(el) {
+				return el.id === id;
+			})[0].comment;
 		};
 
 		$scope.write_message = function(user) {

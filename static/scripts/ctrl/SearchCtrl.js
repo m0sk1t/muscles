@@ -24,16 +24,21 @@ angular.module('MuscleMan').controller('SearchCtrl', ['$scope', 'User',
 		});
 
 		$scope.in_fav = function(id) {
-			return ($scope.options.user.favs ? $scope.options.user.favs.indexOf(id) >= 0 : false);
+			return ($scope.options.user.favs ? $scope.options.user.favs.filter(function(el) {
+				return el.id.indexOf(id) >= 0;
+			}).length : false);
 		};
 
 		$scope.fav = function(id) {
 			if ($scope.in_fav(id)) {
 				$scope.options.user.favs = $scope.options.user.favs.filter(function(el) {
-					return el !== id;
+					return el.id !== id;
 				});
 			} else {
-				$scope.options.user.favs.push(id);
+				$scope.options.user.favs.push({
+					id: id,
+					comment: ''
+				});
 			}
 			$scope.$emit('user_save');
 		};

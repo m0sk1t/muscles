@@ -246,10 +246,10 @@
                                     </div>
                                     <div class="ya-grid-2-3">
                                         <div class="ya-input__field-wrapper">
-                                            <select id="ya-sort" class="ya-input__field ya-input__field_select ya-input__select">
-												<option>По рейтингу</option>
-												<option>По возрасту</option>
-											</select>
+                                            <select ng-model="order" id="ya-sort" class="ya-input__field ya-input__field_select ya-input__select">
+                                                <option value="rating">По рейтингу</option>
+                                                <option value="age">По возрасту</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -313,9 +313,9 @@
                                     </div>
                                 </div>
                                 <div class="ya-grid-4-5">
-                                    <!--div class="ya-clearfix ya-date-info">
-                                        Просмотр анкеты: 17.06.1991 в 15:23
-                                    </div-->
+                                    <div class="ya-clearfix ya-date-info">
+                                        {{get_user_comment(user._id)}}
+                                    </div>
                                     <div class="ya-clearfix">
                                         <div class="ya-grid-1-2">
                                             <div class="ya-info-block__record ya-clearfix">
@@ -339,7 +339,7 @@
                                             <div class="ya-fake-border"></div>
                                             <div class="ya-fav-actions">
                                                 <a class="ya-fav-action__link ya-fav-action__link_write" ng-click="write_message(user);">Написать сообщение</a>
-                                                <!--a href="#" class="ya-fav-action__link ya-fav-action__link_comment">Оставить комментарий</a-->
+                                                <a href="#" ng-click="add_comment(user._id)" class="ya-fav-action__link ya-fav-action__link_comment">Оставить комментарий</a>
                                                 <a class="ya-fav-action__link ya-fav-action__link_delete" ng-click="remove_from_fav(user._id)">Убрать</a>
                                             </div>
                                         </div>

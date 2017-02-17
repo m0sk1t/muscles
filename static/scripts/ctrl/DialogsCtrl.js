@@ -53,12 +53,15 @@ angular.module('MuscleMan').controller('DialogsCtrl', ['$scope', 'Dialog',
 				console.error(res.data);
 			});
 		};
-		$scope.with_user = function(d) {
+		$scope.detect_user = function(d, id) {
 			if (!d) return '';
 			var user = d.users.filter(function(el) {
-				return el.id !== $scope.options.user._id;
+				return el.id === id;
 			})[0];
 			return (user ? user.fio : 'пользователь покинул беседу...');
+		};
+		$scope.with_user = function(d) {
+			if (!d) return '';
 		};
 	}
 ]);
