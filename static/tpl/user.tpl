@@ -15,7 +15,7 @@
                             {{user.name}} {{user.surname}}{{get_age(user.birthDate)?', ' + get_age(user.birthDate):''}}
                         </div>
                         <div class="ya-user__city">
-                            {{user.location_country.title + ', '}} {{user.location_city.title}}
+                            {{user.location_country.title}} {{', ' + user.location_city.title}}
                         </div>
                     </div>
                     <div class="ya-user__config-block ya-clearfix">
