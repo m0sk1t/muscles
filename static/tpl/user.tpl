@@ -42,7 +42,7 @@
                         <button class="ya-btn ya-btn_blocked" ng-click="write_message();">Написать сообщение</button>
                     </div>
                     <div class="ya-grid-1-5">
-                        <span class="ya-btn ya-btn_blocked" ng-class="{'ya-btn_secondary ya-btn_fav': in_fav(user._id)}" ng-click="fav();"><span class="fa fa-bars" aria-hidden="true"></span></span>
+                        <span class="ya-btn ya-btn_blocked" ng-class="{'ya-btn_secondary ya-btn_fav': in_fav(user._id)}" ng-click="fav();"><span class="fa fa-star" aria-hidden="true"></span></span>
                     </div>
 
 
