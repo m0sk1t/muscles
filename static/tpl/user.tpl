@@ -37,9 +37,15 @@
                         </div>
                     </div>
                 </div>
-                <div ng-if="options.user._id !== user._id" class="actions">
-                    <span ng-class="{fav: in_fav(user._id)}" ng-click="fav();">&#9825;</span>
-                    <button ng-click="write_message();">Написать сообщение</button>
+                <div class="ya-clearfix ya-user-actions" ng-if="options.user._id !== user._id">
+                    <div class="ya-grid-4-5">
+                        <button class="ya-btn ya-btn_blocked" ng-click="write_message();">Написать сообщение</button>
+                    </div>
+                    <div class="ya-grid-1-5">
+                        <span class="ya-btn ya-btn_blocked" ng-class="{'ya-btn_secondary ya-btn_fav': in_fav(user._id)}" ng-click="fav();"><span class="fa fa-bars" aria-hidden="true"></span></span>
+                    </div>
+
+
                 </div>
                 <div class="ya-user__sports ya-sidebar-info ya-relative">
                     <a href="#/options/work_n_study">
