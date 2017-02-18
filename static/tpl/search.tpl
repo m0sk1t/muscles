@@ -233,9 +233,9 @@
                                     </div>
                                     <div class="ya-grid-2-3">
                                         <div class="ya-input__field-wrapper">
-                                            <select id="ya-sort" class="ya-input__field ya-input__field_select ya-input__select">
-												<option>По рейтингу</option>
-												<option>По возрасту</option>
+                                            <select ng-model="order" id="ya-sort" class="ya-input__field ya-input__field_select ya-input__select">
+												<option value="rating">По рейтингу</option>
+												<option value="age">По возрасту</option>
 											</select>
                                         </div>
                                     </div>
@@ -253,10 +253,9 @@
                                         </div>
                                         <div class="ya-grid-2-3">
                                             <div class="ya-input__field-wrapper">
-                                                <select id="ya-sport" class="ya-input__field ya-input__field_select ya-input__select">
+                                                <select ng-model="sport" id="ya-sport" class="ya-input__field ya-input__field_select ya-input__select">
 													<option></option>
-													<option>Спорт 1</option>
-													<option>Спорт 2</option>
+													<option ng-repeat="s in sports">{{s.sport}}</option>
 												</select>
                                             </div>
                                         </div>
@@ -273,10 +272,9 @@
                                         </div>
                                         <div class="ya-grid-2-3">
                                             <div class="ya-input__field-wrapper">
-                                                <select id="ya-status" class="ya-input__field ya-input__field_select ya-input__select">
+                                                <select id="ya-status" class="ya-input__field ya-input__field_select ya-input__select" ng-model="hobbie">
 													<option></option>
-													<option>Статус 1</option>
-													<option>Статус 2</option>
+													<option ng-repeat="h in hobbies">{{h.item}}</option>
 												</select>
                                             </div>
                                         </div>
@@ -289,7 +287,7 @@
                         По Вашим параметрам ничего не найдено.
                     </div>
                     <div class="ya-search-result__list ya-users">
-                        <div class="ya-info-block ya-info-block_search ya-users__item" ng-repeat="user in users track by $index">
+                        <div class="ya-info-block ya-info-block_search ya-users__item" ng-repeat="user in users | search_filter:order:sport:hobbie">
                             <div class="ya-info-block__title ya-info-block__title_name">
                                 <a href="#/user/{{user._id}}">{{user.name}} {{user.surname}}, {{user.city}}</a>
                             </div>
@@ -316,7 +314,7 @@
                                         <div class="ya-grid-2-5">
                                             <div class="ya-info-block__record ya-clearfix">
                                                 <div class="ya-info-block__label ya-span-1-2">Возраст:</div>
-                                                <div class="ya-info-block__value ya-span-1-2">{{user.age || "н/д"}}</div>
+                                                <div class="ya-info-block__value ya-span-1-2">{{get_age(user.birthDate) || "н/д"}}</div>
                                             </div>
                                             <div class="ya-info-block__record ya-clearfix">
                                                 <div class="ya-info-block__label ya-span-1-2">Рост:</div>

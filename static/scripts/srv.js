@@ -16,6 +16,9 @@ angular.module('Services', []).factory('User', ['$http',
             get_contest: function(id, s, e) {
                 return $http.get('/contest/' + id).then(s, e);
             },
+            view_contest: function(id, s, e) {
+                return $http.put('/contest/' + id + '/inc_view').then(s, e);
+            },
             add_contest_participant: function(id, s, e) {
                 return $http.put('/contest/' + id + '/add_participant').then(s, e);
             },
@@ -27,6 +30,9 @@ angular.module('Services', []).factory('User', ['$http',
             },
             rm_contest_participant: function(id, s, e) {
                 return $http.put('/contest/' + id + '/rm_participant').then(s, e);
+            },
+            competition_add_comment: function(id, opt, s, e) {
+                return $http.put('/competition/' + id + '/add_comment', opt).then(s, e);
             },
             get_competition: function(id, s, e) {
                 return $http.get('/competition/' + id).then(s, e);
@@ -111,6 +117,9 @@ angular.module('Services', []).factory('User', ['$http',
             set_permission: function(id, opt, s, e) {
                 return $http.put('/manager/' + id, opt).then(s, e);
             },
+            create_theme: function(opt, s, e) {
+                return $http.post('/manage/theme', opt).then(s, e);
+            },
             create_article: function(s, e) {
                 return $http.post('/manage/article/new', {}).then(s, e);
             },
@@ -125,6 +134,9 @@ angular.module('Services', []).factory('User', ['$http',
             },
             create_sport: function(opt, s, e) {
                 return $http.post('/manage/sport/new', opt).then(s, e);
+            },
+            comment_article: function(id, opt, s, e) {
+                return $http.put('/article/' + id + '/add_comment', opt).then(s, e);
             },
             update_article: function(id, opt, s, e) {
                 return $http.put('/manage/article/' + id, opt).then(s, e);
@@ -143,6 +155,9 @@ angular.module('Services', []).factory('User', ['$http',
             },
             update_user: function(id, user, s, e) {
                 return $http.put('/manage/user/' + id, user).then(s, e);
+            },
+            get_themes: function(s, e) {
+                return $http.get('/manage/themes').then(s, e);
             },
             get_article: function(id, s, e) {
                 return $http.get('/manage/article/' + id).then(s, e);
@@ -179,6 +194,9 @@ angular.module('Services', []).factory('User', ['$http',
             },
             get_topics: function(credate, s, e) {
                 return $http.get('/manage/topics/' + credate).then(s, e);
+            },
+            delete_theme: function(id, s, e) {
+                return $http.delete('/manage/theme/' + id).then(s, e);
             },
             delete_article: function(id, s, e) {
                 return $http.delete('/manage/article/' + id).then(s, e);

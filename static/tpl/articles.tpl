@@ -16,10 +16,9 @@
                                 </div>
                                 <div class="ya-grid-2-3">
                                     <div class="ya-input__field-wrapper">
-                                        <select id="ya-sport" class="ya-input__field ya-input__field_select ya-input__select">
-											<option value=""></option>
-											<option value="Спорт 1">Спорт 1</option>
-											<option value="Спорт 2">Спорт 2</option>
+                                        <select id="ya-sport" class="ya-input__field ya-input__field_select ya-input__select" ng-model="sport">
+                                            <option value=""></option>
+											<option ng-repeat="s in sports">{{s.sport}}</option>
 										</select>
                                     </div>
                                 </div>
@@ -34,10 +33,9 @@
                                 </div>
                                 <div class="ya-grid-2-3">
                                     <div class="ya-input__field-wrapper">
-                                        <select id="ya-theme" class="ya-input__field ya-input__field_select ya-input__select">
-											<option value=""></option>
-											<option value="Тема 1">Тема 1</option>
-											<option value="Тема 2">Тема 2</option>
+                                        <select id="ya-theme" class="ya-input__field ya-input__field_select ya-input__select" ng-model="theme">
+                                            <option value=""></option>
+											<option ng-repeat="t in themes">{{t.title}}</option>
 										</select>
                                     </div>
                                 </div>
@@ -48,50 +46,29 @@
                         Последние добавленные
                     </div>
                     <div class="ya-articles__list">
-                        <div class="ya-articles__item">
+                        <div class="ya-articles__item" ng-repeat="i in articles | filter:sport track by $index">
                             <div class="ya-bordered-box">
                                 <div class="ya-clearfix">
                                     <div class="ya-articles__media ya-grid-2-5">
-                                        <img src="images/article-thumb.jpg" alt="Alternative text" class="ya-articles__thumb">
+                                        <img ng-src="{{get_picture($index) || 'images/article-thumb.jpg'}}" alt="Alternative text" class="ya-articles__thumb">
                                     </div>
                                     <div class="ya-articles__content ya-grid-3-5">
-                                        <h3 class="ya-articles__title">Соревнованяи по бодибилдингу в г. Пенза</h3>
+                                        <h3 class="ya-articles__title">{{i.title}}</h3>
                                         <div class="ya-articles__desc">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod sem eget bibendum dapibus. Quisque imperdiet pulvinar libero, sed lacinia tortor lacinia non.
+                                            {{i.description}}
                                         </div>
                                         <div class="ya-articles__readmore">
-                                            <a href="#" class="ya-btn ya-btn_primary ya-btn_inline">Читать дальше</a>
+                                            <a href="#/article/{{i._id}}" class="ya-btn ya-btn_primary ya-btn_inline">Читать дальше</a>
                                         </div>
                                         <div class="ya-articles__date">
-                                            07.07.2016
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ya-articles__item">
-                            <div class="ya-bordered-box">
-                                <div class="ya-clearfix">
-                                    <div class="ya-articles__media ya-grid-2-5">
-                                        <img src="images/article-thumb.jpg" alt="Alternative text" class="ya-articles__thumb">
-                                    </div>
-                                    <div class="ya-articles__content ya-grid-3-5">
-                                        <h3 class="ya-articles__title">Соревнованяи по бодибилдингу в г. Пенза</h3>
-                                        <div class="ya-articles__desc">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod sem eget bibendum dapibus. Quisque imperdiet pulvinar libero, sed lacinia tortor lacinia non.
-                                        </div>
-                                        <div class="ya-articles__readmore">
-                                            <a href="#" class="ya-btn ya-btn_primary ya-btn_inline">Читать дальше</a>
-                                        </div>
-                                        <div class="ya-articles__date">
-                                            07.07.2016
+                                            {{format_date(i.creDate)}}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="ya-articles__pagination ya-pagination ya-center">
+                    <!--div class="ya-articles__pagination ya-pagination ya-center">
                         <ul class="ya-pagination__list ya-clearfix">
                             <li class="ya-pagination__item ya-pagination__item_hidden">
                                 <a href="#" class="ya-pagination__link ya-pagination__link_box ya-pagination__link_prev">
@@ -128,7 +105,7 @@
 								</a>
                             </li>
                         </ul>
-                    </div>
+                    </div-->
                 </div>
             </div>
             <div class="ya-grid-1-5">

@@ -12,16 +12,16 @@
                             </a>
                         </div>
                         <div class="ya-user__name">
-                            {{user.name}} {{user.surname}}, {{get_age(user.birthDate)}}
+                            {{user.name}} {{user.surname}}{{get_age(user.birthDate)?', ' + get_age(user.birthDate):''}}
                         </div>
                         <div class="ya-user__city">
-                            {{user.location_country.title + ', '}} {{user.location_city.title}}
+                            {{user.location_country.title}} {{user.location_city.title? ', ' + user.location_city.title:''}}
                         </div>
                     </div>
                     <div class="ya-user__config-block ya-clearfix">
                         <div class="ya-span-2-3">
                             <div class="ya-user__raiting ya-raiting">
-                                <span>{{rating}}</span>
+                                <span>{{rating || ''}}</span>
                                 <span ng-click="mark(5);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 5, 'ya-raiting__star_empty': rating === 4, 'ya-raiting__star_half': (rating>4)&&(rating<5)}"></span>
                                 <span ng-click="mark(4);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 4, 'ya-raiting__star_empty': rating === 3, 'ya-raiting__star_half': (rating>3)&&(rating<4)}"></span>
                                 <span ng-click="mark(3);" class="ya-raiting__star" ng-class="{'ya-raiting__star_full': rating >= 3, 'ya-raiting__star_empty': rating === 2, 'ya-raiting__star_half': (rating>2)&&(rating<3)}"></span>
@@ -30,8 +30,8 @@
                             </div>
                         </div>
                         <div class="ya-user__options ya ya-span-1-3">
-                            <div class="ya-user__possible-actions">
-                                <a href="#/options/profile" class="ya-user__options-btn" ng-if="options.user._id === user._id"></a>
+                            <div class="ya-user__possible-actions" ng-if="options.user._id === user._id">
+                                <a href="#/options/profile" class="ya-user__options-btn"></a>
                                 <a href="/logout" class="ya-user__logout-btn ya-logout-btn"></a>
                             </div>
                         </div>
@@ -246,9 +246,9 @@
                         <div class="ya-info-block">
                             <h2 class="ya-info-block__title ya-info-block__title_add"><a href="#/options/work_n_study">Доп.информация</a></h2>
                             <div class="ya-info-block__content">
-                                <div class="ya-info-block__record ya-clearfix" ng-repeat="h in user.hobbies" ng-if="h.type =='false'">
-                                    <div class="ya-info-block__label ya-inner-grid-1-4">{{h.item}}</div>
-                                    <div class="ya-info-block__value ya-inner-grid-3-4">{{h.title}}</div>
+                                <div class="ya-info-block__record ya-clearfix" ng-repeat="h in user.hobbies" ng-if="h.type == 'false'">
+                                    <div class="ya-info-block__label ya-inner-grid-1-4">{{h.experience}}</div>
+                                    <div class="ya-info-block__value ya-inner-grid-3-4">{{h.item}}</div>
                                 </div>
                             </div>
                         </div>
@@ -257,9 +257,9 @@
                         <div class="ya-info-block">
                             <h2 class="ya-info-block__title ya-info-block__title_work"><a href="#/options/work_n_study">Работа</a></h2>
                             <div class="ya-info-block__content">
-                                <div class="ya-info-block__record ya-clearfix" ng-repeat="h in user.hobbies" ng-if="h.type =='true'">
-                                    <div class="ya-info-block__label ya-inner-grid-1-4">{{h.item}}</div>
-                                    <div class="ya-info-block__value ya-inner-grid-3-4">{{h.title}}</div>
+                                <div class="ya-info-block__record ya-clearfix" ng-repeat="h in user.hobbies" ng-if="h.type == 'true'">
+                                    <div class="ya-info-block__label ya-inner-grid-1-4">{{h.experience}}</div>
+                                    <div class="ya-info-block__value ya-inner-grid-3-4">{{h.item}}</div>
                                 </div>
                             </div>
                         </div>
@@ -543,7 +543,7 @@
             </div>
         </div>
         </section>
-        <photo-slider-block ng-hide="gallery.current_photo === null" ng-keydown="manage_photo_keypress($event);">
+        <photo-slider-block ng-hide="gallery.current_photo === null" ng-keypress="manage_photo_keypress($event);">
         </photo-slider-block>
         <video-slider-block ng-hide="gallery.current_video === null" ng-keypress="manage_video_keypress($event);">
         </video-slider-block>

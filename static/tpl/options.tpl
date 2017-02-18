@@ -82,9 +82,6 @@
                 <div class="ya-grid-2-3">
                     <div class="ya-input__field-wrapper">
                         <autocomplete-block area="country" substr="options.user.location_country.title" on-set="options.user.location_country = item"></autocomplete-block>
-                        <!--select ng-click="load_countries();" ng-model="options.user.location_country.id" id="ya-country" class="ya-input__field ya-input__field_select ya-input__select">
-                            <option value="{{c.cid}}" ng-repeat="c in countries" ng-click="options.user.location_country.title = c.title">{{c.title}}</option>
-                        </select-->
                     </div>
                 </div>
             </div>
@@ -99,9 +96,6 @@
                 <div class="ya-grid-2-3">
                     <div class="ya-input__field-wrapper">
                         <autocomplete-block area="city" substr="options.user.location_city.title" country="options.user.location_country.cid" on-set="options.user.location_city = item"></autocomplete-block>
-                        <!--select ng-click="load_cities();" ng-model="options.user.location_city.id" id="ya-city" class="ya-input__field ya-input__field_select ya-input__select">
-                            <option value="{{ct.cid}}" ng-repeat="ct in cities" ng-click="options.user.location_city.title = ct.title">{{ct.title}}</option>
-                        </select-->
                     </div>
                 </div>
             </div>
@@ -677,7 +671,7 @@
                         <span class="ya-close-btn" ng-click="rm_hobbie(h, $index)">X</span>
                         <div class="ya-sidebar-info__content">
                             <div class="ya-sidebar-info__item">
-                                <span class="ya-sidebar-info__label">{{h.item}}</span> {{h.title}}
+                                <span class="ya-sidebar-info__label">{{h.type == "true"? 'Работа:':'Доп.инфо:'}}</span> {{h.item}}, {{h.experience}}
                             </div>
                         </div>
                     </div>
@@ -703,22 +697,21 @@
                                 <div class="ya-grid-2-3">
                                     <div class="ya-input__field-wrapper">
                                         <select id="ya-ach-country" ng-model="hobbie.type" class="ya-input__field ya-input__field_select ya-input__select">
-                                            <option ng-value="{{h.type}}" ng-repeat="h in hobbies" ng-click="hobbie.item = h.item">{{h.item}}</option>
+                                            <option ng-value="true">Работа</option>
+                                            <option ng-value="false">Доп. инфо</option>
                                         </select>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ya-form__input ya-input ya-input_inline">
-                            <div class="ya-clearfix">
-                                <div class="ya-grid-1-3 ya-right">
-                                    <label for="ya-ach-comment" class="ya-input__label">
-                                        Что именно?
-                                    </label>
-                                </div>
-                                <div class="ya-grid-2-3">
                                     <div class="ya-input__field-wrapper">
-                                        <input id="ya-ach-comment" class="ya-input__field" type="text" ng-model="hobbie.title" />
+                                        <select id="ya-ach-country" ng-model="hobbie.item" class="ya-input__field ya-input__field_select ya-input__select">
+                                            <option ng-repeat="h in hobbies | filter:hobbie.type" ng-value="hobbie.item">{{h.item}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="ya-input__field-wrapper">
+                                        <select id="ya-ach-country" ng-model="hobbie.experience" class="ya-input__field ya-input__field_select ya-input__select">
+                                            <option>Новичок</option>
+                                            <option>Любитель</option>
+                                            <option>Профессионал</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -844,9 +837,6 @@
                                 <div class="ya-grid-2-3">
                                     <div class="ya-input__field-wrapper">
                                         <autocomplete-block substr="" area="country" on-set="achievement.country = item"></autocomplete-block>
-                                        <!--select id="ya-ach-country" ng-model="achievement.country_id" ng-change="load_cities();" class="ya-input__field ya-input__field_select ya-input__select">
-                                            <option value="{{c.cid}}" ng-repeat="c in countries" ng-click="achievement.country = c.title">{{c.title}}</option>
-                                        </select-->
                                     </div>
                                 </div>
                             </div>
@@ -861,9 +851,6 @@
                                 <div class="ya-grid-2-3">
                                     <div class="ya-input__field-wrapper">
                                         <autocomplete-block substr="" area="city" country="achievement.country.cid" on-set="achievement.city = item"></autocomplete-block>
-                                        <!--select id="ya-ach-city" ng-model="achievement.city_id" class="ya-input__field ya-input__field_select ya-input__select">
-															<option value="{{ci.cid}}" ng-repeat="ci in cities" ng-click="achievement.city = ci.title">{{ci.title}}</option>
-														</select-->
                                     </div>
                                 </div>
                             </div>
@@ -984,9 +971,6 @@
                                 <div class="ya-grid-2-3">
                                     <div class="ya-input__field-wrapper">
                                         <autocomplete-block substr="" area="country" on-set="workplace.country = item"></autocomplete-block>
-                                        <!--select id="ya-wp-country" ng-model="workplace.country_id" ng-change="load_cities();" class="ya-input__field ya-input__field_select ya-input__select">
-															<option value="{{c.cid}}" ng-repeat="c in countries" ng-click="workplace.country = c.title">{{c.title}}</option>
-														</select-->
                                     </div>
                                 </div>
                             </div>
@@ -1001,9 +985,6 @@
                                 <div class="ya-grid-2-3">
                                     <div class="ya-input__field-wrapper">
                                         <autocomplete-block substr="" area="city" country="workplace.country.cid" on-set="workplace.city = item"></autocomplete-block>
-                                        <!--select id="ya-wp-city" ng-model="workplace.city_id" class="ya-input__field ya-input__field_select ya-input__select">
-															<option value="{{ci.cid}}" ng-repeat="ci in cities" ng-click="workplace.city = ci.title">{{ci.title}}</option>
-														</select-->
                                     </div>
                                 </div>
                             </div>
@@ -1130,9 +1111,6 @@
                                 <div class="ya-grid-2-3">
                                     <div class="ya-input__field-wrapper">
                                         <autocomplete-block substr="" area="country" on-set="university.country = item"></autocomplete-block>
-                                        <!--select id="ya-university-country" ng-model="university.country_id" ng-change="load_cities();" class="ya-input__field ya-input__field_select ya-input__select">
-															<option value="{{c.cid}}" ng-repeat="c in countries" ng-click="university.country = c.title">{{c.title}}</option>
-														</select-->
                                     </div>
                                 </div>
                             </div>
@@ -1147,9 +1125,6 @@
                                 <div class="ya-grid-2-3">
                                     <div class="ya-input__field-wrapper">
                                         <autocomplete-block substr="" area="city" country="university.country.cid" on-set="university.city = item"></autocomplete-block>
-                                        <!--select id="ya-university-city" ng-model="university.city_id" ng-change="load_universities();" class="ya-input__field ya-input__field_select ya-input__select">
-															<option value="{{ci.cid}}" ng-repeat="ci in cities" ng-click="university.city = ci.title">{{ci.title}}</option>
-														</select-->
                                     </div>
                                 </div>
                             </div>
@@ -1164,9 +1139,6 @@
                                 <div class="ya-grid-2-3">
                                     <div class="ya-input__field-wrapper">
                                         <autocomplete-block substr="" area="university" city="university.city.id" country="university.country.cid" on-set="university.university = item"></autocomplete-block>
-                                        <!--select id="ya-university-university" ng-model="university.university_id" ng-change="load_faculties()" class="ya-input__field ya-input__field_select ya-input__select">
-															<option value="{{u.id}}" ng-repeat="u in universities" ng-click="university.university = u.title">{{u.title}}</option>
-														</select-->
                                     </div>
                                 </div>
                             </div>
@@ -1181,9 +1153,6 @@
                                 <div class="ya-grid-2-3">
                                     <div class="ya-input__field-wrapper">
                                         <autocomplete-block substr="" area="faculty" city="university.city.id" country="university.country.cid" university="university.university.id" on-set="university.faculty = item"></autocomplete-block>
-                                        <!--select id="ya-university-faculty" ng-model="university.faculty_id" ng-change="load_chairs()" class="ya-input__field ya-input__field_select ya-input__select">
-															<option value="{{f.id}}" ng-repeat="f in faculties" ng-click="university.faculty = f.title">{{f.title}}</option>
-														</select-->
                                     </div>
                                 </div>
                             </div>
@@ -1198,9 +1167,6 @@
                                 <div class="ya-grid-2-3">
                                     <div class="ya-input__field-wrapper">
                                         <autocomplete-block substr="" area="chair" city="university.city.id" faculty="university.faculty.id" country="university.country.cid" university="university.university.id" on-set="university.chair = item"></autocomplete-block>
-                                        <!--select id="ya-university-chair" ng-model="university.chair_id" class="ya-input__field ya-input__field_select ya-input__select">
-															<option value="{{ch.id}}" ng-repeat="ch in chairs" ng-click="university.chair = ch.title">{{ch.title}}</option>
-														</select-->
                                     </div>
                                 </div>
                             </div>

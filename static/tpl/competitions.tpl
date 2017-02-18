@@ -16,10 +16,8 @@
                             <div class="ya-clearfix">
                                 <div class="ya-grid-1-1">
                                     <div class="ya-input__field-wrapper">
-                                        <select id="ya-theme" class="ya-input__field ya-input__field_select ya-input__select">
-                                            <option value="">По категориям</option>
-                                            <option value="Тема 1">Тема 1</option>
-                                            <option value="Тема 2">Тема 2</option>
+                                        <select id="ya-theme" class="ya-input__field ya-input__field_select ya-input__select" ng-model="sport">
+                                            <option value="" ng-repeat="s in sports">{{s.sport}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -44,7 +42,7 @@
                         </div>
                         <div class="ya-articles__list">
                             <div class="ya-articles__item" ng-repeat="c in competitions">
-                                 <h3 class="ya-articles__title">{{c.title}}</h3>
+                                <h3 class="ya-articles__title">{{c.title}}</h3>
                                 <div class="ya-bordered-box ya-bordered-box_left">
                                     <div class="ya-clearfix">
                                         <div class="ya-articles__media ya-grid-1-5">
@@ -56,7 +54,15 @@
                                                     Дата
                                                 </div>
                                                 <div class="ya-grid-4-5 ya-articles__row-text">
-                                                    {{c.date}}
+                                                    {{c.start}}
+                                                </div>
+                                            </div>
+                                            <div class="ya-articles__row ya-clearfix">
+                                                <div class="ya-grid-1-5 ya-articles__row-title">
+                                                    Страна
+                                                </div>
+                                                <div class="ya-grid-4-5 ya-articles__row-text">
+                                                    {{c.country.title}}
                                                 </div>
                                             </div>
                                             <div class="ya-articles__row ya-clearfix">
@@ -64,7 +70,7 @@
                                                     Город
                                                 </div>
                                                 <div class="ya-grid-4-5 ya-articles__row-text">
-                                                    {{c.city}}
+                                                    {{c.city.title}}
                                                 </div>
                                             </div>
                                             <div class="ya-articles__row ya-clearfix">

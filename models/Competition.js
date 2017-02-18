@@ -1,18 +1,20 @@
 var mongoose = require('mongoose'),
-	CompetitionSchema = mongoose.Schema({
-		end: Date,
-		start: Date,
-		city: String,
-		place: String,
-		creDate: Date,
-		owner: String,
-		title: String,
-		// TODO: thumbnail upload
-		thumbnail: String,
-		// TODO: category upload
-		category: String,
-		nomination: String,
-		description: String,
-	});
+    CompetitionSchema = mongoose.Schema({
+        end: Date,
+        start: Date,
+        city: {},
+        place: String,
+        creDate: Date,
+        comments: {
+            type: Array,
+            default: []
+        },
+        owner: String,
+        title: String,
+        country: {},
+        sport: String,
+        nomination: String,
+        description: String,
+    });
 
 module.exports = mongoose.model('Competitions', CompetitionSchema);

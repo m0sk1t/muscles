@@ -47,6 +47,7 @@ gulp.task('build_js', function() {
     gulp.src([
             'static/scripts/app.js',
             'static/scripts/drt.js',
+            'static/scripts/flt.js',
             'static/scripts/srv.js',
             'static/scripts/ctrl/*.js'
         ])

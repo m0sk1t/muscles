@@ -6,9 +6,9 @@
               Параметры поиска
             </a>
                 <div class="ya-sidebar-info__full-wrap" ng-class="{'ya-sidebar-info__full-wrap_active': !!showsidebar}">
-                    <!--h2 class="ya-media-page__title ya-title ya-relative ya-center">
+                    <h2 class="ya-media-page__title ya-title ya-relative ya-center">
                     Поиск
-                </h2-->
+                    </h2>
                     <!--div class="ya-form ya-form_wide">
                     <div class="ya-form__input ya-input ya-input_inline">
                         <div class="ya-clearfix">
@@ -246,10 +246,10 @@
                                     </div>
                                     <div class="ya-grid-2-3">
                                         <div class="ya-input__field-wrapper">
-                                            <select id="ya-sort" class="ya-input__field ya-input__field_select ya-input__select">
-												<option>По рейтингу</option>
-												<option>По возрасту</option>
-											</select>
+                                            <select ng-model="order" id="ya-sort" class="ya-input__field ya-input__field_select ya-input__select">
+                                                <option value="rating">По рейтингу</option>
+                                                <option value="age">По возрасту</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -266,10 +266,9 @@
                                         </div>
                                         <div class="ya-grid-2-3">
                                             <div class="ya-input__field-wrapper">
-                                                <select id="ya-sport" class="ya-input__field ya-input__field_select ya-input__select">
+                                                <select id="ya-sport" class="ya-input__field ya-input__field_select ya-input__select" ng-model="sport">
 													<option></option>
-													<option>Спорт 1</option>
-													<option>Спорт 2</option>
+													<option ng-repeat="s in sports">{{s.sport}}</option>
 												</select>
                                             </div>
                                         </div>
@@ -286,11 +285,10 @@
                                         </div>
                                         <div class="ya-grid-2-3">
                                             <div class="ya-input__field-wrapper">
-                                                <select id="ya-status" class="ya-input__field ya-input__field_select ya-input__select">
-													<option></option>
-													<option>Статус 1</option>
-													<option>Статус 2</option>
-												</select>
+                                                <select id="ya-status" class="ya-input__field ya-input__field_select ya-input__select" ng-model="hobbie">
+                                                    <option></option>
+                                                    <option ng-repeat="h in hobbies">{{h.item}}</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -302,9 +300,9 @@
                         По Вашим параметрам ничего не найдено.
                     </div>
                     <div class="ya-search-result__list ya-users">
-                        <div class="ya-info-block ya-info-block_search ya-users__item" ng-repeat="user in favs track by $index">
+                        <div class="ya-info-block ya-info-block_search ya-users__item" ng-repeat="user in favs | search_filter:order:sport:hobbie">
                             <div class="ya-info-block__title ya-info-block__title_name">
-                                <a href="#/user/{{user._id}}">{{user.name}} {{user.surname}}, {{user.city}}</a>
+                                <a href="#/user/{{user._id}}">{{user.name}} {{user.surname}}{{user.location_city? ', ' + user.location_city.title: ''}}</a>
                             </div>
                             <div class="ya-info-block__content ya-clearfix">
                                 <div class="ya-grid-1-5">
@@ -315,9 +313,9 @@
                                     </div>
                                 </div>
                                 <div class="ya-grid-4-5">
-                                    <!--div class="ya-clearfix ya-date-info">
-                                        Просмотр анкеты: 17.06.1991 в 15:23
-                                    </div-->
+                                    <div class="ya-clearfix ya-date-info">
+                                        <b>Ваш комментарий: </b>{{get_user_comment(user._id)}}
+                                    </div>
                                     <div class="ya-clearfix">
                                         <div class="ya-grid-1-2">
                                             <div class="ya-info-block__record ya-clearfix">
@@ -341,7 +339,7 @@
                                             <div class="ya-fake-border"></div>
                                             <div class="ya-fav-actions">
                                                 <a class="ya-fav-action__link ya-fav-action__link_write" ng-click="write_message(user);">Написать сообщение</a>
-                                                <!--a href="#" class="ya-fav-action__link ya-fav-action__link_comment">Оставить комментарий</a-->
+                                                <a ng-click="add_comment(user._id)" class="ya-fav-action__link ya-fav-action__link_comment">Оставить комментарий</a>
                                                 <a class="ya-fav-action__link ya-fav-action__link_delete" ng-click="remove_from_fav(user._id)">Убрать</a>
                                             </div>
                                         </div>

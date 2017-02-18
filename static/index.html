@@ -1,111 +1,111 @@
 <!DOCTYPE html>
 <html ng-app="MuscleMan" ng-controller="MainCtrl">
 
-	<head>
-		<title>СпортПроект</title>
-		<meta name="viewport" content="width=device-width,initial-scale=1">
-		<script src="https://use.fontawesome.com/7f18bd53b6.js"></script>
-		<script src="/socket.io/socket.io.js"></script>
-		<script src="libs.min.js"></script>
-		<!-- include this -->
-		<link rel="stylesheet" href="libs/froala-wysiwyg-editor/css/froala_editor.min.css">
-		<link rel="stylesheet" href="libs/froala-wysiwyg-editor/css/froala_style.min.css">
-		<link rel="stylesheet" href="libs/froala-wysiwyg-editor/css/plugins/image.min.css">
-		<link rel="stylesheet" href="libs/froala-wysiwyg-editor/css/plugins/image_manager.min.css">
-		<link rel="stylesheet" href="libs/froala-wysiwyg-editor/css/themes/gray.min.css">
-		<link rel="stylesheet" href="app.min.css">
-		<!-- include this -->
-		<meta charset="utf-8">
-	</head>
+<head>
+    <title>СпортПроект</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://use.fontawesome.com/7f18bd53b6.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="libs.min.js"></script>
+    <!-- include this -->
+    <link rel="stylesheet" href="libs/froala-wysiwyg-editor/css/froala_editor.min.css">
+    <link rel="stylesheet" href="libs/froala-wysiwyg-editor/css/froala_style.min.css">
+    <link rel="stylesheet" href="libs/froala-wysiwyg-editor/css/plugins/image.min.css">
+    <link rel="stylesheet" href="libs/froala-wysiwyg-editor/css/plugins/image_manager.min.css">
+    <link rel="stylesheet" href="libs/froala-wysiwyg-editor/css/themes/gray.min.css">
+    <link rel="stylesheet" href="app.min.css">
+    <!-- include this -->
+    <meta charset="utf-8">
+</head>
 
-	<body class="ya-page">
-		<div class="ya-page__paddinger">
-			<header class="ya-header">
-				<div class="ya-container">
-					<div class="ya-narrower">
-						<div class="ya-row ya-relative">
-							<div class="ya-grid-1-4">
-								<div class="ya-logo">
-									<a href="#/" class="ya-logo__link"><img src="/images/logo.png" class="ya-logo__img" alt="Спорт Проект" /></a>
-								</div>
-							</div>
-							<div class="ya-grid-3-5">
-								<a href="#" ng-class="{'ya-nav-menu__mobile-link_active': showMainMenu}" class="ya-nav-menu__mobile-link" ng-click="$event.preventDefault(); showMainMenu=!showMainMenu;"><span class="fa fa-bars" aria-hidden="true"></span></a>
-								<nav class="ya-nav-menu ya-nav-menu_main-menu" ng-class="{'ya-nav-menu_main-menu_active': showMainMenu}"><a href="#" class="ya-nav-menu__close-link ya-pop-up__close-btn" ng-click="$event.preventDefault(); showMainMenu=!showMainMenu;">X</a>
-									<ul class="ya-nav-menu__list">
-										<li class="ya-nav-menu__item">
-											<a class="ya-nav-menu__link ya-nav-menu__link_social" href="#/user/{{options.user._id}}" ng-click="showMainMenu=!showMainMenu;">
-												<span class="ya-nav-menu__icon ya-nav-menu__icon_social"></span>
-												<span class="ya-nav-menu__text">Соц.сеть</span>
-											</a>
-										</li>
-										<li class="ya-nav-menu__item">
-											<a class="ya-nav-menu__link ya-nav-menu__link_competitions" href="#/competitions" ng-click="showMainMenu=!showMainMenu;">
-												<span class="ya-nav-menu__icon ya-nav-menu__icon_competitions"></span>
-												<span class="ya-nav-menu__text">Расписание соревнований</span>
-											</a>
-										</li>
-										<li class="ya-nav-menu__item">
-											<a class="ya-nav-menu__link ya-nav-menu__link_contests" href="#/contests" ng-click="showMainMenu=!showMainMenu;">
-												<span class="ya-nav-menu__icon ya-nav-menu__icon_contests"></span>
-												<span class="ya-nav-menu__text">Конкурсы</span>
-											</a>
-										</li>
-										<li class="ya-nav-menu__item">
-											<a class="ya-nav-menu__link ya-nav-menu__link_news" href="#/articles" ng-click="showMainMenu=!showMainMenu;">
-												<span class="ya-nav-menu__icon ya-nav-menu__icon_news"></span>
-												<span class="ya-nav-menu__text">Новости</span>
-											</a>
-										</li>
-									</ul>
-								</nav>
-							</div>
-							<div class="ya-grid-3-20">
+<body class="ya-page">
+    <div class="ya-page__paddinger">
+        <header class="ya-header">
+            <div class="ya-container">
+                <div class="ya-narrower">
+                    <div class="ya-row ya-relative">
+                        <div class="ya-grid-1-4">
+                            <div class="ya-logo">
+                                <a href="#/" class="ya-logo__link"><img src="/images/logo.png" class="ya-logo__img" alt="Спорт Проект" /></a>
+                            </div>
+                        </div>
+                        <div class="ya-grid-3-5">
+                            <a href="#" ng-class="{'ya-nav-menu__mobile-link_active': showMainMenu}" class="ya-nav-menu__mobile-link" ng-click="$event.preventDefault(); showMainMenu=!showMainMenu;"><span class="fa fa-bars" aria-hidden="true"></span></a>
+                            <nav class="ya-nav-menu ya-nav-menu_main-menu" ng-class="{'ya-nav-menu_main-menu_active': showMainMenu}"><a href="#" class="ya-nav-menu__close-link ya-pop-up__close-btn" ng-click="$event.preventDefault(); showMainMenu=!showMainMenu;">X</a>
+                                <ul class="ya-nav-menu__list">
+                                    <li class="ya-nav-menu__item">
+                                        <a class="ya-nav-menu__link ya-nav-menu__link_social" href="#/user/{{options.user._id}}" ng-click="showMainMenu=!showMainMenu;">
+                                            <span class="ya-nav-menu__icon ya-nav-menu__icon_social"></span>
+                                            <span class="ya-nav-menu__text">Соц.сеть</span>
+                                        </a>
+                                    </li>
+                                    <li class="ya-nav-menu__item">
+                                        <a class="ya-nav-menu__link ya-nav-menu__link_competitions" href="#/competitions" ng-click="showMainMenu=!showMainMenu;">
+                                            <span class="ya-nav-menu__icon ya-nav-menu__icon_competitions"></span>
+                                            <span class="ya-nav-menu__text">Расписание соревнований</span>
+                                        </a>
+                                    </li>
+                                    <li class="ya-nav-menu__item">
+                                        <a class="ya-nav-menu__link ya-nav-menu__link_contests" href="#/contests" ng-click="showMainMenu=!showMainMenu;">
+                                            <span class="ya-nav-menu__icon ya-nav-menu__icon_contests"></span>
+                                            <span class="ya-nav-menu__text">Конкурсы</span>
+                                        </a>
+                                    </li>
+                                    <li class="ya-nav-menu__item">
+                                        <a class="ya-nav-menu__link ya-nav-menu__link_news" href="#/articles" ng-click="showMainMenu=!showMainMenu;">
+                                            <span class="ya-nav-menu__icon ya-nav-menu__icon_news"></span>
+                                            <span class="ya-nav-menu__text">Новости</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="ya-grid-3-20">
 
-								<div class="ya-sign-block" ng-hide="options.user._id">
-									<a href="#/signin" class="ya-sign-block__link ya-sign-block__link_header">Вход</a>
-									<span class="ya-sign-block__divider">/</span>
-									<a href="#/signup" class="ya-sign-block__link ya-sign-block__link_header">Регистрация</a>
-								</div>
-								<div class="ya-settings ya-settings_header ya-relative" ng-hide="!options.user._id">
-									<div class="ya-settings__wrap ya-clearfix">
-										<div class="ya-settings__name">{{options.user.name}}</div>
-										<div class="ya-settings__avatar">
-											<div class="ya-avatar ya-avatar_small">
-	                                            <img ng-src="{{options.user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
-	                                        </div>
-										</div>
-										<span class="ya-settings__icon fa fa-caret-down"></span>
-									</div>
-									<div class="ya-settings__actions">
-										<nav class="ya-nav-menu ya-nav-menu_settings">
-											<ul class="ya-nav-menu__list">
-												<li class="ya-nav-menu__item">
-													<a href="#/user/{{options.user._id}}" class="ya-nav-menu__link">Профиль</a>
-												</li>
-												<li class="ya-nav-menu__item">
-													<a href="#/options/profile" class="ya-nav-menu__link">Настройки</a>
-												</li>
-												<li class="ya-nav-menu__item">
-													<a href="/logout" class="ya-nav-menu__link">Выход</a>
-												</li>
-											</ul>
-										</nav>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</header>
-			<div class="ya-main" ng-class="{'full': getloc()}" ng-view></div>
-		</div>
-		<div class="loader" ng-show="options.loading">
-			<div class="cssload-container">
-				<div class="cssload-whirlpool"></div>
-			</div>
-		</div>
-	</body>
-	<script src="app.min.js"></script>
+                            <div class="ya-sign-block" ng-hide="options.user._id">
+                                <a href="#/signin" class="ya-sign-block__link ya-sign-block__link_header">Вход</a>
+                                <span class="ya-sign-block__divider">/</span>
+                                <a href="#/signup" class="ya-sign-block__link ya-sign-block__link_header">Регистрация</a>
+                            </div>
+                            <div class="ya-settings ya-settings_header ya-relative" ng-hide="!options.user._id">
+                                <div class="ya-settings__wrap ya-clearfix">
+                                    <div class="ya-settings__name">{{options.user.name}}</div>
+                                    <div class="ya-settings__avatar">
+                                        <div class="ya-avatar ya-avatar_small">
+                                            <img ng-src="{{options.user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
+                                        </div>
+                                    </div>
+                                    <span class="ya-settings__icon fa fa-caret-down"></span>
+                                </div>
+                                <div class="ya-settings__actions">
+                                    <nav class="ya-nav-menu ya-nav-menu_settings">
+                                        <ul class="ya-nav-menu__list">
+                                            <li class="ya-nav-menu__item">
+                                                <a href="#/user/{{options.user._id}}" class="ya-nav-menu__link">Профиль</a>
+                                            </li>
+                                            <li class="ya-nav-menu__item">
+                                                <a href="#/options/profile" class="ya-nav-menu__link">Настройки</a>
+                                            </li>
+                                            <li class="ya-nav-menu__item">
+                                                <a href="/logout" class="ya-nav-menu__link">Выход</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="ya-main" ng-class="{'full': getloc()}" ng-view></div>
+    </div>
+    <div class="loader" ng-show="options.loading">
+        <div class="cssload-container">
+            <div class="cssload-whirlpool"></div>
+        </div>
+    </div>
+</body>
+<script src="app.min.js"></script>
 
 </html>

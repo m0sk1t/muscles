@@ -4,6 +4,7 @@
         <li ng-show="manager.permission.managers" ng-class="{'active': page === 'managers'}" ng-click="page = 'managers'; get_managers();">Менеджерами</li>
         <li ng-show="manager.permission.users" ng-class="{'active': page === 'users'}" ng-click="page = 'users'; get_users();">Пользователями</li>
         <li ng-show="manager.permission.articles" ng-class="{'active': page === 'articles'}" ng-click="page = 'articles'; get_articles();">Статьями</li>
+        <li ng-show="manager.permission.articles" ng-class="{'active': page === 'themes'}" ng-click="page = 'themes'; get_themes();">Темами</li>
         <li ng-show="manager.permission.contests" ng-class="{'active': page === 'contests'}" ng-click="page = 'contests'; get_contests();">Конкурсами</li>
         <li ng-show="manager.permission.competitions" ng-class="{'active': page === 'competitions'}" ng-click="page = 'competitions'; get_competitions();">Соревнованиями</li>
         <li ng-show="manager.permission.sports" ng-class="{'active': page === 'sports'}" ng-click="page = 'sports'; get_sports();">Видами спорта</li>
@@ -15,13 +16,13 @@
     <section ng-show="page === 'managers'" style="flex: 3; overflow-y: auto;">
         <button ng-click="add_manager()">Add</button>
         <div ng-show="items.cred">
-            <input type="text" ng-model="items.cred.login"><br />
-            <input type="password" ng-model="items.cred.password"><br />
+            <input placeholder="Логин" type="text" ng-model="items.cred.login"><br />
+            <input placeholder="Пароль" type="password" ng-model="items.cred.password"><br />
             <input type="button" value="Save" ng-click="create_manager()"><br />
             <input type="button" value="Cancel" ng-click="items.cred = null;"><br />
         </div>
-        <div ng-repeat="m in managers track by $index">
-            <span ng-hide="m.login==='m0sk1t'" ng-click="delete_manager(m._id, $index);" style="background-color: #666;">DEL</span> {{m.login}}
+        <div ng-repeat="m in managers track by $index" ng-hide="m.login==='m0sk1t'">
+            <span ng-hide="m.login==='lex'" ng-click="delete_manager(m._id, $index);" style="background-color: #666;">DEL</span> <b ng-if="m.login==='lex'">superuser:</b> {{m.login}}
             <br />
             <span>
 				permission.users: <input type="checkbox" ng-model="m.permission.users" ng-change="set_permission(m._id, $index);"><br />
@@ -70,8 +71,7 @@
             <a href="#/manage/article/{{article._id}}">EDIT</a><br />
             <h3>{{article.title}}</h3>
             <div ng-bind-html="article_html(article.text)">
-                <div>
-                </div>
+            </div>
     </section>
     <section ng-show="page === 'contests'" style="flex: 3; overflow-y: auto;">
         <button ng-click="create_contest();">Add</button>
@@ -110,6 +110,17 @@
         </div>
         <div ng-repeat="sport in sports track by $index">
             <span style="background-color: #666" ng-click="delete_sport(sport._id, $index)">DEL</span> {{sport.sport}}
+        </div>
+    </section>
+    <section ng-show="page === 'themes'" style="flex: 3; overflow-y: auto;">
+        <button ng-click="add_theme()">Add</button>
+        <div ng-show="items.theme">
+            <input ng-model="items.theme.title" placeholder="Название"><br>
+            <input type="button" value="Save" ng-click="create_theme();"><br>
+            <input type="button" value="Cancel" ng-click="items.theme = null;"><br />
+        </div>
+        <div ng-repeat="theme in themes track by $index">
+            <span style="background-color: #666" ng-click="delete_theme(theme._id, $index)">DEL</span> {{theme.title}}
         </div>
     </section>
     <section ng-show="page === 'competitions'" style="flex: 3; overflow-y: auto;">

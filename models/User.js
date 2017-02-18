@@ -28,6 +28,7 @@ var mongoose = require('mongoose'),
 				unique: true
 			}
 		},
+		rating: Number,
 
 		social: {
 			fb: {},
@@ -109,8 +110,14 @@ var mongoose = require('mongoose'),
 		},
 
 		likes: {
-			free: Number,
-			paid: Number,
+			free: {
+				type: Number,
+				default: 3
+			},
+			paid: {
+				type: Number,
+				default: 3
+			},
 		},
 
 		sex: {
