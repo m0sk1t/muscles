@@ -300,20 +300,61 @@
                         <span style="background-color: #666" ng-click="delete_hobbie(hobbie._id, $index)">DEL</span> {{hobbie.item}}
                     </div>
                 </section>
-                <section ng-show="page === 'sports'" style="flex: 3; overflow-y: auto;">
-                    <button ng-click="add_sport()">Add</button>
-                    <div ng-show="items.sport">
-                        Вид спорта
-                        <select ng-model="items.sport.sex">
-                            <option ng-value="0">Женский</option>
-                            <option ng-value="1">Мужской</option>
-                        </select><br>
-                        <input ng-model="items.sport.sport" placeholder="Название"><br>
-                        <input type="button" value="Save" ng-click="create_sport();"><br>
-                        <input type="button" value="Cancel" ng-click="items.sport = null;"><br />
+                <section ng-show="page === 'sports'">
+                    <h2 class="ya-media-page__title ya-relative">
+                        Управление видами спорта
+                        <span class="ya-albums__create-btn" ng-click="add_sport()"></span>
+                    </h2>
+                    <div class="ya-pop-up ya-pop-up_small ya-pop-up_active" ng-hide="items.sport == null" ng-click="items.sport = null;">
+                        <div class="ya-pop-up__wrapper">
+                            <span class="ya-pop-up__close-btn" ng-click="items.sport = null;">X</span>
+                            <div class="ya-pop-up__content" ng-click="$event.stopPropagation();">
+                                <div class="ya-form__input ya-input ya-input_inline">
+                                    <div class="ya-clearfix">
+                                        <div class="ya-grid-1-3 ya-right">
+                                            <label for="ya-sport" class="ya-input__label">
+                                                Название
+                                            </label>
+                                        </div>
+                                        <div class="ya-grid-2-3">
+                                            <div class="ya-input__field-wrapper">
+                                                <input id="ya-sport" type="text" class="ya-input__field" placeholder="Название" ng-model="items.sport.sport">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ya-form__input ya-input ya-input_inline">
+                                    <div class="ya-clearfix">
+                                        <div class="ya-grid-1-3 ya-right">
+                                            <label for="ya-sport" class="ya-input__label">
+                                                Тип
+                                            </label>
+                                        </div>
+                                        <div class="ya-grid-2-3">
+                                            <div class="ya-input__field-wrapper">
+                                                <select id="ya-sport" type="text" class="ya-input__field ya-input__field_select" placeholder="Тип" ng-model="items.sport.sex">
+                                                    <option ng-value="0">Женский</option>
+                                                    <option ng-value="1">Мужской</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ya-form__input ya-input ya-input_inline">
+                                    <div class="ya-clearfix">
+                                        <div class="ya-grid-1-2 ya-center">
+                                            <button ng-click="create_sport();" class="ya-btn ya-btn_secondary ya-btn_inline">Сохранить</button>
+                                        </div>
+                                        <div class="ya-grid-1-2 ya-center">
+                                            <button ng-click="items.sport = null;" class="ya-btn ya-btn_primary ya-btn_inline">Отменить</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div ng-repeat="sport in sports track by $index">
-                        <span style="background-color: #666" ng-click="delete_sport(sport._id, $index)">DEL</span> {{sport.sport}}
+                    <div class="ya-info-block ya-info-block_lined ya-clearfix" ng-repeat="sport in sports track by $index">
+                        {{sport.sport}} <span class="ya-del-btn ya-del-btn_lined" ng-click="delete_sport(sport._id, $index)">Удалить</span>
                     </div>
                 </section>
                 <section ng-show="page === 'themes'">
