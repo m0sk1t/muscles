@@ -206,6 +206,9 @@
                     </div>
                 </section>
                 <section ng-show="page === 'videos'">
+                    <h2 class="ya-media-page__title ya-relative">
+                        Управление видео
+                    </h2>
                     <div class="ya-photos__list ya-photos__list_manager ya-clearfix" ng-show="videos && videos.length">
                         <div class="ya-photos__item ya-photos__item_large ya-inner-grid-1-4" ng-repeat="v in videos track by $index">
                             <div class="ya-photos__wrapper">
