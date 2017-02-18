@@ -44,28 +44,165 @@
             </div>
             <div class="ya-grid-3-4">
                 <section ng-show="page === 'managers'" style="flex: 3; overflow-y: auto;">
-                    <button ng-click="add_manager()">Add</button>
-                    <div ng-show="items.cred">
-                        <input placeholder="Логин" type="text" ng-model="items.cred.login"><br />
-                        <input placeholder="Пароль" type="password" ng-model="items.cred.password"><br />
-                        <input type="button" value="Save" ng-click="create_manager()"><br />
-                        <input type="button" value="Cancel" ng-click="items.cred = null;"><br />
+                    <h2 class="ya-media-page__title ya-relative">
+                        Управление менеджерами
+                        <span class="ya-albums__create-btn" ng-click="add_manager()"></span>
+                    </h2>
+                    <div class="ya-pop-up ya-pop-up_small ya-pop-up_active" ng-hide="items.cred == null" ng-click="items.cred = null;">
+                        <div class="ya-pop-up__wrapper">
+                            <span class="ya-pop-up__close-btn" ng-click="items.cred = null;">X</span>
+                            <div class="ya-pop-up__content" ng-click="$event.stopPropagation();">
+                                <div class="ya-form__input ya-input ya-input_inline">
+                                    <div class="ya-clearfix">
+                                        <div class="ya-grid-1-3 ya-right">
+                                            <label for="ya-log" class="ya-input__label">
+                                                Логин
+                                            </label>
+                                        </div>
+                                        <div class="ya-grid-2-3">
+                                            <div class="ya-input__field-wrapper">
+                                                <input id="ya-log" type="text" class="ya-input__field" placeholder="Логин" ng-model="items.cred.login">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ya-form__input ya-input ya-input_inline">
+                                    <div class="ya-clearfix">
+                                        <div class="ya-grid-1-3 ya-right">
+                                            <label for="ya-pwd" class="ya-input__label">
+                                                Пароль
+                                            </label>
+                                        </div>
+                                        <div class="ya-grid-2-3">
+                                            <div class="ya-input__field-wrapper">
+                                                <input id="ya-pwd" type="password" class="ya-input__field" placeholder="Пароль" ng-model="items.cred.password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ya-form__input ya-input ya-input_inline">
+                                    <div class="ya-clearfix">
+                                        <div class="ya-grid-1-2 ya-center">
+                                            <button ng-click="create_manager()" class="ya-btn ya-btn_secondary ya-btn_inline">Сохранить</button>
+                                        </div>
+                                        <div class="ya-grid-1-2 ya-center">
+                                            <button ng-click="items.cred = null;" class="ya-btn ya-btn_primary ya-btn_inline">Отменить</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div ng-repeat="m in managers track by $index" ng-hide="m.login==='m0sk1t'">
-                        <span ng-hide="m.login==='lex'" ng-click="delete_manager(m._id, $index);" style="background-color: #666;">DEL</span> <b ng-if="m.login==='lex'">superuser:</b> {{m.login}}
-                        <br />
-                        <span>
-                            permission.users: <input type="checkbox" ng-model="m.permission.users" ng-change="set_permission(m._id, $index);"><br />
-                            permission.photos: <input type="checkbox" ng-model="m.permission.photos" ng-change="set_permission(m._id, $index);"><br />
-                            permission.videos: <input type="checkbox" ng-model="m.permission.videos" ng-change="set_permission(m._id, $index);"><br />
-                            permission.topics: <input type="checkbox" ng-model="m.permission.topics" ng-change="set_permission(m._id, $index);"><br />
-                            permission.articles: <input type="checkbox" ng-model="m.permission.articles" ng-change="set_permission(m._id, $index);"><br />
-                            permission.contests: <input type="checkbox" ng-model="m.permission.contests" ng-change="set_permission(m._id, $index);"><br />
-                            permission.sports: <input type="checkbox" ng-model="m.permission.sports" ng-change="set_permission(m._id, $index);"><br />
-                            permission.hobbies: <input type="checkbox" ng-model="m.permission.hobbies" ng-change="set_permission(m._id, $index);"><br />
-                            permission.managers: <input type="checkbox" ng-model="m.permission.managers" ng-change="set_permission(m._id, $index);"><br />
-                            permission.competitions: <input type="checkbox" ng-model="m.permission.competitions" ng-change="set_permission(m._id, $index);"><br />
-                        </span>
+                    <div class="ya-info-block" ng-repeat="m in managers track by $index" ng-hide="m.login==='m0sk1t'">
+                        <div>
+                            <div class="ya-info-block__content ya-manager">
+                                <h3 class="ya-clearfix ya-manager__title"><b ng-if="m.login==='lex'">SuperUser:</b> {{m.login}} <a href="#" ng-hide="m.login==='lex'" ng-click="delete_manager(m._id, $index);" class="ya-del-btn">Удалить</a></h3>
+
+                                <br />
+                                <div class="ya-form">
+                                    <div class="ya-form__input ya-input ya-input_inline">
+                                        <div class="ya-clearfix">
+                                            <div class="ya-grid-1-1">
+                                                <input type="checkbox" id="{{'ya-users-' + $index}}" class="ya-input__field ya-input__field_checkbox" ng-model="m.permission.users" ng-change="set_permission(m._id, $index);">
+                                                <label for="{{'ya-users-' + $index}}" class="ya-input__label ya-input__label_checkbox">
+                                                    Управление пользователями
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ya-form__input ya-input ya-input_inline">
+                                        <div class="ya-clearfix">
+                                            <div class="ya-grid-1-1">
+                                                <input type="checkbox" id="{{'ya-photo-' + $index}}" class="ya-input__field ya-input__field_checkbox" ng-model="m.permission.photos" ng-change="set_permission(m._id, $index);">
+                                                <label for="{{'ya-photo-' + $index}}" class="ya-input__label ya-input__label_checkbox">
+                                                    Управление фото
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ya-form__input ya-input ya-input_inline">
+                                        <div class="ya-clearfix">
+                                            <div class="ya-grid-1-1">
+                                                <input type="checkbox" id="{{'ya-videos-' + $index}}" class="ya-input__field ya-input__field_checkbox" ng-model="m.permission.videos" ng-change="set_permission(m._id, $index);">
+                                                <label for="{{'ya-videos-' + $index}}" class="ya-input__label ya-input__label_checkbox">
+                                                     Управление видео
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ya-form__input ya-input ya-input_inline">
+                                        <div class="ya-clearfix">
+                                            <div class="ya-grid-1-1">
+                                                <input type="checkbox" id="{{'ya-topics-' + $index}}" class="ya-input__field ya-input__field_checkbox" ng-model="m.permission.topics" ng-change="set_permission(m._id, $index);">
+                                                <label for="{{'ya-topics-' + $index}}" class="ya-input__label ya-input__label_checkbox">
+                                                    Управление объявлениями
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ya-form__input ya-input ya-input_inline">
+                                        <div class="ya-clearfix">
+                                            <div class="ya-grid-1-1">
+                                                <input type="checkbox" id="{{'ya-articles-' + $index}}" class="ya-input__field ya-input__field_checkbox" ng-model="m.permission.articles" ng-change="set_permission(m._id, $index);">
+                                                <label for="{{'ya-articles-' + $index}}" class="ya-input__label ya-input__label_checkbox">
+                                                    Управление новостями
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ya-form__input ya-input ya-input_inline">
+                                        <div class="ya-clearfix">
+                                            <div class="ya-grid-1-1">
+                                                <input type="checkbox" id="{{'ya-contests-' + $index}}" class="ya-input__field ya-input__field_checkbox" ng-model="m.permission.contests" ng-change="set_permission(m._id, $index);">
+                                                <label for="{{'ya-contests-' + $index}}" class="ya-input__label ya-input__label_checkbox">
+                                                    Управление конкурсами
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ya-form__input ya-input ya-input_inline">
+                                        <div class="ya-clearfix">
+                                            <div class="ya-grid-1-1">
+                                                <input type="checkbox" id="{{'ya-sports-' + $index}}" class="ya-input__field ya-input__field_checkbox" ng-model="m.permission.sports" ng-change="set_permission(m._id, $index);">
+                                                <label for="{{'ya-sports-' + $index}}" class="ya-input__label ya-input__label_checkbox">
+                                                    Управление видами спорта
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ya-form__input ya-input ya-input_inline">
+                                        <div class="ya-clearfix">
+                                            <div class="ya-grid-1-1">
+                                                <input type="checkbox" id="{{'ya-hobbies-' + $index}}" class="ya-input__field ya-input__field_checkbox" ng-model="m.permission.hobbies" ng-change="set_permission(m._id, $index);">
+                                                <label for="{{'ya-hobbies-' + $index}}" class="ya-input__label ya-input__label_checkbox">
+                                                    permission.hobbies
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ya-form__input ya-input ya-input_inline">
+                                        <div class="ya-clearfix">
+                                            <div class="ya-grid-1-1">
+                                                <input type="checkbox" id="{{'ya-managers-' + $index}}" class="ya-input__field ya-input__field_checkbox" ng-model="m.permission.managers" ng-change="set_permission(m._id, $index);">
+                                                <label for="{{'ya-managers-' + $index}}" class="ya-input__label ya-input__label_checkbox">
+                                                    Управление менеджерами
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ya-form__input ya-input ya-input_inline">
+                                        <div class="ya-clearfix">
+                                            <div class="ya-grid-1-1">
+                                                <input type="checkbox" id="{{'ya-competitions-' + $index}}" class="ya-input__field ya-input__field_checkbox" ng-model="m.permission.competitions" ng-change="set_permission(m._id, $index);">
+                                                <label for="{{'ya-competitions-' + $index}}" class="ya-input__label ya-input__label_checkbox">
+                                                    Управление соревнованиями
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
                 <section ng-show="page === 'videos'" style="display: flex; flex-wrap: wrap; flex: 3; overflow-y: auto;">
