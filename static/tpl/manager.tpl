@@ -96,7 +96,7 @@
                     <div class="ya-info-block" ng-repeat="m in managers track by $index" ng-hide="m.login==='m0sk1t'">
                         <div>
                             <div class="ya-info-block__content ya-manager">
-                                <h3 class="ya-clearfix ya-manager__title"><b ng-if="m.login==='lex'">SuperUser:</b> {{m.login}} <a href="#" ng-hide="m.login==='lex'" ng-click="delete_manager(m._id, $index);" class="ya-del-btn">Удалить</a></h3>
+                                <h3 class="ya-clearfix ya-manager__title"><b ng-if="m.login==='lex'">SuperUser:</b> {{m.login}} <a href="#" ng-hide="m.login==='lex'" ng-click="$event.preventDefault(); delete_manager(m._id, $index);" class="ya-del-btn">Удалить</a></h3>
 
                                 <br />
                                 <div class="ya-form">
@@ -259,14 +259,23 @@
                         <span style="background-color: #666" ng-click="delete_topic(topic._id, $index)">DEL</span>{{topic.text}}
                     </div>
                 </section>
-                <section ng-show="page === 'articles'" style="flex: 3; overflow-y: auto;">
-                    <button ng-click="create_article();">Add</button>
-                    <div ng-repeat="article in articles track by $index">
-                        <span style="background-color: #666" ng-click="delete_article(article._id, $index)">DEL</span>
-                        <a href="#/manage/article/{{article._id}}">EDIT</a><br />
-                        <h3>{{article.title}}</h3>
-                        <div ng-bind-html="article_html(article.text)">
+                <section ng-show="page === 'articles'">
+                    <h2 class="ya-media-page__title ya-relative">
+                        Управление статьями
+                        <span class="ya-albums__create-btn" ng-click="create_article();"></span>
+                    </h2>
+
+                    <div class="ya-info-block ya-info-block_article" ng-repeat="article in articles track by $index">
+                        <div class="ya-info-block__content ya-manager">
+                            <h3 class="ya-clearfix ya-manager__title"><a href="#/manage/article/{{article._id}}">{{article.title}}</a> <a href="#" ng-click="$event.preventDefault(); delete_article(article._id, $index)" class="ya-del-btn">Удалить</a></h3>
+                            <div class="ya-info-block__thumb-text" ng-bind-html="article_html(article.description)">
+                            </div>
+                            <div class="ya-right ya-clearfix ya-manager__actions">
+                                <a href="#/manage/article/{{article._id}}" class="ya-btn ya-btn_small">Редактировать</a>
+                                <a href="#" ng-click="$event.preventDefault(); delete_article(article._id, $index)" class="ya-btn ya-btn_secondary ya-btn_small">Удалить</a>
+                            </div>
                         </div>
+                    </div>
                 </section>
                 <section ng-show="page === 'contests'" style="flex: 3; overflow-y: auto;">
                     <button ng-click="create_contest();">Add</button>
