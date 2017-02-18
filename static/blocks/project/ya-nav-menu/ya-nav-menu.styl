@@ -107,3 +107,19 @@
                 top: 13px
                 right: 15px
                 background: url(images/sprite.png) -127px -229px no-repeat
+    &_manager
+        & ^[0]__link
+            display: block
+            padding: 10px
+            border-bottom: 1px solid mainLinksColor
+            color: mainLinksColor
+            &:hover
+                color: white
+                background: mainLinksColor
+        & ^[0]__item
+            padding: 0
+            float: none
+            &_active
+                & ^[0]__link
+                    color: white
+                    background: mainLinksColor
