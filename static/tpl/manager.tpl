@@ -175,8 +175,7 @@
                                             <div class="ya-grid-1-1">
                                                 <input type="checkbox" id="{{'ya-hobbies-' + $index}}" class="ya-input__field ya-input__field_checkbox" ng-model="m.permission.hobbies" ng-change="set_permission(m._id, $index);">
                                                 <label for="{{'ya-hobbies-' + $index}}" class="ya-input__label ya-input__label_checkbox">
-                                                    permission.hobbies
-                                                </label>
+                                                    Управление дополнительной информацией
                                             </div>
                                         </div>
                                     </div>
