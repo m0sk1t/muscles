@@ -237,11 +237,21 @@
                         </div>
                     </div>
                 </section>
-                <section ng-show="page === 'users'" style="flex: 3; overflow-y: auto;">
-                    <div ng-repeat="user in users track by $index" style="width: 10%">
-                        <span style="background-color: #666" ng-click="delete_user(user._id, $index)">DEL</span>
-                        <a href="#/manage/user/{{user._id}}" target="_blank">EDIT</a>{{user.name + ' ' + user.surname}}
-                        <img ng-src="{{user.avatar || '/images/avatar.jpg'}}">
+                <section ng-show="page === 'users'">
+                    <h2 class="ya-media-page__title ya-relative">
+                        Управление пользователями
+                    </h2>
+                    <div class="ya-photos__list ya-photos__list_manager ya-clearfix" ng-show="users && users.length">
+                        <div class="ya-photos__item ya-photos__item_large ya-inner-grid-1-4" ng-repeat="user in users track by $index">
+                            <div class="ya-photos__wrapper">
+                                <div class="ya-photos__img ya-photos__img_large" ng-style="{'background-image':'url(' + (user.avatar || '/images/avatar.jpg') + ')'}" title="{{user.name + ' ' + user.surname}}"></div>
+                                <div class="ya-photos__actions">
+                                    <a href="#/manage/user/{{user._id}}" target="_blank" class="ya-photos__action-btn"><span class=" fa fa-user" title="Посмотреть профиль пользователя" ></span></a>
+                                    <span class="ya-photos__action-btn fa fa-close" title="Удалить" ng-click="delete_user(user._id, $index)"></span>
+                                </div>
+                            </div>
+                            <div class="ya-photos__user-name">{{user.name + ' ' + user.surname}}</div>
+                        </div>
                     </div>
                 </section>
                 <section ng-show="page === 'topics'" style="flex: 3; overflow-y: auto;">
