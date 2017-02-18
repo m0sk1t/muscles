@@ -41,8 +41,13 @@
     +below(959px)
         col(1/3)
 .ya-new-post__form
-    .ya-avatar
-        display: none
+    +below(959px)
+        .ya-avatar
+            display: none
+.ya-new-post__form
+    .ya-grid-5-6
+        .ya-avatar_message
+            margin-top: 0
 .ya-photos-page
 .ya-videos-page
     .ya-pop-up_small
