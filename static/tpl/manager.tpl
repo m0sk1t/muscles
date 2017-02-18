@@ -205,11 +205,17 @@
                         </div>
                     </div>
                 </section>
-                <section ng-show="page === 'videos'" style="display: flex; flex-wrap: wrap; flex: 3; overflow-y: auto;">
-                    <div ng-repeat="video in videos track by $index" style="width: 10%">
-                        <span style="background-color: #666" ng-click="delete_video(video._id, $index)">DEL</span>{{video.title}}
-                        <a href="#/manage/user/{{video.owner}}" target="_blank">Посмотреть профиль пользователя</a>
-                        <img ng-src="{{video.thumbnail}}">
+                <section ng-show="page === 'videos'">
+                    <div class="ya-photos__list ya-photos__list_manager ya-clearfix" ng-show="videos && videos.length">
+                        <div class="ya-photos__item ya-photos__item_large ya-inner-grid-1-4" ng-repeat="v in videos track by $index">
+                            <div class="ya-photos__wrapper">
+                                <div class="ya-photos__img ya-photos__img_large" ng-style="{'background-image':'url(' + v.thumbnail + ')'}" title="{{p.title}}"></div>
+                                <div class="ya-photos__actions">
+                                    <a href="#/manage/user/{{v.owner}}" target="_blank" class="ya-photos__action-btn"><span class=" fa fa-user" title="Посмотреть профиль пользователя" ></span></a>
+                                    <span class="ya-photos__action-btn fa fa-close" ng-click="delete_video(v._id, $index)"></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
                 <section ng-show="page === 'photos'">
@@ -219,7 +225,7 @@
                     <div class="ya-photos__list ya-photos__list_manager ya-clearfix" ng-show="photos && photos.length">
                         <div class="ya-photos__item ya-photos__item_large ya-inner-grid-1-4" ng-repeat="p in photos track by $index">
                             <div class="ya-photos__wrapper">
-                                <div class="ya-photos__img ya-photos__img_large" ng-style="{'background-image':'url(' + p.image + ')'}" title="{{photo.title}}"></div>
+                                <div class="ya-photos__img ya-photos__img_large" ng-style="{'background-image':'url(' + p.image + ')'}" title="{{p.title}}"></div>
                                 <div class="ya-photos__actions">
                                     <a href="#/manage/user/{{p.owner}}" target="_blank" class="ya-photos__action-btn"><span class=" fa fa-user" title="Посмотреть профиль пользователя" ></span></a>
                                     <span class="ya-photos__action-btn fa fa-close" title="Удалить" ng-click="delete_photo(p._id, $index)"></span>
