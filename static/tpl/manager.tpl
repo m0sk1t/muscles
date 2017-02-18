@@ -6,37 +6,37 @@
                 <nav class="ya-nav-menu ya-nav-menu_manager">
                     <ul class="ya-nav-menu__list ya-nav-menu__list_manager">
                         <li class="ya-nav-menu__item ya-nav-menu__item_manager" ng-show="manager.permission.managers" ng-class="{'ya-nav-menu__item_active': page === 'managers'}" ng-click="page = 'managers'; get_managers();">
-                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Менеджерами</span>
+                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Менеджеры</span>
                         </li>
                         <li class="ya-nav-menu__item ya-nav-menu__item_manager" ng-show="manager.permission.users" ng-class="{'ya-nav-menu__item_active': page === 'users'}" ng-click="page = 'users'; get_users();">
-                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Пользователями</span>
+                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Пользователи</span>
                         </li>
                         <li class="ya-nav-menu__item ya-nav-menu__item_manager" ng-show="manager.permission.articles" ng-class="{'ya-nav-menu__item_active': page === 'articles'}" ng-click="page = 'articles'; get_articles();">
-                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Статьями</span>
+                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Статьи</span>
                         </li>
                         <li class="ya-nav-menu__item ya-nav-menu__item_manager" ng-show="manager.permission.articles" ng-class="{'ya-nav-menu__item_active': page === 'themes'}" ng-click="page = 'themes'; get_themes();">
-                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Темами</span>
+                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Темы</span>
                         </li>
                         <li class="ya-nav-menu__item ya-nav-menu__item_manager" ng-show="manager.permission.contests" ng-class="{'ya-nav-menu__item_active': page === 'contests'}" ng-click="page = 'contests'; get_contests();">
-                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Конкурсами</span>
+                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Конкурсы</span>
                         </li>
                         <li class="ya-nav-menu__item ya-nav-menu__item_manager" ng-show="manager.permission.competitions" ng-class="{'ya-nav-menu__item_active': page === 'competitions'}" ng-click="page = 'competitions'; get_competitions();">
-                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Соревнованиями</span>
+                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Соревнования</span>
                         </li>
                         <li class="ya-nav-menu__item ya-nav-menu__item_manager" ng-show="manager.permission.sports" ng-class="{'ya-nav-menu__item_active': page === 'sports'}" ng-click="page = 'sports'; get_sports();">
-                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Видами спорта</span>
+                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Виды спорта</span>
                         </li>
                         <li class="ya-nav-menu__item ya-nav-menu__item_manager" ng-show="manager.permission.photos" ng-class="{'ya-nav-menu__item_active': page === 'photos'}" ng-click="page = 'photos'; get_photos();">
-                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Пользовательскими фото</span>
+                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Пользовательские фото</span>
                         </li>
                         <li class="ya-nav-menu__item ya-nav-menu__item_manager" ng-show="manager.permission.videos" ng-class="{'ya-nav-menu__item_active': page === 'videos'}" ng-click="page = 'videos'; get_videos();">
-                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Пользовательскими видео</span>
+                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Пользовательские видео</span>
                         </li>
                         <li class="ya-nav-menu__item ya-nav-menu__item_manager" ng-show="manager.permission.topics" ng-class="{'ya-nav-menu__item_active': page === 'topics'}" ng-click="page = 'topics'; get_topics();">
-                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Пользовательскими объявлениями</span>
+                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Пользовательские объявления</span>
                         </li>
                         <li class="ya-nav-menu__item ya-nav-menu__item_manager" ng-show="manager.permission.hobbies" ng-class="{'ya-nav-menu__item_active': page === 'hobbies'}" ng-click="page = 'hobbies'; get_hobbies();">
-                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Дополнительной информацией</span>
+                            <span class="ya-nav-menu__link ya-nav-menu__link_manager">Дополнительная информация</span>
                         </li>
                     </ul>
                 </nav>
