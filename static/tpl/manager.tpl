@@ -254,9 +254,12 @@
                         </div>
                     </div>
                 </section>
-                <section ng-show="page === 'topics'" style="flex: 3; overflow-y: auto;">
-                    <div ng-repeat="topic in topics track by $index">
-                        <span style="background-color: #666" ng-click="delete_topic(topic._id, $index)">DEL</span>{{topic.text}}
+                <section ng-show="page === 'topics'">
+                    <h2 class="ya-media-page__title ya-relative">
+                        Управление пользовательскими объявлениями
+                    </h2>
+                    <div class="ya-info-block ya-info-block_lined ya-clearfix" ng-repeat="topic in topics track by $index">
+                        {{topic.text}} <span class="ya-del-btn ya-del-btn_lined" ng-click="delete_topic(topic._id, $index)">Удалить</span>
                     </div>
                 </section>
                 <section ng-show="page === 'articles'">
@@ -393,7 +396,7 @@
                             </div>
                         </div>
                     </div>
-                     <div class="ya-info-block ya-info-block_lined ya-clearfix" ng-repeat="theme in themes track by $index">
+                    <div class="ya-info-block ya-info-block_lined ya-clearfix" ng-repeat="theme in themes track by $index">
                         {{theme.title}} <span class="ya-del-btn ya-del-btn_lined" ng-click="delete_theme(theme._id, $index)">Удалить</span>
                     </div>
                 </section>
