@@ -316,15 +316,44 @@
                         <span style="background-color: #666" ng-click="delete_sport(sport._id, $index)">DEL</span> {{sport.sport}}
                     </div>
                 </section>
-                <section ng-show="page === 'themes'" style="flex: 3; overflow-y: auto;">
-                    <button ng-click="add_theme()">Add</button>
-                    <div ng-show="items.theme">
-                        <input ng-model="items.theme.title" placeholder="Название"><br>
-                        <input type="button" value="Save" ng-click="create_theme();"><br>
-                        <input type="button" value="Cancel" ng-click="items.theme = null;"><br />
+                <section ng-show="page === 'themes'">
+                    <h2 class="ya-media-page__title ya-relative">
+                        Управление темами
+                        <span class="ya-albums__create-btn" ng-click="add_theme()"></span>
+                    </h2>
+                    <div class="ya-pop-up ya-pop-up_small ya-pop-up_active" ng-hide="items.theme == null" ng-click="items.theme = null;">
+                        <div class="ya-pop-up__wrapper">
+                            <span class="ya-pop-up__close-btn" ng-click="items.theme = null;">X</span>
+                            <div class="ya-pop-up__content" ng-click="$event.stopPropagation();">
+                                <div class="ya-form__input ya-input ya-input_inline">
+                                    <div class="ya-clearfix">
+                                        <div class="ya-grid-1-3 ya-right">
+                                            <label for="ya-theme" class="ya-input__label">
+                                                Название темы
+                                            </label>
+                                        </div>
+                                        <div class="ya-grid-2-3">
+                                            <div class="ya-input__field-wrapper">
+                                                <input id="ya-theme" type="text" class="ya-input__field" placeholder="Название темы " ng-model="items.theme.title">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ya-form__input ya-input ya-input_inline">
+                                    <div class="ya-clearfix">
+                                        <div class="ya-grid-1-2 ya-center">
+                                            <button ng-click="create_theme();" class="ya-btn ya-btn_secondary ya-btn_inline">Сохранить</button>
+                                        </div>
+                                        <div class="ya-grid-1-2 ya-center">
+                                            <button ng-click="items.theme = null;" class="ya-btn ya-btn_primary ya-btn_inline">Отменить</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div ng-repeat="theme in themes track by $index">
-                        <span style="background-color: #666" ng-click="delete_theme(theme._id, $index)">DEL</span> {{theme.title}}
+                     <div class="ya-info-block ya-info-block_lined ya-clearfix" ng-repeat="theme in themes track by $index">
+                        {{theme.title}} <span class="ya-del-btn ya-del-btn_lined" ng-click="delete_theme(theme._id, $index)">Удалить</span>
                     </div>
                 </section>
                 <section ng-show="page === 'competitions'" style="flex: 3; overflow-y: auto;">
