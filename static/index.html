@@ -71,8 +71,7 @@
                                 <div class="ya-settings__wrap ya-clearfix">
                                     <div class="ya-settings__name">{{options.user.name}}</div>
                                     <div class="ya-settings__avatar">
-                                        <div class="ya-avatar ya-avatar_small">
-                                            <img ng-src="{{options.user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
+                                        <div class="ya-avatar ya-avatar_small ya-avatar_top-block" ng-style="{'background-image':'url(' + (options.user.avatar || '/images/avatar.jpg') + ')'}">
                                         </div>
                                     </div>
                                     <span class="ya-settings__icon fa fa-caret-down"></span>
