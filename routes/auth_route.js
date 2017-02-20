@@ -274,6 +274,7 @@ module.exports = (app) => {
 	));
 
 	passport.use(new VKStrategy({
+			apiVersion: '5.50',
 			clientID: '5644041 ',
 			passReqToCallback: true,
 			scope: ['email', 'friends'],
@@ -575,7 +576,7 @@ module.exports = (app) => {
 		}
 	);
 
-	app.get('/logout', function(req, res) {
+	app.get('/logout', (req, res) => {
 		req.logout();
 		res.redirect('/');
 	});
