@@ -123,6 +123,7 @@ angular.module('MuscleMan').controller('PhotosCtrl', ['$scope', '$routeParams', 
         };
 
         $scope.add_photo_comment = function() {
+            if (!$scope.gallery.comment) return;
             var comment = {
                 date: Date.now(),
                 name: $scope.options.user.name,

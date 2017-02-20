@@ -287,7 +287,7 @@
                         По Вашим параметрам ничего не найдено.
                     </div>
                     <div class="ya-search-result__list ya-users">
-                        <div class="ya-info-block ya-info-block_search ya-users__item" ng-repeat="user in users | search_filter:order:sport:hobbie">
+                        <div class="ya-info-block ya-info-block_search ya-users__item" ng-if="!me()" ng-repeat="user in users | search_filter:order:sport:hobbie">
                             <div class="ya-info-block__title ya-info-block__title_name">
                                 <a href="#/user/{{user._id}}">{{user.name}} {{user.surname}}, {{user.city}}</a>
                             </div>

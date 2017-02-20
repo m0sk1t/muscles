@@ -2,6 +2,7 @@ angular.module('MuscleMan').controller('CompetitionCtrl', ['$scope', '$routePara
     function($scope, $routeParams, User) {
         $scope.competition = {};
         $scope.add_comment = function() {
+            if (!$scope.comment) return;
             User.competition_add_comment($routeParams.id, { comment: $scope.comment }, function(res) {
                 $scope.competition.comments.push({
                     date: new Date(),

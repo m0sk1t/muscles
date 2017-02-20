@@ -242,6 +242,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$sce', '$scope', '$location
         };
 
         $scope.add_photo_comment = function() {
+            if (!$scope.gallery.comment) return;
             var comment = {
                 date: Date.now(),
                 name: $scope.options.user.name,
@@ -274,6 +275,7 @@ angular.module('MuscleMan').controller('UserCtrl', ['$sce', '$scope', '$location
         };
 
         $scope.add_video_comment = function(index) {
+            if (!$scope.gallery.comment) return;
             var comment = {
                 date: Date.now(),
                 name: $scope.options.user.name,
