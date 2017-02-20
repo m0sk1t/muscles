@@ -278,11 +278,21 @@
                         </div>
                     </div>
                 </section>
-                <section ng-show="page === 'contests'" style="flex: 3; overflow-y: auto;">
-                    <button ng-click="create_contest();">Add</button>
-                    <div ng-repeat="contest in contests track by $index">
-                        <span style="background-color: #666" ng-click="delete_contest(contest._id, $index)">DEL</span>
-                        <a href="#/manage/contest/{{contest._id}}">EDIT</a><br /> {{contest.title}}
+                <section ng-show="page === 'contests'">
+                    <h2 class="ya-media-page__title ya-relative">
+                        Управление конкурсами
+                        <span class="ya-albums__create-btn" ng-click="create_contest();"></span>
+                    </h2>
+                    <div class="ya-info-block ya-info-block_lined ya-clearfix" ng-repeat="contest in contests track by $index">
+                        <div class="ya-clearfix">
+                            <div class="ya-grid-3-5">
+                                {{contest.title}}
+                            </div>
+                            <div class="ya-grid-2-5 ya-right">
+                                <a href="#/manage/contest/{{contest._id}}" class="ya-btn ya-btn_small ya-btn_secondary ya-btn_inline">Редактировать</a>
+                                <button ng-click="delete_contest(contest._id, $index)" class="ya-btn ya-btn_primary ya-btn_small ya-btn_inline">Удалить</button>
+                            </div>
+                        </div>
                     </div>
                 </section>
                 <section ng-show="page === 'hobbies'">
