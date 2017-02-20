@@ -1,5 +1,6 @@
 angular.module('MuscleMan').controller('CompetitionCtrl', ['$scope', '$routeParams', 'User',
     function($scope, $routeParams, User) {
+        $scope.location = location.href;
         $scope.competition = {};
         $scope.add_comment = function() {
             if (!$scope.comment) return;

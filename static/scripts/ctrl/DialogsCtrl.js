@@ -6,6 +6,7 @@ angular.module('MuscleMan').controller('DialogsCtrl', ['$scope', 'Dialog',
         $scope.messages = [];
         Dialog.get(function(res) {
             $scope.dialogs = res.data;
+            $scope.set_messages($scope.dialogs[0], 0);
         }, function(res) {
             console.error(res.data);
         });
