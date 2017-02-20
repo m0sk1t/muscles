@@ -41,8 +41,13 @@
     +below(959px)
         col(1/3)
 .ya-new-post__form
-    .ya-avatar
-        display: none
+    +below(959px)
+        .ya-avatar
+            display: none
+.ya-new-post__form
+    .ya-grid-5-6
+        .ya-avatar_message
+            margin-top: 0
 .ya-photos-page
 .ya-videos-page
     .ya-pop-up_small
@@ -212,3 +217,52 @@ ads-block
         .ya-grid-1-1
             +below(959px)
                 margin-bottom: 10px
+.ya-user-actions
+    margin-bottom: 10px
+.ya-manager
+    &__title
+        background: mainLinksColor
+        color: white
+        padding: 10px
+        font-size: 14px
+        line-height: 1
+.ya-del-btn
+    float: right
+    font-size: 14px
+    color: white
+.ya-photos__list_manager
+    .ya-photos__img
+        cursor: default
+.ya-photos__user-name
+    position: absolute
+    width: 100%
+    padding: 5px 0
+    text-align: center
+    background: mainLinksColor
+    color:white
+    font-size: 14px
+    left: 0
+    bottom: 0
+.ya-info-block_article
+    a
+        color: white
+.ya-info-block__thumb-text
+    margin-top: 10px
+    margin-bottom: 10px
+.ya-manager__actions
+    margin: 10px 0 25px 0
+.ya-form_manager
+    .ya-input__field-wrapper
+        max-width: 100%
+.ya-manage-article
+    .ya-btn
+        color: white
+.ya-del-btn_lined
+    color: mainLinksColor
+    cursor: pointer
+    text-decoration: underline
+    &:hover
+        text-decoration: none
+.ya-info-block_lined
+    font-size: 14px
+    padding: 10px 0
