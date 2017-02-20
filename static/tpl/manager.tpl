@@ -449,11 +449,21 @@
                         {{theme.title}} <span class="ya-del-btn ya-del-btn_lined" ng-click="delete_theme(theme._id, $index)">Удалить</span>
                     </div>
                 </section>
-                <section ng-show="page === 'competitions'" style="flex: 3; overflow-y: auto;">
-                    <button ng-click="create_competition()">Add</button>
-                    <div ng-repeat="competition in competitions track by $index">
-                        <span style="background-color: #666" ng-click="delete_competition(competition._id, $index)">DEL</span>
-                        <a href="#/manage/competition/{{competition._id}}">EDIT</a> {{competition.title}}
+                <section ng-show="page === 'competitions'">
+                    <h2 class="ya-media-page__title ya-relative">
+                        Управление соревнованиями
+                        <span class="ya-albums__create-btn" ng-click="create_competition();"></span>
+                    </h2>
+                    <div class="ya-info-block ya-info-block_lined ya-clearfix" ng-repeat="competition in competitions track by $index">
+                        <div class="ya-clearfix">
+                            <div class="ya-grid-3-5">
+                                {{competition.title}}
+                            </div>
+                            <div class="ya-grid-2-5 ya-right">
+                                <a href="#/manage/competition/{{competition._id}}" class="ya-btn ya-btn_small ya-btn_secondary ya-btn_inline">Редактировать</a>
+                                <button ng-click="delete_competition(competition._id, $index)" class="ya-btn ya-btn_primary ya-btn_small ya-btn_inline">Удалить</button>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>
