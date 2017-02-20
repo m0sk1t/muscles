@@ -338,9 +338,9 @@
                                         <div class="ya-grid-1-2 ya-relative">
                                             <div class="ya-fake-border"></div>
                                             <div class="ya-fav-actions">
-                                                <a class="ya-fav-action__link ya-fav-action__link_write" ng-click="write_message(user);">Написать сообщение</a>
-                                                <a ng-click="add_comment(user._id)" class="ya-fav-action__link ya-fav-action__link_comment">Оставить комментарий</a>
-                                                <a class="ya-fav-action__link ya-fav-action__link_delete" ng-click="remove_from_fav(user._id)">Убрать</a>
+                                                <a href="#" class="ya-fav-action__link ya-fav-action__link_write" ng-click="$event.preventDefault();write_message(user);">Написать сообщение</a>
+                                                <a href="#" ng-click="$event.preventDefault();add_comment(user._id)" class="ya-fav-action__link ya-fav-action__link_comment">Оставить комментарий</a>
+                                                <a href="#" class="ya-fav-action__link ya-fav-action__link_delete" ng-click="$event.preventDefault();remove_from_fav(user._id)">Убрать</a>
                                             </div>
                                         </div>
                                     </div>

@@ -42,7 +42,7 @@
                             <a href="/auth/tw" class="ya-sign-form__social-link ya-sign-form__social-link_tw"></a>
                         </div>
                         <div class="ya-center ya-sign-form__login-link">
-                            Еще нет аккаунта? <a href="/#/signup">Зарегистрироваться</a>
+                            Еще нет аккаунта? <a class="ya-register-link" href="/#/signup">Зарегистрироваться</a>
                         </div>
                     </form>
                 </div>
