@@ -258,7 +258,7 @@
                         Управление пользовательскими объявлениями
                     </h2>
                     <div class="ya-info-block ya-info-block_lined ya-clearfix" ng-repeat="topic in topics track by $index">
-                        {{topic.text}} <span class="ya-del-btn ya-del-btn_lined" ng-click="delete_topic(topic._id, $index)">Удалить</span>
+                        {{topic.text}} <a href="#/manage/user/{{topic.owner}}" target="_blank" class="ya-photos__action-btn">В профиль</a><span class="ya-del-btn ya-del-btn_lined" ng-click="delete_topic(topic._id, $index)">Удалить</span>
                     </div>
                 </section>
                 <section ng-show="page === 'articles'">
