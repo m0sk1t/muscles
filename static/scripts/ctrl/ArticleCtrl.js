@@ -8,6 +8,7 @@ angular.module('MuscleMan').controller('ArticleCtrl', ['$sce', '$scope', '$route
 			$scope.article = res.data;
 			$scope.meta.description = $scope.article.description;
 			$scope.meta.keywords = $scope.article.keywords;
+			$scope.meta.title = $scope.article.title;
 		}, function(res) {
 			console.error(res.data);
 		});
