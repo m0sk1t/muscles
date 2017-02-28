@@ -1,6 +1,7 @@
 angular.module('MuscleMan').controller('ArticleCtrl', ['$sce', '$scope', '$routeParams', 'Manager',
 	function($sce, $scope, $routeParams, Manager) {
 		$scope.article = {};
+		$scope.location = location.href;
 		$scope.format_date = function(date) {
 			return moment(date).format('DD.MM.YYYY');
 		};
