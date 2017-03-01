@@ -7,8 +7,7 @@ var mongoose = require('mongoose'),
 			default: ''
 		},
 		ioid: {
-			type: String,
-			unique: true
+			type: String
 		},
 		status: {
 			type: String,
