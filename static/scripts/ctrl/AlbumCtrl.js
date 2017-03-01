@@ -53,6 +53,7 @@ angular.module('MuscleMan').controller('AlbumCtrl', ['$scope', '$routeParams', '
 		};
 
 		$scope.set_album_cover = function(opt) {
+			opt.title = $scope.album._id;
 			opt.title = $scope.album.title;
 			Album.set_title(opt, function(res) {
 				$scope.album.cover = opt.title;
