@@ -35,8 +35,8 @@ angular.module('MuscleMan').controller('MainCtrl', ['$scope', '$location', 'sock
 			}, function(res) {
 				$scope.options.loading = false;
 				if (res.status === 401) {
-					MSG.err('Неверный логин или пароль!');
-					return;
+					MSG.err('Забыли пароль?');
+					$location.path('/forgot');
 				}
 			});
 		};
