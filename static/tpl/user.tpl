@@ -198,7 +198,7 @@
                     <div class="ya-user__info-block ya-info-block ya-info-block_border_no">
                         <div class="ya-clearfix ya-user__status-line">
                             <div class="ya-user__status ya-grid-1-2">{{user.status}}</div>
-                            <div class="ya-user__status ya-grid-1-2 ya-right">Заходил {{last_seen()}}</div>
+                            <div ng-if="options.user._id !== user._id" class="ya-user__status ya-grid-1-2 ya-right">Заходил {{last_seen()}}</div>
                         </div>
                     </div>
                     <div class="ya-user__info-block">
