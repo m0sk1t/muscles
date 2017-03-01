@@ -5,7 +5,6 @@ angular.module('MuscleMan').controller('ResetCtrl', ['$scope', '$routeParams', '
 			token: $routeParams.token,
 		};
 		$scope.reset = function() {
-			if ($scope.cred.mail.$error) return;
 			$scope.options.loading = true;
 			User.reset($scope.cred, function(res) {
 				console.log(res.data);
