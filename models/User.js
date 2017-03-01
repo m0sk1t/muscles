@@ -7,6 +7,8 @@ var mongoose = require('mongoose'),
 		status: String,
 		surname: String,
 		pass: String,
+		resetPasswordToken: String,
+		resetPasswordExpires: Date,
 		mail: {
 			type: String,
 			required: true,
