@@ -7,7 +7,8 @@ var mongoose = require('mongoose'),
 			default: ''
 		},
 		ioid: {
-			type: String
+			type: String,
+			default: Date.now().toString()
 		},
 		status: {
 			type: String,
