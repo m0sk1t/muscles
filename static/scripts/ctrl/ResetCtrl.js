@@ -1,4 +1,4 @@
-angular.module('MuscleMan').controller('ResetCtrl', ['$scope', '$routeParams', '$location', 'socket', 'User', 'MSG', 'LS',
+angular.module('MuscleMan').controller('ResetCtrl', ['$scope', '$routeParams', '$location', 'User', 'MSG', 'LS',
 	function($scope, $routeParams, $location, User, MSG, LS) {
 		$scope.cred = {
 			pass: '',

@@ -1,4 +1,4 @@
-angular.module('MuscleMan').controller('ForgotCtrl', ['$scope', '$location', 'socket', 'User', 'MSG', 'LS',
+angular.module('MuscleMan').controller('ForgotCtrl', ['$scope', '$location', 'User', 'MSG', 'LS',
 	function($scope, $location, User, MSG, LS) {
 		$scope.cred = {
 			mail: '',
