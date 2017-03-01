@@ -455,6 +455,7 @@ module.exports = (app) => {
 
 		const user = new User({
 			pass: req.body.pass,
+			ioid: Date.now().toString(),
 			mail: req.body.mail.toLowerCase(),
 		});
 
