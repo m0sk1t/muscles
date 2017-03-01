@@ -7,7 +7,8 @@ angular.module('MuscleMan').controller('ResetCtrl', ['$scope', '$routeParams', '
 		$scope.reset = function() {
 			$scope.options.loading = true;
 			User.reset($scope.cred, function(res) {
-				console.log(res.data);
+				MSG.ok('Прекрасно! Теперь вы можете войти со своим новым паролем!');
+				$location.path('/signin');
 			}, function(res) {
 				$scope.options.loading = false;
 				MSG.err(res.data);

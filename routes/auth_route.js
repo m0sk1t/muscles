@@ -682,7 +682,7 @@ module.exports = (app) => {
 				});
 			}
 		], function(err) {
-			res.redirect('/');
+			res.send('OK!');
 		});
 	});
 };
