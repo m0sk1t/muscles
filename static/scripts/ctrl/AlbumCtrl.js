@@ -1,5 +1,5 @@
-angular.module('MuscleMan').controller('AlbumCtrl', ['$scope', '$routeParams', 'Photo', 'Album',
-	function($scope, $routeParams, Photo, Album) {
+angular.module('MuscleMan').controller('AlbumCtrl', ['$scope', '$routeParams', 'Photo', 'Album', 'MSG',
+	function($scope, $routeParams, Photo, Album, MSG) {
 		$scope.album = {};
 		$scope.photos = [];
 
@@ -58,7 +58,7 @@ angular.module('MuscleMan').controller('AlbumCtrl', ['$scope', '$routeParams', '
 			Album.set_title(opt, function(res) {
 				$scope.album.cover = opt.title;
 				$scope.layer.editedAlbum = null;
-				MSG.ok('Наименование альбома успешно изменено!');
+				MSG.ok('Обложка альбома успешно изменена!');
 			}, function(res) {
 				console.error(res.data);
 			});
