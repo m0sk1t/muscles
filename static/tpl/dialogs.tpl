@@ -56,7 +56,7 @@
                                             <div class="ya-wall__news-author ya-relative ya-clearfix">
                                                 <!--div class="ya-wall__news-remove" ng-if="options.user._id === user._id" ng-click="del_topic($index)">x</div-->
                                                 <div class="ya-avatar ya-avatar_small ya-wall__avatar">
-                                                    <img ng-src="{{detect_user(dialogs[dialogIndex], m.uid).avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
+                                                    <a ng-href="#/user/{{m.uid}}"><img ng-src="{{detect_user(dialogs[dialogIndex], m.uid).avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" /></a>
                                                 </div>
                                                 <div class="ya-wall__news-info ya-clearfix">
                                                     <div class="ya-wall__author-name">
