@@ -15,7 +15,7 @@
                         <div class="ya-photos__list ya-clearfix" ng-show="albums && albums.length">
                             <div class="ya-photos__item ya-photos__item_large ya-inner-grid-1-4" ng-repeat="a in albums">
                                 <div class="ya-photos__wrapper">
-                                    <a href="#/user/{{user._id}}/album/{{a._id}}" class="ya-photos__img ya-photos__img_large" ng-style="{'background-image':'url(' + (a.cover.image || '/images/avatar.jpg') + ')'}"></a>
+                                    <a href="#/user/{{user._id}}/album/{{a._id}}" class="ya-photos__img ya-photos__img_large" ng-style="{'background-image':'url(' + (a.cover || '/images/avatar.jpg') + ')'}"></a>
                                     <a href="#/user/{{user._id}}/album/{{a._id}}" class="ya-photos__img-title">{{::a.title}}</a>
                                     <div class="ya-photos__actions">
                                         <span class="ya-photos__action-btn fa fa-edit" ng-click="layer.editedAlbum = a" ng-if="options.user._id === a.owner"></span>
