@@ -18,9 +18,11 @@
                 <div class="ya-pop-up-comments">
                     <div class="ya-pop-up-comments__wrapper">
                         <div class="ya-wall__news-author ya-relative ya-clearfix">
-                            <div class="ya-avatar ya-avatar_small ya-wall__avatar">
+                            <!--div class="ya-avatar ya-avatar_small ya-wall__avatar">
                                 <img ng-src="{{user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
-                            </div>
+                            </div-->
+                            <div class="ya-avatar ya-avatar_small ya-wall__avatar" ng-style="{'background-image':'url(' + (user.avatar || '/images/avatar.jpg') + ')'}"></div>
+                            <div class="ya-wall__news-info">
                             <div class="ya-wall__news-info">
                                 <div class="ya-wall__author-name">
                                     {{user.name + ' ' + user.surname}}
@@ -50,9 +52,10 @@
                                     <div class="ya-comments__item" ng-repeat="c in videos[gallery.current_video].comments">
                                         <div class="ya-wall__news-author ya-relative ya-clearfix">
                                             <div class="ya-wall__news-remove" ng-if="c.userid === options.user._id" ng-click="remove_video_comment(c.comment)">x</div>
-                                            <div class="ya-avatar ya-avatar_small ya-wall__avatar">
+                                            <!--div class="ya-avatar ya-avatar_small ya-wall__avatar">
                                                 <img ng-src="{{c.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
-                                            </div>
+                                            </div-->
+                                            <div class="ya-avatar ya-avatar_small ya-wall__avatar" ng-style="{'background-image':'url(' + (c.avatar || '/images/avatar.jpg') + ')'}"></div>
                                             <div class="ya-wall__news-info">
                                                 <div class="ya-wall__author-name">
                                                     {{c.name}} {{c.surname}}

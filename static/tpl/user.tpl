@@ -378,9 +378,10 @@
                             <div class="ya-form__input ya-input ya-input_inline ya-input_small-pad">
                                 <div class="ya-clearfix">
                                     <div class="ya-grid-1-5">
-                                        <div class="ya-avatar ya-avatar_auto">
+                                        <!--div class="ya-avatar ya-avatar_auto">
                                             <img ng-src="{{user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
-                                        </div>
+                                        </div-->
+                                         <div class="ya-avatar ya-avatar_auto" ng-style="{'background-image':'url(' + (user.avatar || '/images/avatar.jpg') + ')'}"></div>
                                     </div>
                                     <div class="ya-grid-4-5">
                                         <div class="ya-input__field-wrapper ya-input__field-wrapper_textarea ya-relative">
@@ -451,9 +452,10 @@
                                     <div class="ya-wall__news-content">
                                         <div class="ya-wall__news-author ya-relative ya-clearfix">
                                             <div class="ya-wall__news-remove" ng-if="options.user._id === user._id" ng-click="del_topic($index)">x</div>
-                                            <div class="ya-avatar ya-avatar_small ya-wall__avatar">
+                                            <!--div class="ya-avatar ya-avatar_small ya-wall__avatar">
                                                 <img ng-src="{{user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
-                                            </div>
+                                            </div-->
+                                            <div class="ya-avatar ya-avatar_small ya-wall__avatar" ng-style="{'background-image':'url(' + (user.avatar || '/images/avatar.jpg') + ')'}"></div>
                                             <div class="ya-wall__news-info">
                                                 <div class="ya-wall__author-name">
                                                     {{user.name}} {{user.surname}}
@@ -477,9 +479,10 @@
                                                     <div class="ya-comments__item" ng-repeat="c in t.comments">
                                                         <div class="ya-wall__news-author ya-relative ya-clearfix">
                                                             <div class="ya-wall__news-remove" ng-if="options.user._id === c.userid" ng-click="remove_topic_comment($index, c.comment)">x</div>
-                                                            <div class="ya-avatar ya-avatar_small ya-wall__avatar">
+                                                            <!--div class="ya-avatar ya-avatar_small ya-wall__avatar">
                                                                 <img ng-src="{{c.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
-                                                            </div>
+                                                            </div-->
+                                                            <div class="ya-avatar ya-avatar_small ya-wall__avatar" ng-style="{'background-image':'url(' + (c.avatar || '/images/avatar.jpg') + ')'}"></div>
                                                             <div class="ya-wall__news-info">
                                                                 <div class="ya-wall__author-name">
                                                                     {{c.name}} {{c.surname}}
