@@ -82,9 +82,10 @@
                                     <div class="ya-comments__list">
                                         <div class="ya-comments__item" ng-repeat="c in competition.comments">
                                             <div class="ya-wall__news-author ya-relative ya-clearfix">
-                                                <div class="ya-avatar ya-avatar_small ya-wall__avatar">
+                                                <div class="ya-avatar ya-avatar_small ya-wall__avatar" ng-style="{'background-image':'url(' + (c.avatar || '/images/avatar.jpg') + ')'}"></div>
+                                                <!--div class="ya-avatar ya-avatar_small ya-wall__avatar">
                                                     <img ng-src="{{c.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
-                                                </div>
+                                                </div-->
                                                 <div class="ya-wall__news-info">
                                                     <div class="ya-wall__author-name">
                                                         {{c.name}} {{c.surname}}

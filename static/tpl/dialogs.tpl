@@ -13,9 +13,10 @@
                     <div class="ya-penpals__list">
                         <div class="ya-penpals__item ya-clearfix" ng-repeat="d in dialogs track by $index" ng-click="activate_dialog($index); set_messages(d, $index);">
                             <div class="ya-grid-1-5">
-                                <div class="ya-avatar ya-avatar_small ya-wall__avatar">
+                                <div class="ya-avatar ya-avatar_small ya-wall__avatar" ng-style="{'background-image':'url(' + (with_user(d).avatar || '/images/avatar.jpg') + ')'}"></div>
+                                <!--div class="ya-avatar ya-avatar_small ya-wall__avatar">
                                     <img ng-src="{{with_user(d).avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
-                                </div>
+                                </div-->
                             </div>
                             <div class="ya-grid-4-5">
                                 <div class="ya-penpals__title ya-clearfix">
@@ -55,9 +56,11 @@
                                         <div class="ya-wall__news-content">
                                             <div class="ya-wall__news-author ya-relative ya-clearfix">
                                                 <!--div class="ya-wall__news-remove" ng-if="options.user._id === user._id" ng-click="del_topic($index)">x</div-->
-                                                <div class="ya-avatar ya-avatar_small ya-wall__avatar">
-                                                    <a ng-href="#/user/{{m.uid}}"><img ng-src="{{detect_user(dialogs[dialogIndex], m.uid).avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" /></a>
-                                                </div>
+
+                                                    <a ng-href="#/user/{{m.uid}}">
+                                                      <div class="ya-avatar ya-avatar_small ya-wall__avatar" ng-style="{'background-image':'url(' + (detect_user(dialogs[dialogIndex], m.uid).avatar || '/images/avatar.jpg') + ')'}"></div>
+                                                      <!--img ng-src="{{detect_user(dialogs[dialogIndex], m.uid).avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" /-->
+                                                    </a>
                                                 <div class="ya-wall__news-info ya-clearfix">
                                                     <div class="ya-wall__author-name">
                                                         {{detect_user(dialogs[dialogIndex], m.uid).fio}}
@@ -85,9 +88,10 @@
                       <div class="ya-form__input ya-input ya-input_inline ya-input_small-pad ya-input_message">
                           <div class="ya-clearfix">
                               <div class="ya-grid-1-6">
-                                  <div class="ya-avatar ya-avatar_small ya-avatar_message">
+                                  <!--div class="ya-avatar ya-avatar_small ya-avatar_message">
                                       <img ng-src="{{options.user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
-                                  </div>
+                                  </div-->
+                                  <div class="ya-avatar ya-avatar_small ya-avatar_message" ng-style="{'background-image':'url(' + (options.user.avatar || '/images/avatar.jpg') + ')'}"></div>
                               </div>
                               <div class="ya-grid-2-3">
                                   <div class="ya-input__field-wrapper ya-input__field-wrapper_textarea ya-relative">
@@ -116,9 +120,10 @@
                                     </div>
                                 </div>
                                 <div class="ya-grid-1-6">
-                                  <div class="ya-avatar ya-avatar_small ya-avatar_message ya-avatar_opponent">
+                                  <!--div class="ya-avatar ya-avatar_small ya-avatar_message ya-avatar_opponent">
                                       <img ng-src="{{options.user.avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" ng-click="add_message()" />
-                                  </div>
+                                  </div-->
+                                  <div class="ya-avatar ya-avatar_small ya-avatar_message ya-avatar_opponent" ng-style="{'background-image':'url(' + (options.user.avatar || '/images/avatar.jpg') + ')'}" ng-click="add_message()"></div>
                               </div>
                             </div>
                         </div>
