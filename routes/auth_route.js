@@ -1,5 +1,7 @@
 module.exports = (app) => {
-	var express = require('express'),
+	var async = require('async'),
+		crypto = require('crypto'),
+		express = require('express'),
 		mailer = require('./mailer'),
 		passport = require('passport'),
 		User = require('../models/User'),
@@ -274,6 +276,7 @@ module.exports = (app) => {
 	));
 
 	passport.use(new VKStrategy({
+			apiVersion: '5.50',
 			clientID: '5644041 ',
 			passReqToCallback: true,
 			scope: ['email', 'friends'],
@@ -454,6 +457,7 @@ module.exports = (app) => {
 
 		const user = new User({
 			pass: req.body.pass,
+			ioid: Date.now().toString(),
 			mail: req.body.mail.toLowerCase(),
 		});
 
@@ -575,8 +579,110 @@ module.exports = (app) => {
 		}
 	);
 
-	app.get('/logout', function(req, res) {
+	app.get('/logout', (req, res) => {
 		req.logout();
 		res.redirect('/');
+	});
+
+	app.post('/forgot', function(req, res, next) {
+		async.waterfall([
+			function(done) {
+				crypto.randomBytes(20, function(err, buf) {
+					var token = buf.toString('hex');
+					done(err, token);
+				});
+			},
+			function(token, done) {
+				User.findOne({
+					mail: req.body.mail
+				}, function(err, user) {
+					if (!user) {
+						return res.status(404).send('Пользователь не найден');
+					}
+
+					user.resetPasswordToken = token;
+					user.resetPasswordExpires = Date.now() + (24 * 3600000); // 24 hour
+
+					user.save(function(err) {
+						done(err, token, user);
+					});
+				});
+			},
+			function(token, user, done) {
+				mailer.send_mail({
+					mail: [user.mail.toLowerCase()],
+					subj: 'Восстановление пароля в сети СпортПроект',
+					text: [
+						'Вы получили это письмо поскольку кто-то (возможно вы)',
+						' запросил смену пароля для вашего аккаунта. ',
+						'Если это были вы, пожалуйста кликните на этой ссылке ',
+						'http://' + req.headers.host + '/reset/' + token + '\n\n',
+						'В противном случае просто проигнорируйте это письмо',
+					].join(''),
+				}, (err, info) => {
+					console.error(err);
+					console.log(info);
+					done(err, 'done');
+				});
+			}
+		], function(err) {
+			if (err) return next(err);
+			res.send('Проверьте почту!');
+		});
+	});
+
+	app.get('/reset/:token', function(req, res) {
+		User.findOne({
+			resetPasswordToken: req.params.token,
+			resetPasswordExpires: {
+				$gt: Date.now()
+			}
+		}, function(err, user) {
+			if (!user) return res.redirect('/');
+			res.redirect('/#/reset/' + req.params.token);
+		});
+	});
+
+	app.post('/reset/:token', function(req, res) {
+		async.waterfall([
+			function(done) {
+				User.findOne({
+					resetPasswordToken: req.params.token,
+					resetPasswordExpires: {
+						$gt: Date.now()
+					}
+				}, function(err, user) {
+					if (!user) {
+						return res.redirect('/');
+					}
+
+					user.pass = req.body.pass;
+					user.resetPasswordToken = undefined;
+					user.resetPasswordExpires = undefined;
+
+					user.save(function(err) {
+						req.logIn(user, function(err) {
+							done(err, user);
+						});
+					});
+				});
+			},
+			function(user, done) {
+				mailer.send_mail({
+					mail: [user.mail.toLowerCase()],
+					subj: 'Пароль в сети СпортПроект успешно изменён!',
+					text: [
+						'Это письмо подтверждает изменение пароля для адреса ',
+						user.mail,
+					].join(''),
+				}, (err, info) => {
+					console.error(err);
+					console.log(info);
+					done(err, 'done');
+				});
+			}
+		], function(err) {
+			res.send('OK!');
+		});
 	});
 };

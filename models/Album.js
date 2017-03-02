@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
 	AlbumSchema = mongoose.Schema({
-		cover: {},
+		cover: String,
 		creDate: Date,
 		title: String,
 		owner: String,

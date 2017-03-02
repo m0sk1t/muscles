@@ -37,6 +37,20 @@
                     </div>
                     <div class="ya-form__input ya-input ya-input_inline">
                         <div class="ya-clearfix">
+                            <div>
+                                <label for="ya-desc" class="ya-input__label">
+                                    Ключевые слова (через запятую)
+                                </label>
+                            </div>
+                            <div>
+                                <div class="ya-input__field-wrapper">
+                                    <textarea id="ya-title" class="ya-input__field ya-input__field_textarea" ng-model="article.keywords"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ya-form__input ya-input ya-input_inline">
+                        <div class="ya-clearfix">
                             <div class="ya-grid-1-2">
                                 <div>
                                     <label for="ya-sports" class="ya-input__label">

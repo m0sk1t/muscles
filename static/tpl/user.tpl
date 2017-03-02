@@ -198,15 +198,15 @@
                     <div class="ya-user__info-block ya-info-block ya-info-block_border_no">
                         <div class="ya-clearfix ya-user__status-line">
                             <div class="ya-user__status ya-grid-1-2">{{user.status}}</div>
-                            <div class="ya-user__status ya-grid-1-2 ya-right">Заходил {{last_seen()}}</div>
+                            <div ng-if="options.user._id !== user._id" class="ya-user__status ya-grid-1-2 ya-right">Заходил {{last_seen()}}</div>
                         </div>
                     </div>
                     <div class="ya-user__info-block">
                         <div class="ya-info-block">
                             <h2 class="ya-info-block__title ya-info-block__title_data">
-                                <a href="#/options/profile">
+                                <a ng-if="options.user._id === user._id" href="#/options/profile">
                                     Данные спортсмена
-                                </a>
+                                </a><span ng-if="options.user._id !== user._id">Данные спортсмена</span>
                             </h2>
                             <div class="ya-info-block__content ya-clearfix">
                                 <div class="ya-inner-grid-1-2">
@@ -250,7 +250,7 @@
                     </div>
                     <div class="ya-user__info-block">
                         <div class="ya-info-block">
-                            <h2 class="ya-info-block__title ya-info-block__title_add"><a href="#/options/work_n_study">Доп.информация</a></h2>
+                            <h2 class="ya-info-block__title ya-info-block__title_add"><a ng-if="options.user._id === user._id" href="#/options/work_n_study">Доп.информация</a><span ng-if="options.user._id !== user._id">Доп.информация</span></h2>
                             <div class="ya-info-block__content">
                                 <div class="ya-info-block__record ya-clearfix" ng-repeat="h in user.hobbies" ng-if="h.type == 'false'">
                                     <div class="ya-info-block__label ya-inner-grid-1-4">{{h.experience}}</div>
@@ -261,7 +261,7 @@
                     </div>
                     <div class="ya-user__info-block">
                         <div class="ya-info-block">
-                            <h2 class="ya-info-block__title ya-info-block__title_work"><a href="#/options/work_n_study">Работа</a></h2>
+                            <h2 class="ya-info-block__title ya-info-block__title_work"><a ng-if="options.user._id === user._id" href="#/options/work_n_study">Работа</a><span ng-if="options.user._id !== user._id">Работа</span></h2>
                             <div class="ya-info-block__content">
                                 <div class="ya-info-block__record ya-clearfix" ng-repeat="h in user.hobbies" ng-if="h.type == 'true'">
                                     <div class="ya-info-block__label ya-inner-grid-1-4">{{h.experience}}</div>

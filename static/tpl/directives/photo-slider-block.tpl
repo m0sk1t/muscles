@@ -49,7 +49,7 @@
                                                     {{c.name}} {{c.surname}}
                                                 </div>
                                                 <div class="ya-wall__news-date">
-                                                    {{birth_date(c.date)}}
+                                                    {{getDate(c.date)}}
                                                 </div>
                                             </div>
                                         </div>

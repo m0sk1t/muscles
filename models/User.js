@@ -2,25 +2,13 @@ var mongoose = require('mongoose'),
 	bcrypt = require('bcrypt'),
 	SALT_WORK_FACTOR = 10,
 	UserSchema = mongoose.Schema({
-		name: {
-			type: String,
-			default: ''
-		},
-		ioid: {
-			type: String,
-			unique: true
-		},
-		status: {
-			type: String,
-			default: ''
-		},
-		surname: {
-			type: String,
-			default: ''
-		},
-		pass: {
-			type: String
-		},
+		name: String,
+		ioid: String,
+		status: String,
+		surname: String,
+		pass: String,
+		resetPasswordToken: String,
+		resetPasswordExpires: Date,
 		mail: {
 			type: String,
 			required: true,

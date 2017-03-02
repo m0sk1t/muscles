@@ -62,10 +62,10 @@
                             <div class="ya-form__input ya-input ya-input_inline">
                                 <div class="ya-clearfix">
                                     <div class="ya-grid-1-2 ya-center">
-                                        <button ng-click="layer.addVideo = null;" class="ya-btn ya-btn_secondary ya-btn_inline">Сохранить</button>
+                                        <button ng-click="add_video(layer.addVideo)" class="ya-btn ya-btn_secondary ya-btn_inline">Сохранить</button>
                                     </div>
                                     <div class="ya-grid-1-2 ya-center">
-                                        <button ng-click="add_video(layer.addVideo)" class="ya-btn ya-btn_primary ya-btn_inline">Отменить</button>
+                                        <button ng-click="layer.addVideo = null;" class="ya-btn ya-btn_primary ya-btn_inline">Отменить</button>
                                     </div>
                                 </div>
                             </div>

@@ -18,7 +18,8 @@ angular.module('MuscleMan').controller('SignInCtrl', ['$scope', '$location', 'so
 				});
 			}, function(res) {
 				$scope.options.loading = false;
-				MSG.err(res.data);
+				MSG.err('Забыли пароль?');
+				$location.path('/forgot');
 			});
 		};
 	}

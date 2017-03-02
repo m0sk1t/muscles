@@ -5,6 +5,10 @@ angular.module('MuscleMan').controller('SearchCtrl', ['$scope', 'User',
 		};
 		$scope.users = [];
 
+		$scope.me = function(id) {
+			return $scope.options.user._id === id;
+		};
+
 		$scope.get_age = function(birthDate) {
 			var now = moment(),
 				birthDate = moment(birthDate);
@@ -44,10 +48,6 @@ angular.module('MuscleMan').controller('SearchCtrl', ['$scope', 'User',
 		};
 
 		$scope.find_users = function() {
-			if ($scope.search.fio) {
-				$scope.search.name = $scope.search.fio.split(' ')[0];
-				$scope.search.surname = $scope.search.fio.split(' ')[1];
-			}
 			User.search($scope.search, function(res) {
 				$scope.users = res.data;
 			}, function(res) {

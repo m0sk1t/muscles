@@ -88,7 +88,8 @@ module.exports = (app) => {
 					owner: user._id.toString()
 				}, {
 					$set: {
-						title: req.body.title
+						cover: req.body.cover,
+						title: req.body.title,
 					}
 				}, (err, album) => {
 					if (err) return console.error(err);

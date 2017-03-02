@@ -59,10 +59,10 @@
                                 <div class="ya-article__social-share ya-share-box">
                                     <span class="ya-share-box__title">Поделиться в </span>
                                     <span class="ya-share-box__btns">
-										<a href="#" class="ya-share-box__btn ya-share-box__btn_vk"></a>
-										<a href="#" class="ya-share-box__btn ya-share-box__btn_fb"></a>
-										<a href="#" class="ya-share-box__btn ya-share-box__btn_ok"></a>
-										<a href="#" class="ya-share-box__btn ya-share-box__btn_tw"></a>
+                                        <a href='http://vk.com/share.php?url={{location}}"' target="_blank" class="ya-share-box__btn ya-share-box__btn_vk"></a>
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{location}}" target="_blank" class="ya-share-box__btn ya-share-box__btn_fb"></a>
+                                        <a href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1&st._surl={{location}}" target="_blank" class="ya-share-box__btn ya-share-box__btn_ok"></a>
+                                        <a href="https://twitter.com/intent/tweet?text={{location}}" target="_blank" class="ya-share-box__btn ya-share-box__btn_tw"></a>
 									</span>
                                 </div>
                                 <!--div class="ya-article__nav ya-clearfix">

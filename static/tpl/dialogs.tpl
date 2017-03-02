@@ -11,7 +11,7 @@
                         Список диалогов
                     </h2>
                     <div class="ya-penpals__list">
-                        <div class="ya-penpals__item ya-clearfix" ng-repeat="d in dialogs track by $index" ng-click="set_messages(d, $index);">
+                        <div class="ya-penpals__item ya-clearfix" ng-repeat="d in dialogs track by $index" ng-click="activate_dialog($index); set_messages(d, $index);">
                             <div class="ya-grid-1-5">
                                 <div class="ya-avatar ya-avatar_small ya-wall__avatar">
                                     <img ng-src="{{with_user(d).avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
@@ -56,7 +56,7 @@
                                             <div class="ya-wall__news-author ya-relative ya-clearfix">
                                                 <!--div class="ya-wall__news-remove" ng-if="options.user._id === user._id" ng-click="del_topic($index)">x</div-->
                                                 <div class="ya-avatar ya-avatar_small ya-wall__avatar">
-                                                    <img ng-src="{{detect_user(dialogs[dialogIndex], m.uid).avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" />
+                                                    <a ng-href="#/user/{{m.uid}}"><img ng-src="{{detect_user(dialogs[dialogIndex], m.uid).avatar || '/images/avatar.jpg'}}" class="ya-avatar__img" /></a>
                                                 </div>
                                                 <div class="ya-wall__news-info ya-clearfix">
                                                     <div class="ya-wall__author-name">

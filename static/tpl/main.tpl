@@ -51,7 +51,7 @@
                 <div class="ya-row">
                     <div class="ya-span-1-3">
                         <div class="ya-slogans__item ya-center">
-                            Находи спосоров
+                            Находи спонсоров
                         </div>
                     </div>
                     <div class="ya-span-1-3">

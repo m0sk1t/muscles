@@ -2,8 +2,10 @@
 <html ng-app="MuscleMan" ng-controller="MainCtrl">
 
 <head>
-    <title>СпортПроект</title>
+    <title>{{meta.title || 'СпортПроект'}}</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="{{meta.description}}">
+    <meta name="keywords" content="{{meta.keywords}}">
     <script src="https://use.fontawesome.com/7f18bd53b6.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="libs.min.js"></script>

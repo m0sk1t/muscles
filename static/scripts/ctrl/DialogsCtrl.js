@@ -6,9 +6,20 @@ angular.module('MuscleMan').controller('DialogsCtrl', ['$scope', 'Dialog',
 		$scope.messages = [];
 		Dialog.get(function(res) {
 			$scope.dialogs = res.data;
+			$scope.set_messages($scope.dialogs[0], 0);
 		}, function(res) {
 			console.error(res.data);
 		});
+		$scope.activate_dialog = function(i) {
+			var dialog = $scope.dialogs[i];
+			$scope.dialogs.splice(i, 1);
+			$scope.dialogs.unshift(dialog);
+			/*			for (var l = $scope.dialogs.length; l--;) {
+							if (i !== l) dialogs.push($scope.dialogs[l]);
+						}
+						$scope.dialogs = dialogs;
+			*/
+		};
 		$scope.format_date = function(date) {
 			return moment(date).format('DD.MM.YYYY');
 		};
@@ -22,6 +33,7 @@ angular.module('MuscleMan').controller('DialogsCtrl', ['$scope', 'Dialog',
 			e.keyCode === 13 && $scope.add_message();
 		};
 		$scope.add_message = function() {
+			if (!$scope.message) return;
 			var message = {
 					t: Date.now(),
 					text: $scope.message,
@@ -38,7 +50,7 @@ angular.module('MuscleMan').controller('DialogsCtrl', ['$scope', 'Dialog',
 				$scope.$emit('new_message', {
 					target: addressee.id,
 					message: message.text,
-					date: new Date(),
+					t: new Date(),
 					avatar: $scope.options.user.avatar,
 					fio: $scope.options.user.name + ' ' + $scope.options.user.surname,
 				});
